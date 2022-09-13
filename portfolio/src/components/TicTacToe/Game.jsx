@@ -46,6 +46,9 @@ export class Game extends React.Component {
   }
 
   jumpTo(step) {
+    for (let i = 0; i < document.querySelectorAll(".square").length; i++) {
+      document.querySelectorAll(".square")[i].classList.remove("win");
+    }
     this.setState({
       stepNumber: step,
       xIsNext: step % 2 === 0,
