@@ -1,5 +1,5 @@
+import { Square } from "components/TicTacToe/Square";
 import React from "react";
-import { Square } from "./Square";
 import "./Board.css";
 
 export class Board extends React.Component {

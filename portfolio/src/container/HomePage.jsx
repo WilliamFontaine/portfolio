@@ -1,11 +1,16 @@
+import { TicTacToe } from "components/TicTacToe/TicTacToe";
 import React from "react";
 
-export class HomePAge extends React.Component {
+export class HomePage extends React.Component {
   constructor(props) {
     super(props);
   }
 
   render() {
-    return <p>Page d'accueil du portfolio</p>;
+    return (
+      <div className="homePage">
+        <TicTacToe />
+      </div>
+    );
   }
 }
