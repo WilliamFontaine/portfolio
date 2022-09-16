@@ -1,8 +1,8 @@
 import React from "react";
 import { Board } from "./Board";
-import "./Game.css";
+import "./TicTacToe.css";
 
-export class Game extends React.Component {
+export class TicTacToe extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -140,14 +140,14 @@ export class Game extends React.Component {
     }
 
     return (
-      <div className="game">
-        <div className="game-board">
+      <div className="TicTacToe">
+        <div className="TicTacToe-board">
           <Board
             squares={current.squares}
             onClick={(i) => this.handleClick(i)}
           />
         </div>
-        <div className="game-info">
+        <div className="TicTacToe-info">
           <div>
             <button onClick={() => this.reset()}>Réintialiser la grille</button>
           </div>
