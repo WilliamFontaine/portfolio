@@ -1,5 +1,5 @@
-import { Board } from "components/TicTacToe/Board";
 import React from "react";
+import { Board } from "./Board";
 import "./TicTacToe.css";
 
 export class TicTacToe extends React.Component {

@@ -1,6 +1,6 @@
-import { Square } from "components/TicTacToe/Square";
 import React from "react";
 import "./Board.css";
+import { Square } from "./Square";
 
 export class Board extends React.Component {
   constructor(props) {
@@ -28,9 +28,7 @@ export class Board extends React.Component {
           return (
             <div className="board-row" key={row}>
               {Array.from(Array(this.state.columns).keys()).map(() => {
-                {
-                  return this.renderSquare(i++);
-                }
+                return this.renderSquare(i++);
               })}
             </div>
           );

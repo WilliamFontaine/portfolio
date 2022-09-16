@@ -1,5 +1,5 @@
-import { TicTacToe } from "components/TicTacToe/TicTacToe";
 import React from "react";
+import { TicTacToe } from "../components/TicTacToe/TicTacToe";
 
 export class HomePage extends React.Component {
   constructor(props) {
