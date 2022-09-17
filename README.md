@@ -4,6 +4,7 @@
 
 - dark theme (redux)
 - langue fr / en (redux)
+- pop up de mail (succes/fail)
 - mini jeux
   - ~~TicTacToe~~
   - Démineur
