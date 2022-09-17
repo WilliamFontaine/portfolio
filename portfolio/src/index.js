@@ -4,7 +4,7 @@ import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import reportWebVitals from "./reportWebVitals";
-import ErrorPage from "./routes/error-page";
+import ErrorPage from "./components/Error/error-page";
 import { TicTacToeGame } from "./container/TicTacToeGame";
 import { HomePage } from "./container/HomePage";
 

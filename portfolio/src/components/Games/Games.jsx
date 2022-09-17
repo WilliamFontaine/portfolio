@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import SvgTicTacToe from "../images/tictactoe";
+import SvgTicTacToe from "../../images/tictactoe";
 import "./Games.css";
 
 export function Games() {

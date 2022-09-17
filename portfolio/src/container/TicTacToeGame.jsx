@@ -1,4 +1,4 @@
-import { StickyMenu } from "../components/StickyMenu";
+import { StickyMenu } from "../components/StickyMenu/StickyMenu";
 import { TicTacToe } from "../components/TicTacToe/TicTacToe";
 
 export function TicTacToeGame() {

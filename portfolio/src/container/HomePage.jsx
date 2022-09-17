@@ -1,12 +1,12 @@
 import React from "react";
-import { Contact } from "../components/Contact";
-import { Experiences } from "../components/Experiences";
-import { Footer } from "../components/Footer";
-import { Games } from "../components/Games";
-import { Header } from "../components/Header";
-import { Introduction } from "../components/Introduction";
-import { Skills } from "../components/Skills";
-import { StickyMenu } from "../components/StickyMenu";
+import { Contact } from "../components/Contact/Contact";
+import { Experiences } from "../components/Experiences/Experiences";
+import { Footer } from "../components/Footer/Footer";
+import { Games } from "../components/Games/Games";
+import { Header } from "../components/Header/Header";
+import { Introduction } from "../components/Introduction/Introduction";
+import { Skills } from "../components/Skills/Skills";
+import { StickyMenu } from "../components/StickyMenu/StickyMenu";
 
 export function HomePage() {
   return (

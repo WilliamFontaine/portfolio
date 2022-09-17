@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import "./StickyMenu.css";
-import SvgGitHub from "../images/GitHub";
-import SvgLinkedIn from "../images/LinkedIn";
-import SvgFrenchFlag from "../images/FrenchFlag";
-import SvgEnglishFlag from "../images/EnglishFlag";
-import SvgSun from "../images/Sun";
-import SvgMoon from "../images/Moon";
+import SvgGitHub from "../../images/GitHub";
+import SvgLinkedIn from "../../images/LinkedIn";
+import SvgFrenchFlag from "../../images/FrenchFlag";
+import SvgEnglishFlag from "../../images/EnglishFlag";
+import SvgSun from "../../images/Sun";
+import SvgMoon from "../../images/Moon";
 
 export function StickyMenu() {
   const [isFrench, setLang] = useState(true);
