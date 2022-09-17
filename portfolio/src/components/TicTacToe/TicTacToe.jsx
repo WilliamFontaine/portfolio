@@ -20,7 +20,7 @@ export class TicTacToe extends React.Component {
 
   reset() {
     for (let i = 0; i < document.querySelectorAll(".square").length; i++) {
-      document.querySelectorAll(".square")[i].classList.remove("win");
+      document.querySelectorAll(".square")[i].classNameList.remove("win");
     }
     this.setState(this.baseState);
   }
@@ -47,7 +47,7 @@ export class TicTacToe extends React.Component {
 
   jumpTo(step) {
     for (let i = 0; i < document.querySelectorAll(".square").length; i++) {
-      document.querySelectorAll(".square")[i].classList.remove("win");
+      document.querySelectorAll(".square")[i].classNameList.remove("win");
     }
     this.setState({
       stepNumber: step,
@@ -129,7 +129,7 @@ export class TicTacToe extends React.Component {
       status = "Gagnant: " + winner.winner;
       for (let i = 0; i < document.querySelectorAll(".square").length; i++) {
         if (winner.line.includes(i)) {
-          document.querySelectorAll(".square")[i].classList.add("win");
+          document.querySelectorAll(".square")[i].classNameList.add("win");
         }
       }
     } else {
@@ -140,14 +140,14 @@ export class TicTacToe extends React.Component {
     }
 
     return (
-      <div className="TicTacToe">
-        <div className="TicTacToe-board">
+      <div className="tictactoe">
+        <div className="tictactoe-board">
           <Board
             squares={current.squares}
             onClick={(i) => this.handleClick(i)}
           />
         </div>
-        <div className="TicTacToe-info">
+        <div className="tictactoe-info">
           <div>
             <button onClick={() => this.reset()}>Réintialiser la grille</button>
           </div>

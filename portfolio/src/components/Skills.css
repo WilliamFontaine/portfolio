@@ -1,0 +1,57 @@
+.skills {
+  display: flex;
+  padding-top: 30vh;
+}
+
+.skills-header {
+  margin: auto;
+  font-family: var(--second-font);
+  font-size: var(--second-font-size);
+  font-style: var(--second-font-style);
+  height: inherit;
+  width: fit-content;
+  order: 1;
+}
+
+.skills-list {
+  width: 50vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  flex-wrap: wrap;
+  order: 2;
+}
+
+.skills-list__hexagonArea {
+  display: flex;
+}
+
+.skills-list__hexagonArea .hexagon {
+  position: relative;
+  width: 7rem;
+  height: 7rem;
+  margin: 0 10px;
+  clip-path: polygon(0 25%, 50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%);
+  background: lightcoral;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  cursor: pointer;
+  transition: 0.5s;
+}
+.skills-list__hexagonArea .hexagon img {
+  width: 4rem;
+}
+
+.skills-list__hexagonArea .hexagon p {
+  font-family: var(--first-font);
+  font-size: var(--third-font-size);
+  letter-spacing: 1px;
+}
+
+.skills-list__hexagonArea .hexagon:hover {
+  background: lightgrey;
+  transform: scale(0.8);
+}

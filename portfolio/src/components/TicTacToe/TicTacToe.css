@@ -1,8 +1,8 @@
-.TicTacToe {
+.tictactoe {
   display: flex;
   flex-direction: row;
 }
 
-.TicTacToe-info {
+.tictactoe-info {
   margin-left: 20px;
 }
