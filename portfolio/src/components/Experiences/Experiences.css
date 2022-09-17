@@ -49,7 +49,7 @@
   font-style: var(--first-font-style);
 }
 
-.experience-content__first-location i,
-.experience-content__second-location i {
+.experience-content__first-location .FontAwesomeIcon,
+.experience-content__second-location .FontAwesomeIcon {
   padding: 0 1rem 0 0;
 }

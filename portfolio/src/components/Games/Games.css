@@ -23,8 +23,7 @@
   display: flex;
   order: 2;
 }
-.games-content__tictactoe,
-.games-content__indev {
+.games-content__tictactoe {
   padding: 2rem;
   margin: 2rem;
   border: 1px solid black;
@@ -32,6 +31,8 @@
   width: fit-content;
   height: fit-content;
   cursor: pointer;
+  font-family: var(--second-font);
+  font-size: var(--fourth-font-size);
 }
 .games-content__tictactoe-icon {
   width: 10rem;

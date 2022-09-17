@@ -1,0 +1,81 @@
+.contact {
+  padding: 10rem;
+}
+
+.contact-header {
+  text-align: center;
+  padding-bottom: 10vh;
+  font-family: var(--second-font);
+  font-size: var(--second-font-size);
+  font-style: var(--second-font-style);
+}
+
+.contact-form__name,
+.contact-form__email,
+.contact-form__text {
+  width: 100%;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-family: var(--third-font);
+  font-weight: var(--third-font-weight);
+  font-style: var(--second-font-style);
+}
+
+.contact-form__label {
+  padding: 1rem 1rem 1rem 0;
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+  font-family: var(--second-font);
+  font-size: var(--fourth-font-size);
+  font-style: var(--second-font-style);
+}
+
+.contact-form__submit {
+  background-color: #04aa6d;
+  color: white;
+  padding: 1rem 2.5rem;
+  border: none;
+  border-radius: 1rem;
+  cursor: pointer;
+  display: block;
+  margin: 5vh auto 5vh auto;
+}
+
+.contact-form__submit:hover {
+  background-color: #35a13a;
+}
+
+.contact-form__col-25 {
+  float: left;
+  width: 25%;
+  margin-top: 6px;
+}
+
+.contact-form__col-75 {
+  float: left;
+  width: 75%;
+  margin-top: 6px;
+}
+
+.contact-form__row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+@media screen and (max-width: 1000px) {
+  .contact {
+    padding: 1rem;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .contact-form__col-25,
+  .contact-form__col-75,
+  .contact-form__submit {
+    width: 100%;
+    margin-top: 0;
+  }
+}

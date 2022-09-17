@@ -1,0 +1,13 @@
+.footer {
+  height: 30vh;
+  display: flex;
+  align-items: center;
+}
+
+.footer p {
+  text-align: center;
+  margin: auto;
+  font-family: var(--first-font);
+  font-size: 1.2rem;
+  font-weight: var(--first-font-weight);
+}
