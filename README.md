@@ -5,6 +5,7 @@
 - dark theme (redux)
 - langue fr / en (redux)
 - pop up de mail (succes/fail)
+- catpcha pour les mails
 - mini jeux
   - ~~TicTacToe~~
   - Démineur
