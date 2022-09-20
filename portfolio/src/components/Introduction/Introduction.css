@@ -1,20 +1,21 @@
 .introduction {
-  font-family: var(--third-font);
-  font-weight: var(--third-font-weight);
-  padding: 10vh 0 30vh 0;
+    font-family: var(--third-font);
+    font-weight: var(--third-font-weight);
+    padding: 10vh 0 30vh 0;
 }
+
 .introduction-text {
-  padding-left: 50vw;
-  font-size: 1.8rem;
-  text-align: justify;
+    padding-left: 50vw;
+    font-size: 1.8rem;
+    text-align: justify;
 }
 
 .introduction-text__first {
-  width: 35rem;
-  margin-top: 5vh;
+    width: 35rem;
+    margin-top: 5vh;
 }
 
 .introduction-text__second {
-  width: 35rem;
-  margin-top: 25vh;
+    width: 35rem;
+    margin-top: 25vh;
 }

@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, {useRef} from "react";
 import emailjs from "@emailjs/browser";
 import "./Contact.css";
 
@@ -92,7 +92,7 @@ export function Contact() {
             />
           </div>
         </div>
-        <input type="submit" value="Envoyer" className="contact-form__submit" />
+        <input type="submit" value="Envoyer" className="contact-form__submit"/>
       </form>
     </div>
   );

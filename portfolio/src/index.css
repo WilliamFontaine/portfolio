@@ -1,35 +1,36 @@
 *,
 ::before,
 ::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
+
 :root {
-  /* fonts */
-  --first-font: "Montserrat Alternates";
-  --second-font: "Expletus Sans";
-  --third-font: "PT Sans Caption";
+    /* fonts */
+    --first-font: "Montserrat Alternates";
+    --second-font: "Expletus Sans";
+    --third-font: "PT Sans Caption";
 
-  /* font-size */
-  --first-font-size: 5rem;
-  --second-font-size: 2rem;
-  --third-font-size: 1.1rem;
-  --fourth-font-size: 1.5rem;
+    /* font-size */
+    --first-font-size: 5rem;
+    --second-font-size: 2rem;
+    --third-font-size: 1.1rem;
+    --fourth-font-size: 1.5rem;
 
-  /* font style */
-  --first-font-style: oblique;
-  --second-font-style: normal;
+    /* font style */
+    --first-font-style: oblique;
+    --second-font-style: normal;
 
-  /* font weight */
-  --first-font-weight: 900;
-  --third-font-weight: 300;
+    /* font weight */
+    --first-font-weight: 900;
+    --third-font-weight: 300;
 
-  /* line height */
-  --second-font-line-height: 10px;
+    /* line height */
+    --second-font-line-height: 10px;
 
-  /* ============================================= */
+    /* ============================================= */
 
-  /* icon size */
-  --icon-size: 3rem;
+    /* icon size */
+    --icon-size: 3rem;
 }

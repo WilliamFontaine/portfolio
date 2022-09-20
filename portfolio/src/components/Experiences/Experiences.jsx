@@ -1,7 +1,7 @@
 import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import "./Experiences.css";
-import { faLocationPin } from "@fortawesome/free-solid-svg-icons";
+import {faLocationPin} from "@fortawesome/free-solid-svg-icons";
 
 export function Experiences() {
   return (
@@ -18,7 +18,7 @@ export function Experiences() {
             Stagiaire développeur web
           </p>
           <p className="experience-content__first-location">
-            <FontAwesomeIcon icon={faLocationPin} className="FontAwesomeIcon" />
+            <FontAwesomeIcon icon={faLocationPin} className="FontAwesomeIcon"/>
             Volvic, Auvergne-Rhône-Alpes, France
           </p>
         </div>
@@ -30,7 +30,7 @@ export function Experiences() {
             Alternant concepteur et développeur d'applications
           </p>
           <p className="experience-content__second-location">
-            <FontAwesomeIcon icon={faLocationPin} className="FontAwesomeIcon" />
+            <FontAwesomeIcon icon={faLocationPin} className="FontAwesomeIcon"/>
             Clermont-Ferrand, Auvergne-Rhône-Alpes, France
           </p>
         </div>

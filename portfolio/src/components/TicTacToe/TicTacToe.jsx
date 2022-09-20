@@ -1,5 +1,5 @@
 import React from "react";
-import { Board } from "./Board";
+import {Board} from "./Board";
 import "./TicTacToe.css";
 
 export class TicTacToe extends React.Component {
@@ -73,7 +73,7 @@ export class TicTacToe extends React.Component {
         squares[a] === squares[b] &&
         squares[a] === squares[c]
       ) {
-        return { winner: squares[a], line: lines[i] };
+        return {winner: squares[a], line: lines[i]};
       }
     }
     return null;
@@ -110,10 +110,10 @@ export class TicTacToe extends React.Component {
     const moves = history.map((step, move) => {
       const desc = move
         ? "Coup #" +
-          move +
-          " (position : " +
-          this.convertToPosition(history[move].case) +
-          ")"
+        move +
+        " (position : " +
+        this.convertToPosition(history[move].case) +
+        ")"
         : "Début de la partie";
       return (
         <li key={move}>
@@ -148,11 +148,11 @@ export class TicTacToe extends React.Component {
           />
         </div>
         <div className="tictactoe-info">
-          <div>
+          <div className="tictactoe-info__button">
             <button onClick={() => this.reset()}>Réintialiser la grille</button>
           </div>
-          <div>{status}</div>
-          <ol>{moves}</ol>
+          <div className="tictactoe-info__status">{status}</div>
+          <ol className="tictactoe-info__moves">{moves}</ol>
         </div>
       </div>
     );

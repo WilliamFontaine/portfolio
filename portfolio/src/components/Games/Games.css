@@ -1,48 +1,50 @@
 .games {
-  display: flex;
-  flex-direction: column;
-  padding-top: 30vh;
+    display: flex;
+    flex-direction: column;
+    padding-top: 30vh;
 }
 
 .games-header {
-  margin: auto;
-  font-family: var(--second-font);
-  font-size: var(--second-font-size);
-  font-style: var(--second-font-style);
-  padding-bottom: 10vh;
-  height: fit-content;
-  width: fit-content;
-  order: 1;
+    margin: auto;
+    font-family: var(--second-font);
+    font-size: var(--second-font-size);
+    font-style: var(--second-font-style);
+    padding-bottom: 10vh;
+    height: fit-content;
+    width: fit-content;
+    order: 1;
 }
 
 .games-content {
-  padding: 2rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  display: flex;
-  order: 2;
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    order: 2;
 }
+
 .games-content__tictactoe {
-  padding: 2rem;
-  margin: 2rem;
-  border: 1px solid black;
-  border-radius: 1rem;
-  width: fit-content;
-  height: fit-content;
-  cursor: pointer;
-  font-family: var(--second-font);
-  font-size: var(--fourth-font-size);
+    padding: 2rem;
+    margin: 2rem;
+    border: 1px solid black;
+    border-radius: 1rem;
+    width: fit-content;
+    height: fit-content;
+    cursor: pointer;
+    font-family: var(--second-font);
+    font-size: var(--fourth-font-size);
 }
+
 .games-content__tictactoe-icon {
-  width: 10rem;
-  display: inline-block;
-  border: 2px solid #333;
-  border-radius: 2% 6% 5% 4% / 1% 1% 2% 4%;
-  background: #fff;
+    width: 10rem;
+    display: inline-block;
+    border: 2px solid #333;
+    border-radius: 2% 6% 5% 4% / 1% 1% 2% 4%;
+    background: #fff;
 }
 
 .games-content__tictactoe p {
-  text-align: center;
-  padding: 2rem 0 0 0;
+    text-align: center;
+    padding: 2rem 0 0 0;
 }

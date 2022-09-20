@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import "./StickyMenu.css";
 import SvgGitHub from "../../images/GitHub";
 import SvgLinkedIn from "../../images/LinkedIn";
@@ -43,8 +43,8 @@ export function StickyMenu() {
         />
       )}
 
-      <SvgGitHub className="stickymenu-icon__github" />
-      <SvgLinkedIn className="stickymenu-icon__linkedIn" />
+      <SvgGitHub className="stickymenu-icon__github"/>
+      <SvgLinkedIn className="stickymenu-icon__linkedIn"/>
     </div>
   );
 }

@@ -1,31 +1,32 @@
 .stickymenu {
-  position: fixed;
-  top: 1rem;
-  right: 1rem;
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
 }
+
 .stickymenu-icon__github,
 .stickymenu-icon__linkedIn {
-  width: var(--icon-size);
-  height: var(--icon-size);
-  border-radius: 1.8rem;
-  cursor: pointer;
-  margin: 0 1rem 0 1rem;
-  background-color: white;
+    width: var(--icon-size);
+    height: var(--icon-size);
+    border-radius: 1.8rem;
+    cursor: pointer;
+    margin: 0 1rem 0 1rem;
+    background-color: white;
 }
 
 .stickymenu-icon__frenchFlag,
 .stickymenu-icon__englishFlag {
-  width: var(--icon-size);
-  cursor: pointer;
-  margin: 0 1rem 0 1rem;
-  background-color: white;
-  vertical-align: super;
+    width: var(--icon-size);
+    cursor: pointer;
+    margin: 0 1rem 0 1rem;
+    background-color: white;
+    vertical-align: super;
 }
 
 .stickymenu-icon__lightmode,
 .stickymenu-icon__darkmode {
-  width: var(--icon-size);
-  height: var(--icon-size);
-  cursor: pointer;
-  margin: 0 1rem 0 1rem;
+    width: var(--icon-size);
+    height: var(--icon-size);
+    cursor: pointer;
+    margin: 0 1rem 0 1rem;
 }

@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 import SvgTicTacToe from "../../images/tictactoe";
 import "./Games.css";
 
@@ -12,7 +12,7 @@ export function Games() {
       <div className="games-content">
         <Link to={"tictactoe"}>
           <div className="games-content__tictactoe">
-            <SvgTicTacToe className="games-content__tictactoe-icon" />
+            <SvgTicTacToe className="games-content__tictactoe-icon"/>
             <p>Morpion</p>
           </div>
         </Link>

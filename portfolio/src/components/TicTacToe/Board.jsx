@@ -1,6 +1,6 @@
 import React from "react";
 import "./Board.css";
-import { Square } from "./Square";
+import {Square} from "./Square";
 
 export class Board extends React.Component {
   constructor(props) {
@@ -10,6 +10,7 @@ export class Board extends React.Component {
       columns: 3,
     };
   }
+
   renderSquare(i) {
     return (
       <Square

@@ -1,22 +1,22 @@
 .header {
-  height: 100vh;
+    height: 100vh;
 }
 
 .header-content {
-  padding-left: 20vw;
-  padding-top: 32vh;
+    padding-left: 20vw;
+    padding-top: 32vh;
 }
 
 .header-content__title {
-  font-family: var(--first-font);
-  font-size: var(--first-font-size);
-  font-weight: var(--first-font-weight);
-  font-style: oblique;
+    font-family: var(--first-font);
+    font-size: var(--first-font-size);
+    font-weight: var(--first-font-weight);
+    font-style: oblique;
 }
 
 .header-content__desc {
-  font-family: var(--second-font);
-  margin-top: 5vh;
-  font-size: var(--second-font-size);
-  font-style: var(--second-font-style);
+    font-family: var(--second-font);
+    margin-top: 5vh;
+    font-size: var(--second-font-size);
+    font-style: var(--second-font-style);
 }
