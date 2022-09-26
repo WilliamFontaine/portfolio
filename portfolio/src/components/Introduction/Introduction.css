@@ -1,21 +1,52 @@
 .introduction {
-    font-family: var(--third-font);
-    font-weight: var(--third-font-weight);
-    padding: 10vh 0 30vh 0;
+  display: flex;
+  font-family: var(--third-font);
+  font-weight: var(--third-font-weight);
+  padding: 10vh 0 30vh 0;
 }
 
 .introduction-text {
-    padding-left: 50vw;
-    font-size: 1.8rem;
-    text-align: justify;
+  padding-left: 50vw;
+  font-size: var(--second-font-size);
+  text-align: justify;
 }
 
 .introduction-text__first {
-    width: 35rem;
-    margin-top: 5vh;
+  width: 35rem;
+  margin-top: 5vh;
 }
 
 .introduction-text__second {
-    width: 35rem;
-    margin-top: 25vh;
+  width: 35rem;
+  margin-top: 25vh;
+}
+@media screen and (max-width: 1600px) {
+  .introduction-text {
+    padding-left: 0;
+    margin: 0 auto;
+  }
+}
+
+@media screen and (max-width: 1300px) {
+}
+
+@media screen and (max-width: 1000px) {
+  .introduction-text {
+    font-size: var(--third-font-size);
+  }
+
+  .introduction-text__first,
+  .introduction-text__second {
+    width: 24rem;
+  }
+}
+@media screen and (max-width: 600px) {
+  .introduction-text {
+    font-size: var(--fourth-font-size);
+  }
+
+  .introduction-text__first,
+  .introduction-text__second {
+    width: 18rem;
+  }
 }

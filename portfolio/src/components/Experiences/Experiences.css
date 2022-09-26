@@ -1,57 +1,84 @@
 .experience {
-    display: flex;
+  display: flex;
 }
 
 .experience-header {
-    font-family: var(--second-font);
-    font-size: var(--second-font-size);
-    font-style: var(--second-font-style);
-    width: fit-content;
-    margin: auto;
-    height: inherit;
-    order: 2;
+  font-family: var(--second-font);
+  font-size: var(--second-font-size);
+  font-style: var(--second-font-style);
+  width: fit-content;
+  margin: auto;
+  height: inherit;
+  order: 2;
 }
 
 .experience-content {
-    width: 50vw;
-    justify-content: center;
-    text-align: center;
-    order: 1;
+  width: 50vw;
+  justify-content: center;
+  text-align: center;
+  order: 1;
 }
 
 .experience-content__first,
 .experience-content__second {
-    border: 1px solid black;
-    border-radius: 1rem;
-    text-align: center;
-    width: fit-content;
-    padding: 1rem 3rem;
-    margin: 10vh auto 10vh auto;
+  border: 1px solid black;
+  border-radius: 1rem;
+  text-align: center;
+  width: fit-content;
+  padding: 1rem 3rem;
+  margin: 10vh auto 10vh auto;
 }
 
 .experience-content__first-date,
 .experience-content__second-date {
-    margin: 2px 0;
-    font-family: var(--third-font);
-    font-weight: var(--third-font-weight);
+  margin: 2px 0;
+  font-family: var(--third-font);
+  font-weight: var(--third-font-weight);
 }
 
 .experience-content__first-job,
 .experience-content__second-job {
-    margin: 2px 0;
-    font-family: var(--third-font);
-    font-weight: var(--first-font-weight);
+  margin: 2px 0;
+  font-family: var(--third-font);
+  font-weight: var(--first-font-weight);
 }
 
 .experience-content__first-location,
 .experience-content__second-location {
-    margin: 2px 0;
-    font-family: var(--third-font);
-    font-weight: var(--third-font-weight);
-    font-style: var(--first-font-style);
+  margin: 2px 0;
+  font-family: var(--third-font);
+  font-weight: var(--third-font-weight);
+  font-style: var(--first-font-style);
 }
 
 .experience-content__first-location .FontAwesomeIcon,
 .experience-content__second-location .FontAwesomeIcon {
-    padding: 0 1rem 0 0;
+  padding: 0 1rem 0 0;
+}
+
+@media screen and (max-width: 1300px) {
+  .experience {
+    display: inline;
+  }
+
+  .experience-content {
+    margin: auto;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .experience-content__first-date,
+  .experience-content__second-date,
+  .experience-content__first-job,
+  .experience-content__second-job,
+  .experience-content__first-location,
+  .experience-content__second-location {
+    font-size: var(--fifth-font-size);
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .experience-header {
+    font-size: var(--third-font-size);
+  }
 }
