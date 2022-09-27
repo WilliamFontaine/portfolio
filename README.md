@@ -24,3 +24,8 @@
 - animations
     - animation sur 1 titre (ref. Le designeur du web)
     - svg animé (x1) dans la page
+
+### Important
+
+- menu burger ne passe pas au dessus des skills
+- menu déroulant des paramètres lorsque l'on appui sur le menu burger

@@ -33,7 +33,7 @@
   height: fit-content;
   cursor: pointer;
   font-family: var(--second-font);
-  font-size: var(--fifth-font-size);
+  font-size: var(--third-font-size);
 }
 
 .games-content__tictactoe-icon {
@@ -47,4 +47,42 @@
 .games-content__tictactoe p {
   text-align: center;
   padding: 2rem 0 0 0;
+}
+
+@media screen and (max-width: 1300px) {
+  .skills {
+    display: inline;
+  }
+  .skills-header {
+    margin-top: 20vh;
+  }
+
+  .skills-list {
+    margin: 20vh auto 0 auto;
+  }
+
+  .skills-list__hexagonArea .hexagon {
+    width: 5rem;
+    height: 5rem;
+  }
+
+  .games-content__tictactoe {
+    font-size: var(--fourth-font-size);
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .games-content__tictactoe-icon {
+    width: 7rem;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .games-header {
+    font-size: var(--third-font-size);
+  }
+
+  .games-content__tictactoe {
+    font-size: var(--fifth-font-size);
+  }
 }

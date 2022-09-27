@@ -73,9 +73,12 @@
 
 @media screen and (max-width: 600px) {
   .contact-form__col-25,
-  .contact-form__col-75,
-  .contact-form__submit {
+  .contact-form__col-75 {
     width: 100%;
     margin-top: 0;
+  }
+
+  .contact-header {
+    font-size: var(--third-font-size);
   }
 }
