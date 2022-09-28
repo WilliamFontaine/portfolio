@@ -62,29 +62,29 @@ export function StickyMenu() {
       <div className="hamburger-container">
         {isLightMode ? (
           <SvgMoon
-            className="stickymenu-icon__darkmode"
+            className="stickymenu-icon__darkmode icon"
             onClick={handleChangeTheme}
           />
         ) : (
           <SvgSun
-            className="stickymenu-icon__lightmode"
+            className="stickymenu-icon__lightmode icon"
             onClick={handleChangeTheme}
           />
         )}
         {isFrench ? (
           <SvgEnglishFlag
-            className="stickymenu-icon__englishFlag"
+            className="stickymenu-icon__englishFlag icon"
             onClick={handleChangeLang}
           />
         ) : (
           <SvgFrenchFlag
-            className="stickymenu-icon__frenchFlag"
+            className="stickymenu-icon__frenchFlag icon"
             onClick={handleChangeLang}
           />
         )}
 
-        <SvgGitHub className="stickymenu-icon__github" />
-        <SvgLinkedIn className="stickymenu-icon__linkedIn" />
+        <SvgGitHub className="stickymenu-icon__github icon" />
+        <SvgLinkedIn className="stickymenu-icon__linkedIn icon" />
       </div>
     </div>
   );
