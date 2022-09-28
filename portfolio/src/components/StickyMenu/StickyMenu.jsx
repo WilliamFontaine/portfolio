@@ -74,7 +74,7 @@ export function StickyMenu() {
             onClick={handleChangeTheme}
           />
         )}
-        {lang === "fr" ? (
+        {lang === "en" ? (
           <SvgEnglishFlag
             className="stickymenu-icon__englishFlag icon"
             onClick={handleChangeLang}
