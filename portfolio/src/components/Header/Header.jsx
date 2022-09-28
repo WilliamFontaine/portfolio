@@ -7,7 +7,57 @@ export function Header() {
   return (
     <div className="header">
       <div className="header-content">
-        <h1 className="header-content__title">{t("title")}</h1>
+        <div className="header-content__title">
+          <div className="lettre-anim">
+            <span data-lettre="W">W</span>
+          </div>
+          <div className="lettre-anim">
+            <span data-lettre="i">i</span>
+          </div>
+          <div className="lettre-anim">
+            <span data-lettre="l">l</span>
+          </div>
+          <div className="lettre-anim">
+            <span data-lettre="l">l</span>
+          </div>
+          <div className="lettre-anim">
+            <span data-lettre="i">i</span>
+          </div>
+          <div className="lettre-anim">
+            <span data-lettre="a">a</span>
+          </div>
+          <div className="lettre-anim">
+            <span data-lettre="m">m</span>
+          </div>
+          <span> </span>
+          <div className="lettre-anim">
+            <span data-lettre="F">F</span>
+          </div>
+          <div className="lettre-anim">
+            <span data-lettre="o">o</span>
+          </div>
+          <div className="lettre-anim">
+            <span data-lettre="n">n</span>
+          </div>
+          <div className="lettre-anim">
+            <span data-lettre="t">t</span>
+          </div>
+          <div className="lettre-anim">
+            <span data-lettre="a">a</span>
+          </div>
+          <div className="lettre-anim">
+            <span data-lettre="i">i</span>
+          </div>
+          <div className="lettre-anim">
+            <span data-lettre="n">n</span>
+          </div>
+          <div className="lettre-anim">
+            <span data-lettre="e">e</span>
+          </div>
+          <div className="lettre-anim">
+            <span data-lettre=",">,</span>
+          </div>
+        </div>
         <p className="header-content__desc">{t("title_desc")}</p>
       </div>
     </div>

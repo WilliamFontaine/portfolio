@@ -64,3 +64,75 @@
     font-size: var(--third-desc-size);
   }
 }
+
+/* Animation du nom */
+
+.lettre-anim,
+.lettre-anim span {
+  display: inline-block;
+}
+
+.header-content__title span {
+  cursor: pointer;
+  position: relative;
+  perspective: 500px;
+}
+
+.lettre-anim span::before,
+.lettre-anim span::after {
+  position: absolute;
+  content: attr(data-lettre);
+  inset: 0;
+  transform-origin: left;
+}
+
+.lettre-anim span::before {
+  transition: transform 0.3s ease-out;
+  color: rgba(0, 0, 0, 0.122);
+}
+
+.lettre-anim span::after {
+  color: #757575;
+  transition: transform 0.4s ease-out, color 0.4s ease-out;
+  transform: rotateY(-25deg);
+}
+
+.lettre-anim:hover span::after {
+  transform: rotateY(-40deg);
+}
+
+.lettre-anim:hover span::before {
+  transform: scaleX(0.85) skewY(20deg);
+}
+
+.lettre-anim:nth-child(1):hover span::after,
+.lettre-anim:nth-child(13):hover span::after {
+  color: #f08080;
+}
+.lettre-anim:nth-child(4):hover span::after,
+.lettre-anim:nth-child(7):hover span::after,
+.lettre-anim:nth-child(14):hover span::after {
+  color: #00ffff;
+}
+.lettre-anim:nth-child(2):hover span::after,
+.lettre-anim:nth-child(6):hover span::after,
+.lettre-anim:nth-child(16):hover span::after {
+  color: #deb887;
+}
+.lettre-anim:nth-child(8):hover span::after,
+.lettre-anim:nth-child(11):hover span::after,
+.lettre-anim:nth-child(17):hover span::after {
+  color: #90ee90;
+}
+.lettre-anim:nth-child(9):hover span::after,
+.lettre-anim:nth-child(15):hover span::after {
+  color: #20b2aa;
+}
+.lettre-anim:nth-child(5):hover span::after,
+.lettre-anim:nth-child(12):hover span::after {
+  color: #ffffe0;
+}
+.lettre-anim:nth-child(3):hover span::after,
+.lettre-anim:nth-child(10):hover span::after {
+  color: #ffb6c1;
+}

@@ -16,5 +16,4 @@
 - responsive
     - réorganiser éléments dans tictactoe
 - animations
-    - animation sur 1 titre (ref. Le designeur du web)
     - svg animé (x1) dans la page

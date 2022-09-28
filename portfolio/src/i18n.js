@@ -4,7 +4,6 @@ import { initReactI18next } from "react-i18next";
 const resources = {
   en: {
     translation: {
-      title: "William Fontaine,",
       title_desc: "Junior web developer.",
       introduction_first:
         "Hi ! My name is William Fontaine, I'm 20 years old and I'm a junior web developer.",
@@ -33,7 +32,6 @@ const resources = {
   },
   fr: {
     translation: {
-      title: "William Fontaine,",
       title_desc: "Développeur web junior.",
       introduction_first:
         "Hello ! Je m'appelle William Fontaine, j'ai 20 ans et je suis développeur web junior.",
