@@ -27,5 +27,4 @@
 
 ### Important
 
-- menu burger ne passe pas au dessus des skills
 - menu déroulant des paramètres lorsque l'on appui sur le menu burger
