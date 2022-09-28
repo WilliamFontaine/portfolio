@@ -75,6 +75,10 @@
   .experience-content__second-location {
     font-size: var(--fifth-font-size);
   }
+
+  .experience-content {
+    width: 80vw;
+  }
 }
 
 @media screen and (max-width: 600px) {
