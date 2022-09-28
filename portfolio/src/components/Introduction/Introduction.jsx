@@ -1,22 +1,18 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import "./Introduction.css";
 
 export function Introduction() {
+  const { t } = useTranslation();
+
   return (
     <div className="introduction">
       <div className="introduction-text">
         <div className="introduction-text__first">
-          <p>
-            Hello ! Je m'appelle William Fontaine, j'ai 20 ans et je suis
-            développeur web junior.
-          </p>
+          <p>{t("introduction_first")}</p>
         </div>
         <div className="introduction-text__second">
-          <p>
-            Je suis passionné par l'informatique et très curieux, ce qui me
-            permet de découvrir plein de nouvelles choses, notamment dans le
-            domaine des nouvelles technologies et dans le monde de l'IT.
-          </p>
+          <p>{t("introduction_second")}</p>
         </div>
       </div>
     </div>

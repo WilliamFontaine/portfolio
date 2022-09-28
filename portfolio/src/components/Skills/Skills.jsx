@@ -1,11 +1,13 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import "./Skills.css";
 
 export function Skills() {
+  const { t } = useTranslation();
   return (
     <div className="skills">
       <div className="skills-header">
-        <p>Mes compétences</p>
+        <p>{t("skills_title")}</p>
       </div>
       <div className="skills-list">
         <div className="skills-list__hexagonArea">

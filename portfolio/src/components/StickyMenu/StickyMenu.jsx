@@ -6,10 +6,11 @@ import SvgFrenchFlag from "../../images/FrenchFlag";
 import SvgEnglishFlag from "../../images/EnglishFlag";
 import SvgSun from "../../images/Sun";
 import SvgMoon from "../../images/Moon";
+import i18n from "../../i18n";
 
 export function StickyMenu() {
-  const [isFrench, setLang] = useState(true);
   const [isLightMode, setTheme] = useState(true);
+  const [lang, setLang] = useState("fr");
 
   let toggler = null;
   let navLinksContainer = null;
@@ -44,8 +45,10 @@ export function StickyMenu() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const handleChangeLang = () => {
-    setLang(!isFrench);
+  const handleChangeLang = (e) => {
+    if (lang === "fr") setLang("en");
+    else setLang("fr");
+    i18n.changeLanguage(lang);
   };
 
   const handleChangeTheme = () => {
@@ -71,7 +74,7 @@ export function StickyMenu() {
             onClick={handleChangeTheme}
           />
         )}
-        {isFrench ? (
+        {lang === "fr" ? (
           <SvgEnglishFlag
             className="stickymenu-icon__englishFlag icon"
             onClick={handleChangeLang}

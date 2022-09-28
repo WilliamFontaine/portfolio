@@ -1,12 +1,14 @@
-import React, {useRef} from "react";
+import React, { useRef } from "react";
 import emailjs from "@emailjs/browser";
 import "./Contact.css";
+import { useTranslation } from "react-i18next";
 
 export function Contact() {
   const form = useRef();
   const nameRef = useRef(null);
   const emailRef = useRef(null);
   const messageRef = useRef(null);
+  const { t } = useTranslation();
 
   const sendEmail = (e) => {
     e.preventDefault();
@@ -35,13 +37,13 @@ export function Contact() {
   return (
     <div className="contact">
       <div className="contact-header">
-        <p className="contact-header__title">Me concater</p>
+        <p className="contact-header__title">{t("contact_title")}</p>
       </div>
       <form ref={form} onSubmit={sendEmail} className="contact-form">
         <div className="contact-form__row">
           <div className="contact-form__col-25">
             <label className="contact-form__label" htmlFor="name">
-              Votre nom
+              {t("contact_name")}
             </label>
           </div>
           <div className="contact-form__col-75">
@@ -59,7 +61,7 @@ export function Contact() {
         <div className="contact-form__row">
           <div className="contact-form__col-25">
             <label className="contact-form__label" htmlFor="email">
-              Votre email
+              {t("contact_email")}
             </label>
           </div>
           <div className="contact-form__col-75">
@@ -77,13 +79,13 @@ export function Contact() {
         <div className="contact-form__row">
           <div className="contact-form__col-25">
             <label className="contact-form__label" htmlFor="message">
-              Votre message
+              {t("contact_message")}
             </label>
           </div>
           <div className="contact-form__col-75">
             <textarea
               className="contact-form__text"
-              placeholder="Hey ! ce portfolio est-il vraiment fait en React ?"
+              placeholder={t("contact_message_placeholder")}
               name="message"
               id="message"
               rows="10"
@@ -92,7 +94,11 @@ export function Contact() {
             />
           </div>
         </div>
-        <input type="submit" value="Envoyer" className="contact-form__submit"/>
+        <input
+          type="submit"
+          value={t("contact_button")}
+          className="contact-form__submit"
+        />
       </form>
     </div>
   );
