@@ -4,7 +4,6 @@
 
 - dark theme (redux)
 - langue fr / en (redux)
-- icône de site
 - mails
     - pop up de mail (succes/fail)
     - catpcha pour les mails (éviter le spam)
