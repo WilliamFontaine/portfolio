@@ -10,7 +10,7 @@ import SvgMoon from "../../images/Moon";
 import i18n from "../../i18n";
 
 export function StickyMenu() {
-  const [isLightMode, setTheme] = useState(true);
+  const [theme, setTheme] = useState("light-theme");
   const [lang, setLang] = useState("fr");
 
   let toggler = null;
@@ -46,15 +46,19 @@ export function StickyMenu() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const handleChangeLang = (e) => {
+  const handleChangeLang = () => {
     if (lang === "fr") setLang("en");
     else setLang("fr");
     i18n.changeLanguage(lang);
   };
 
   const handleChangeTheme = () => {
-    setTheme(!isLightMode);
+    theme === "light-theme" ? setTheme("dark-theme") : setTheme("light-theme");
   };
+
+  useEffect(() => {
+    document.body.className = theme;
+  }, [theme]);
 
   return (
     <div className="stickymenu">
@@ -64,7 +68,7 @@ export function StickyMenu() {
         <span></span>
       </div>
       <div className="hamburger-container">
-        {isLightMode ? (
+        {theme === "light-theme" ? (
           <SvgMoon
             className="stickymenu-icon__darkmode icon"
             onClick={handleChangeTheme}
@@ -86,9 +90,13 @@ export function StickyMenu() {
             onClick={handleChangeLang}
           />
         )}
+        <a href="https://github.com/WilliamFontaine">
+          <SvgGitHub className="stickymenu-icon__github icon" />
+        </a>
 
-        <SvgGitHub className="stickymenu-icon__github icon" />
-        <SvgLinkedIn className="stickymenu-icon__linkedIn icon" />
+        <a href="https://www.linkedin.com/in/williamftn/">
+          <SvgLinkedIn className="stickymenu-icon__linkedIn icon" />
+        </a>
       </div>
     </div>
   );

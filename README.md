@@ -3,7 +3,6 @@
 ## TODO
 
 - page d'erreur perso
-- dark theme (redux)
 - mails
     - pop up de mail (succes/fail)
     - catpcha pour les mails (éviter le spam)

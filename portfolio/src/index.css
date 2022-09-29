@@ -49,3 +49,14 @@
   /* icon size */
   --icon-size: 3rem;
 }
+/* ============================================= */
+
+/* couleurs du mode clair */
+
+:root .light-theme {
+}
+
+/* couleurs du mode sombre */
+
+:root .dark-theme {
+}
