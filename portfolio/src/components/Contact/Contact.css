@@ -82,3 +82,34 @@
     font-size: var(--third-font-size);
   }
 }
+
+.modal-captcha,
+.modal-succes,
+.modal-fail {
+  position: fixed;
+  top: 14rem;
+  right: 1rem;
+  background: rgb(0, 0, 0, 0.2);
+  transform: translateX(120%);
+}
+
+.modal-captcha-animation,
+.modal-succes-animation,
+.modal-fail-animation {
+  animation: modal 6s infinite;
+}
+
+@keyframes modal {
+  0% {
+    transform: translateX(120%);
+  }
+  20% {
+    transform: translateX(-10%);
+  }
+  80% {
+    transform: translateX(-10%);
+  }
+  100% {
+    transform: translateX(120%);
+  }
+}

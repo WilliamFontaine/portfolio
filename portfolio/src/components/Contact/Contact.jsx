@@ -1,7 +1,12 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import emailjs from "@emailjs/browser";
 import "./Contact.css";
 import { useTranslation } from "react-i18next";
+import {
+  loadCaptchaEnginge,
+  LoadCanvasTemplateNoReload,
+  validateCaptcha,
+} from "react-simple-captcha";
 
 export function Contact() {
   const form = useRef();
@@ -11,8 +16,6 @@ export function Contact() {
   const { t } = useTranslation();
 
   const sendEmail = (e) => {
-    e.preventDefault();
-
     emailjs
       .sendForm(
         "service_3cz2rke",
@@ -23,15 +26,56 @@ export function Contact() {
       .then(
         (result) => {
           e.target.reset();
-          console.log(result.text);
           nameRef.current.value = "";
           emailRef.current.value = "";
           messageRef.current.value = "";
+          document
+            .querySelector(".modal-succes")
+            .classList.add("modal-succes-animation");
+          setTimeout(function () {
+            document
+              .querySelector(".modal-succes")
+              .classList.remove("modal-succes-animation");
+          }, 6000);
+          document.querySelector(".user_captcha_input").value = "";
         },
         (error) => {
-          console.log(error.text);
+          document
+            .querySelector(".modal-fail")
+            .classList.add("modal-fail-animation");
+          setTimeout(function () {
+            document
+              .querySelector(".modal-fail")
+              .classList.remove("modal-fail-animation");
+          }, 6000);
+          document.querySelector(".user_captcha_input").value = "";
         }
       );
+  };
+
+  useEffect(() => {
+    loadCaptchaEnginge(6);
+  });
+
+  const doSubmit = (e) => {
+    let user_captcha = document.querySelector(".user_captcha_input").value;
+
+    if (validateCaptcha(user_captcha) === true) {
+      loadCaptchaEnginge(6);
+      document.querySelector(".user_captcha_input").value = "";
+      sendEmail(e);
+    } else {
+      document
+        .querySelector(".modal-captcha")
+        .classList.add("modal-captcha-animation");
+      document.querySelector(".user_captcha_input").value = "";
+      setTimeout(function () {
+        document
+          .querySelector(".modal-captcha")
+          .classList.remove("modal-captcha-animation");
+      }, 6000);
+    }
+    e.preventDefault();
   };
 
   return (
@@ -39,7 +83,7 @@ export function Contact() {
       <div className="contact-header">
         <p className="contact-header__title">{t("contact_title")}</p>
       </div>
-      <form ref={form} onSubmit={sendEmail} className="contact-form">
+      <form ref={form} onSubmit={doSubmit} className="contact-form">
         <div className="contact-form__row">
           <div className="contact-form__col-25">
             <label className="contact-form__label" htmlFor="name">
@@ -94,12 +138,22 @@ export function Contact() {
             />
           </div>
         </div>
+        <LoadCanvasTemplateNoReload />
+        <input
+          placeholder="Enter Captcha Value"
+          className="user_captcha_input"
+          name="user_captcha_input"
+          type="text"
+        ></input>
         <input
           type="submit"
           value={t("contact_button")}
           className="contact-form__submit"
         />
       </form>
+      <div className="modal-captcha">{t("contact_captcha")}</div>
+      <div className="modal-succes">{t("contact_succes")}</div>
+      <div className="modal-fail">{t("contact_fail")}</div>
     </div>
   );
 }
