@@ -25,9 +25,9 @@ const resources = {
       contact_email: "Your mail",
       contact_message: "Your message",
       contact_message_placeholder:
-        "Hey! Is this portfolio really made in React?",
+        "Hey! Is this portfolio really made in React ?",
       contact_button: "Send",
-      footer_title: "Directed by William Fontaine with ❤️ .",
+      footer_title: "Directed by William Fontaine with ❤️.",
     },
   },
   fr: {
