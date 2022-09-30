@@ -115,7 +115,7 @@ export function Contact() {
               name="user_name"
               id="name"
               ref={nameRef}
-              // required
+              required
             />
           </div>
         </div>
@@ -133,7 +133,7 @@ export function Contact() {
               name="user_email"
               id="email"
               ref={emailRef}
-              // required
+              required
             />
           </div>
         </div>
@@ -151,7 +151,7 @@ export function Contact() {
               id="message"
               rows="10"
               ref={messageRef}
-              // required
+              required
             />
           </div>
         </div>
