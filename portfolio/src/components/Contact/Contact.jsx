@@ -7,6 +7,7 @@ import {
   LoadCanvasTemplateNoReload,
   validateCaptcha,
 } from "react-simple-captcha";
+import { Popus } from "../Popup/Popup";
 
 export function Contact() {
   const form = useRef();
@@ -54,7 +55,7 @@ export function Contact() {
   };
 
   useEffect(() => {
-    loadCaptchaEnginge(6);
+    loadCaptchaEnginge(8);
   });
 
   const doSubmit = (e) => {
@@ -138,22 +139,31 @@ export function Contact() {
             />
           </div>
         </div>
-        <LoadCanvasTemplateNoReload />
-        <input
-          placeholder="Enter Captcha Value"
-          className="user_captcha_input"
-          name="user_captcha_input"
-          type="text"
-        ></input>
+        <div className="contact-form__captcha">
+          <div className="contact-form__captcha-captcha">
+            <LoadCanvasTemplateNoReload />
+          </div>
+          <div className="contact-form__captcha-help">
+            Enter the captcha here :
+          </div>
+
+          <input
+            placeholder="Enter Captcha Value"
+            className="user_captcha_input"
+            name="user_captcha_input"
+            type="text"
+          ></input>
+        </div>
+
         <input
           type="submit"
           value={t("contact_button")}
           className="contact-form__submit"
         />
       </form>
-      <div className="modal-captcha">{t("contact_captcha")}</div>
-      <div className="modal-succes">{t("contact_succes")}</div>
-      <div className="modal-fail">{t("contact_fail")}</div>
+      <Popus message={t("contact_captcha")} className="modal-captcha" />
+      <Popus message={t("contact_succes")} className="modal-succes" />
+      <Popus message={t("contact_fail")} className="modal-fail" />
     </div>
   );
 }

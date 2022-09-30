@@ -12,7 +12,8 @@
 
 .contact-form__name,
 .contact-form__email,
-.contact-form__text {
+.contact-form__text,
+.user_captcha_input {
   width: 100%;
   padding: 1rem;
   border: 1px solid #ccc;
@@ -22,7 +23,8 @@
   font-style: var(--second-font-style);
 }
 
-.contact-form__label {
+.contact-form__label,
+.contact-form__captcha-help {
   padding: 1rem 1rem 1rem 0;
   display: inline-block;
   width: 100%;
@@ -30,6 +32,19 @@
   font-family: var(--second-font);
   font-size: var(--fifth-font-size);
   font-style: var(--second-font-style);
+}
+
+.contact-form__captcha-help {
+  padding: 0;
+  margin: 2vh 0;
+}
+
+.contact-form__captcha-captcha {
+  border: 1px rgba(0, 0, 0, 0.1) solid;
+  width: fit-content;
+  margin: auto;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
 }
 
 .contact-form__submit {
@@ -65,6 +80,14 @@
   clear: both;
 }
 
+.contact-form__captcha {
+  border: rgba(0, 0, 0, 0.5) 1px solid;
+  width: fit-content;
+  margin: 5vh auto;
+  padding: 2rem;
+  border-radius: 1rem;
+}
+
 @media screen and (max-width: 1000px) {
   .contact {
     padding: 1rem;
@@ -80,36 +103,5 @@
 
   .contact-header {
     font-size: var(--third-font-size);
-  }
-}
-
-.modal-captcha,
-.modal-succes,
-.modal-fail {
-  position: fixed;
-  top: 14rem;
-  right: 1rem;
-  background: rgb(0, 0, 0, 0.2);
-  transform: translateX(120%);
-}
-
-.modal-captcha-animation,
-.modal-succes-animation,
-.modal-fail-animation {
-  animation: modal 6s infinite;
-}
-
-@keyframes modal {
-  0% {
-    transform: translateX(120%);
-  }
-  20% {
-    transform: translateX(-10%);
-  }
-  80% {
-    transform: translateX(-10%);
-  }
-  100% {
-    transform: translateX(120%);
   }
 }
