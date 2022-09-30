@@ -17,41 +17,57 @@ export function Contact() {
   const { t } = useTranslation();
 
   const sendEmail = (e) => {
-    emailjs
-      .sendForm(
-        "service_3cz2rke",
-        "template_9y3kqsb",
-        form.current,
-        "wM_Pk2WkEQ2xB60ip"
-      )
-      .then(
-        (result) => {
-          e.target.reset();
-          nameRef.current.value = "";
-          emailRef.current.value = "";
-          messageRef.current.value = "";
-          document
-            .querySelector(".modal-succes")
-            .classList.add("modal-succes-animation");
-          setTimeout(function () {
+    if (
+      nameRef.current.value !== "" &&
+      emailRef.current.value !== "" &&
+      messageRef.current.value !== ""
+    ) {
+      emailjs
+        .sendForm(
+          "service_3cz2rke",
+          "template_9y3kqsb",
+          form.current,
+          "wM_Pk2WkEQ2xB60ip"
+        )
+        .then(
+          (result) => {
+            e.target.reset();
+            nameRef.current.value = "";
+            emailRef.current.value = "";
+            messageRef.current.value = "";
             document
               .querySelector(".modal-succes")
-              .classList.remove("modal-succes-animation");
-          }, 6000);
-          document.querySelector(".user_captcha_input").value = "";
-        },
-        (error) => {
-          document
-            .querySelector(".modal-fail")
-            .classList.add("modal-fail-animation");
-          setTimeout(function () {
+              .classList.add("modal-succes-animation");
+            setTimeout(function () {
+              document
+                .querySelector(".modal-succes")
+                .classList.remove("modal-succes-animation");
+            }, 6000);
+            document.querySelector(".user_captcha_input").value = "";
+          },
+          (error) => {
             document
               .querySelector(".modal-fail")
-              .classList.remove("modal-fail-animation");
-          }, 6000);
-          document.querySelector(".user_captcha_input").value = "";
-        }
-      );
+              .classList.add("modal-fail-animation");
+            setTimeout(function () {
+              document
+                .querySelector(".modal-fail")
+                .classList.remove("modal-fail-animation");
+            }, 6000);
+            document.querySelector(".user_captcha_input").value = "";
+          }
+        );
+    } else {
+      document
+        .querySelector(".modal-fail")
+        .classList.add("modal-fail-animation");
+      setTimeout(function () {
+        document
+          .querySelector(".modal-fail")
+          .classList.remove("modal-fail-animation");
+      }, 6000);
+      document.querySelector(".user_captcha_input").value = "";
+    }
   };
 
   useEffect(() => {
@@ -99,7 +115,7 @@ export function Contact() {
               name="user_name"
               id="name"
               ref={nameRef}
-              required
+              // required
             />
           </div>
         </div>
@@ -117,7 +133,7 @@ export function Contact() {
               name="user_email"
               id="email"
               ref={emailRef}
-              required
+              // required
             />
           </div>
         </div>
@@ -135,7 +151,7 @@ export function Contact() {
               id="message"
               rows="10"
               ref={messageRef}
-              required
+              // required
             />
           </div>
         </div>
