@@ -146,15 +146,13 @@ export function Contact() {
           <div className="contact-form__captcha-help">
             Enter the captcha here :
           </div>
-
           <input
             placeholder="Enter Captcha Value"
             className="user_captcha_input"
             name="user_captcha_input"
             type="text"
-          ></input>
+          />
         </div>
-
         <input
           type="submit"
           value={t("contact_button")}
