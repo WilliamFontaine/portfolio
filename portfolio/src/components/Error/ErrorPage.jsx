@@ -22,8 +22,10 @@ export default function ErrorPage() {
       <div className="error-page__left">
         <div className="error-page__info">
           <p className="title">{t("error")}</p>
-          <span className="error-code">{error.status} </span>
-          <span className="error-statusText">{error.statusText}.</span>
+          <span className="error-code glitch" data-text={error.status}>
+            {error.status}
+          </span>
+          <span className="error-statusText"> {error.statusText}.</span>
           <p className="error">{t("error_message")}</p>
         </div>
       </div>
