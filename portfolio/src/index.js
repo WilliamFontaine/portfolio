@@ -6,7 +6,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import i18n from "./i18n";
 
 import reportWebVitals from "./reportWebVitals";
-import ErrorPage from "./components/Error/error-page";
+import ErrorPage from "./components/Error/ErrorPage";
 import { TicTacToeGame } from "./container/TicTacToeGame/TicTacToeGame";
 import { HomePage } from "./container/HomePage";
 

@@ -31,6 +31,9 @@ const resources = {
       contact_succes: "Your message has been sent successfully.",
       contact_fail: "Error, your message could not be sent.",
       footer_title: "Directed by William Fontaine with ❤️.",
+      error: "Error !",
+      error_message:
+        "Sorry, an unexpected error has occurred. Please, go back.",
     },
   },
   fr: {
@@ -63,6 +66,9 @@ const resources = {
       contact_succes: "Votre message à été envoyé avec succès.",
       contact_fail: "Erreur, votre message n'a pas pû être envoyé.",
       footer_title: "Réalisé par William Fontaine avec ❤️️.",
+      error: "Erreur !",
+      error_message:
+        "Désolé, une erreur inattendue  est survenue. Veuillez retourner à la page précédente.",
     },
   },
 };
