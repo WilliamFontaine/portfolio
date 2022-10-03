@@ -9,6 +9,8 @@
   padding-left: 50vw;
   font-size: var(--second-font-size);
   text-align: justify;
+  position: relative;
+  color: white;
 }
 
 .introduction-text__first {

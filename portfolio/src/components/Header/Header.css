@@ -1,9 +1,5 @@
-.header {
-  display: flex;
-  height: 100vh;
-}
-
 .header-content {
+  height: 100vh;
   padding-left: 20vw;
   padding-top: 32vh;
 }

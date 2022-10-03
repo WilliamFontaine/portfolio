@@ -2,6 +2,7 @@
   height: 30vh;
   display: flex;
   align-items: center;
+  position: relative;
 }
 
 .footer p {

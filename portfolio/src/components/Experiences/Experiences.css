@@ -1,5 +1,7 @@
 .experience {
   display: flex;
+  position: relative;
+  color: white;
 }
 
 .experience-header {

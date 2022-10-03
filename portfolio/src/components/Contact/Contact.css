@@ -1,5 +1,7 @@
 .contact {
   padding: 10rem;
+  position: relative;
+  color: white;
 }
 
 .contact-header {

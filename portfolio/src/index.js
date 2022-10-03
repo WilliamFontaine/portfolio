@@ -8,7 +8,8 @@ import i18n from "./i18n";
 import reportWebVitals from "./reportWebVitals";
 import ErrorPage from "./components/Error/ErrorPage";
 import { TicTacToeGame } from "./container/TicTacToeGame/TicTacToeGame";
-import { HomePage } from "./container/HomePage";
+import { HomePage } from "./container/HomePage/HomePage";
+import { ParallaxProvider } from "react-scroll-parallax";
 
 const router = createBrowserRouter([
   {
@@ -23,9 +24,11 @@ const router = createBrowserRouter([
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <RouterProvider router={router} />
-  </React.StrictMode>
+  <ParallaxProvider>
+    <React.StrictMode>
+      <RouterProvider router={router} />
+    </React.StrictMode>
+  </ParallaxProvider>
 );
 
 reportWebVitals();

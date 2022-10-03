@@ -2,6 +2,9 @@
   display: flex;
   flex-direction: column;
   padding-top: 30vh;
+  position: relative;
+  color: white;
+  background-color: #56588c;
 }
 
 .games-header {
