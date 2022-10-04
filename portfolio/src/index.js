@@ -10,6 +10,7 @@ import ErrorPage from "./components/Error/ErrorPage";
 import { TicTacToeGame } from "./container/TicTacToeGame/TicTacToeGame";
 import { HomePage } from "./container/HomePage/HomePage";
 import { ParallaxProvider } from "react-scroll-parallax";
+import { ThemeProvider } from "./store/ThemeStore";
 
 const router = createBrowserRouter([
   {
@@ -24,11 +25,13 @@ const router = createBrowserRouter([
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <ParallaxProvider>
-    <React.StrictMode>
-      <RouterProvider router={router} />
-    </React.StrictMode>
-  </ParallaxProvider>
+  <ThemeProvider>
+    <ParallaxProvider>
+      <React.StrictMode>
+        <RouterProvider router={router} />
+      </React.StrictMode>
+    </ParallaxProvider>
+  </ThemeProvider>
 );
 
 reportWebVitals();

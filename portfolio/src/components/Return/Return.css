@@ -1,5 +1,8 @@
 .return {
-    margin: 1rem 1rem 1rem 2.5rem;
-    width: fit-content;
-    height: fit-content;
+  margin: 1rem 1rem 1rem 2.5rem;
+  width: fit-content;
+  height: fit-content;
+}
+.icon-arrow-left {
+  font-size: 2rem;
 }

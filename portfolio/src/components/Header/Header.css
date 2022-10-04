@@ -2,6 +2,7 @@
   height: 100vh;
   padding-left: 20vw;
   padding-top: 32vh;
+  position: relative;
 }
 
 .header-content__title {

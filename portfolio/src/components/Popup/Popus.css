@@ -8,6 +8,7 @@
   border-radius: 1rem;
   transform: translateX(120%);
   background-color: #d3d3d3;
+  color: black;
 }
 
 .popup-spinner {

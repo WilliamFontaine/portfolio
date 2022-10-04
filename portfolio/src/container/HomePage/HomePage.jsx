@@ -11,42 +11,54 @@ import { ParallaxBanner } from "react-scroll-parallax";
 
 import "./HomePage.css";
 
-import bg1_first from "../../images/background/first/bg-1.svg";
-import bg2_first from "../../images/background/first/bg-2.svg";
-import bg3_first from "../../images/background/first/bg-3.svg";
-import bg4_first from "../../images/background/first/bg-4.svg";
+import bg1_first_light from "../../images/background/first/bg-1_light.svg";
+import bg1_first_dark from "../../images/background/first/bg-1_dark.svg";
+import bg2_first_light from "../../images/background/first/bg-2_light.svg";
+import bg2_first_dark from "../../images/background/first/bg-2_dark.svg";
+import bg3_first_light from "../../images/background/first/bg-3_light.svg";
+import bg3_first_dark from "../../images/background/first/bg-3_dark.svg";
+import bg4_first_light from "../../images/background/first/bg-4_light.svg";
+import bg4_first_dark from "../../images/background/first/bg-4_dark.svg";
 
-import bg1_second from "../../images/background/second/bg-1.svg";
-import bg2_second from "../../images/background/second/bg-2.svg";
+import bg1_second_light from "../../images/background/second/bg-1_light.svg";
+import bg1_second_dark from "../../images/background/second/bg-1_dark.svg";
+import bg2_second_light from "../../images/background/second/bg-2_light.svg";
+import bg2_second_dark from "../../images/background/second/bg-2_dark.svg";
 
-import bg2_fourth from "../../images/background/fourth/bg-2.svg";
-import bg3_fourth from "../../images/background/fourth/bg-3.svg";
+import bg1_fourth_light from "../../images/background/third/bg-1_light.svg";
+import bg1_fourth_dark from "../../images/background/third/bg-1_dark.svg";
+import bg2_fourth_light from "../../images/background/third/bg-2_light.svg";
+import bg2_fourth_dark from "../../images/background/third/bg-2_dark.svg";
+import { ThemeConsumerHook } from "../../store/ThemeStore";
 
 export function HomePage() {
+  const [{ theme }, dispatch] = ThemeConsumerHook();
+
   return (
     <div className="homePage">
+      {console.log(theme)}
       <ParallaxBanner
         layers={[
           {
-            image: bg1_first,
+            image: theme === "light-theme" ? bg1_first_light : bg1_first_dark,
             translateY: [-30, 50],
             shouldAlwaysCompleteAnimation: true,
             expanded: false,
           },
           {
-            image: bg2_first,
+            image: theme === "light-theme" ? bg2_first_light : bg2_first_dark,
             translateY: [-25, 40],
             shouldAlwaysCompleteAnimation: true,
             expanded: false,
           },
           {
-            image: bg3_first,
+            image: theme === "light-theme" ? bg3_first_light : bg3_first_dark,
             translateY: [-25, 30],
             shouldAlwaysCompleteAnimation: true,
             expanded: false,
           },
           {
-            image: bg4_first,
+            image: theme === "light-theme" ? bg4_first_light : bg4_first_dark,
             translateY: [0, 20],
             shouldAlwaysCompleteAnimation: true,
             expanded: false,
@@ -60,13 +72,15 @@ export function HomePage() {
       <ParallaxBanner
         layers={[
           {
-            image: bg2_second,
+            image: theme === "light-theme" ? bg2_second_light : bg2_second_dark,
+
             translateY: [-20, 20],
             shouldAlwaysCompleteAnimation: true,
             expanded: false,
           },
           {
-            image: bg1_second,
+            image:
+              theme === "light-theme" ? bg1_second_light : bg1_second_light,
             translateY: [0, -50],
             shouldAlwaysCompleteAnimation: true,
             expanded: false,
@@ -76,19 +90,17 @@ export function HomePage() {
         <Experiences />
         <Skills />
       </ParallaxBanner>
-
       <Games />
-
       <ParallaxBanner
         layers={[
           {
-            image: bg3_fourth,
+            image: theme === "light-theme" ? bg2_fourth_light : bg2_fourth_dark,
             translateY: [-20, 10],
             shouldAlwaysCompleteAnimation: true,
             expanded: true,
           },
           {
-            image: bg2_fourth,
+            image: theme === "light-theme" ? bg1_fourth_light : bg1_fourth_dark,
             translateY: [-20, -10],
             shouldAlwaysCompleteAnimation: true,
             expanded: true,

@@ -54,9 +54,18 @@
 /* couleurs du mode clair */
 
 :root .light-theme {
+  --first-color: rgba(242, 242, 242, 0.774);
+  --second-color: #656b8c;
+  --third-color: #56588c;
+  --fourth-color: #0d0e26;
+  --fifth-color: #59394e;
 }
-
 /* couleurs du mode sombre */
 
 :root .dark-theme {
+  --first-color: #2e3959;
+  --second-color: rgba(42, 49, 191, 0.8);
+  --third-color: #171140;
+  --fourth-color: #3d188c;
+  --fifth-color: #8c0f84;
 }

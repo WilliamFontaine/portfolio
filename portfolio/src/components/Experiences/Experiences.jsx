@@ -1,8 +1,7 @@
 import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./Experiences.css";
-import { faLocationPin } from "@fortawesome/free-solid-svg-icons";
 import { useTranslation } from "react-i18next";
+import { FaLocationArrow } from "react-icons/fa";
 
 export function Experiences() {
   const { t } = useTranslation();
@@ -18,7 +17,7 @@ export function Experiences() {
           </p>
           <p className="experience-content__first-job">{t("first_exp_job")}</p>
           <p className="experience-content__first-location">
-            <FontAwesomeIcon icon={faLocationPin} className="FontAwesomeIcon" />
+            <FaLocationArrow className="pin-icon" />
             {t("first_exp_location")}
           </p>
         </div>
@@ -30,7 +29,7 @@ export function Experiences() {
             {t("second_exp_job")}
           </p>
           <p className="experience-content__second-location">
-            <FontAwesomeIcon icon={faLocationPin} className="FontAwesomeIcon" />
+            <FaLocationArrow className="pin-icon" />
             {t("second_exp_location")}
           </p>
         </div>

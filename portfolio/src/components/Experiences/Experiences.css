@@ -53,11 +53,6 @@
   font-style: var(--first-font-style);
 }
 
-.experience-content__first-location .FontAwesomeIcon,
-.experience-content__second-location .FontAwesomeIcon {
-  padding: 0 1rem 0 0;
-}
-
 @media screen and (max-width: 1300px) {
   .experience {
     display: inline;

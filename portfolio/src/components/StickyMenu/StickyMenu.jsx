@@ -1,17 +1,22 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import "./StickyMenu.css";
-import SvgGitHub from "../../images/GitHub";
-import SvgLinkedIn from "../../images/LinkedIn";
 import SvgFrenchFlag from "../../images/FrenchFlag";
 import SvgEnglishFlag from "../../images/EnglishFlag";
-import SvgSun from "../../images/Sun";
-import SvgMoon from "../../images/Moon";
 import i18n from "../../i18n";
+import { ThemeConsumerHook } from "../../store/ThemeStore";
+import { FaGithub, FaLinkedinIn, FaMoon, FaSun } from "react-icons/fa";
 
 export function StickyMenu() {
-  const [theme, setTheme] = useState("light-theme");
+  const [{ theme }, dispatch] = ThemeConsumerHook();
   const [lang, setLang] = useState("fr");
+
+  const handleChangeTheme = () => {
+    dispatch({
+      type: "changeTheme",
+      newTheme: theme === "light-theme" ? "dark-theme" : "light-theme",
+    });
+  };
 
   let toggler = null;
   let navLinksContainer = null;
@@ -52,10 +57,6 @@ export function StickyMenu() {
     i18n.changeLanguage(lang);
   };
 
-  const handleChangeTheme = () => {
-    theme === "light-theme" ? setTheme("dark-theme") : setTheme("light-theme");
-  };
-
   useEffect(() => {
     document.body.className = theme;
   }, [theme]);
@@ -69,12 +70,12 @@ export function StickyMenu() {
       </div>
       <div className="hamburger-container">
         {theme === "light-theme" ? (
-          <SvgMoon
+          <FaMoon
             className="stickymenu-icon__darkmode icon"
             onClick={handleChangeTheme}
           />
         ) : (
-          <SvgSun
+          <FaSun
             className="stickymenu-icon__lightmode icon"
             onClick={handleChangeTheme}
           />
@@ -91,11 +92,11 @@ export function StickyMenu() {
           />
         )}
         <a href="https://github.com/WilliamFontaine">
-          <SvgGitHub className="stickymenu-icon__github icon" />
+          <FaGithub className="stickymenu-icon__github icon" />
         </a>
 
         <a href="https://www.linkedin.com/in/williamftn/">
-          <SvgLinkedIn className="stickymenu-icon__linkedIn icon" />
+          <FaLinkedinIn className="stickymenu-icon__linkedIn icon" />
         </a>
       </div>
     </div>
