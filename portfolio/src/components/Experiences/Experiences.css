@@ -1,7 +1,7 @@
 .experience {
   display: flex;
   position: relative;
-  color: white;
+  color: var(--font-color-white);
 }
 
 .experience-header {
@@ -21,14 +21,41 @@
   order: 1;
 }
 
+.pin-icon {
+  margin-right: 1rem;
+}
+
 .experience-content__first,
 .experience-content__second {
-  border: 1px solid black;
   border-radius: 1rem;
   text-align: center;
   width: fit-content;
-  padding: 1rem 3rem;
+  padding: 1.5rem 3rem;
   margin: 10vh auto 10vh auto;
+  position: relative;
+  border-radius: 70% 55% 45% 40% / 80% 50% 80% 40%;
+  background-color: var(--first-color);
+  color: var(--font-color-black);
+  animation: blobby 7s infinite linear;
+  border: 2px solid var(--fifth-color);
+}
+
+@keyframes blobby {
+  0% {
+    border-radius: 70% 55% 45% 40% / 80% 50% 80% 40%;
+  }
+  25% {
+    border-radius: 60% 45% 80% 10% / 80% 30% 55% 40%;
+  }
+  50% {
+    border-radius: 45% 30% 80% 30% / 70% 55% 45% 45%;
+  }
+  75% {
+    border-radius: 80% 30% 45% 40% / 55% 80% 45% 60%;
+  }
+  100% {
+    border-radius: 70% 55% 45% 40% / 80% 50% 80% 40%;
+  }
 }
 
 .experience-content__first-date,

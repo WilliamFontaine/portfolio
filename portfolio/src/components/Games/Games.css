@@ -4,7 +4,7 @@
   padding-top: 30vh;
   position: relative;
   color: white;
-  background-color: #56588c;
+  background-color: var(--third-color);
 }
 
 .games-header {
@@ -17,6 +17,7 @@
   width: fit-content;
   text-align: center;
   order: 1;
+  color: var(--fifth-color);
 }
 
 .games-content {
@@ -26,6 +27,14 @@
   align-items: center;
   display: flex;
   order: 2;
+}
+.games-content a {
+  text-decoration: underline;
+  color: var(--fifth-color);
+}
+
+.games-content:hover {
+  color: var(--fifth-color);
 }
 
 .games-content__tictactoe {
@@ -45,7 +54,6 @@
   display: inline-block;
   border: 2px solid #333;
   border-radius: 2% 6% 5% 4% / 1% 1% 2% 4%;
-  background: #fff;
 }
 
 .games-content__tictactoe p {

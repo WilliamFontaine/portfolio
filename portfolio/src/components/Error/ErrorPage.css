@@ -1,6 +1,7 @@
 .error-page {
   display: flex;
   height: 100vh;
+  background-color: var(--third-color);
 }
 
 .error-page__right {

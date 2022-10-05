@@ -9,31 +9,46 @@
   display: none;
 }
 
+.icon {
+  margin: 0 1rem 0 1rem;
+}
+
 .stickymenu-icon__github,
 .stickymenu-icon__linkedIn {
   width: var(--icon-size);
   height: var(--icon-size);
-  border-radius: 1.8rem;
   cursor: pointer;
-  margin: 0 1rem 0 1rem;
-  background-color: white;
+}
+
+.stickymenu-icon__github {
+  color: black;
+}
+
+.stickymenu-icon__linkedIn {
+  color: #0a66c2;
 }
 
 .stickymenu-icon__frenchFlag,
 .stickymenu-icon__englishFlag {
   width: var(--icon-size);
   cursor: pointer;
-  margin: 0 1rem 0 1rem;
   background-color: white;
   vertical-align: super;
 }
 
 .stickymenu-icon__lightmode,
 .stickymenu-icon__darkmode {
-  width: var(--icon-size);
-  height: var(--icon-size);
+  width: 2.5rem;
+  height: 2.5rem;
   cursor: pointer;
-  margin: 0 1rem 0 1rem;
+}
+
+.stickymenu-icon__darkmode {
+  color: #032830;
+}
+
+.stickymenu-icon__lightmode {
+  color: #f9c318;
 }
 
 @media (max-width: 600px) {
@@ -44,7 +59,6 @@
     border: none;
     display: flex;
     align-items: center;
-    margin-top: 1rem;
   }
 
   .hamburger span {

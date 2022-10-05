@@ -10,7 +10,9 @@
   font-size: var(--second-font-size);
   text-align: justify;
   position: relative;
-  color: white;
+  color: var(--font-color-white);
+  text-shadow: 2px 2px 1px var(--fifth-color);
+  /* letter-spacing: 1px; */
 }
 
 .introduction-text__first {

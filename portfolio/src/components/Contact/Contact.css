@@ -10,6 +10,7 @@
   font-family: var(--second-font);
   font-size: var(--second-font-size);
   font-style: var(--second-font-style);
+  color: var(--fifth-color);
 }
 
 .contact-form__name,
@@ -32,8 +33,10 @@
   width: 100%;
   text-align: center;
   font-family: var(--second-font);
-  font-size: var(--fifth-font-size);
+  font-size: var(--fourth-font-size);
   font-style: var(--second-font-style);
+  color: var(--font-color-black);
+  font-weight: bold;
 }
 
 .contact-form__captcha-help {
@@ -58,6 +61,7 @@
   cursor: pointer;
   display: block;
   margin: 5vh auto 5vh auto;
+  transition: background-color 0.5s ease-out;
 }
 
 .contact-form__submit:hover {

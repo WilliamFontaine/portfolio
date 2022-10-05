@@ -48,17 +48,29 @@
 
   /* icon size */
   --icon-size: 3rem;
+
+  /* border */
+  --border-size: 5px;
+
+  /* colors */
+  --white-color: white;
+  --black-color: black;
+  --light-black: rgba(0, 0, 0, 0.122);
+
+  --font-color-white: var(--white-color);
+  --font-color-black: var(--black-color);
 }
 /* ============================================= */
 
 /* couleurs du mode clair */
 
 :root .light-theme {
-  --first-color: rgba(242, 242, 242, 0.774);
-  --second-color: #656b8c;
-  --third-color: #56588c;
-  --fourth-color: #0d0e26;
-  --fifth-color: #59394e;
+  --first-color: #dbdbdb;
+  --second-color: #424a59;
+  --third-color: #f3d6cb;
+  --fourth-color: #2da8a5;
+  --fifth-color: #272f40;
+  --sixth-color: #39af5c;
 }
 /* couleurs du mode sombre */
 
@@ -68,4 +80,5 @@
   --third-color: #171140;
   --fourth-color: #3d188c;
   --fifth-color: #8c0f84;
+  --sixth-color: #8fff83;
 }
