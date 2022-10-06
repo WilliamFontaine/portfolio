@@ -25,14 +25,31 @@
 .footer-social::before {
   content: "";
   position: absolute;
+  left: 0;
   left: 12.5vw;
-  /* top: -10%; */
   width: 75vw;
-  border-bottom: solid 1.5px var(--black-color);
+  border-bottom: solid 1px var(--black-color);
   margin: 0 auto;
 }
+.footer::before {
+  content: "";
+  position: absolute;
+  left: 25vw;
+  width: 50vw;
+  top: -0.3rem;
+  border-bottom: solid 1px var(--black-color);
+}
 
-.footer p {
+.footer::after {
+  content: "";
+  position: absolute;
+  left: 25vw;
+  width: 50vw;
+  top: 0.3rem;
+  border-bottom: 1px solid var(--black-color);
+}
+
+.footer-social::after .footer p {
   text-align: center;
   margin: auto;
   font-family: var(--first-font);
