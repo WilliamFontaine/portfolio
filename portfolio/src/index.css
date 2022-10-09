@@ -70,15 +70,17 @@
   --third-color: #f3d6cb;
   --fourth-color: #2da8a5;
   --fifth-color: #272f40;
+  --title-color: var(--fourth-color);
   --sixth-color: #39af5c;
 }
 /* couleurs du mode sombre */
 
 :root .dark-theme {
-  --first-color: #2e3959;
-  --second-color: rgba(42, 49, 191, 0.8);
-  --third-color: #171140;
-  --fourth-color: #3d188c;
-  --fifth-color: #8c0f84;
-  --sixth-color: #8fff83;
+  --first-color: #535059;
+  --second-color: #8090a9;
+  --third-color: #a79281;
+  --fourth-color: #1f2024;
+  --fifth-color: #495676;
+  --title-color: var(--white-color);
+  --sixth-color: rgb(199, 178, 159);
 }

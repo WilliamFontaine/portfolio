@@ -32,7 +32,7 @@ import bg2_fourth_dark from "../../images/background/third/bg-2_dark.svg";
 import { ThemeConsumerHook } from "../../store/ThemeStore";
 
 export function HomePage() {
-  const [{ theme }, dispatch] = ThemeConsumerHook();
+  const [{ theme }] = ThemeConsumerHook();
 
   return (
     <div className="homePage">
@@ -41,27 +41,27 @@ export function HomePage() {
         layers={[
           {
             image: theme === "light-theme" ? bg1_first_light : bg1_first_dark,
-            translateY: [-30, 50],
+            translateY: [-20, 50],
             shouldAlwaysCompleteAnimation: true,
             expanded: false,
           },
           {
             image: theme === "light-theme" ? bg2_first_light : bg2_first_dark,
-            translateY: [-25, 40],
+            translateY: [-20, 40],
             shouldAlwaysCompleteAnimation: true,
             expanded: false,
           },
           {
             image: theme === "light-theme" ? bg3_first_light : bg3_first_dark,
-            translateY: [-25, 30],
+            translateY: [-30, 20],
             shouldAlwaysCompleteAnimation: true,
             expanded: false,
           },
           {
             image: theme === "light-theme" ? bg4_first_light : bg4_first_dark,
-            translateY: [0, 20],
+            translateY: [-15, 0],
             shouldAlwaysCompleteAnimation: true,
-            expanded: false,
+            expanded: true,
           },
         ]}
       >
@@ -79,8 +79,7 @@ export function HomePage() {
             expanded: false,
           },
           {
-            image:
-              theme === "light-theme" ? bg1_second_light : bg1_second_light,
+            image: theme === "light-theme" ? bg1_second_light : bg1_second_dark,
             translateY: [0, -50],
             shouldAlwaysCompleteAnimation: true,
             expanded: false,
