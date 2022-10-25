@@ -1,6 +1,6 @@
 import React from "react";
 import "./Board.css";
-import {Square} from "./Square";
+import { Square } from "./Square";
 
 export class Board extends React.Component {
   constructor(props) {
@@ -24,7 +24,7 @@ export class Board extends React.Component {
   render() {
     let i = 0;
     return (
-      <div>
+      <div className="tictactoe">
         {Array.from(Array(this.state.rows).keys()).map((row) => {
           return (
             <div className="board-row" key={row}>

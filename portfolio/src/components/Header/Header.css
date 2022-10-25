@@ -52,7 +52,7 @@
 @media screen and (max-width: 600px) {
   .header-content {
     padding-left: 0;
-    margin: 0 auto;
+    margin-left: 2rem;
   }
 
   .header-content__title {
@@ -103,6 +103,7 @@
 .lettre-anim:hover span::before {
   transform: scaleX(0.85) skewY(20deg);
 }
+
 .lettre-anim:hover span::after {
   color: var(--sixth-color);
 }

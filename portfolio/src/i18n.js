@@ -34,6 +34,7 @@ const resources = {
       error: "Error !",
       error_message:
         "Sorry, an unexpected error has occurred. Please, go back.",
+      tictactoe_grid: "Reset grid",
     },
   },
   fr: {
@@ -69,6 +70,7 @@ const resources = {
       error: "Erreur !",
       error_message:
         "Désolé, une erreur inattendue  est survenue. Veuillez retourner à la page précédente.",
+      tictactoe_grid: "Réintialiser la grille",
     },
   },
 };

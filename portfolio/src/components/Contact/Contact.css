@@ -10,7 +10,7 @@
   font-family: var(--second-font);
   font-size: var(--second-font-size);
   font-style: var(--second-font-style);
-  color: var(--fifth-color);
+  color: var(--first-title-color);
 }
 
 .contact-form__name,
@@ -101,6 +101,7 @@
 }
 
 @media screen and (max-width: 600px) {
+
   .contact-form__col-25,
   .contact-form__col-75 {
     width: 100%;

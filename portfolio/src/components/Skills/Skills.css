@@ -14,7 +14,7 @@
   height: inherit;
   width: fit-content;
   order: 1;
-  color: var(--fifth-color);
+  color: var(--first-title-color);
 }
 
 .skills-list {
@@ -63,6 +63,7 @@
   .skills {
     display: inline;
   }
+
   .skills-header {
     margin-top: 20vh;
   }

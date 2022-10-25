@@ -24,7 +24,7 @@
   width: 3rem;
   height: 3rem;
   top: 40rem;
-  right: 40rem;
+  right: 1rem;
   border-radius: 70% 30% 30% 70% / 60% 40% 60% 40%;
   background: var(--second-color);
 }
@@ -33,7 +33,7 @@
   width: 4rem;
   height: 4rem;
   top: 27rem;
-  right: 12rem;
+  right: 5rem;
   border-radius: 76% 44% 41% 82% / 80% 20% 76% 36%;
   background: var(--fifth-color);
 }
@@ -48,7 +48,7 @@
   width: fit-content;
   text-align: center;
   order: 1;
-  color: var(--fifth-color);
+  color: var(--first-title-color);
 }
 
 .games-content {
@@ -59,43 +59,51 @@
   display: flex;
   order: 2;
 }
-.games-content a {
-  text-decoration: underline;
-  color: var(--fifth-color);
-}
 
-.games-content:hover {
-  color: var(--fifth-color);
-}
 
 .games-content__tictactoe {
   padding: 2rem;
   margin: 2rem;
-  border: 1px solid black;
   border-radius: 1rem;
   width: fit-content;
   height: fit-content;
   cursor: pointer;
   font-family: var(--second-font);
   font-size: var(--third-font-size);
+  background-color: var(--box-background);
 }
 
 .games-content__tictactoe-icon {
   width: 10rem;
   display: inline-block;
-  border: 2px solid #333;
   border-radius: 2% 6% 5% 4% / 1% 1% 2% 4%;
+  background-color: var(--box-icon-background);
 }
 
 .games-content__tictactoe p {
   text-align: center;
+  color: var(--white-color);
   padding: 2rem 0 0 0;
+}
+
+.games-content a {
+  text-decoration: none;
+  color: var(--white-color);
+}
+
+.games-content a:hover {
+  text-decoration: underline var(--white-color);
+}
+
+.games-content:hover {
+  color: var(--white-color);
 }
 
 @media screen and (max-width: 1300px) {
   .skills {
     display: inline;
   }
+
   .skills-header {
     margin-top: 20vh;
   }
@@ -118,6 +126,7 @@
   .games-content__tictactoe-icon {
     width: 7rem;
   }
+
 }
 
 @media screen and (max-width: 600px) {
@@ -127,5 +136,9 @@
 
   .games-content__tictactoe {
     font-size: var(--fifth-font-size);
+  }
+
+  .games-blob:nth-child(3) {
+    display: none;
   }
 }

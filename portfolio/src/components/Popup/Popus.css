@@ -7,8 +7,9 @@
   padding: 2rem 1rem;
   border-radius: 1rem;
   transform: translateX(120%);
-  background-color: #d3d3d3;
-  color: black;
+  background-color: var(--popup-color);
+  color: var(--popup-text);
+  z-index: 10;
 }
 
 .popup-spinner {
@@ -26,12 +27,15 @@
   0% {
     transform: translateX(120%);
   }
+
   20% {
     transform: translateX(-10%);
   }
+
   80% {
     transform: translateX(-10%);
   }
+
   100% {
     transform: translateX(120%);
   }
@@ -41,6 +45,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(359deg);
   }

@@ -6,7 +6,7 @@
 }
 
 .tictactoe-board {
-    padding-bottom: 10vh;
+    padding-bottom: 2vh;
 }
 
 .tictactoe-info {
@@ -17,4 +17,10 @@
 .tictactoe-info__status,
 .tictactoe-info__moves {
     margin: 2vh 0;
+}
+
+.square {
+    color: var(--game-text);
+    font-size: 3rem;
+    font-family: var(--second-font);
 }

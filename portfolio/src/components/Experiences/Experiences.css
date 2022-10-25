@@ -34,25 +34,29 @@
   margin: 10vh auto 10vh auto;
   position: relative;
   border-radius: 70% 55% 45% 40% / 80% 50% 80% 40%;
-  background-color: var(--first-color);
+  background-color: var(--blob-background);
   color: var(--font-color-black);
   animation: blobby 7s infinite linear;
-  border: 2px solid var(--fifth-color);
+  border: 1px solid var(--blob-border);
 }
 
 @keyframes blobby {
   0% {
     border-radius: 70% 55% 45% 40% / 80% 50% 80% 40%;
   }
+
   25% {
     border-radius: 60% 45% 80% 10% / 80% 30% 55% 40%;
   }
+
   50% {
     border-radius: 45% 30% 80% 30% / 70% 55% 45% 45%;
   }
+
   75% {
     border-radius: 80% 30% 45% 40% / 55% 80% 45% 60%;
   }
+
   100% {
     border-radius: 70% 55% 45% 40% / 80% 50% 80% 40%;
   }
@@ -91,6 +95,7 @@
 }
 
 @media screen and (max-width: 1000px) {
+
   .experience-content__first-date,
   .experience-content__second-date,
   .experience-content__first-job,
