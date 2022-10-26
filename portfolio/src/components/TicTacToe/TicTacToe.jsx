@@ -1,8 +1,9 @@
 import React from "react";
+import { withTranslation } from "react-i18next";
 import { Board } from "./Board";
 import "./TicTacToe.css";
 
-export class TicTacToe extends React.Component {
+class TicTacToe extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -103,18 +104,19 @@ export class TicTacToe extends React.Component {
   }
 
   render() {
+    const { t } = this.props;
     const history = this.state.history;
     const current = history[this.state.stepNumber];
     const winner = this.calculateWinner(current.squares);
 
     const moves = history.map((step, move) => {
       const desc = move
-        ? "Coup #" +
-          move +
-          " (position : " +
-          this.convertToPosition(history[move].case) +
-          ")"
-        : "Début de la partie";
+        ? "#" +
+        move +
+        " " + t('tictactoe.position') + " : " +
+        this.convertToPosition(history[move].case) +
+        ")"
+        : t('tictactoe.start');
       return (
         <li key={move}>
           <button onClick={() => this.jumpTo(move)}>
@@ -126,21 +128,21 @@ export class TicTacToe extends React.Component {
 
     let status;
     if (winner) {
-      status = "Gagnant: " + winner.winner;
+      status = t('tictactoe.winner') + ": " + winner.winner;
       for (let i = 0; i < document.querySelectorAll(".square").length; i++) {
         if (winner.line.includes(i)) {
-          // console.log(document.querySelectorAll(".square")[i].classList.add);
           document.querySelectorAll(".square")[i].classList.add("win");
         }
       }
     } else {
-      status = "Joueur suivant: " + (this.state.xIsNext ? "X" : "O");
+      status = t('tictactoe.next_player') + " : " + (this.state.xIsNext ? "X" : "O");
     }
     if (this.state.stepNumber === 9) {
-      status = "Match nul !";
+      status = t('tictactoe.draw') + " !";
     }
 
     return (
+
       <div className="tictactoe">
         <div className="tictactoe-board">
           <Board
@@ -150,7 +152,7 @@ export class TicTacToe extends React.Component {
         </div>
         <div className="tictactoe-info">
           <div className="tictactoe-info__button">
-            <button onClick={() => this.reset()}>Réintialiser la grille</button>
+            <button onClick={() => this.reset()}>{t('tictactoe.reset')}</button>
           </div>
           <div className="tictactoe-info__status">{status}</div>
           <ol className="tictactoe-info__moves">{moves}</ol>
@@ -159,3 +161,5 @@ export class TicTacToe extends React.Component {
     );
   }
 }
+
+export const GameTicTacToe = withTranslation()(TicTacToe);

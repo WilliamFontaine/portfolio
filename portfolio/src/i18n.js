@@ -34,7 +34,15 @@ const resources = {
       error: "Error !",
       error_message:
         "Sorry, an unexpected error has occurred. Please, go back.",
-      tictactoe_grid: "Reset grid",
+      tictactoe:
+      {
+        reset: "Reset grid",
+        next_player: "Next player",
+        position: "position",
+        start: "Game Start",
+        winner: "Winner",
+        draw: "Draw",
+      }
     },
   },
   fr: {
@@ -71,6 +79,15 @@ const resources = {
       error_message:
         "Désolé, une erreur inattendue  est survenue. Veuillez retourner à la page précédente.",
       tictactoe_grid: "Réintialiser la grille",
+      tictactoe:
+      {
+        reset: "Réintialiser la grille",
+        next_player: "Prochain joueur",
+        position: "position",
+        start: "Début de la partie",
+        winner: "Gagnant",
+        draw: "Match nul",
+      }
     },
   },
 };
