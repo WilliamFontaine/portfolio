@@ -8,9 +8,6 @@ export function Games() {
   const { t } = useTranslation();
   return (
     <div className="games">
-      <div className="games-blob"></div>
-      <div className="games-blob"></div>
-      <div className="games-blob"></div>
       <div className="games-header">
         <p>{t("games_title")}</p>
       </div>

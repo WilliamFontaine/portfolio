@@ -20,16 +20,6 @@ const resources = {
       skills_title: "My skills",
       games_title: "Would you like to play a mini game ??",
       game_tictactoe: "TicTacToe",
-      contact_title: "Contact me",
-      contact_name: "Your name",
-      contact_email: "Your mail",
-      contact_message: "Your message",
-      contact_message_placeholder:
-        "Hey! Is this portfolio really made in React ?",
-      contact_button: "Send",
-      contact_captcha: "Captcha does not match.",
-      contact_succes: "Your message has been sent successfully.",
-      contact_fail: "Error, your message could not be sent.",
       footer_title: "Directed by William Fontaine with ❤️.",
       error: "Error !",
       error_message:
@@ -64,16 +54,7 @@ const resources = {
       skills_title: "Mes compétences",
       games_title: "Une envie de mini-jeux ??",
       game_tictactoe: "Morpion",
-      contact_title: "Me contacter",
-      contact_name: "Votre nom",
-      contact_email: "Votre email",
-      contact_message: "Votre message",
-      contact_message_placeholder:
-        "Hey ! ce portfolio est-il vraiment fait en React ?",
-      contact_button: "Envoyer",
-      contact_captcha: "Le captcha ne correspond pas.",
-      contact_succes: "Votre message à été envoyé avec succès.",
-      contact_fail: "Erreur, votre message n'a pas pû être envoyé.",
+
       footer_title: "Réalisé par William Fontaine avec ❤️️.",
       error: "Erreur !",
       error_message:
