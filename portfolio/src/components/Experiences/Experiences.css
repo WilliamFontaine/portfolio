@@ -66,7 +66,7 @@
 .experience-content__second-date {
   margin: 2px 0;
   font-family: var(--third-font);
-  font-weight: var(--third-font-weight);
+  font-weight: var(--second-font-weight);
 }
 
 .experience-content__first-job,
@@ -80,7 +80,7 @@
 .experience-content__second-location {
   margin: 2px 0;
   font-family: var(--third-font);
-  font-weight: var(--third-font-weight);
+  font-weight: var(--second-font-weight);
   font-style: var(--first-font-style);
 }
 

@@ -36,7 +36,6 @@ export function HomePage() {
 
   return (
     <div className="homePage">
-      {console.log(theme)}
       <ParallaxBanner
         layers={[
           {

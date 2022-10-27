@@ -1,5 +1,5 @@
 .tictactoeGame {
-    height: 100vh;
+    min-height: 100vh;
     background-color: var(--game-background);
     padding-top: 10px;
     position: relative;

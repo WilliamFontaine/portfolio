@@ -120,7 +120,7 @@ class TicTacToe extends React.Component {
       return (
         <li key={move}>
           <button onClick={() => this.jumpTo(move)}>
-            {move === this.state.stepNumber ? <b>{desc}</b> : desc}
+            {move === this.state.stepNumber ? <p className="latest">{desc}</p> : desc}
           </button>
         </li>
       );
@@ -134,12 +134,12 @@ class TicTacToe extends React.Component {
           document.querySelectorAll(".square")[i].classList.add("win");
         }
       }
+    } else if (this.state.stepNumber === 9) {
+      status = t('tictactoe.draw') + " !";
     } else {
       status = t('tictactoe.next_player') + " : " + (this.state.xIsNext ? "X" : "O");
     }
-    if (this.state.stepNumber === 9) {
-      status = t('tictactoe.draw') + " !";
-    }
+
 
     return (
 

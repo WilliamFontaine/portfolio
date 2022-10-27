@@ -51,7 +51,7 @@
   font-family: var(--first-font);
   font-size: var(--first-font-size);
   font-style: var(--second-font-style);
-  font-weight: var(--third-font-weight);
+  font-weight: var(--second-font-weight);
   transform: rotate(10deg);
   margin-left: 5vw;
   margin-bottom: 5vh;

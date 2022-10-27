@@ -39,7 +39,7 @@
 
   /* font weight */
   --first-font-weight: 900;
-  --third-font-weight: 300;
+  --second-font-weight: 300;
 
   /* line height */
   --second-font-line-height: 10px;
@@ -78,6 +78,7 @@
   --fifth-color: #272f40;
   --title-color: var(--fourth-color);
   --sixth-color: #39af5c;
+  --winner-color: rgb(255, 0, 128);
 
   /* blob */
   --blob-background: var(--first-color);
@@ -117,6 +118,7 @@
   --fifth-color: #495676;
   --title-color: var(--white-color);
   --sixth-color: rgb(199, 178, 159);
+  --winner-color: #ffd700;
 
   /* blob */
   --blob-background: var(--second-color);
