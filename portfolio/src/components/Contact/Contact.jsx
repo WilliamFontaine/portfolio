@@ -24,7 +24,7 @@ export function Contact() {
     ) {
       emailjs
         .sendForm(
-          "service_3cz2rke",
+          "service_8t0qw9c",
           "template_9y3kqsb",
           form.current,
           "wM_Pk2WkEQ2xB60ip"
