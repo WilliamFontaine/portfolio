@@ -11,6 +11,7 @@ import { TicTacToeGame } from "./container/TicTacToeGame/TicTacToeGame";
 import { HomePage } from "./container/HomePage/HomePage";
 import { ParallaxProvider } from "react-scroll-parallax";
 import { ThemeProvider } from "./store/ThemeStore";
+import { Analytics } from '@vercel/analytics/react';
 
 const router = createBrowserRouter([
   {
@@ -31,6 +32,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <RouterProvider router={router} />
       </React.StrictMode>
     </ParallaxProvider>
+    <Analytics />
   </ThemeProvider>
 );
 
