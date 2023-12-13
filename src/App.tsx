@@ -1,10 +1,8 @@
-import "./App.scss";
+import Main from "./pages/Main/Mais";
 
-const App = () => {
+function App() {
 	return (
-		<div>
-			<h1>Mon portfolio</h1>
-		</div>
+		<Main />
 	);
 }
 
