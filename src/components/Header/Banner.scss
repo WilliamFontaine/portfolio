@@ -1,0 +1,60 @@
+@import "src/Styles.scss";
+
+.banner {
+  background-color: $background-color;
+  padding-top: 2rem;
+  padding-bottom: 1rem;
+
+  .banner-content {
+    width: 99%;
+    border-style: solid;
+    border-width: 3px;
+    border-style: solid solid solid none;
+    background-image: url("../../../public/images/banner.png");
+    height: 322px;
+    display: flex;
+    align-items: center;
+
+    .firstname {
+      width: fit-content;
+      height: fit-content;
+      position: relative;
+      left: calc(45% - 28rem);
+      img {
+        width: 28rem;
+        height: auto;
+      }
+
+      p {
+        position: absolute;
+        top: 48%;
+        left: 53%;
+        transform: translate(-50%, -50%);
+        font-family: Solitreo, cursive;
+        font-size: 7rem;
+        font-weight: 800;
+        color: $banner-text-color;
+        -webkit-text-stroke: 3px $border-color;
+        rotate: -7deg;
+      }
+    }
+
+    .info {
+      font-family: Bangers, cursive;
+      position: relative;
+      color: $banner-text-color;
+      text-shadow: 1px 1px 0 $border-color,2px 2px 0 $border-color, 3px 3px 0 $border-color,4px 4px 0 $border-color,5px 5px 0 $border-color,
+       6px 6px 0 $border-color, 7px 7px 0 $border-color, 8px 8px 0 $border-color, 9px 9px 0 $border-color, 10px 10px 0 $border-color;
+      rotate: -7deg;
+      left: calc(50vw - 28rem);
+
+      .lastname {
+        font-size: 9rem;
+      }
+
+      .desc {
+        font-size: 2rem;
+      }
+    }
+  }
+}

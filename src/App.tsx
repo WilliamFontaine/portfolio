@@ -1,4 +1,5 @@
-import Main from "./pages/Main/Mais";
+import Main from "./pages/Main/Main";
+
 
 function App() {
 	return (
