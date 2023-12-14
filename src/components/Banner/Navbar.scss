@@ -21,8 +21,6 @@
         display: none;
       }
 
-
-
       ul {
         list-style: none;
 
@@ -48,7 +46,6 @@
     }
   }
 }
-
 
 @media (max-width: 1200px) {
   .header-container {
@@ -132,9 +129,8 @@
             justify-content: center;
 
             li {
-              margin: .5rem 1.5rem .5rem 1rem;
+              margin: 0.5rem 1.5rem 0.5rem 1rem;
             }
-
           }
         }
       }

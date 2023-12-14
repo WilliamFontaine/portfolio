@@ -3,12 +3,12 @@ import Banner from "../../components/Header/Banner";
 
 
 function Main() {
-	return (
-		<>
-    <Navbar />
-    <Banner />
-		</>
-	);
+  return (
+    <>
+      <Navbar />
+      <Banner />
+    </>
+  );
 }
 
 export default Main;

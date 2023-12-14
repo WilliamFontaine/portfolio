@@ -11,17 +11,13 @@
     border-width: 3px;
     border-style: solid solid solid none;
     background-image: url("/images/banner.png");
-    height: 322px;
-    display: flex;
-    align-items: center;
 
     .firstname {
       width: fit-content;
       height: fit-content;
       position: relative;
-      left: calc(45% - 28rem);
+
       img {
-        width: 28rem;
         height: auto;
       }
 
@@ -31,7 +27,6 @@
         left: 53%;
         transform: translate(-50%, -50%);
         font-family: cursive;
-        font-size: 6rem;
         font-weight: 800;
         color: $banner-text-color;
         -webkit-text-stroke: 3px $border-color;
@@ -43,17 +38,122 @@
       font-family: Bangers, cursive;
       position: relative;
       color: $banner-text-color;
-      text-shadow: 1px 1px 0 $border-color,2px 2px 0 $border-color, 3px 3px 0 $border-color,4px 4px 0 $border-color,5px 5px 0 $border-color,
-       6px 6px 0 $border-color, 7px 7px 0 $border-color, 8px 8px 0 $border-color, 9px 9px 0 $border-color, 10px 10px 0 $border-color;
+      width: fit-content;
+      text-shadow:
+        1px 1px 0 $border-color,
+        2px 2px 0 $border-color,
+        3px 3px 0 $border-color,
+        4px 4px 0 $border-color,
+        5px 5px 0 $border-color,
+        6px 6px 0 $border-color,
+        7px 7px 0 $border-color,
+        8px 8px 0 $border-color,
+        9px 9px 0 $border-color,
+        10px 10px 0 $border-color;
       rotate: -7deg;
-      left: calc(50vw - 28rem);
 
       .lastname {
-        font-size: 9rem;
+        width: fit-content;
       }
 
       .desc {
-        font-size: 2rem;
+        width: fit-content;
+      }
+    }
+  }
+}
+
+@media (max-width: 400px) {
+  .banner {
+    .banner-content {
+      height: 450px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      img {
+        width: 20rem;
+      }
+
+      .firstname {
+        p {
+          font-size: 4rem;
+        }
+      }
+
+      .info {
+        .lastname {
+          font-size: 5rem;
+        }
+
+        .desc {
+          font-size: 1.3rem;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 400px) and (max-width: 1200px) {
+  .banner {
+    .banner-content {
+      height: 644px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      img {
+        width: 25rem;
+      }
+
+      .firstname {
+        p {
+          font-size: 6rem;
+        }
+      }
+
+      .info {
+        .lastname {
+          font-size: 6rem;
+        }
+
+        .desc {
+          font-size: 1.7rem;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 1200px) {
+  .banner {
+    .banner-content {
+      height: 322px;
+      display: flex;
+      align-items: center;
+
+      .firstname {
+        left: calc(45% - 28rem);
+
+        img {
+          width: 28rem;
+        }
+
+        p {
+          font-size: 6rem;
+        }
+      }
+
+      .info {
+        left: calc(50vw - 28rem);
+
+        .lastname {
+          font-size: 9rem;
+        }
+
+        .desc {
+          font-size: 2rem;
+        }
       }
     }
   }
