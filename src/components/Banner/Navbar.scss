@@ -21,6 +21,34 @@
         list-style: none;
 
         li {
+          &.language-selector {
+            display: flex;
+            align-items: center;
+
+            .language-icon {
+              width: 1.5rem;
+              height: 1.5rem;
+              margin-left: 1rem;
+            }
+
+            select {
+              border: 1px solid $border-color;
+              border-radius: 5px;
+              background-color: transparent;
+              font-family: "Playpen Sans", cursive;
+              font-weight: 500;
+              font-size: 1.2rem;
+              color: $text-color;
+              cursor: pointer;
+              outline: none;
+              padding: 0 10px;
+            }
+
+            option {
+              background-color: $background-color;
+            }
+          }
+
           a {
             text-decoration: none;
             color: $text-color;

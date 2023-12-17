@@ -1,0 +1,21 @@
+{
+  "banner": {
+    "firstname": "William",
+    "lastname": "Fontaine",
+    "desc": "Full-stack web developer."
+  },
+  "header": {
+    "title": "Portfolio",
+    "menu": {
+      "experience": "Experience",
+      "study": "Education",
+      "skills": "Skills",
+      "projects": "Projects",
+      "contact": "Contact"
+    },
+    "lang": {
+      "fr": "French",
+      "en": "English"
+    }
+  }
+}

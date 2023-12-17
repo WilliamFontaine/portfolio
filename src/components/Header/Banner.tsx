@@ -1,6 +1,9 @@
+import { useTranslation } from 'react-i18next';
 import './Banner.scss';
 
 function Banner() {
+  const { t } = useTranslation();
+
   return (
     <div className="banner">
       <div className="banner-content">
@@ -8,11 +11,11 @@ function Banner() {
           <img src="/images/bubble.png"
             alt="bubble"
             className='bubble' />
-          <p className="firstname">William</p>
+          <p className="firstname">{t('banner.firstname')}</p>
         </div>
         <div className='info'>
-          <p className="lastname">Fontaine</p>
-          <p className="desc">Développeur full stack.</p>
+          <p className="lastname">{t('banner.lastname')}</p>
+          <p className="desc">{t('banner.desc')}</p>
         </div>
       </div>
     </div>

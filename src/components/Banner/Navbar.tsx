@@ -1,6 +1,11 @@
 import { useRef } from "react";
 import "./Navbar.scss";
+import { useTranslation } from "react-i18next";
+import { GrLanguage } from "react-icons/gr";
+
 function Navbar() {
+  const { t, i18n } = useTranslation();
+
   const hamburger = useRef<HTMLDivElement | null>(null);
   const hamburgerContainer = useRef<HTMLDivElement | null>(null);
 
@@ -16,7 +21,7 @@ function Navbar() {
   return (
     <div className="header-container">
       <header>
-        <h1>Portfolio</h1>
+        <h1>{t("header.title")}</h1>
         <nav>
           <div className="hamburger" ref={hamburger} onClick={toggleHamburger}>
             <span></span>
@@ -26,16 +31,26 @@ function Navbar() {
           <div className="hamburger-container" ref={hamburgerContainer}>
             <ul>
               <li>
-                <a href="#experience">Experience</a>
+                <a href="#experience">{t("header.menu.experience")}</a>
               </li>
               <li>
-                <a href="#studies">Etudes</a>
+                <a href="#study">{t("header.menu.study")}</a>
               </li>
               <li>
-                <a href="#projects">Projets</a>
+                <a href="#skills">{t("header.menu.skills")}</a>
               </li>
               <li>
-                <a href="#contact">Contact</a>
+                <a href="#projects">{t("header.menu.projects")}</a>
+              </li>
+              <li>
+                <a href="#contact">{t("header.menu.contact")}</a>
+              </li>
+              <li className="language-selector">
+                <select onChange={(e) => i18n.changeLanguage(e.target.value)}>
+                  <option value="fr">{t("header.lang.fr")}</option>
+                  <option value="en">{t("header.lang.en")}</option>
+                </select>
+                <GrLanguage className="language-icon" />
               </li>
             </ul>
           </div>
