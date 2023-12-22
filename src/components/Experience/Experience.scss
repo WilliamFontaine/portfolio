@@ -1,8 +1,7 @@
 @import "src/Styles.scss";
 
-.experience {
+#experience {
   background-color: $background-color;
-  font-family: "Playpen Sans", cursive;
 
   .experience-container {
     padding: 1rem;
@@ -16,10 +15,7 @@
       justify-content: flex-start;
 
       .company-logo {
-        width: 100px;
-        height: 100px;
         margin-right: 20px;
-        border-radius: 50%;
       }
 
       .company-name {
@@ -44,7 +40,7 @@
 }
 
 @media (min-width: 1200px) {
-  .experience {
+  #experience {
     .parent {
       display: grid;
       grid-template-columns: 0.5fr repeat(3, 1fr) 0.5fr;
@@ -77,6 +73,25 @@
       .div6 {
         grid-area: 6 / 2 / 8 / 3;
         border: 1px solid orange;
+      }
+    }
+  }
+}
+
+@media (max-width: 1200px) {
+  #experience {
+    .parent {
+      .first-experience {
+        margin-bottom: 0;
+      }
+
+      .div3,
+      .div4,
+      .div5,
+      .div6 {
+        height: 0;
+        width: 0;
+        margin: 0;
       }
     }
   }

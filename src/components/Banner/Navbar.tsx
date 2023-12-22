@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./Navbar.scss";
 import { useTranslation } from "react-i18next";
 import { GrLanguage } from "react-icons/gr";
@@ -8,6 +8,7 @@ function Navbar() {
 
   const hamburger = useRef<HTMLDivElement | null>(null);
   const hamburgerContainer = useRef<HTMLDivElement | null>(null);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleHamburger = () => {
     if (hamburger.current) {
@@ -16,7 +17,20 @@ function Navbar() {
     if (hamburgerContainer.current) {
       hamburgerContainer.current.classList.toggle("open");
     }
+    setIsMenuOpen(!isMenuOpen);
   };
+
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.classList.add("no-scroll");
+    } else {
+      document.body.classList.remove("no-scroll");
+    }
+
+    return () => {
+      document.body.classList.remove("no-scroll");
+    };
+  }, [isMenuOpen]);
 
   return (
     <div className="header-container">

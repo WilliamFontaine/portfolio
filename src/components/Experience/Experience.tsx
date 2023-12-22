@@ -10,7 +10,7 @@ function Experience() {
           <div className="company">
             <img src="/logo/neo_logix_logo.jpeg"
               alt="neo_logix_logo"
-              className="company-logo" />
+              className="company-logo logo rounded" />
             <p className="company-name">NEO-FUGU®</p>
           </div>
           <div className="job">
@@ -31,7 +31,7 @@ function Experience() {
           <div className="company">
             <img src="/logo/itarverne_logo.jpeg"
               alt="neo_logix_logo"
-              className="company-logo" />
+              className="company-logo logo rounded" />
             <p className="company-name">ITArverne</p>
           </div>
           <div className="job">

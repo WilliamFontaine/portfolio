@@ -22,11 +22,11 @@
       }
 
       p {
+        font-weight: 700 !important;
         position: absolute;
         top: 44%;
         left: 53%;
         transform: translate(-50%, -50%);
-        font-family: cursive;
         font-weight: 800;
         color: $banner-text-color;
         -webkit-text-stroke: 3px $border-color;
@@ -35,7 +35,6 @@
     }
 
     .info {
-      font-family: Bangers, cursive;
       position: relative;
       color: $banner-text-color;
       width: fit-content;
@@ -54,10 +53,12 @@
 
       .lastname {
         width: fit-content;
+        font-family: Bangers, cursive !important;
       }
 
       .desc {
         width: fit-content;
+        font-family: Bangers, cursive !important;
       }
     }
   }

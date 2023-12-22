@@ -1,0 +1,14 @@
+@import "src/Styles.scss";
+
+#contact {
+  background-color: $background-color;
+  padding-bottom: 50px;
+
+  .logo-container {
+    background-color: #ffffff;
+    width: 100px;
+    height: 100px;
+    padding: 5px;
+    border-radius: 10px;
+  }
+}

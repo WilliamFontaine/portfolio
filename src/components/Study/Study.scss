@@ -1,0 +1,22 @@
+@import "src/Styles.scss";
+
+#study {
+  background-color: $background-color;
+
+  .study-container {
+    .school {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+
+      .school-logo {
+        margin-right: 20px;
+      }
+
+      .school-name {
+        font-size: 1.5rem;
+        font-weight: 600;
+      }
+    }
+  }
+}

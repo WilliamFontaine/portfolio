@@ -17,7 +17,11 @@
       "settings": {
         "editor.formatOnSave": true,
         "files.insertFinalNewline": true,
-        "editor.action.commentLine": "ctrl+[Period]"
+        "editor.action.commentLine": "ctrl+[Period]",
+        "emmet.includeLanguages":{
+          "javascript": "javascriptreact",
+          "typescript": "typescriptreact"
+        }
       },
       "colorTheme": "SynthWave '84",
       "fiel-icons.activeIconPack": "material-icon-theme",
