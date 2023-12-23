@@ -27,7 +27,8 @@
         },
         "editor.codeActionsOnSave": {
           "source.fixAll.eslint": true
-        }
+        },
+        "prettier.singleQuote": true
       },
       "colorTheme": "SynthWave '84",
       "fiel-icons.activeIconPack": "material-icon-theme",

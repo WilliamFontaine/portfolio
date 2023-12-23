@@ -1,4 +1,4 @@
-@import "src/Styles.scss";
+@import 'src/Styles.scss';
 
 .banner {
   background-color: $background-color;
@@ -10,7 +10,7 @@
     border-style: solid;
     border-width: 3px;
     border-style: solid solid solid none;
-    background-image: url("/images/banner.png");
+    background-image: url('/images/banner.png');
 
     .firstname {
       width: fit-content;

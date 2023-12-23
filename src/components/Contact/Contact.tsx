@@ -1,53 +1,54 @@
-import { FormEventHandler, useEffect, useRef } from "react";
-import emailjs from "@emailjs/browser";
-import { toast } from "react-toastify";
-import "./Contact.scss";
+import { FormEventHandler, useEffect, useRef } from 'react';
+import emailjs from '@emailjs/browser';
+import { toast } from 'react-toastify';
+import './Contact.scss';
 
-const userPublicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
-const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
-const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+const emailConfig = {
+  userPublicKey: import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
+  serviceId: import.meta.env.VITE_EMAILJS_SERVICE_ID,
+  templateId: import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+};
 
 function Contact() {
   const form = useRef<HTMLFormElement>(null);
 
   useEffect(() => {
-    emailjs.init(userPublicKey);
+    emailjs.init(emailConfig.userPublicKey);
   }, []);
+
+  const validateFormData = (data: FormData): boolean => {
+    return ['firstname', 'lastname', 'email', 'message'].every(
+      (field) => !!data.get(field)
+    );
+  };
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    const firstname = data.get("firstname")?.toString();
-    const lastname = data.get("lastname")?.toString();
-    const email = data.get("email")?.toString();
-    const message = data.get("message")?.toString();
 
-    if (!firstname || !lastname || !email || !message) {
-      toast.error("Veuillez remplir tous les champs du formulaire");
+    if (!validateFormData(data)) {
+      toast.error('Veuillez remplir tous les champs du formulaire');
       return;
     }
 
-    toast.promise(sendEmail({ firstname, lastname, email, message }), {
-      pending: "Envoi du message en cours...",
-      success: "Votre message a bien été envoyé",
+    toast.promise(sendEmail(data), {
+      pending: 'Envoi du message en cours...',
+      success: 'Votre message a bien été envoyé',
       error: "Une erreur est survenue lors de l'envoi du message",
     });
   };
 
-  const sendEmail = ({
-    firstname,
-    lastname,
-    email,
-    message,
-  }: {
-    firstname: string;
-    lastname: string;
-    email: string;
-    message: string;
-  }): Promise<unknown> => {
+  const sendEmail = (data: FormData): Promise<unknown> => {
+    const firstname = data.get('firstname');
+    const lastname = data.get('lastname');
+    const email = data.get('email');
+    const message = data.get('message');
+
+    console.log(firstname, lastname, email, message);
+
     return new Promise((resolve, reject) => {
       emailjs
-        .send(serviceId, templateId, {
+        .send(emailConfig.serviceId, emailConfig.templateId, {
           firstname,
           lastname,
           email,
