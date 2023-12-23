@@ -1,9 +1,7 @@
 {
   "name": "Node.js & TypeScript",
   "image": "mcr.microsoft.com/devcontainers/typescript-node:1-20-bullseye",
-  "forwardPorts": [
-    3000
-  ],
+  "forwardPorts": [3000],
   "portsAttributes": {
     "3000": {
       "label": "React App",
@@ -18,9 +16,17 @@
         "editor.formatOnSave": true,
         "files.insertFinalNewline": true,
         "editor.action.commentLine": "ctrl+[Period]",
-        "emmet.includeLanguages":{
+        "emmet.includeLanguages": {
           "javascript": "javascriptreact",
           "typescript": "typescriptreact"
+        },
+        "eslint.workingDirectories": ["./src"],
+        "[typescriptreact]": {
+          "editor.defaultFormatter": "esbenp.prettier-vscode",
+          "editor.formatOnSave": true
+        },
+        "editor.codeActionsOnSave": {
+          "source.fixAll.eslint": true
         }
       },
       "colorTheme": "SynthWave '84",
@@ -46,7 +52,8 @@
         "sibiraj-s.vscode-scss-formatter",
         "mrmlnc.vscode-scss",
         "burkeholland.simple-react-snippets",
-        "robbowen.synthwave-vscode"
+        "robbowen.synthwave-vscode",
+        "esbenp.prettier-vscode"
       ]
     }
   },
