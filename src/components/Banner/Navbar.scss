@@ -1,16 +1,16 @@
-@import 'src/Styles.scss';
+@import "src/Styles.scss";
 
 body.no-scroll {
   overflow: hidden;
 }
 
 .header-container {
-  background-color: $background-color;
+  background-color: $white-02;
 
   header {
     padding: 0 1rem 1rem 1rem;
     margin: 0 0.5rem;
-    border-bottom: 3px solid $text-color;
+    border-bottom: 3px solid $black-01;
     height: 6rem;
 
     h1 {
@@ -35,25 +35,25 @@ body.no-scroll {
             }
 
             select {
-              border: 1px solid $border-color;
+              border: 1px solid $black-01;
               border-radius: 5px;
               background-color: transparent;
               font-weight: 500;
               font-size: 1.2rem;
-              color: $text-color;
+              color: $black-01;
               cursor: pointer;
               outline: none;
               padding: 0 10px;
             }
 
             option {
-              background-color: $background-color;
+              background-color: $white-02;
             }
           }
 
           a {
             text-decoration: none;
-            color: $text-color;
+            color: $black-01;
             font-weight: 500;
             border-bottom-style: dashed;
             border-width: 2px;
@@ -62,7 +62,7 @@ body.no-scroll {
           }
 
           :hover {
-            border-color: $border-color;
+            border-color: $black-01;
             transition: border-color 0.5s ease-in-out;
           }
         }
@@ -96,7 +96,7 @@ body.no-scroll {
             display: block;
             width: inherit;
             height: 2px;
-            background: $border-color;
+            background: $black-01;
             position: absolute;
             pointer-events: none;
             transition: opacity 0.3s 0.15s ease-out;

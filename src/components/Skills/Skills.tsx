@@ -3,7 +3,9 @@ import './Skills.scss';
 function Skills() {
   return (
     <div id="skills" className="skills">
-      <h1>Skills</h1>
+      <div className="title-container">
+        <h2 className="title">Compétences</h2>
+      </div>
       <div className="skills-container">
         <div className="skill">Java</div>
         <div className="skill">JavaScript</div>

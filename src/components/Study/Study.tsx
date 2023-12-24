@@ -3,7 +3,9 @@ import './Study.scss';
 function Study() {
   return (
     <div id="study" className="study">
-      <h1>Study</h1>
+      <div className="title-container">
+        <h2 className="title">formation</h2>
+      </div>
       <div className="study-container">
         <div className="school">
           <img

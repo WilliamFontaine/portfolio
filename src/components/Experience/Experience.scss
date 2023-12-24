@@ -1,21 +1,27 @@
-@import 'src/Styles.scss';
+@import "src/Styles.scss";
 
 #experience {
-  background-color: $background-color;
+  background-color: $white-02;
 
   .experience-container {
-    padding: 1rem;
+    padding: 0 1rem;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
+    padding: 0 2rem;
 
     .company {
       display: flex;
-      align-items: center;
+      align-items: flex-end;
       justify-content: flex-start;
+      padding-bottom: 1.5rem;
+      margin: 1rem 0;
+      border-bottom: 2px solid $black-01;
+      width: 70%;
 
       .company-logo {
         margin-right: 20px;
+        border: 2px solid $black-01;
       }
 
       .company-name {
@@ -25,11 +31,39 @@
     }
 
     .job {
-      margin: 2rem 0 0 2rem;
       text-align: justify;
-      .job-title {
-        font-weight: 800;
-        margin-bottom: 1rem;
+
+      .job-entitle {
+        display: flex;
+        align-items: baseline;
+
+        .job-title {
+          font-weight: 800;
+          margin-bottom: 0.5rem;
+          font-size: 1.5rem;
+        }
+
+        .job-date {
+          font-size: 1.1rem;
+          margin-left: 1rem;
+
+          &::before {
+            content: "•";
+            margin-right: 1rem;
+          }
+        }
+      }
+
+      .job-desc {
+        padding: 0 0 1rem 2rem;
+
+        ul {
+          margin-left: 1rem;
+
+          li {
+            margin-bottom: 0.5rem;
+          }
+        }
       }
     }
   }
@@ -43,36 +77,61 @@
   #experience {
     .parent {
       display: grid;
-      grid-template-columns: 0.5fr repeat(3, 1fr) 0.5fr;
-      grid-template-rows: 0.5fr repeat(2, 1fr) 0.5fr repeat(2, 1fr) 0.5fr;
+      grid-template-columns: 0.4fr 0.8fr 1fr 0.6fr 0.4fr;
+      grid-template-rows: 0.5fr 1.2fr 1fr 0.2fr 1fr 1.2fr 0.5fr;
       grid-column-gap: 0px;
       grid-row-gap: 0px;
 
-      .second-experience {
-        grid-area: 2 / 2 / 4 / 4;
-        border: 1px solid #000;
+      .container {
+        z-index: 10;
       }
 
-      .first-experience {
-        grid-area: 5 / 3 / 7 / 5;
-        border: 1px solid red;
+      .experience-container {
+        border: 3px solid $black-01;
+        border-radius: 20px;
+        background-color: $white-01;
+
+        &.second-experience {
+          grid-area: 2 / 2 / 4 / 4;
+        }
+
+        &.first-experience {
+          grid-area: 5 / 3 / 7 / 5;
+        }
       }
 
       .div3 {
         grid-area: 3 / 1 / 6 / 2;
-        border: 1px solid blue;
+        background-image: url("/images/experience/asset1.png");
+        background-repeat: round;
+        border: 3px solid $black-01;
       }
       .div4 {
         grid-area: 1 / 4 / 3 / 6;
-        border: 1px solid green;
+        background-image: url("/images/experience/asset4.png");
+        background-repeat: round;
+        border: 3px solid $black-01;
       }
       .div5 {
         grid-area: 4 / 5 / 6 / 6;
-        border: 1px solid yellow;
+        background-image: url("/images/experience/asset2.png");
+        background-repeat: round;
+        border: 3px solid $black-01;
       }
       .div6 {
         grid-area: 6 / 2 / 8 / 3;
-        border: 1px solid orange;
+        background-image: url("/images/experience/asset3.png");
+        background-repeat: round;
+        border: 3px solid $black-01;
+      }
+
+      .div7 {
+        grid-area: 2 / 3 / 6 / 6;
+        background-image: url("/images/assets/cartoon-dots.svg");
+        background-repeat: no-repeat;
+        background-position: center;
+        z-index: 1;
+        margin: 4%;
       }
     }
   }

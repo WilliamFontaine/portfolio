@@ -1,7 +1,7 @@
-@import 'src/Styles.scss';
+@import "src/Styles.scss";
 
 .banner {
-  background-color: $background-color;
+  background-color: $white-02;
   padding-top: 2rem;
   padding-bottom: 1rem;
 
@@ -10,7 +10,7 @@
     border-style: solid;
     border-width: 3px;
     border-style: solid solid solid none;
-    background-image: url('/images/banner.png');
+    background-image: url("/images/banner.png");
 
     .firstname {
       width: fit-content;
@@ -28,27 +28,27 @@
         left: 53%;
         transform: translate(-50%, -50%);
         font-weight: 800;
-        color: $banner-text-color;
-        -webkit-text-stroke: 3px $border-color;
+        color: $light-red-01;
+        -webkit-text-stroke: 3px $black-01;
         rotate: -7deg;
       }
     }
 
     .info {
       position: relative;
-      color: $banner-text-color;
+      color: $light-red-01;
       width: fit-content;
       text-shadow:
-        1px 1px 0 $border-color,
-        2px 2px 0 $border-color,
-        3px 3px 0 $border-color,
-        4px 4px 0 $border-color,
-        5px 5px 0 $border-color,
-        6px 6px 0 $border-color,
-        7px 7px 0 $border-color,
-        8px 8px 0 $border-color,
-        9px 9px 0 $border-color,
-        10px 10px 0 $border-color;
+        1px 1px 0 $black-01,
+        2px 2px 0 $black-01,
+        3px 3px 0 $black-01,
+        4px 4px 0 $black-01,
+        5px 5px 0 $black-01,
+        6px 6px 0 $black-01,
+        7px 7px 0 $black-01,
+        8px 8px 0 $black-01,
+        9px 9px 0 $black-01,
+        10px 10px 0 $black-01;
       rotate: -7deg;
 
       .lastname {

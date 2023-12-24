@@ -68,7 +68,9 @@ function Contact() {
 
   return (
     <div id="contact" className="contact">
-      <h1>Contact</h1>
+      <div className="title-container">
+        <h2 className="title">contact</h2>
+      </div>
       <div className="contact-form">
         <p>formulaire de contact</p>
         <form onSubmit={handleSubmit} ref={form}>
