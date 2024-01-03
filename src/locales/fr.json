@@ -61,10 +61,10 @@
     }
   },
   "header": {
-    "title": "Portfolio de William Fontaine",
+    "title": "Portfolio",
     "menu": {
-      "experience": "Expériences",
-      "study": "Formations",
+      "experience": "Expérience",
+      "study": "Formation",
       "skills": "Compétences",
       "projects": "Projets réalisés",
       "contact": "Me contacter"
@@ -99,22 +99,22 @@
     "title": "Mes compétences techniques"
   },
   "study": {
-    "title": "Mon parcours de formation",
+    "title": "Ma formation",
     "list": {
       "1": {
         "title": "Manager de projet informatique",
-        "school": "Hesias",
+        "school": "Hesias (Hautes Études en Informatique - Clermont-Ferrand)",
         "date": {
           "from": "Depuis Octobre 2023",
           "to": "Jusqu'à Septembre 2025"
         },
         "desc": {
-          "1": "Actuellement en formation de Manager de projet informatique à Hesias, en alternance chez NEO-FUGU®."
+          "1": "Actuellement en formation de Manager de projet informatique, en alternance chez NEO-FUGU®."
         }
       },
       "2": {
         "title": "Concepteur développeur d'applications",
-        "school": "Hesias",
+        "school": "Hesiad (Hautes Études en Informatique - Clermont-Ferrand)",
         "date": {
           "from": "Septembre 2022",
           "to": "Octobre 2023"

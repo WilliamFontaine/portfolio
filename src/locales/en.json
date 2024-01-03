@@ -37,7 +37,7 @@
           "to": "Present"
         },
         "desc": {
-          "1": "Actively involved in various internal projects for developing web applications for jewelers.",
+          "1": "Actively involved in various internal projects to developing web applications for jewelers.",
           "2": "Responsible for developing, bug fixing, and creating new features.",
           "3": "Working in a team of 10 people, closely collaborating with other departments.",
           "4": "Mainly using Spring Boot & Angular for these projects."
@@ -61,9 +61,9 @@
     }
   },
   "header": {
-    "title": "William Fontaine's Portfolio",
+    "title": "Portfolio",
     "menu": {
-      "experience": "Experiences",
+      "experience": "Experience",
       "study": "Education",
       "skills": "Skills",
       "projects": "Projects",
@@ -103,18 +103,18 @@
     "list": {
       "1": {
         "title": "Manager of IT Projects",
-        "school": "Hesias",
+        "school": "Hesias (Advanced Studies in Computer Science - Clermont-Ferrand)",
         "date": {
           "from": "From October 2023",
           "to": "To September 2025"
         },
         "desc": {
-          "1": "Currently undergoing training as an IT Project Manager at Hesias, with an apprenticeship at NEO-FUGU®."
+          "1": "Currently undergoing training as an IT Project Manager, with an apprenticeship at NEO-FUGU®."
         }
       },
       "2": {
         "title": "Application Developer",
-        "school": "Hesias",
+        "school": "Hesias (Advanced Studies in Computer Science - Clermont-Ferrand)",
         "date": {
           "from": "September 2022",
           "to": "October 2023"
