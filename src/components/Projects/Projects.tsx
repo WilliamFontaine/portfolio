@@ -1,10 +1,13 @@
+import { useTranslation } from 'react-i18next';
 import './Projects.scss';
 
 function Projects() {
+  const { t } = useTranslation();
+
   return (
     <div id="projects" className="projects">
       <div className="title-container">
-        <h2 className="title">projets</h2>
+        <h2 className="title">{t('projects.title')}</h2>
       </div>
       <div className="projects-container">
         <div className="project">
@@ -13,14 +16,11 @@ function Projects() {
             alt="github_logo"
             className="project-logo logo rounded"
           />
-          <p className="project-title">Projets sur GitHub</p>
+          <p className="project-title">{t('projects.list.1.title')}</p>
           <div className="project-desc">
             <span>
-              <p>Vous pouvez retrouver tous mes projets sur mon GitHub.</p>
-              <p>
-                Je travaille sur des projets personnels et des projets
-                scolaires.
-              </p>
+              <p>{t('projects.list.1.desc.1')}</p>
+              <p>{t('projects.list.1.desc.2')}</p>
             </span>
           </div>
         </div>
@@ -30,22 +30,13 @@ function Projects() {
             alt="gitlab_logo"
             className="project-logo logo rounded"
           />
-          <p className="project-title">Projets sur GitLab</p>
+          <p className="project-title">{t('projects.list.2.title')}</p>
           <div className="project-desc">
             <span>
-              <p>
-                Vous pouvez notamment retrouver le projet Gabbler sur mon
-                GitLab.
-              </p>
-              <p>
-                Ce projet est un réseau social développé en VueJS et Laravel.
-              </p>
-              <p>
-                Ce projet à été réalisé en groupe de 4 personnes, dans le cadre
-                de la formation de Concepteur développeur d'applications à
-                Hesias.
-              </p>
-              <p>J'étais le chef de projet de ce groupe.</p>
+              <p>{t('projects.list.2.desc.1')}</p>
+              <p>{t('projects.list.2.desc.2')}</p>
+              <p>{t('projects.list.2.desc.3')}</p>
+              <p>{t('projects.list.2.desc.4')}</p>
             </span>
           </div>
         </div>

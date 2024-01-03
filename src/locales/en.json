@@ -2,12 +2,68 @@
   "banner": {
     "firstname": "William",
     "lastname": "Fontaine",
-    "desc": "Full-stack web developer."
+    "desc": "Full-Stack Web Developer."
+  },
+  "contact": {
+    "title": "Contact Me",
+    "form": {
+      "title": "Contact Form",
+      "field": {
+        "firstname": "First Name",
+        "lastname": "Last Name",
+        "email": "Email Address",
+        "message": "Your Message"
+      },
+      "button": {
+        "send": "Send Message"
+      },
+      "more": "Other ways to contact me:"
+    },
+    "toast": {
+      "fill": "Please fill in all required fields.",
+      "success": "Your message has been sent successfully.",
+      "error": "An error occurred while sending the message.",
+      "pending": "Sending message..."
+    }
+  },
+  "experience": {
+    "title": "My Professional Experience",
+    "list": {
+      "1": {
+        "title": "Full-Stack Web Developer at NEO-FUGU®",
+        "company": "NEO-FUGU®",
+        "date": {
+          "from": "Since June 2021",
+          "to": "Present"
+        },
+        "desc": {
+          "1": "Actively involved in various internal projects for developing web applications for jewelers.",
+          "2": "Responsible for developing, bug fixing, and creating new features.",
+          "3": "Working in a team of 10 people, closely collaborating with other departments.",
+          "4": "Mainly using Spring Boot & Angular for these projects."
+        }
+      },
+      "2": {
+        "title": "Web Developer at ITArverne",
+        "company": "ITArverne",
+        "date": {
+          "from": "April 2021",
+          "to": "June 2021"
+        },
+        "desc": {
+          "1": "Worked on a React project for bug reporting.",
+          "2": "Integrated this project with an existing live chat that was non-functional.",
+          "3": "Deployed these projects in a Docker container.",
+          "4": "The chat is a node.js application, using sockets to listen to requests from the site.",
+          "5": "This project operates with Keybase application."
+        }
+      }
+    }
   },
   "header": {
-    "title": "Portfolio",
+    "title": "William Fontaine's Portfolio",
     "menu": {
-      "experience": "Experience",
+      "experience": "Experiences",
       "study": "Education",
       "skills": "Skills",
       "projects": "Projects",
@@ -16,6 +72,70 @@
     "lang": {
       "fr": "French",
       "en": "English"
+    }
+  },
+  "projects": {
+    "title": "My Projects",
+    "list": {
+      "1": {
+        "title": "Projects on GitHub",
+        "desc": {
+          "1": "Discover my personal and academic projects on my GitHub account.",
+          "2": "I regularly work on new personal and study-related projects."
+        }
+      },
+      "2": {
+        "title": "Projects on GitLab",
+        "desc": {
+          "1": "Visit my GitLab account to see the Gabbler project, among others.",
+          "2": "Gabbler is a social network developed in VueJS and Laravel.",
+          "3": "This project was carried out in a group of four as part of my Application Developer training at Hesias.",
+          "4": "I served as the project manager for this group."
+        }
+      }
+    }
+  },
+  "skills": {
+    "title": "My Hard Skills"
+  },
+  "study": {
+    "title": "My Educational Background",
+    "list": {
+      "1": {
+        "title": "Manager of IT Projects",
+        "school": "Hesias",
+        "date": {
+          "from": "From October 2023",
+          "to": "To September 2025"
+        },
+        "desc": {
+          "1": "Currently undergoing training as an IT Project Manager at Hesias, with an apprenticeship at NEO-FUGU®."
+        }
+      },
+      "2": {
+        "title": "Application Developer",
+        "school": "Hesias",
+        "date": {
+          "from": "September 2022",
+          "to": "October 2023"
+        },
+        "desc": {
+          "1": "Graduated in Application Development at Hesias.",
+          "2": "Top of my class during the training, with an apprenticeship at NEO-FUGU®."
+        }
+      },
+      "3": {
+        "title": "University Degree in Computer Science",
+        "school": "Université Clermont Auvergne",
+        "date": {
+          "from": "September 2020",
+          "to": "June 2022"
+        },
+        "desc": {
+          "1": "Graduated with a University Degree in Computer Science from Université Clermont Auvergne.",
+          "2": "Completed my end-of-studies internship at ITArverne."
+        }
+      }
     }
   }
 }

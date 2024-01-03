@@ -4,18 +4,138 @@
     "lastname": "Fontaine",
     "desc": "Développeur web full-stack."
   },
+  "contact": {
+    "title": "Contactez-moi",
+    "form": {
+      "title": "Formulaire de contact",
+      "field": {
+        "firstname": "Prénom",
+        "lastname": "Nom",
+        "email": "Adresse e-mail",
+        "message": "Votre message"
+      },
+      "button": {
+        "send": "Envoyer le message"
+      },
+      "more": "Autres moyens de contact :"
+    },
+    "toast": {
+      "fill": "Merci de remplir tous les champs.",
+      "success": "Votre message a été envoyé avec succès.",
+      "error": "Erreur lors de l'envoi du message.",
+      "pending": "Envoi du message en cours..."
+    }
+  },
+  "experience": {
+    "title": "Mon expérience professionnelle",
+    "list": {
+      "1": {
+        "title": "Développeur web full-stack chez NEO-FUGU®",
+        "company": "NEO-FUGU®",
+        "date": {
+          "from": "Depuis Juin 2021",
+          "to": "Actuellement"
+        },
+        "desc": {
+          "1": "Participation active à divers projets de développement d'applications web pour les bijoutiers.",
+          "2": "Responsable du développement, de la correction de bugs, et de la création de nouvelles fonctionnalités.",
+          "3": "Travail en équipe de 10 personnes, en collaboration étroite avec d'autres départements.",
+          "4": "Utilisation principale de Spring Boot & Angular."
+        }
+      },
+      "2": {
+        "title": "Développeur web chez ITArverne",
+        "company": "ITArverne",
+        "date": {
+          "from": "Avril 2021",
+          "to": "Juin 2021"
+        },
+        "desc": {
+          "1": "Développement d'une application React pour le reporting de bugs.",
+          "2": "Intégration de cette application à un chat en direct existant.",
+          "3": "Mise en place de ces applications dans un container Docker.",
+          "4": "Le chat, une application node.js, utilise des sockets pour écouter les requêtes du site.",
+          "5": "Ce projet est intégré avec l'application Keybase."
+        }
+      }
+    }
+  },
   "header": {
-    "title": "Portfolio",
+    "title": "Portfolio de William Fontaine",
     "menu": {
-      "experience": "Expérience",
-      "study": "Formation",
+      "experience": "Expériences",
+      "study": "Formations",
       "skills": "Compétences",
-      "projects": "Projets",
-      "contact": "Contact"
+      "projects": "Projets réalisés",
+      "contact": "Me contacter"
     },
     "lang": {
       "fr": "Français",
-      "en": "Anglais"
+      "en": "English"
+    }
+  },
+  "projects": {
+    "title": "Mes projets",
+    "list": {
+      "1": {
+        "title": "Projets sur GitHub",
+        "desc": {
+          "1": "Découvrez mes projets personnels et académiques sur mon compte GitHub.",
+          "2": "Je travaille régulièrement sur de nouveaux projets personnels et d'étude."
+        }
+      },
+      "2": {
+        "title": "Projets sur GitLab",
+        "desc": {
+          "1": "Visitez mon compte GitLab pour voir le projet Gabbler.",
+          "2": "Gabbler est un réseau social développé en VueJS et Laravel.",
+          "3": "Ce projet a été réalisé en groupe de quatre, dans le cadre de ma formation de Concepteur développeur d'applications à Hesias.",
+          "4": "J'ai eu le rôle de chef de projet dans ce groupe."
+        }
+      }
+    }
+  },
+  "skills": {
+    "title": "Mes compétences techniques"
+  },
+  "study": {
+    "title": "Mon parcours de formation",
+    "list": {
+      "1": {
+        "title": "Manager de projet informatique",
+        "school": "Hesias",
+        "date": {
+          "from": "Depuis Octobre 2023",
+          "to": "Jusqu'à Septembre 2025"
+        },
+        "desc": {
+          "1": "Actuellement en formation de Manager de projet informatique à Hesias, en alternance chez NEO-FUGU®."
+        }
+      },
+      "2": {
+        "title": "Concepteur développeur d'applications",
+        "school": "Hesias",
+        "date": {
+          "from": "Septembre 2022",
+          "to": "Octobre 2023"
+        },
+        "desc": {
+          "1": "Diplômé en Concepteur développeur d'applications à Hesias.",
+          "2": "Major de promotion, en alternance chez NEO-FUGU®."
+        }
+      },
+      "3": {
+        "title": "DUT Informatique",
+        "school": "Université Clermont Auvergne",
+        "date": {
+          "from": "Septembre 2020",
+          "to": "Juin 2022"
+        },
+        "desc": {
+          "1": "Diplômé du DUT Informatique à l'Université Clermont Auvergne.",
+          "2": "Stage de fin d'études effectué chez ITArverne."
+        }
+      }
     }
   }
 }

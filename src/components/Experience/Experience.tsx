@@ -1,10 +1,13 @@
+import { useTranslation } from 'react-i18next';
 import './Experience.scss';
 
 function Experience() {
+  const { t } = useTranslation();
+
   return (
     <div id="experience" className="experience">
       <div className="title-container">
-        <h2 className="title">expérience</h2>
+        <h2 className="title">{t('experience.title')}</h2>
       </div>
       <div className="parent">
         <div className="second-experience experience-container container">
@@ -14,43 +17,29 @@ function Experience() {
               alt="neo_logix_logo"
               className="company-logo logo rounded"
             />
-            <p className="company-name">NEO-FUGU®</p>
+            <p className="company-name">{t('experience.list.1.company')}</p>
           </div>
           <div className="job">
             <div className="job-entitle">
-              <p className="job-title">Développeur Web Full Stack</p>
+              <p className="job-title">{t('experience.list.1.title')}</p>
               <p className="job-date">
-                <span className="date">Juin 2021</span> -{' '}
-                <span className="date">Aujourd'hui</span>
+                <span className="date">{t('experience.list.1.date.from')}</span>{' '}
+                - <span className="date">{t('experience.list.1.date.to')}</span>
               </p>
             </div>
             <div className="job-desc">
               <ul>
                 <li>
-                  <p>
-                    Je suis engagé dans plusieurs projets internes dédiés au
-                    développement d'applications web pour les bijoutiers.
-                  </p>
+                  <p>{t('experience.list.1.desc.1')}</p>
                 </li>
                 <li>
-                  <p>
-                    Mes responsabilités englobent le développement de ces
-                    initiatives, la résolution de bugs, ainsi que la création de
-                    nouvelles fonctionnalités.
-                  </p>
+                  <p>{t('experience.list.1.desc.2')}</p>
                 </li>
                 <li>
-                  <p>
-                    Ces tâches sont menées au sein d'une équipe d'environ 10
-                    personnes, en collaboration étroite avec d'autres
-                    départements de l'entreprise.
-                  </p>
+                  <p>{t('experience.list.1.desc.3')}</p>
                 </li>
                 <li>
-                  <p>
-                    Concernant les outils technologiques, nous utilisons
-                    principalement Spring Boot & Angular pour ces projets.
-                  </p>
+                  <p>{t('experience.list.1.desc.4')}</p>
                 </li>
               </ul>
             </div>
@@ -63,45 +52,32 @@ function Experience() {
               alt="neo_logix_logo"
               className="company-logo logo rounded"
             />
-            <p className="company-name">ITArverne</p>
+            <p className="company-name">{t('experience.list.2.company')}</p>
           </div>
           <div className="job">
             <div className="job-entitle">
-              <p className="job-title">Développeur Web</p>
+              <p className="job-title">{t('experience.list.2.title')}</p>
               <p className="job-date">
-                <span className="date">Avril 2021</span> -{' '}
-                <span className="date">Juin 2021</span>
+                <span className="date">{t('experience.list.2.date.from')}</span>{' '}
+                - <span className="date">{t('experience.list.2.date.to')}</span>
               </p>
             </div>
             <div className="job-desc">
               <ul>
                 <li>
-                  <p>
-                    J'ai travaillé sur un projet React, qui permettait de
-                    rapporter des bugs à l'équipe de maintenance du site.
-                  </p>
+                  <p>{t('experience.list.2.desc.1')}</p>
                 </li>
                 <li>
-                  <p>
-                    J'ai relié ce projet à un autre projet existant, qui était
-                    un chat en direct, mais qui n'était plus fonctionnel.
-                  </p>
+                  <p>{t('experience.list.2.desc.2')}</p>
                 </li>
                 <li>
-                  <p>
-                    J'ai installé ces deux projets dans un container Docker.
-                  </p>
+                  <p>{t('experience.list.2.desc.3')}</p>
                 </li>
                 <li>
-                  <p>
-                    Le chat est une application node.js, qui utilise des sockets
-                    et écoute les requêtes envoyées par le site.
-                  </p>
+                  <p>{t('experience.list.2.desc.4')}</p>
                 </li>
                 <li>
-                  <p>
-                    Ce nouveau projet fonctionne avec l'application Keybase.
-                  </p>
+                  <p>{t('experience.list.2.desc.5')}</p>
                 </li>
               </ul>
             </div>

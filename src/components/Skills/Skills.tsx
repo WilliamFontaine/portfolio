@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import './Skills.scss';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 
 type Position = {
   x: number;
@@ -12,6 +13,8 @@ type Positions = {
 };
 
 function Skills() {
+  const { t } = useTranslation();
+
   const skillsList: string[] = [
     'Java',
     'JavaScript',
@@ -48,19 +51,16 @@ function Skills() {
   const [positions, setPositions] = useState<Positions>(initialPositions);
 
   const handleMarbleClick = (skill: string) => () => {
-    console.log(skill);
     setPositions({
       ...positions,
       [skill]: newPosition(),
     });
   };
 
-  console.log(positions);
-
   return (
     <div id="skills" className="skills">
       <div className="title-container">
-        <h2 className="title">Compétences</h2>
+        <h2 className="title">{t('skills.title')}</h2>
       </div>
       <div className="skills-container">
         {skillsList.map((skill) => (

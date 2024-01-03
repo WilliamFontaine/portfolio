@@ -1,10 +1,13 @@
+import { useTranslation } from 'react-i18next';
 import './Study.scss';
 
 function Study() {
+  const { t } = useTranslation();
+
   return (
     <div id="study" className="study">
       <div className="title-container">
-        <h2 className="title">formation</h2>
+        <h2 className="title">{t('study.title')}</h2>
       </div>
       <div className="studies">
         <div className="study-container">
@@ -14,22 +17,18 @@ function Study() {
               alt="hesias_logo"
               className="school-logo logo rounded"
             />
-            <p className="school-name">Hesias</p>
+            <p className="school-name">{t('study.list.1.school')}</p>
           </div>
 
           <div className="study-content">
-            <p className="study-title">Manager de projet informatique</p>
+            <p className="study-title">{t('study.list.1.title')}</p>
             <p className="study-date">
-              <span className="date">Octobre 2023</span> -{' '}
-              <span className="date">Septembre 2025</span>
+              <span className="date">{t('study.list.1.date.from')}</span> -{' '}
+              <span className="date">{t('study.list.1.date.to')}</span>
             </p>
             <div className="study-desc">
               <span>
-                <p>
-                  Je suis actuellement en formation de Manager de projet
-                  informatique à Hesias.
-                </p>
-                <p>Je suis en alternance chez NEO-FUGU®.</p>
+                <p>{t('study.list.1.desc.1')}</p>
               </span>
             </div>
           </div>
@@ -42,22 +41,18 @@ function Study() {
               alt="hesias_logo"
               className="school-logo logo rounded"
             />
-            <p className="school-name">Hesias</p>
+            <p className="school-name">{t('study.list.2.school')}</p>
           </div>
           <div className="study-content">
-            <p className="study-title">Concepteur développeur d'applications</p>
+            <p className="study-title">{t('study.list.2.title')}</p>
             <p className="study-date">
-              <span className="date">Septembre 2022</span> -{' '}
-              <span className="date">Octobre 2023</span>
+              <span className="date">{t('study.list.2.date.from')}</span> -{' '}
+              <span className="date">{t('study.list.2.date.to')}</span>
             </p>
             <div className="study-desc">
               <span>
-                <p>
-                  Je suis diplômé de la formation de Concepteur développeur
-                  d'applications à Hesias.
-                </p>
-                <p>J'ai été major de promotion durant cette formation.</p>
-                <p>J'était en alternance chez NEO-FUGU®.</p>
+                <p>{t('study.list.2.desc.1')}</p>
+                <p>{t('study.list.2.desc.2')}</p>
               </span>
             </div>
           </div>
@@ -70,24 +65,19 @@ function Study() {
               alt="uca_logo"
               className="school-logo logo rounded"
             />
-            <p className="school-name">Université Clermont Auvergne</p>
+            <p className="school-name">{t('study.list.3.school')}</p>
           </div>
 
           <div className="study-content">
-            <p className="study-title">
-              Diplôme universitaire de technologie en informatique
-            </p>
+            <p className="study-title">{t('study.list.3.title')}</p>
             <p className="study-date">
-              <span className="date">Septembre 2020</span> -{' '}
-              <span className="date">Juin 2022</span>
+              <span className="date">{t('study.list.3.date.from')}</span> -{' '}
+              <span className="date">{t('study.list.3.date.to')}</span>
             </p>
             <div className="study-desc">
               <span>
-                <p>
-                  Je suis diplômé du DUT Informatique à l'Université Clermont
-                  Auvergne.
-                </p>
-                <p>J'ai effectué mon stage de fin de cursus chez ITArverne.</p>
+                <p>{t('study.list.3.desc.1')}</p>
+                <p>{t('study.list.3.desc.2')}</p>
               </span>
             </div>
           </div>

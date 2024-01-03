@@ -2,6 +2,7 @@ import { FormEventHandler, useEffect, useRef } from 'react';
 import emailjs from '@emailjs/browser';
 import { toast } from 'react-toastify';
 import './Contact.scss';
+import { useTranslation } from 'react-i18next';
 
 const emailConfig = {
   userPublicKey: import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
@@ -10,6 +11,8 @@ const emailConfig = {
 };
 
 function Contact() {
+  const { t } = useTranslation();
+
   const form = useRef<HTMLFormElement>(null);
 
   useEffect(() => {
@@ -27,14 +30,14 @@ function Contact() {
     const data = new FormData(event.currentTarget);
 
     if (!validateFormData(data)) {
-      toast.error('Veuillez remplir tous les champs du formulaire');
+      toast.error(t('contact.toast.fill'));
       return;
     }
 
     toast.promise(sendEmail(data), {
-      pending: 'Envoi du message en cours...',
-      success: 'Votre message a bien été envoyé',
-      error: "Une erreur est survenue lors de l'envoi du message",
+      pending: t('contact.toast.pending'),
+      success: t('contact.toast.success'),
+      error: t('contact.toast.error'),
     });
   };
 
@@ -43,8 +46,6 @@ function Contact() {
     const lastname = data.get('lastname');
     const email = data.get('email');
     const message = data.get('message');
-
-    console.log(firstname, lastname, email, message);
 
     return new Promise((resolve, reject) => {
       emailjs
@@ -69,14 +70,16 @@ function Contact() {
   return (
     <div id="contact" className="contact">
       <div className="title-container">
-        <h2 className="title">contact</h2>
+        <h2 className="title">{t('contact.title')}</h2>
       </div>
       <div className="contact-form">
-        <p>formulaire de contact</p>
+        <p>{t('contact.form.title')}</p>
         <form onSubmit={handleSubmit} ref={form}>
           <div className="form-group">
             <div className="label-container">
-              <label htmlFor="firstname">Prénom</label>
+              <label htmlFor="firstname">
+                {t('contact.form.field.firstname')}
+              </label>
             </div>
             <div className="input-container">
               <input type="text" name="firstname" id="firstname" required />
@@ -84,7 +87,9 @@ function Contact() {
           </div>
           <div className="form-group">
             <div className="label-container">
-              <label htmlFor="lastname">Nom</label>
+              <label htmlFor="lastname">
+                {t('contact.form.field.lastname')}
+              </label>
             </div>
             <div className="input-container">
               <input type="text" name="lastname" id="lastname" required />
@@ -92,7 +97,7 @@ function Contact() {
           </div>
           <div className="form-group">
             <div className="label-container">
-              <label htmlFor="email">Email</label>
+              <label htmlFor="email">{t('contact.form.field.email')}</label>
             </div>
             <div className="input-container">
               <input type="email" name="email" id="email" required />
@@ -100,17 +105,17 @@ function Contact() {
           </div>
           <div className="form-group">
             <div className="label-container">
-              <label htmlFor="message">Message</label>
+              <label htmlFor="message">{t('contact.form.field.message')}</label>
             </div>
             <div className="input-container">
               <textarea name="message" id="message" required rows={5} />
             </div>
           </div>
-          <button type="submit">Envoyer</button>
+          <button type="submit">{t('contact.form.button.send')}</button>
         </form>
       </div>
       <div className="logo-container">
-        <p> Me contacter aussi sur :</p>
+        <p>{t('contact.form.more')}</p>
         <a href="https://www.linkedin.com/in/williamftn/">
           <img
             src="/logo/linkedin_logo.png"
