@@ -75,30 +75,63 @@ function Contact() {
         <p>formulaire de contact</p>
         <form onSubmit={handleSubmit} ref={form}>
           <div className="form-group">
-            <label htmlFor="name">Prénom</label>
-            <input type="text" name="firstname" id="firstname" required />
+            <div className="label-container">
+              <label htmlFor="firstname">Prénom</label>
+            </div>
+            <div className="input-container">
+              <input type="text" name="firstname" id="firstname" required />
+            </div>
           </div>
           <div className="form-group">
-            <label htmlFor="lastname">Nom</label>
-            <input type="text" name="lastname" id="lastname" required />
+            <div className="label-container">
+              <label htmlFor="lastname">Nom</label>
+            </div>
+            <div className="input-container">
+              <input type="text" name="lastname" id="lastname" required />
+            </div>
           </div>
           <div className="form-group">
-            <label htmlFor="email">Email</label>
-            <input type="email" name="email" id="email" required />
+            <div className="label-container">
+              <label htmlFor="email">Email</label>
+            </div>
+            <div className="input-container">
+              <input type="email" name="email" id="email" required />
+            </div>
           </div>
           <div className="form-group">
-            <label htmlFor="message">Message</label>
-            <textarea name="message" id="message" required />
+            <div className="label-container">
+              <label htmlFor="message">Message</label>
+            </div>
+            <div className="input-container">
+              <textarea name="message" id="message" required rows={5} />
+            </div>
           </div>
           <button type="submit">Envoyer</button>
         </form>
       </div>
       <div className="logo-container">
-        <img
-          src="/logo/linkedin_logo.png"
-          alt="linkedin_logo"
-          className="linkedin_logo logo"
-        />
+        <p> Me contacter aussi sur :</p>
+        <a href="https://www.linkedin.com/in/williamftn/">
+          <img
+            src="/logo/linkedin_logo.png"
+            alt="linkedin_logo"
+            className="linkedin_logo logo"
+          />
+        </a>
+        <a href="https://github.com/WilliamFontaine">
+          <img
+            src="/logo/github_logo.png"
+            alt="github_logo"
+            className="github_logo logo"
+          />
+        </a>
+        <a href="https://gitlab.com/WilliamFontaine">
+          <img
+            src="/logo/gitlab_logo.png"
+            alt="gitlab_logo"
+            className="gitlab_logo logo"
+          />
+        </a>
       </div>
     </div>
   );

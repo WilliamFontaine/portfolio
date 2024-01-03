@@ -14,7 +14,7 @@ function Projects() {
             className="project-logo logo rounded"
           />
           <p className="project-title">Projets sur GitHub</p>
-          <p className="project-desc">
+          <div className="project-desc">
             <span>
               <p>Vous pouvez retrouver tous mes projets sur mon GitHub.</p>
               <p>
@@ -22,7 +22,7 @@ function Projects() {
                 scolaires.
               </p>
             </span>
-          </p>
+          </div>
         </div>
         <div className="project">
           <img
@@ -31,7 +31,7 @@ function Projects() {
             className="project-logo logo rounded"
           />
           <p className="project-title">Projets sur GitLab</p>
-          <p className="project-desc">
+          <div className="project-desc">
             <span>
               <p>
                 Vous pouvez notamment retrouver le projet Gabbler sur mon
@@ -47,7 +47,7 @@ function Projects() {
               </p>
               <p>J'étais le chef de projet de ce groupe.</p>
             </span>
-          </p>
+          </div>
         </div>
       </div>
     </div>

@@ -9,6 +9,9 @@
     flex-direction: column;
     justify-content: space-evenly;
     padding: 0 2rem;
+    border: 3px solid $black-01;
+    border-radius: 20px;
+    background-color: $white-01;
 
     .company {
       display: flex;
@@ -67,30 +70,23 @@
       }
     }
   }
-
-  .container {
-    margin: 1rem;
-  }
 }
 
 @media (min-width: 1200px) {
   #experience {
     .parent {
       display: grid;
-      grid-template-columns: 0.4fr 0.8fr 1fr 0.6fr 0.4fr;
-      grid-template-rows: 0.5fr 1.2fr 1fr 0.2fr 1fr 1.2fr 0.5fr;
+      grid-template-columns: 0.3fr 0.5fr 1fr 0.5fr 0.3fr;
+      grid-template-rows: 0.5fr 1.2fr 1fr 0.3fr 1fr 1.2fr 0.5fr;
       grid-column-gap: 0px;
       grid-row-gap: 0px;
 
       .container {
         z-index: 10;
+        margin: 1rem;
       }
 
       .experience-container {
-        border: 3px solid $black-01;
-        border-radius: 20px;
-        background-color: $white-01;
-
         &.second-experience {
           grid-area: 2 / 2 / 4 / 4;
         }

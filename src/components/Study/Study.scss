@@ -3,19 +3,68 @@
 #study {
   background-color: $white-02;
 
-  .study-container {
-    .school {
+  .studies {
+    .study-container {
+      padding: 0 1rem;
       display: flex;
-      align-items: center;
-      justify-content: flex-start;
+      flex-direction: column;
+      justify-content: space-evenly;
+      padding: 0 2rem;
+      border: 3px solid $black-01;
+      border-radius: 20px;
+      background-color: $white-01;
 
-      .school-logo {
-        margin-right: 20px;
+      .school {
+        display: flex;
+        align-items: flex-end;
+        justify-content: flex-start;
+        padding-bottom: 1.5rem;
+        margin: 1rem 0;
+        border-bottom: 2px solid $black-01;
+        width: 90%;
+
+        .school-logo {
+          margin-right: 20px;
+          border: 2px solid $black-01;
+        }
+
+        .school-name {
+          font-size: 1.5rem;
+          font-weight: 600;
+        }
       }
 
-      .school-name {
-        font-size: 1.5rem;
-        font-weight: 600;
+      .study-content {
+        .study-title {
+          font-weight: 800;
+          margin-bottom: 0.5rem;
+          font-size: 1.5rem;
+        }
+
+        .study-date {
+          font-size: 1.2rem;
+        }
+
+        .study-desc {
+          text-align: justify;
+          margin-top: 1rem;
+          margin-bottom: 1rem;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 1200px) {
+  #study {
+    .studies {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .study-container {
+        width: 35%;
+        margin: 2rem;
       }
     }
   }

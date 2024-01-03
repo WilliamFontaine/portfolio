@@ -2,4 +2,44 @@
 
 #projects {
   background-color: $white-02;
+
+  .projects-container {
+    .project {
+      padding: 0 1rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      padding: 0 2rem;
+      border: 3px solid $black-01;
+      border-radius: 20px;
+      background-color: $white-01;
+
+      .project-title {
+        font-weight: 800;
+        margin-bottom: 0.5rem;
+        font-size: 1.5rem;
+      }
+
+      .project-desc {
+        text-align: justify;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+      }
+    }
+  }
+}
+
+@media (min-width: 1200px) {
+  #projects {
+    .projects-container {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-evenly;
+
+      .project {
+        width: 35%;
+        margin: 2rem;
+      }
+    }
+  }
 }
