@@ -69,6 +69,7 @@ function Skills() {
             onClick={handleMarbleClick(skill)}
             animate={{ x: positions[skill].x, y: positions[skill].y }}
             key={skill}
+            title={skill}
           >
             <img
               className="skill-img logo"
