@@ -1,0 +1,24 @@
+.square {
+  border: 1px solid var(--light-black);
+  background-color: var(--game-background-2);
+  float: left;
+  font-size: 24px;
+  font-weight: bold;
+  line-height: 34px;
+  height: 8vmax;
+  margin-right: -1px;
+  margin-top: -1px;
+  padding: 0;
+  text-align: center;
+  width: 8vmax;
+  border-radius: 1rem;
+  margin: .5rem;
+}
+
+.square:focus {
+  outline: none;
+}
+
+.win {
+  background: var(--game-win);
+}

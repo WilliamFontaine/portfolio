@@ -1,0 +1,52 @@
+#popup {
+  position: fixed;
+  top: 14rem;
+  right: 1rem;
+  background: rgb(0, 0, 0, 0.2);
+  width: fit-content;
+  padding: 2rem 1rem;
+  border-radius: 1rem;
+  transform: translateX(120%);
+  background-color: var(--popup-color);
+  color: var(--popup-text);
+  z-index: 10;
+}
+
+.popup-spinner {
+  margin: 0 1rem 0 0;
+  animation: rotate 2s infinite linear;
+}
+
+.modal-captcha-animation,
+.modal-succes-animation,
+.modal-fail-animation {
+  animation: modal 6s infinite ease-in-out;
+}
+
+@keyframes modal {
+  0% {
+    transform: translateX(120%);
+  }
+
+  20% {
+    transform: translateX(-10%);
+  }
+
+  80% {
+    transform: translateX(-10%);
+  }
+
+  100% {
+    transform: translateX(120%);
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(359deg);
+  }
+}

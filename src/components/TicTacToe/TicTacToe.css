@@ -1,0 +1,75 @@
+.tictactoe {
+    align-items: center;
+    justify-content: center;
+    font-family: var(--first-font);
+    font-weight: var(--first-font-weight);
+    font-size: 1rem;
+    letter-spacing: 1px;
+}
+
+.tictactoe-board {
+    float: left;
+    padding-left: 25%;
+}
+
+.tictactoe-info {
+    float: right;
+    padding-right: 25%;
+}
+
+.tictactoe-info {
+    /* width: 50%; */
+    display: inline-block;
+    text-align: center;
+}
+
+.tictactoe-info__button,
+.tictactoe-info__status,
+.tictactoe-info__moves {
+    margin: 2vh 0;
+}
+
+.square {
+    color: var(--game-text);
+    font-size: 3rem;
+    font-family: var(--second-font);
+}
+
+button {
+    border: none;
+    border-radius: .5rem;
+    padding: .5rem;
+    background-color: var(--fourth-color);
+    color: var(--white-color);
+    font-size: 1rem;
+}
+
+ol button {
+    margin-left: 2rem;
+}
+
+.latest {
+    color: var(--winner-color);
+}
+
+@media screen and (max-width: 1000px) {
+    .tictactoe {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .tictactoe-board {
+        float: none;
+        padding-left: 0;
+        padding-bottom: 2vh;
+    }
+
+    .tictactoe-info {
+        float: none;
+        padding-right: 0;
+    }
+
+    button {
+        font-size: .8rem;
+    }
+}
