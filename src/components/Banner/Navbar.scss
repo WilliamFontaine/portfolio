@@ -204,3 +204,17 @@ body.no-scroll {
     }
   }
 }
+
+@media (max-height: 800px) {
+  .header-container {
+    header {
+      nav {
+        ul {
+          li {
+            margin: 15px !important;
+          }
+        }
+      }
+    }
+  }
+}
