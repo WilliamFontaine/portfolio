@@ -116,27 +116,29 @@ function Contact() {
       </div>
       <div className="logo-container">
         <p>{t('contact.form.more')}</p>
-        <a href="https://www.linkedin.com/in/williamftn/">
-          <img
-            src="/logo/linkedin_logo.png"
-            alt="linkedin_logo"
-            className="linkedin_logo logo"
-          />
-        </a>
-        <a href="https://github.com/WilliamFontaine">
-          <img
-            src="/logo/github_logo.png"
-            alt="github_logo"
-            className="github_logo logo"
-          />
-        </a>
-        <a href="https://gitlab.com/WilliamFontaine">
-          <img
-            src="/logo/gitlab_logo.png"
-            alt="gitlab_logo"
-            className="gitlab_logo logo"
-          />
-        </a>
+        <div className="medias">
+          <a href="https://www.linkedin.com/in/williamftn/">
+            <img
+              src="/logo/linkedin_logo.png"
+              alt="linkedin_logo"
+              className="linkedin_logo logo"
+            />
+          </a>
+          <a href="https://github.com/WilliamFontaine">
+            <img
+              src="/logo/github_logo.png"
+              alt="github_logo"
+              className="github_logo logo"
+            />
+          </a>
+          <a href="https://gitlab.com/WilliamFontaine">
+            <img
+              src="/logo/gitlab_logo.png"
+              alt="gitlab_logo"
+              className="gitlab_logo logo"
+            />
+          </a>
+        </div>
       </div>
     </div>
   );

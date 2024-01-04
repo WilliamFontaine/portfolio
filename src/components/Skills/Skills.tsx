@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './Skills.scss';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
@@ -14,6 +14,7 @@ type Positions = {
 
 function Skills() {
   const { t } = useTranslation();
+  const [width, setWidth] = useState<number>(0);
 
   const skillsList: string[] = [
     'Java',
@@ -36,13 +37,16 @@ function Skills() {
   ];
 
   const newPosition = (): Position => ({
-    x: Math.floor(Math.random() * (screen.width - 200)),
+    x: Math.floor(Math.random() * (screen.width - width)),
     y: Math.floor(Math.random() * 500),
   });
 
   const initialPositions: Positions = skillsList.reduce(
     (acc: Positions, skill: string) => {
-      acc[skill] = newPosition();
+      acc[skill] = {
+        x: 0,
+        y: 0,
+      };
       return acc;
     },
     {}
@@ -56,6 +60,29 @@ function Skills() {
       [skill]: newPosition(),
     });
   };
+
+  useEffect(() => {
+    if (screen.width < 600) {
+      setWidth(50);
+    } else if (screen.width < 1200) {
+      setWidth(100);
+    } else {
+      setWidth(200);
+    }
+  }, []);
+
+  useEffect(() => {
+    const newPositions: Positions = skillsList.reduce(
+      (acc: Positions, skill: string) => {
+        acc[skill] = newPosition();
+        return acc;
+      },
+      {}
+    );
+
+    setPositions(newPositions);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [width]);
 
   return (
     <div id="skills" className="skills">

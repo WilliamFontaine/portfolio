@@ -24,5 +24,53 @@
   }
 }
 
-@media (min-width: 1200px) {
+@media (max-width: 1200px) {
+  #skills {
+    .skills-container {
+      position: relative;
+      height: 600px;
+
+      .skill {
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        img {
+          height: 50px !important;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 1200px) {
+  #skills {
+    .skills-container {
+      .skill {
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        img {
+          height: 50px !important;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  #skills {
+    .skills-container {
+      .skill {
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        img {
+          height: 35px !important;
+        }
+      }
+    }
+  }
 }

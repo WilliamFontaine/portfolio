@@ -33,7 +33,6 @@ function Study() {
             </div>
           </div>
         </div>
-
         <div className="study-container">
           <div className="school">
             <img
@@ -57,7 +56,6 @@ function Study() {
             </div>
           </div>
         </div>
-
         <div className="study-container">
           <div className="school">
             <img
@@ -82,6 +80,8 @@ function Study() {
             </div>
           </div>
         </div>
+        <div className="div1 container"> </div>
+        <div className="div2 container"> </div>
       </div>
     </div>
   );

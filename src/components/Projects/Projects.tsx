@@ -24,6 +24,7 @@ function Projects() {
             </span>
           </div>
         </div>
+        <div className="div1 container"></div>
         <div className="project">
           <img
             src="/logo/gitlab_logo.png"
