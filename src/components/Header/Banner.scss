@@ -1,0 +1,161 @@
+@import "src/Styles.scss";
+
+.banner {
+  background-color: $white-02;
+  padding-top: 2rem;
+  padding-bottom: 1rem;
+
+  .banner-content {
+    width: 99%;
+    border-style: solid;
+    border-width: 3px;
+    border-style: solid solid solid none;
+    background-image: url("/images/banner.png");
+
+    .firstname {
+      width: fit-content;
+      height: fit-content;
+      position: relative;
+
+      img {
+        height: auto;
+      }
+
+      p {
+        font-weight: 700 !important;
+        position: absolute;
+        top: 44%;
+        left: 53%;
+        transform: translate(-50%, -50%);
+        font-weight: 800;
+        color: $light-red-01;
+        -webkit-text-stroke: 3px $black-01;
+        rotate: -7deg;
+      }
+    }
+
+    .info {
+      position: relative;
+      color: $light-red-01;
+      width: fit-content;
+      text-shadow:
+        1px 1px 0 $black-01,
+        2px 2px 0 $black-01,
+        3px 3px 0 $black-01,
+        4px 4px 0 $black-01,
+        5px 5px 0 $black-01,
+        6px 6px 0 $black-01,
+        7px 7px 0 $black-01,
+        8px 8px 0 $black-01,
+        9px 9px 0 $black-01,
+        10px 10px 0 $black-01;
+      rotate: -7deg;
+
+      .lastname {
+        width: fit-content;
+        font-family: Bangers, cursive !important;
+      }
+
+      .desc {
+        width: fit-content;
+        font-family: Bangers, cursive !important;
+      }
+    }
+  }
+}
+
+@media (max-width: 400px) {
+  .banner {
+    .banner-content {
+      height: 450px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      img {
+        width: 20rem;
+      }
+
+      .firstname {
+        p {
+          font-size: 4rem;
+        }
+      }
+
+      .info {
+        .lastname {
+          font-size: 5rem;
+        }
+
+        .desc {
+          font-size: 1.3rem;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 400px) and (max-width: 1200px) {
+  .banner {
+    .banner-content {
+      height: 644px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      img {
+        width: 25rem;
+      }
+
+      .firstname {
+        p {
+          font-size: 6rem;
+        }
+      }
+
+      .info {
+        .lastname {
+          font-size: 6rem;
+        }
+
+        .desc {
+          font-size: 1.7rem;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 1200px) {
+  .banner {
+    .banner-content {
+      height: 322px;
+      display: flex;
+      align-items: center;
+
+      .firstname {
+        left: calc(45% - 28rem);
+
+        img {
+          width: 28rem;
+        }
+
+        p {
+          font-size: 6rem;
+        }
+      }
+
+      .info {
+        left: calc(50vw - 28rem);
+
+        .lastname {
+          font-size: 9rem;
+        }
+
+        .desc {
+          font-size: 2rem;
+        }
+      }
+    }
+  }
+}

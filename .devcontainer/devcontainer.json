@@ -1,0 +1,62 @@
+{
+  "name": "Node.js & TypeScript",
+  "image": "mcr.microsoft.com/devcontainers/typescript-node:1-20-bullseye",
+  "forwardPorts": [3000],
+  "portsAttributes": {
+    "3000": {
+      "label": "React App",
+      "onAutoForward": "openPreview"
+    }
+  },
+  "updateContentCommand": "yarn install",
+  "postCreateCommand": "yarn dev",
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "editor.formatOnSave": true,
+        "files.insertFinalNewline": true,
+        "editor.action.commentLine": "ctrl+[Period]",
+        "emmet.includeLanguages": {
+          "javascript": "javascriptreact",
+          "typescript": "typescriptreact"
+        },
+        "eslint.workingDirectories": ["./src"],
+        "[typescriptreact]": {
+          "editor.defaultFormatter": "esbenp.prettier-vscode",
+          "editor.formatOnSave": true
+        },
+        "editor.codeActionsOnSave": {
+          "source.fixAll.eslint": true
+        },
+        "prettier.singleQuote": true
+      },
+      "colorTheme": "SynthWave '84",
+      "fiel-icons.activeIconPack": "material-icon-theme",
+      "material-icon-theme.folders.color": "#880088",
+      "extensions": [
+        "mgmcdermott.vscode-language-babel",
+        "dart-code.dart-code",
+        "mikestead.dotenv",
+        "editorconfig.editorconfig",
+        "dsznajder.es7-react-js-snippets",
+        "dbaeumer.vscode-eslint",
+        "github.copilot",
+        "ecmel.vscode-html-css",
+        "visualstudioexptteam.vscodeintellicode",
+        "zignd.html-css-class-completion",
+        "xabikos.javascriptsnippets",
+        "ms-vscode.vscode-typescript-next",
+        "yzhang.markdown-all-in-one",
+        "pkief.material-icon-theme",
+        "fallenmax.mithril-emmet",
+        "xabikos.reactsnippets",
+        "sibiraj-s.vscode-scss-formatter",
+        "mrmlnc.vscode-scss",
+        "burkeholland.simple-react-snippets",
+        "robbowen.synthwave-vscode",
+        "esbenp.prettier-vscode"
+      ]
+    }
+  },
+  "remoteUser": "root"
+}

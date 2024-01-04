@@ -1,0 +1,76 @@
+@import "src/Styles.scss";
+
+#skills {
+  background-color: $white-02;
+
+  .skills-container {
+    position: relative;
+    height: 600px;
+
+    .skill {
+      position: absolute;
+      top: 0;
+      left: 0;
+
+      img {
+        height: 100px;
+        width: auto;
+        background-color: $white-01;
+        border-radius: 20px;
+        padding: 4px;
+        border: 3px solid $black-01;
+      }
+    }
+  }
+}
+
+@media (max-width: 1200px) {
+  #skills {
+    .skills-container {
+      position: relative;
+      height: 600px;
+
+      .skill {
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        img {
+          height: 50px !important;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 1200px) {
+  #skills {
+    .skills-container {
+      .skill {
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        img {
+          height: 50px !important;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  #skills {
+    .skills-container {
+      .skill {
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        img {
+          height: 35px !important;
+        }
+      }
+    }
+  }
+}

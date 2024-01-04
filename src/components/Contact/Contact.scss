@@ -1,0 +1,165 @@
+@import "src/Styles.scss";
+
+#contact {
+  background-color: $white-02;
+  padding-bottom: 50px;
+
+  .contact-form {
+    margin-top: 50px;
+    margin-bottom: 50px;
+
+    p {
+      font-size: 2rem;
+      font-weight: 600;
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .form-group {
+        margin-bottom: 25px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        .label-container {
+          width: 10%;
+          display: flex;
+          justify-content: end;
+          margin-right: 20px;
+
+          label {
+            font-size: 1.1rem;
+            font-weight: 600;
+          }
+        }
+
+        .input-container {
+          width: 90%;
+
+          input,
+          textarea {
+            width: 90%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 3px solid $black-01;
+            font-size: 1.1rem;
+          }
+        }
+      }
+
+      button {
+        padding: 10px;
+        border-radius: 5px;
+        border: 3px solid $black-01;
+        font-size: 1.1rem;
+        font-weight: 600;
+        background-color: $white-01;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+        margin-top: 20px;
+
+        &:hover {
+          background-color: $black-01;
+          color: $white-01;
+        }
+      }
+    }
+  }
+
+  .logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    img {
+      width: 50px;
+      height: 50px;
+      margin: 0 10px;
+      background-color: $white-01;
+
+      &.github_logo {
+        border-radius: 50%;
+      }
+    }
+
+    p {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-right: 20px;
+    }
+  }
+}
+
+@media (min-width: 1200px) {
+  #contact {
+    .contact-form {
+      form {
+        .form-group {
+          width: 60%;
+        }
+
+        button {
+          width: 20%;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 1200px) {
+  #contact {
+    .contact-form {
+      form {
+        .form-group {
+          width: 80%;
+        }
+
+        button {
+          width: 30%;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  #contact {
+    .contact-form {
+      form {
+        .form-group {
+          flex-direction: column;
+          align-items: flex-start;
+
+          .label-container {
+            width: unset;
+            display: flex;
+            margin-right: unset;
+            margin-bottom: 10px;
+            margin-top: 20px;
+          }
+
+          .input-container {
+            width: 100%;
+          }
+        }
+
+        button {
+          width: fit-content;
+        }
+      }
+    }
+
+    .logo-container {
+      flex-direction: column;
+
+      .medias {
+        margin-top: 20px;
+      }
+    }
+  }
+}

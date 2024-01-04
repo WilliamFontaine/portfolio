@@ -1,0 +1,298 @@
+@import "src/Styles.scss";
+
+#experience {
+  background-color: $white-02;
+
+  .experience-container {
+    padding: 0 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    padding: 0 2rem;
+    border: 3px solid $black-01;
+    border-radius: 20px;
+    background-color: $white-01;
+
+    .company {
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-start;
+      padding-bottom: 1.5rem;
+      margin: 1rem 0;
+      border-bottom: 2px solid $black-01;
+      width: 70%;
+
+      .company-logo {
+        margin-right: 20px;
+        border: 2px solid $black-01;
+      }
+
+      .company-name {
+        font-size: 1.5rem;
+        font-weight: 600;
+      }
+    }
+
+    .job {
+      text-align: justify;
+
+      .job-entitle {
+        display: flex;
+        align-items: baseline;
+
+        .job-title {
+          font-weight: 800;
+          margin-bottom: 0.5rem;
+          font-size: 1.5rem;
+        }
+
+        .job-date {
+          font-size: 1.1rem;
+          margin-left: 1rem;
+
+          &::before {
+            content: "•";
+            margin-right: 1rem;
+          }
+        }
+      }
+
+      .job-desc {
+        padding: 0 0 1rem 2rem;
+
+        ul {
+          margin-left: 1rem;
+
+          li {
+            margin-bottom: 0.5rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 1700px) {
+  #experience {
+    .parent {
+      display: grid;
+      grid-template-columns: 0.3fr 0.5fr 1fr 0.5fr 0.3fr;
+      grid-template-rows: 0.5fr 1.2fr 1fr 0.3fr 1fr 1.2fr 0.5fr;
+      grid-column-gap: 0px;
+      grid-row-gap: 0px;
+
+      .container {
+        z-index: 10;
+        margin: 1rem;
+      }
+
+      .experience-container {
+        &.second-experience {
+          grid-area: 2 / 2 / 4 / 4;
+        }
+
+        &.first-experience {
+          grid-area: 5 / 3 / 7 / 5;
+        }
+      }
+
+      .div3 {
+        grid-area: 3 / 1 / 6 / 2;
+        background-image: url("/images/experience/asset1.png");
+        background-repeat: round;
+        border: 3px solid $black-01;
+      }
+      .div4 {
+        grid-area: 1 / 4 / 3 / 6;
+        background-image: url("/images/experience/asset4.png");
+        background-repeat: round;
+        border: 3px solid $black-01;
+      }
+      .div5 {
+        grid-area: 4 / 5 / 6 / 6;
+        background-image: url("/images/experience/asset2.png");
+        background-repeat: round;
+        border: 3px solid $black-01;
+      }
+      .div6 {
+        grid-area: 6 / 2 / 8 / 3;
+        background-image: url("/images/experience/asset3.png");
+        background-repeat: round;
+        border: 3px solid $black-01;
+      }
+
+      .div7 {
+        grid-area: 2 / 3 / 6 / 6;
+        background-image: url("/images/assets/cartoon-dots.svg");
+        background-repeat: no-repeat;
+        background-position: center;
+        z-index: 1;
+        margin: 4%;
+      }
+    }
+  }
+}
+
+@media (min-width: 1200px) {
+  #experience {
+    .parent {
+      display: grid;
+      grid-template-columns: 0.4fr 0.4fr 1fr 0.5fr 0.4fr;
+      grid-template-rows: 0.2fr 1.2fr 1fr 0.3fr 1fr 1fr 0.2fr;
+      grid-column-gap: 0px;
+      grid-row-gap: 0px;
+
+      .container {
+        z-index: 10;
+        margin: 1rem;
+      }
+
+      .experience-container {
+        &.second-experience {
+          grid-area: 2 / 2 / 4 / 4;
+        }
+
+        &.first-experience {
+          grid-area: 5 / 3 / 7 / 5;
+        }
+      }
+
+      .div3 {
+        grid-area: 3 / 1 / 6 / 2;
+        background-image: url("/images/experience/asset1.png");
+        background-repeat: round;
+        border: 3px solid $black-01;
+      }
+      .div4 {
+        grid-area: 1 / 4 / 3 / 6;
+        background-image: url("/images/experience/asset4.png");
+        background-repeat: round;
+        border: 3px solid $black-01;
+      }
+      .div5 {
+        grid-area: 4 / 5 / 6 / 6;
+        background-image: url("/images/experience/asset2.png");
+        background-repeat: round;
+        border: 3px solid $black-01;
+      }
+      .div6 {
+        grid-area: 6 / 2 / 8 / 3;
+        background-image: url("/images/experience/asset3.png");
+        background-repeat: round;
+        border: 3px solid $black-01;
+      }
+
+      .div7 {
+        grid-area: 2 / 3 / 6 / 6;
+        background-image: url("/images/assets/cartoon-dots.svg");
+        background-repeat: no-repeat;
+        background-position: center;
+        z-index: 1;
+        margin: 4%;
+      }
+    }
+  }
+}
+
+@media (max-width: 1200px) {
+  #experience {
+    .parent {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+
+      .experience-container {
+        margin: 50px;
+        width: 75%;
+        z-index: 10;
+      }
+
+      .div3 {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        width: 174px;
+        height: 681px;
+        background-image: url("/images/experience/asset1.png");
+        border: 3px solid $black-01;
+        z-index: 2;
+      }
+
+      .div4 {
+        position: absolute;
+        bottom: 0px;
+        right: 0px;
+        width: 169px;
+        height: 340px;
+        background-image: url("/images/experience/asset2.png");
+        border: 3px solid $black-01;
+        z-index: 2;
+      }
+
+      .div7 {
+        position: absolute;
+        top: 0px;
+        width: 100%;
+        height: 100%;
+        background-image: url("/images/assets/cartoon-dots.svg");
+        background-size: cover;
+        background-position: center;
+        z-index: 1;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  #experience {
+    .company {
+      width: 100% !important;
+
+      .company-logo {
+        margin-right: 20px;
+        border: 2px solid $black-01;
+        width: 50px;
+        height: 50px;
+      }
+
+      .company-name {
+        font-size: 1.2rem !important;
+        font-weight: 600;
+      }
+    }
+
+    .job {
+      .job-entitle {
+        flex-direction: column;
+
+        .job-title {
+          font-weight: 800;
+          margin-bottom: 0.5rem;
+          font-size: 1rem !important;
+        }
+
+        .job-date {
+          font-size: 0.8rem !important;
+          margin-bottom: 1.5rem;
+
+          &::before {
+            display: none;
+          }
+        }
+      }
+
+      .job-desc {
+        padding: unset !important;
+
+        ul {
+          margin-left: 0.2rem !important;
+
+          li {
+            margin-bottom: 0.2rem !important;
+          }
+        }
+      }
+    }
+  }
+}
