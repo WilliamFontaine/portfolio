@@ -20,6 +20,16 @@ function Navbar() {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  const closeHamburger = () => {
+    if (hamburger.current) {
+      hamburger.current.classList.remove('open');
+    }
+    if (hamburgerContainer.current) {
+      hamburgerContainer.current.classList.remove('open');
+    }
+    setIsMenuOpen(false);
+  }
+
   useEffect(() => {
     if (isMenuOpen) {
       document.body.classList.add('no-scroll');
@@ -45,19 +55,19 @@ function Navbar() {
           <div className="hamburger-container" ref={hamburgerContainer}>
             <ul>
               <li>
-                <a href="#experience">{t('header.menu.experience')}</a>
+                <a href="#experience" onClick={closeHamburger}>{t('header.menu.experience')}</a>
               </li>
               <li>
-                <a href="#study">{t('header.menu.study')}</a>
+                <a href="#study" onClick={closeHamburger}>{t('header.menu.study')}</a>
               </li>
               <li>
-                <a href="#skills">{t('header.menu.skills')}</a>
+                <a href="#skills" onClick={closeHamburger}>{t('header.menu.skills')}</a>
               </li>
               <li>
-                <a href="#projects">{t('header.menu.projects')}</a>
+                <a href="#projects" onClick={closeHamburger}>{t('header.menu.projects')}</a>
               </li>
               <li>
-                <a href="#contact">{t('header.menu.contact')}</a>
+                <a href="#contact" onClick={closeHamburger}>{t('header.menu.contact')}</a>
               </li>
               <li className="language-selector">
                 <select onChange={(e) => i18n.changeLanguage(e.target.value)}>
