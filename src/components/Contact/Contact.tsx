@@ -3,6 +3,7 @@ import emailjs from '@emailjs/browser';
 import { toast } from 'react-toastify';
 import './Contact.scss';
 import { useTranslation } from 'react-i18next';
+import ReCAPTCHA from 'react-google-recaptcha';
 
 const emailConfig = {
   userPublicKey: import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
@@ -10,10 +11,15 @@ const emailConfig = {
   templateId: import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
 };
 
+const captchaConfig = {
+  siteKey: import.meta.env.VITE_RECAPTCHA_SITE_KEY,
+};
+
 function Contact() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const form = useRef<HTMLFormElement>(null);
+  const captcha = useRef<ReCAPTCHA>(null);
 
   useEffect(() => {
     emailjs.init(emailConfig.userPublicKey);
@@ -28,6 +34,11 @@ function Contact() {
   const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
+
+    if (!captcha.current?.getValue()) {
+      toast.error(t('contact.toast.captcha'));
+      return;
+    }
 
     if (!validateFormData(data)) {
       toast.error(t('contact.toast.fill'));
@@ -54,6 +65,7 @@ function Contact() {
           lastname,
           email,
           message,
+          'g-recaptcha-response': captcha.current?.getValue(),
         })
         .then(
           (response) => {
@@ -111,6 +123,7 @@ function Contact() {
               <textarea name="message" id="message" required rows={5} />
             </div>
           </div>
+          <ReCAPTCHA sitekey={captchaConfig.siteKey} ref={captcha} hl={i18n.language} />
           <button type="submit">{t('contact.form.button.send')}</button>
         </form>
       </div>

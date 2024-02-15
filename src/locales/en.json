@@ -23,7 +23,8 @@
       "fill": "Please fill in all required fields.",
       "success": "Your message has been sent successfully.",
       "error": "An error occurred while sending the message.",
-      "pending": "Sending message..."
+      "pending": "Sending message...",
+      "captcha": "Please check the checkbox 'I'm not a robot'."
     }
   },
   "experience": {

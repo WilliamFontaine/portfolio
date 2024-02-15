@@ -23,7 +23,8 @@
       "fill": "Merci de remplir tous les champs.",
       "success": "Votre message a été envoyé avec succès.",
       "error": "Erreur lors de l'envoi du message.",
-      "pending": "Envoi du message en cours..."
+      "pending": "Envoi du message en cours...",
+      "captcha": "Veuillez cocher la case 'Je ne suis pas un robot'."
     }
   },
   "experience": {

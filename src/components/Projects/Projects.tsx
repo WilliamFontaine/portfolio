@@ -16,7 +16,12 @@ function Projects() {
             alt="github_logo"
             className="project-logo logo rounded"
           />
-          <p className="project-title">{t('projects.list.1.title')}</p>
+          <a
+            href="https://github.com/WilliamFontaine"
+            className="project-title"
+          >
+            {t('projects.list.1.title')}
+          </a>
           <div className="project-desc">
             <span>
               <p>{t('projects.list.1.desc.1')}</p>
@@ -31,7 +36,12 @@ function Projects() {
             alt="gitlab_logo"
             className="project-logo logo rounded"
           />
-          <p className="project-title">{t('projects.list.2.title')}</p>
+          <a
+            href="https://gitlab.com/WilliamFontaine"
+            className="project-title"
+          >
+            {t('projects.list.2.title')}
+          </a>
           <div className="project-desc">
             <span>
               <p>{t('projects.list.2.desc.1')}</p>
