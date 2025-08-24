@@ -69,7 +69,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 const { t } = useI18n()
 
 // Configuration UI personnalisée pour le Timeline

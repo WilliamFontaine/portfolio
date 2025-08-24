@@ -250,7 +250,7 @@
   </section>
 </template>
 
-<script setup>
+<script setup lang="ts">
 const { t } = useI18n()
 
 // Project configuration with complete i18n

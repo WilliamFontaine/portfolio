@@ -76,7 +76,7 @@
   </section>
 </template>
 
-<script setup>
+<script setup lang="ts">
 const { t } = useI18n()
 
 // Stagger animation for experience

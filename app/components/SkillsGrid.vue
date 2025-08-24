@@ -119,7 +119,7 @@
   </section>
 </template>
 
-<script setup>
+<script setup lang="ts">
 const { t } = useI18n()
 
 // Main specializations with i18n
