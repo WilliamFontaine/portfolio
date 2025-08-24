@@ -16,8 +16,8 @@
             :label="t('hero.badge')" 
             variant="soft" 
             color="primary" 
-            size="lg"
-            class="section-badge hover:scale-105 transition-smooth cursor-default"
+            size="xl"
+            class="rounded-full hover:scale-105 transition-smooth cursor-default"
           />
         </div>
 
