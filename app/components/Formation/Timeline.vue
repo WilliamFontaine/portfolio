@@ -82,7 +82,7 @@ const timelineConfig = {
   }
 }
 
-const timelineItems = [
+const timelineItems = computed(() => [
   {
     date: t('formation.items.master.period'),
     title: t('formation.items.master.title'),
@@ -128,5 +128,5 @@ const timelineItems = [
     ],
     stack: [t('skills.technologies.java'), t('skills.technologies.cPlusPlus'), t('skills.technologies.javascript'), t('skills.technologies.php'), t('skills.technologies.vue'), t('skills.technologies.sql')]
   }
-]
+])
 </script>

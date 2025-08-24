@@ -82,7 +82,7 @@ const timelineConfig = {
   }
 }
 
-const timelineItems = [
+const timelineItems = computed(() => [
   {
     date: t('experience.items.neofugu.period'),
     title: t('experience.items.neofugu.title'),
@@ -113,5 +113,5 @@ const timelineItems = [
     ],
     stack: [t('skills.technologies.python'), t('skills.technologies.django'), t('skills.technologies.wagtail'), t('skills.technologies.react'), t('skills.technologies.javascript'), t('skills.technologies.nodejs'), t('skills.technologies.docker')]
   }
-]
+])
 </script>
