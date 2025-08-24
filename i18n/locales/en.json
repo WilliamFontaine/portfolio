@@ -1,0 +1,222 @@
+{
+  "experience": {
+    "items": {
+      "itarverne": {
+        "description": "First contact with the professional world. Feature development on various technologies.",
+        "highlights": {
+          "autopost": "Auto-posting blog to Twitter and LinkedIn",
+          "chat": "Live chat redesign with Node.js and sockets",
+          "django": "Rapid learning of Django and Wagtail",
+          "react": "React frontend development"
+        },
+        "institution": "ITarverne - Volvic",
+        "period": "2022",
+        "title": "Internship - Web Developer"
+      },
+      "neofugu": {
+        "description": "Web application development in a team of 10 people. Internal projects intended for production with inter-service coordination.",
+        "highlights": {
+          "bugs": "Bug fixes and development of new features",
+          "collaboration": "Close collaboration with business teams",
+          "fullstack": "Full-Stack development with Java Spring Boot / Angular",
+          "projects": "Projects in correlation with end customers"
+        },
+        "institution": "NEO-FUGU® - Clermont-Ferrand",
+        "period": "2022 - Present",
+        "title": "Full-Stack Developer"
+      }
+    },
+    "stats": {
+      "companies": "Companies",
+      "subtitle": "A few numbers that define my journey",
+      "title": "Key Metrics",
+      "users": "quoi-regarder users",
+      "valedictorian": "Bachelor valedictorian",
+      "years": "Years apprenticeship"
+    },
+    "subtitle": "My journey in the professional world",
+    "title": "Professional Experience"
+  },
+  "footer": {
+    "contact": "Contact",
+    "copyright": "© 2024 William Fontaine. All rights reserved.",
+    "madeWith": "Made with"
+  },
+  "formation": {
+    "items": {
+      "bachelor": {
+        "description": "Comprehensive application development training with full-stack specialization. Valedictorian with highest honors.",
+        "highlights": {
+          "database": "Database design and management",
+          "fullstack": "Frontend and backend web development",
+          "mobile": "Native and hybrid mobile applications",
+          "valedictorian": "Valedictorian - Highest honors"
+        },
+        "institution": "HESIAS - Clermont-Ferrand",
+        "period": "2021 - 2023",
+        "specialization": "Full-Stack Development",
+        "title": "Bachelor's - Application Developer Designer"
+      },
+      "dut": {
+        "description": "Solid technical foundation covering computer science fundamentals, from programming to systems and networks.",
+        "highlights": {
+          "databases": "Database modeling and querying",
+          "programming": "Object-oriented programming (Java, C++)",
+          "systems": "Operating systems and networks",
+          "web": "Web technologies and interface development"
+        },
+        "institution": "IUT Clermont Auvergne - Aubière",
+        "period": "2019 - 2021",
+        "specialization": "General Computer Science",
+        "title": "DUT Computer Science"
+      },
+      "master": {
+        "description": "Advanced IT expert training specialized in intelligent applications and emerging technologies.",
+        "highlights": {
+          "ai": "Artificial intelligence and machine learning",
+          "cloud": "Cloud architecture and microservices",
+          "management": "Project management and technical leadership",
+          "security": "Cybersecurity and data protection"
+        },
+        "institution": "HESIAS - Clermont-Ferrand",
+        "period": "2023 - 2025",
+        "specialization": "Intelligent Applications",
+        "title": "Master's Degree - IT Expert"
+      }
+    },
+    "subtitle": "My academic background and degrees",
+    "badge": "Academic",
+    "title": "Education"
+  },
+  "header": {
+    "tagline": "Full-Stack Developer"
+  },
+  "hero": {
+    "badge": "Full-Stack Developer",
+    "cta": {
+      "linkedin": "View my LinkedIn",
+      "projects": "Discover my projects"
+    },
+    "description": "Passionate about web development, specialized in Nuxt/Vue, I create modern and performant applications.",
+    "greeting": "Hi, I'm",
+    "name": "William Fontaine",
+    "stats": {
+      "apprenticeship": "Years apprenticeship",
+      "companies": "Companies",
+      "users": "Users"
+    },
+    "subtitle": "Full-Stack Developer"
+  },
+  "projects": {
+    "items": {
+      "egenr": {
+        "description": "Complete solution for podiatrists with patient record management, automatic PDF generation and guaranteed local data security.",
+        "features": {
+          "compliant": "Compliant",
+          "multiOs": "Multi-OS",
+          "osCompatibility": "Win/Mac/Linux",
+          "rgpd": "GDPR"
+        },
+        "period": "2024 - Present",
+        "status": {
+          "desktop": "Desktop"
+        },
+        "subtitle": "Medical management",
+        "title": "EgenR"
+      },
+      "quoiRegarder": {
+        "description": "Smart application for discovering movies and series with advanced filtering, personalized recommendations and progress tracking.",
+        "metrics": {
+          "monthly": "Monthly",
+          "users": "Users"
+        },
+        "period": "2023 - Present",
+        "status": {
+          "production": "Production"
+        },
+        "subtitle": "Recommendation platform",
+        "title": "Quoi Regarder"
+      }
+    },
+    "stats": {
+      "deployedApps": "Deployed apps",
+      "monthlyUsers": "Monthly",
+      "nuxtVue": "Nuxt/Vue",
+      "openSource": "Open Source",
+      "openSourceValue": "Open",
+      "subtitle": "The impact of my personal projects",
+      "title": "Key Numbers",
+      "users": "Users"
+    },
+    "subtitle": "Discover my most significant projects",
+    "title": "My Work",
+    "viewProject": "View project",
+    "badge": "Portfolio"
+  },
+  "seo": {
+    "description": "Portfolio of William Fontaine, full-stack developer specialized in Nuxt/Vue. Discover my innovative projects and technical expertise.",
+    "title": "William Fontaine - Full-Stack Developer"
+  },
+  "skills": {
+    "categories": {
+      "backend": "Backend",
+      "frontend": "Frontend",
+      "toolsDevops": "Tools & DevOps"
+    },
+    "levels": {
+      "advanced": "Advanced",
+      "expert": "Expert",
+      "intermediate": "Intermediate"
+    },
+    "specialization": "Specialization",
+    "subtitle": "My technical expertise",
+    "technologies": {
+      "angular": "Angular",
+      "apiRest": "REST API",
+      "docker": "Docker",
+      "git": "Git",
+      "java": "Java",
+      "javascript": "JavaScript",
+      "kubernetes": "Kubernetes",
+      "linux": "Linux",
+      "nodejs": "Node.js",
+      "nosql": "NoSQL",
+      "nuxt": "Nuxt",
+      "php": "PHP",
+      "python": "Python",
+      "react": "React",
+      "sass": "Sass",
+      "springBoot": "Spring Boot",
+      "sql": "SQL",
+      "tailwind": "Tailwind CSS",
+      "tmdbApi": "TMDB API",
+      "typescript": "TypeScript",
+      "vue": "Vue.js",
+      "wagtail": "Wagtail",
+      "django": "Django",
+      "pdfLib": "PDF-lib",
+      "tauri": "Tauri",
+      "aiMl": "AI/ML",
+      "cloud": "Cloud",
+      "microservices": "Microservices",
+      "cPlusPlus": "C++"
+    },
+    "title": "Technologies & Skills",
+    "years": "years of experience"
+  },
+  "timeline": {
+    "achievements": "Key Achievements",
+    "stack": "Technology Stack"
+  },
+  "error": {
+    "badge": "Error",
+    "title": "Oops! Something went wrong",
+    "message": "Sorry, something went wrong. Please try again or return to the home page.",
+    "backHome": "Back to Home",
+    "retry": "Try Again"
+  },
+  "common": {
+    "linkedin": "LinkedIn",
+    "github": "GitHub"
+  }
+}

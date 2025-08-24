@@ -1,0 +1,222 @@
+{
+  "experience": {
+    "items": {
+      "itarverne": {
+        "description": "Premier contact avec le monde professionnel. Développement de fonctionnalités sur différentes technologies.",
+        "highlights": {
+          "autopost": "Auto-posting blog vers Twitter et LinkedIn",
+          "chat": "Refonte chat en direct avec Node.js et sockets",
+          "django": "Apprentissage rapide de Django et Wagtail",
+          "react": "Développement frontend React"
+        },
+        "institution": "ITarverne - Volvic",
+        "period": "2022",
+        "title": "Stage - Développeur Web"
+      },
+      "neofugu": {
+        "description": "Développement d'applications web en équipe de 10 personnes. Projets internes destinés à la production avec coordination inter-services.",
+        "highlights": {
+          "bugs": "Correction de bugs et développement de nouvelles fonctionnalités",
+          "collaboration": "Collaboration étroite avec les équipes métier",
+          "fullstack": "Développement Full-Stack avec Java Spring Boot / Angular",
+          "projects": "Projets en corrélation avec les clients finaux"
+        },
+        "institution": "NEO-FUGU® - Clermont-Ferrand",
+        "period": "2022 - Présent",
+        "title": "Développeur Full-Stack"
+      }
+    },
+    "stats": {
+      "companies": "Entreprises",
+      "subtitle": "Quelques métriques clés de mon parcours",
+      "title": "Métriques Clés",
+      "users": "Utilisateurs Quoi Regarder",
+      "valedictorian": "Major Bachelor",
+      "years": "Années alternance"
+    },
+    "subtitle": "Mon parcours dans le monde professionnel",
+    "title": "Expérience Professionnelle"
+  },
+  "footer": {
+    "contact": "Contact",
+    "copyright": "© 2024 William Fontaine. Tous droits réservés.",
+    "madeWith": "Fait avec"
+  },
+  "formation": {
+    "items": {
+      "bachelor": {
+        "description": "Formation complète en développement d'applications avec spécialisation full-stack. Major de promotion avec mention très bien.",
+        "highlights": {
+          "database": "Conception et gestion de bases de données",
+          "fullstack": "Développement web frontend et backend",
+          "mobile": "Applications mobiles natives et hybrides",
+          "valedictorian": "Major de promotion - Mention très bien"
+        },
+        "institution": "HESIAS - Clermont-Ferrand",
+        "period": "2021 - 2023",
+        "specialization": "Développement Full-Stack",
+        "title": "Bachelor - Concepteur Développeur d'Applications"
+      },
+      "dut": {
+        "description": "Formation technique solide couvrant les fondamentaux de l'informatique, de la programmation aux systèmes et réseaux.",
+        "highlights": {
+          "databases": "Modélisation et requêtage de bases de données",
+          "programming": "Programmation orientée objet (Java, C++)",
+          "systems": "Systèmes d'exploitation et réseaux",
+          "web": "Technologies web et développement d'interfaces"
+        },
+        "institution": "IUT Clermont Auvergne - Aubière",
+        "period": "2019 - 2021",
+        "specialization": "Informatique générale",
+        "title": "DUT Informatique"
+      },
+      "master": {
+        "description": "Formation d'expert en informatique spécialisée dans les applications intelligentes et les technologies émergentes.",
+        "highlights": {
+          "ai": "Intelligence artificielle et machine learning",
+          "cloud": "Architecture cloud et microservices",
+          "management": "Gestion de projet et leadership technique",
+          "security": "Cybersécurité et protection des données"
+        },
+        "institution": "HESIAS - Clermont-Ferrand",
+        "period": "2023 - 2025",
+        "specialization": "Applications intelligentes",
+        "title": "Master 2 - Expert IT"
+      }
+    },
+    "subtitle": "Mon parcours académique et mes diplômes",
+    "badge": "Académique",
+    "title": "Formation"
+  },
+  "header": {
+    "tagline": "Développeur Full-Stack"
+  },
+  "hero": {
+    "badge": "Développeur Full-Stack",
+    "cta": {
+      "linkedin": "Voir mon LinkedIn",
+      "projects": "Découvrir mes projets"
+    },
+    "description": "Passionné par le développement web, spécialisé en Nuxt/Vue, je crée des applications modernes et performantes.",
+    "greeting": "Bonjour, je suis",
+    "name": "William Fontaine",
+    "stats": {
+      "apprenticeship": "Ans alternance",
+      "companies": "Entreprises",
+      "users": "Utilisateurs"
+    },
+    "subtitle": "Développeur Full-Stack"
+  },
+  "projects": {
+    "items": {
+      "egenr": {
+        "description": "Solution complète pour podologues avec gestion de fiches patients, génération PDF automatique et sécurité des données garantie localement.",
+        "features": {
+          "compliant": "Conforme",
+          "multiOs": "Multi-OS",
+          "osCompatibility": "Win/Mac/Linux",
+          "rgpd": "RGPD"
+        },
+        "period": "2024 - Présent",
+        "status": {
+          "desktop": "Desktop"
+        },
+        "subtitle": "Gestion médicale",
+        "title": "EgenR"
+      },
+      "quoiRegarder": {
+        "description": "Application intelligente pour découvrir films et séries avec filtrage avancé, recommandations personnalisées et suivi de progression.",
+        "metrics": {
+          "monthly": "Mensuels",
+          "users": "Utilisateurs"
+        },
+        "period": "2023 - Présent",
+        "status": {
+          "production": "Production"
+        },
+        "subtitle": "Plateforme de recommandation",
+        "title": "Quoi Regarder"
+      }
+    },
+    "stats": {
+      "deployedApps": "Apps déployées",
+      "monthlyUsers": "Mensuels",
+      "nuxtVue": "Nuxt/Vue",
+      "openSource": "Open Source",
+      "openSourceValue": "Open",
+      "subtitle": "L'impact de mes projets personnels",
+      "title": "Métriques Clés",
+      "users": "Utilisateurs"
+    },
+    "subtitle": "Découvrez mes projets les plus marquants",
+    "title": "Mes Réalisations",
+    "viewProject": "Voir le projet",
+    "badge": "Portfolio"
+  },
+  "seo": {
+    "description": "Portfolio de William Fontaine, développeur full-stack spécialisé en Nuxt/Vue. Découvrez mes projets innovants et mon expertise technique.",
+    "title": "William Fontaine - Développeur Full-Stack"
+  },
+  "skills": {
+    "categories": {
+      "backend": "Backend",
+      "frontend": "Frontend",
+      "toolsDevops": "Outils & DevOps"
+    },
+    "levels": {
+      "advanced": "Avancé",
+      "expert": "Expert",
+      "intermediate": "Intermédiaire"
+    },
+    "specialization": "Spécialisation",
+    "subtitle": "Mon expertise technique",
+    "technologies": {
+      "angular": "Angular",
+      "apiRest": "API REST",
+      "docker": "Docker",
+      "git": "Git",
+      "java": "Java",
+      "javascript": "JavaScript",
+      "kubernetes": "Kubernetes",
+      "linux": "Linux",
+      "nodejs": "Node.js",
+      "nosql": "NoSQL",
+      "nuxt": "Nuxt",
+      "php": "PHP",
+      "python": "Python",
+      "react": "React",
+      "sass": "Sass",
+      "springBoot": "Spring Boot",
+      "sql": "SQL",
+      "tailwind": "Tailwind CSS",
+      "tmdbApi": "API TMDB",
+      "typescript": "TypeScript",
+      "vue": "Vue.js",
+      "wagtail": "Wagtail",
+      "django": "Django",
+      "pdfLib": "PDF-lib",
+      "tauri": "Tauri",
+      "aiMl": "IA/ML",
+      "cloud": "Cloud",
+      "microservices": "Microservices",
+      "cPlusPlus": "C++"
+    },
+    "title": "Technologies & Compétences",
+    "years": "ans d'expérience"
+  },
+  "timeline": {
+    "achievements": "Réalisations",
+    "stack": "Technologies"
+  },
+  "error": {
+    "badge": "Erreur",
+    "title": "Oups ! Une erreur est survenue",
+    "message": "Désolé, quelque chose s'est mal passé. Veuillez réessayer ou revenir à l'accueil.",
+    "backHome": "Retour à l'accueil",
+    "retry": "Réessayer"
+  },
+  "common": {
+    "linkedin": "LinkedIn",
+    "github": "GitHub"
+  }
+}
