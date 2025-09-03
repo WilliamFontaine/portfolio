@@ -2,16 +2,16 @@
   "experience": {
     "items": {
       "itarverne": {
-        "description": "Premier contact avec le monde professionnel. Développement de fonctionnalités sur différentes technologies.",
+        "description": "Développement de fonctionnalités sur différentes technologies.",
         "highlights": {
           "autopost": "Auto-posting blog vers Twitter et LinkedIn",
           "chat": "Refonte chat en direct avec Node.js et sockets",
-          "django": "Apprentissage rapide de Django et Wagtail",
+          "django": "Prise en main rapide de Django et Wagtail",
           "react": "Développement frontend React"
         },
         "institution": "ITarverne - Volvic",
         "period": "2022",
-        "title": "Stage - Développeur Web"
+        "title": "Développeur Web"
       },
       "neofugu": {
         "description": "Développement d'applications web en équipe de 10 personnes. Projets internes destinés à la production avec coordination inter-services.",
@@ -19,7 +19,7 @@
           "bugs": "Correction de bugs et développement de nouvelles fonctionnalités",
           "collaboration": "Collaboration étroite avec les équipes métier",
           "fullstack": "Développement Full-Stack avec Java Spring Boot / Angular",
-          "projects": "Projets en corrélation avec les clients finaux"
+          "projects": "Projets en interaction avec les clients"
         },
         "institution": "NEO-FUGU® - Clermont-Ferrand",
         "period": "2022 - Présent",
@@ -34,7 +34,7 @@
       "valedictorian": "Major Bachelor",
       "years": "Années alternance"
     },
-    "subtitle": "Mon parcours dans le monde professionnel",
+    "subtitle": "Mon parcours professionnel",
     "title": "Expérience Professionnelle"
   },
   "footer": {
@@ -45,12 +45,12 @@
   "formation": {
     "items": {
       "bachelor": {
-        "description": "Formation complète en développement d'applications avec spécialisation full-stack. Major de promotion avec mention très bien.",
+        "description": "Formation complète en développement d'applications avec spécialisation full-stack.",
         "highlights": {
           "database": "Conception et gestion de bases de données",
           "fullstack": "Développement web frontend et backend",
           "mobile": "Applications mobiles natives et hybrides",
-          "valedictorian": "Major de promotion - Mention très bien"
+          "valedictorian": "Major de promotion"
         },
         "institution": "HESIAS - Clermont-Ferrand",
         "period": "2021 - 2023",
