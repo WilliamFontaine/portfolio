@@ -72,10 +72,6 @@
   @apply text-4xl sm:text-5xl font-bold tracking-tight mb-6;
 }
 
-.section-subtitle {
-  @apply text-xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed;
-}
-
 .section-decoration {
   @apply flex items-center justify-center mt-8;
 }

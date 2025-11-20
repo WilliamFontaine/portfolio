@@ -14,20 +14,9 @@
     <UContainer class="relative z-10">
       <!-- Section Header consistent with others -->
       <div class="text-center mb-20">
-        <div class="section-badge bg-gradient-to-r from-violet-100/80 to-yellow-100/80 dark:from-violet-900/40 dark:to-yellow-900/40">
-          <UIcon name="i-lucide-graduation-cap" class="decoration-icon text-violet-600 dark:text-violet-400" />
-          <span class="text-sm font-medium text-violet-700 dark:text-violet-300 uppercase tracking-wider">
-            {{ t('formation.badge') }}
-          </span>
-        </div>
-        
         <h2 class="section-title bg-gradient-to-r from-slate-900 via-violet-900 via-yellow-900 to-slate-900 dark:from-slate-100 dark:via-violet-100 dark:via-yellow-100 dark:to-slate-100 bg-clip-text text-transparent">
           {{ t('formation.title') }}
         </h2>
-        
-        <p class="section-subtitle">
-          {{ t('formation.subtitle') }}
-        </p>
         
         <!-- Consistent decorative line -->
         <div class="section-decoration">

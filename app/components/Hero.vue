@@ -72,22 +72,6 @@
             {{ heroLinks[1].label }}
           </UButton>
         </div>
-
-        <!-- Mini stats with animations -->
-        <div class="grid grid-cols-3 gap-8 max-w-lg mx-auto mt-16 pt-8 border-t border-gradient-to-r from-indigo-200 to-cyan-200 dark:from-indigo-800 dark:to-cyan-800">
-          <div class="text-center group cursor-default">
-            <div class="text-2xl font-bold text-indigo-600 dark:text-indigo-400 group-hover:scale-125 transition-smooth animate-sparkle">2</div>
-            <div class="text-sm text-slate-500 dark:text-slate-400 group-hover:text-indigo-500 transition-smooth">{{ t('hero.stats.companies') }}</div>
-          </div>
-          <div class="text-center group cursor-default">
-            <div class="text-2xl font-bold text-emerald-600 dark:text-emerald-400 group-hover:scale-125 transition-smooth animate-sparkle" style="animation-delay: 0.5s">2.6K+</div>
-            <div class="text-sm text-slate-500 dark:text-slate-400 group-hover:text-emerald-500 transition-smooth">{{ t('hero.stats.users') }}</div>
-          </div>
-          <div class="text-center group cursor-default">
-            <div class="text-2xl font-bold text-cyan-600 dark:text-cyan-400 group-hover:scale-125 transition-smooth animate-sparkle" style="animation-delay: 1s">3</div>
-            <div class="text-sm text-slate-500 dark:text-slate-400 group-hover:text-cyan-500 transition-smooth">{{ t('hero.stats.apprenticeship') }}</div>
-          </div>
-        </div>
       </div>
     </UContainer>
   </div>

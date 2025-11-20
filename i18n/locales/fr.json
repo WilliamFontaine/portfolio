@@ -22,7 +22,7 @@
           "projects": "Projets en interaction avec les clients"
         },
         "institution": "NEO-FUGU® - Clermont-Ferrand",
-        "period": "2022 - Présent",
+        "period": "2022 - 2025",
         "title": "Développeur Full-Stack"
       }
     },
@@ -35,7 +35,7 @@
       "years": "Années alternance"
     },
     "subtitle": "Mon parcours professionnel",
-    "title": "Expérience Professionnelle"
+    "title": "Mon expérience professionnelle"
   },
   "footer": {
     "contact": "Contact",
@@ -86,7 +86,7 @@
     },
     "subtitle": "Mon parcours académique et mes diplômes",
     "badge": "Académique",
-    "title": "Formation"
+    "title": "Ma formation"
   },
   "header": {
     "tagline": "Développeur Full-Stack"

@@ -11,20 +11,9 @@
     <UContainer class="relative z-10">
       <!-- Section Header with enhanced styling -->
       <div class="text-center mb-20">
-        <div class="section-badge bg-gradient-to-r from-emerald-100/80 to-indigo-100/80 dark:from-emerald-900/40 dark:to-indigo-900/40">
-          <UIcon name="i-lucide-briefcase" class="decoration-icon text-emerald-600 dark:text-emerald-400" />
-          <span class="text-sm font-medium text-emerald-700 dark:text-emerald-300 uppercase tracking-wider">
-            {{ t('experience.title') }}
-          </span>
-        </div>
-        
         <h2 class="section-title bg-gradient-to-r from-slate-900 via-emerald-900 via-indigo-900 to-slate-900 dark:from-slate-100 dark:via-emerald-100 dark:via-indigo-100 dark:to-slate-100 bg-clip-text text-transparent">
           {{ t('experience.title') }}
         </h2>
-        
-        <p class="section-subtitle">
-          {{ t('experience.subtitle') }}
-        </p>
         
         <!-- Consistent decorative line -->
         <div class="section-decoration">
@@ -47,21 +36,6 @@
       <div class="relative">
         <!-- Background decoration with more colors -->
         <div class="absolute -inset-4 bg-gradient-to-r from-emerald-100/50 via-indigo-100/50 via-cyan-100/50 to-emerald-100/50 dark:from-emerald-900/20 dark:via-indigo-900/20 dark:via-cyan-900/20 dark:to-emerald-900/20 blur-3xl rounded-3xl animate-color-pulse"></div>
-        
-        <UCard class="relative glass-refined shadow-natural shadow-natural-hover stats-card">
-          <div class="p-8 sm:p-12">
-            <div class="text-center mb-12">
-              <h3 class="text-xl font-semibold tracking-tight text-slate-900 dark:text-slate-100 mb-3">
-                {{ t('experience.stats.title') }}
-              </h3>
-              <p class="text-sm text-slate-600 dark:text-slate-400">
-                {{ t('experience.stats.subtitle') }}
-              </p>
-            </div>
-
-            <ExperienceStats />
-          </div>
-        </UCard>
       </div>
       
       <!-- Bottom decoration with colors -->

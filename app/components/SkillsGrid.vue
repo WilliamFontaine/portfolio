@@ -13,21 +13,10 @@
     
     <UContainer class="relative z-10">
       <!-- Section Header consistent with others -->
-      <div class="text-center mb-20">
-        <div class="section-badge bg-gradient-to-r from-emerald-100/80 to-purple-100/80 dark:from-emerald-900/40 dark:to-purple-900/40">
-          <UIcon name="i-lucide-code" class="decoration-icon text-emerald-600 dark:text-emerald-400" />
-          <span class="text-sm font-medium text-emerald-700 dark:text-emerald-300 uppercase tracking-wider">
-            {{ t('skills.specialization') }}
-          </span>
-        </div>
-        
+      <div class="text-center mb-20">        
         <h2 class="section-title bg-gradient-to-r from-slate-900 via-emerald-900 via-purple-900 to-slate-900 dark:from-slate-100 dark:via-emerald-100 dark:via-purple-100 dark:to-slate-100 bg-clip-text text-transparent">
           {{ t('skills.title') }}
         </h2>
-        
-        <p class="section-subtitle">
-          {{ t('skills.subtitle') }}
-        </p>
         
         <!-- Consistent decorative line -->
         <div class="section-decoration">

@@ -14,20 +14,9 @@
     <UContainer class="relative z-10">
       <!-- Section Header consistent with Experience -->
       <div class="text-center mb-20">
-        <div class="section-badge bg-gradient-to-r from-cyan-100/80 to-orange-100/80 dark:from-cyan-900/40 dark:to-orange-900/40">
-          <UIcon name="i-lucide-rocket" class="decoration-icon text-cyan-600 dark:text-cyan-400" />
-          <span class="text-sm font-medium text-cyan-700 dark:text-cyan-300 uppercase tracking-wider">
-            {{ t('projects.badge') }}
-          </span>
-        </div>
-        
         <h2 class="section-title bg-gradient-to-r from-slate-900 via-cyan-900 via-orange-900 to-slate-900 dark:from-slate-100 dark:via-cyan-100 dark:via-orange-100 dark:to-slate-100 bg-clip-text text-transparent">
           {{ t('projects.title') }}
         </h2>
-        
-        <p class="section-subtitle">
-          {{ t('projects.subtitle') }}
-        </p>
         
         <!-- Consistent decorative line -->
         <div class="section-decoration">
@@ -171,71 +160,6 @@
             </template>
           </UCard>
         </div>
-      </div>
-
-      <!-- Stats section consistent with ExperienceStats style -->
-      <div class="relative">
-        <!-- Background decoration with more colors -->
-        <div class="absolute -inset-4 bg-gradient-to-r from-cyan-100/50 via-orange-100/50 via-emerald-100/50 to-cyan-100/50 dark:from-cyan-900/20 dark:via-orange-900/20 dark:via-emerald-900/20 dark:to-cyan-900/20 blur-3xl rounded-3xl animate-color-pulse"></div>
-        
-        <UCard class="relative glass-refined shadow-natural shadow-natural-hover stats-card">
-          <div class="p-8 sm:p-12">
-            <div class="text-center mb-12">
-              <h3 class="text-xl font-semibold tracking-tight text-slate-900 dark:text-slate-100 mb-3">
-                {{ t('projects.stats.title') }}
-              </h3>
-              <p class="text-sm text-slate-600 dark:text-slate-400">
-                {{ t('projects.stats.subtitle') }}
-              </p>
-            </div>
-
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-2xl mx-auto">
-              <div class="text-center group cursor-default">
-                <UAvatar 
-                  icon="i-lucide-users" 
-                  size="sm" 
-                  :ui="{ background: 'bg-emerald-100 dark:bg-emerald-900' }"
-                  class="mx-auto mb-2 group-hover:scale-110 transition-transform"
-                />
-                <div class="text-lg font-bold text-emerald-600 dark:text-emerald-400 mb-1 group-hover:scale-125 transition-smooth animate-sparkle">2.6K+</div>
-                <p class="text-xs text-slate-600 dark:text-slate-400">{{ t('projects.stats.users') }}</p>
-              </div>
-
-              <div class="text-center group cursor-default">
-                <UAvatar 
-                  icon="i-lucide-globe" 
-                  size="sm" 
-                  :ui="{ background: 'bg-cyan-100 dark:bg-cyan-900' }"
-                  class="mx-auto mb-2 group-hover:scale-110 transition-transform"
-                />
-                <div class="text-lg font-bold text-cyan-600 dark:text-cyan-400 mb-1 group-hover:scale-125 transition-smooth animate-sparkle" style="animation-delay: 0.5s">2</div>
-                <p class="text-xs text-slate-600 dark:text-slate-400">{{ t('projects.stats.deployedApps') }}</p>
-              </div>
-
-              <div class="text-center group cursor-default">
-                <UAvatar 
-                  icon="i-lucide-code" 
-                  size="sm" 
-                  :ui="{ background: 'bg-indigo-100 dark:bg-indigo-900' }"
-                  class="mx-auto mb-2 group-hover:scale-110 transition-transform"
-                />
-                <div class="text-lg font-bold text-indigo-600 dark:text-indigo-400 mb-1 group-hover:scale-125 transition-smooth animate-sparkle" style="animation-delay: 1s">100%</div>
-                <p class="text-xs text-slate-600 dark:text-slate-400">{{ t('projects.stats.nuxtVue') }}</p>
-              </div>
-
-              <div class="text-center group cursor-default">
-                <UAvatar 
-                  icon="i-lucide-github" 
-                  size="sm" 
-                  :ui="{ background: 'bg-orange-100 dark:bg-orange-900' }"
-                  class="mx-auto mb-2 group-hover:scale-110 transition-transform"
-                />
-                <div class="text-lg font-bold text-orange-600 dark:text-orange-400 mb-1 group-hover:scale-125 transition-smooth animate-sparkle" style="animation-delay: 1.5s">{{ t('projects.stats.openSourceValue') }}</div>
-                <p class="text-xs text-slate-600 dark:text-slate-400">{{ t('projects.stats.openSource') }}</p>
-              </div>
-            </div>
-          </div>
-        </UCard>
       </div>
       
       <!-- Bottom decoration with consistent colors -->
