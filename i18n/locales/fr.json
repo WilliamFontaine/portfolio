@@ -1,222 +1,136 @@
 {
+  "a11y": {
+    "goToSection": "Aller à la section {section}"
+  },
+  "about": {
+    "description": "Spécialisé Nuxt et NestJS, j'accompagne startups et PME dans la création d'applications web performantes, maintenables et pensées pour durer.",
+    "education": {
+      "bachelor": "Bachelor Développeur d'Applications - HESIAS (2023)",
+      "dut": "DUT Informatique - IUT Clermont Auvergne (2022)",
+      "master": "Mastère Expert IT - HESIAS (2025)",
+      "title": "Formation"
+    },
+    "intro": "Développeur Full-Stack passionné",
+    "philosophy": {
+      "content": "Des projets qui tournent en prod, et toujours cette obsession : code utile, orienté client, pas juste beau. Je ne suis pas juste un exécutant : je suis force de proposition.",
+      "title": "Ma philosophie"
+    },
+    "services": {
+      "custom": "Développement d'applications sur-mesure : SaaS, MVP, plateformes métier",
+      "modernization": "Modernisation de stack technique : transition no-code vers code, refactoring",
+      "reinforcement": "Renfort technique sur projets existants : intégration équipe, développement de fonctionnalités",
+      "title": "Ce que je propose"
+    },
+    "stats": {
+      "experience": "Ans d'expérience",
+      "satisfaction": "Clients satisfaits"
+    },
+    "title": "À propos"
+  },
+  "contact": {
+    "cta": {
+      "email": "Email direct",
+      "malt": "Me contacter sur Malt"
+    },
+    "description": "Vous avez un projet ? Discutons-en autour d'un café (virtuel ou réel).",
+    "location": "Basé à Clermont-Ferrand",
+    "remote": "Mobile France entière",
+    "social": "Retrouvez-moi aussi sur",
+    "title": "Travaillons ensemble"
+  },
   "experience": {
     "items": {
+      "freelance": {
+        "achievements": [
+          "Développement de Combox, SaaS de planification social media",
+          "Accompagnement clients du cadrage au déploiement",
+          "Architecture multi-tenant, OAuth 2.0, queues asynchrones"
+        ],
+        "company": "Freelance",
+        "description": "Conception et développement d'applications web sur-mesure pour startups et PME.",
+        "period": "Sept. 2025 - Présent",
+        "role": "Développeur Full-Stack"
+      },
       "itarverne": {
-        "description": "Développement de fonctionnalités sur différentes technologies.",
-        "highlights": {
-          "autopost": "Auto-posting blog vers Twitter et LinkedIn",
-          "chat": "Refonte chat en direct avec Node.js et sockets",
-          "django": "Prise en main rapide de Django et Wagtail",
-          "react": "Développement frontend React"
-        },
-        "institution": "ITarverne - Volvic",
+        "achievements": [
+          "Auto-posting blog vers Twitter et LinkedIn",
+          "Refonte chat en direct avec Node.js et WebSockets",
+          "Développement frontend React"
+        ],
+        "company": "ITarverne",
+        "description": "Développement de fonctionnalités sur différentes technologies dans une agence web à Volvic.",
         "period": "2022",
-        "title": "Développeur Web"
+        "role": "Développeur Web"
       },
       "neofugu": {
-        "description": "Développement d'applications web en équipe de 10 personnes. Projets internes destinés à la production avec coordination inter-services.",
-        "highlights": {
-          "bugs": "Correction de bugs et développement de nouvelles fonctionnalités",
-          "collaboration": "Collaboration étroite avec les équipes métier",
-          "fullstack": "Développement Full-Stack avec Java Spring Boot / Angular",
-          "projects": "Projets en interaction avec les clients"
-        },
-        "institution": "NEO-FUGU® - Clermont-Ferrand",
+        "achievements": [
+          "Développement Full-Stack avec Java Spring Boot / Angular",
+          "Collaboration étroite avec les équipes métier",
+          "Projets en interaction avec les clients finaux",
+          "Rigueur et importance d'un code maintenable"
+        ],
+        "company": "NEO-FUGU",
+        "description": "Développement d'un ERP complexe dans le secteur du luxe. 3 ans sur des projets internes en équipe de 10 personnes.",
         "period": "2022 - 2025",
-        "title": "Développeur Full-Stack"
+        "role": "Développeur Full-Stack"
       }
     },
-    "stats": {
-      "companies": "Entreprises",
-      "subtitle": "Quelques métriques clés de mon parcours",
-      "title": "Métriques Clés",
-      "users": "Utilisateurs Quoi Regarder",
-      "valedictorian": "Major Bachelor",
-      "years": "Années alternance"
-    },
-    "subtitle": "Mon parcours professionnel",
-    "title": "Mon expérience professionnelle"
-  },
-  "footer": {
-    "contact": "Contact",
-    "copyright": "© 2025 William Fontaine. Tous droits réservés.",
-    "madeWith": "Fait avec"
-  },
-  "formation": {
-    "items": {
-      "bachelor": {
-        "description": "Formation complète en développement d'applications avec spécialisation full-stack.",
-        "highlights": {
-          "database": "Conception et gestion de bases de données",
-          "fullstack": "Développement web frontend et backend",
-          "mobile": "Applications mobiles natives et hybrides",
-          "valedictorian": "Major de promotion"
-        },
-        "institution": "HESIAS - Clermont-Ferrand",
-        "period": "2021 - 2023",
-        "specialization": "Développement Full-Stack",
-        "title": "Bachelor - Concepteur Développeur d'Applications"
-      },
-      "dut": {
-        "description": "Formation technique solide couvrant les fondamentaux de l'informatique, de la programmation aux systèmes et réseaux.",
-        "highlights": {
-          "databases": "Modélisation et requêtage de bases de données",
-          "programming": "Programmation orientée objet (Java, C++)",
-          "systems": "Systèmes d'exploitation et réseaux",
-          "web": "Technologies web et développement d'interfaces"
-        },
-        "institution": "IUT Clermont Auvergne - Aubière",
-        "period": "2019 - 2021",
-        "specialization": "Informatique générale",
-        "title": "DUT Informatique"
-      },
-      "master": {
-        "description": "Formation d'expert en informatique spécialisée dans les applications intelligentes et les technologies émergentes.",
-        "highlights": {
-          "ai": "Intelligence artificielle et machine learning",
-          "cloud": "Architecture cloud et microservices",
-          "management": "Gestion de projet et leadership technique",
-          "security": "Cybersécurité et protection des données"
-        },
-        "institution": "HESIAS - Clermont-Ferrand",
-        "period": "2023 - 2025",
-        "specialization": "Applications intelligentes",
-        "title": "Master 2 - Expert IT"
-      }
-    },
-    "subtitle": "Mon parcours académique et mes diplômes",
-    "badge": "Académique",
-    "title": "Ma formation"
-  },
-  "header": {
-    "tagline": "Développeur Full-Stack"
+    "title": "Expériences"
   },
   "hero": {
-    "badge": "Développeur Full-Stack",
+    "available": "Disponible en freelance",
     "cta": {
-      "linkedin": "Voir mon LinkedIn",
-      "projects": "Découvrir mes projets"
+      "contact": "Me contacter",
+      "projects": "Voir mes projets"
     },
-    "description": "Passionné par le développement web, spécialisé en Nuxt/Vue, je crée des applications modernes et performantes.",
+    "description": "Je conçois des applications web sur-mesure pour startups et PME. Du cadrage fonctionnel au déploiement, je vous accompagne à chaque étape.",
     "greeting": "Bonjour, je suis",
     "name": "William Fontaine",
-    "stats": {
-      "apprenticeship": "Ans alternance",
-      "companies": "Entreprises",
-      "users": "Utilisateurs"
-    },
-    "subtitle": "Développeur Full-Stack"
+    "title": "Développeur Full-Stack Nuxt & NestJS"
+  },
+  "nav": {
+    "about": "À propos",
+    "contact": "Contact",
+    "experience": "Expériences",
+    "projects": "Projets",
+    "skills": "Compétences"
   },
   "projects": {
+    "archived": "Projet archivé",
+    "featured": "Projet phare",
     "items": {
+      "combox": {
+        "description": "SaaS de planification et publication automatique de contenu sur les réseaux sociaux.",
+        "longDescription": "Architecture multi-tenant avec gestion d'organisations, rôles et permissions. Système d'authentification OAuth 2.0 pour chaque plateforme sociale. Pipeline de publication programmée avec queues asynchrones (BullMQ).",
+        "title": "Combox"
+      },
       "egenr": {
-        "description": "Solution complète pour podologues avec gestion de fiches patients, génération PDF automatique et sécurité des données garantie localement.",
-        "features": {
-          "compliant": "Conforme",
-          "multiOs": "Multi-OS",
-          "osCompatibility": "Win/Mac/Linux",
-          "rgpd": "RGPD"
-        },
-        "period": "2024 - Présent",
-        "status": {
-          "desktop": "Desktop"
-        },
-        "subtitle": "Gestion médicale",
+        "description": "Application de bureau multiplateforme pour podologues et professionnels de santé.",
+        "longDescription": "Gestion de fiches patients avec formulaires médicaux standardisés. Génération automatique de comptes-rendus PDF professionnels. Stockage local sécurisé, conforme RGPD.",
         "title": "EgenR"
       },
       "quoiRegarder": {
-        "description": "Application intelligente pour découvrir films et séries avec filtrage avancé, recommandations personnalisées et suivi de progression.",
-        "metrics": {
-          "monthly": "Mensuels",
-          "users": "Utilisateurs"
-        },
-        "period": "2023 - Présent",
-        "status": {
-          "production": "Production"
-        },
-        "subtitle": "Plateforme de recommandation",
+        "description": "Plateforme web pour découvrir, organiser et suivre films et séries.",
+        "longDescription": "Moteur de recherche avancé avec filtres précis. Listes personnalisées et suivi de progression. Système de recommandations basé sur les préférences utilisateur.",
         "title": "Quoi Regarder"
       }
     },
-    "stats": {
-      "deployedApps": "Apps déployées",
-      "monthlyUsers": "Mensuels",
-      "nuxtVue": "Nuxt/Vue",
-      "openSource": "Open Source",
-      "openSourceValue": "Open",
-      "subtitle": "L'impact de mes projets personnels",
-      "title": "Métriques Clés",
-      "users": "Utilisateurs"
-    },
-    "subtitle": "Découvrez mes projets les plus marquants",
-    "title": "Mes Réalisations",
-    "viewProject": "Voir le projet",
-    "badge": "Portfolio"
+    "title": "Projets",
+    "viewProject": "Voir le projet"
   },
   "seo": {
-    "description": "Portfolio de William Fontaine, développeur full-stack spécialisé en Nuxt/Vue. Découvrez mes projets innovants et mon expertise technique.",
-    "title": "William Fontaine - Développeur Full-Stack"
+    "description": "Développeur Full-Stack spécialisé Nuxt et NestJS. Je conçois des applications web sur-mesure : SaaS, MVP, plateformes métier.",
+    "title": "William Fontaine - Développeur Full-Stack Nuxt & NestJS"
   },
   "skills": {
-    "categories": {
-      "backend": "Backend",
-      "frontend": "Frontend",
-      "toolsDevops": "Outils & DevOps"
+    "main": {
+      "description": "Technologies maîtrisées au quotidien",
+      "title": "Stack principale"
     },
-    "levels": {
-      "advanced": "Avancé",
-      "expert": "Expert",
-      "intermediate": "Intermédiaire"
+    "secondary": {
+      "description": "Technologies utilisées selon les projets",
+      "title": "Stack secondaire"
     },
-    "specialization": "Spécialisation",
-    "subtitle": "Mon expertise technique",
-    "technologies": {
-      "angular": "Angular",
-      "apiRest": "API REST",
-      "docker": "Docker",
-      "git": "Git",
-      "java": "Java",
-      "javascript": "JavaScript",
-      "kubernetes": "Kubernetes",
-      "linux": "Linux",
-      "nodejs": "Node.js",
-      "nosql": "NoSQL",
-      "nuxt": "Nuxt",
-      "php": "PHP",
-      "python": "Python",
-      "react": "React",
-      "sass": "Sass",
-      "springBoot": "Spring Boot",
-      "sql": "SQL",
-      "tailwind": "Tailwind CSS",
-      "tmdbApi": "API TMDB",
-      "typescript": "TypeScript",
-      "vue": "Vue.js",
-      "wagtail": "Wagtail",
-      "django": "Django",
-      "pdfLib": "PDF-lib",
-      "tauri": "Tauri",
-      "aiMl": "IA/ML",
-      "cloud": "Cloud",
-      "microservices": "Microservices",
-      "cPlusPlus": "C++"
-    },
-    "title": "Technologies & Compétences",
-    "years": "ans d'expérience"
-  },
-  "timeline": {
-    "achievements": "Réalisations",
-    "stack": "Technologies"
-  },
-  "error": {
-    "badge": "Erreur",
-    "title": "Oups ! Une erreur est survenue",
-    "message": "Désolé, quelque chose s'est mal passé. Veuillez réessayer ou revenir à l'accueil.",
-    "backHome": "Retour à l'accueil",
-    "retry": "Réessayer"
-  },
-  "common": {
-    "linkedin": "LinkedIn",
-    "github": "GitHub"
+    "title": "Compétences"
   }
 }

@@ -1,12 +1,75 @@
 {
+  // Tailwind CSS v4 directives (@source, @theme)
+  "css.lint.unknownAtRules": "ignore",
+
+  // Nuxt UI specific class attributes
+  "tailwindCSS.classAttributes": ["active-class", "inactive-class", "ui"],
+  "tailwindCSS.experimental.classRegex": [
+    ["ui:\\s*{([^)]*)\\}", "[\"'`]([^\"'`]*).*?[\"'`]"],
+    ["/\\*ui\\*/\\s*{([^;]*)}", ":\\s*[\"'`]([^\"'`]*).*?[\"'`]"]
+  ],
+
+  // Use workspace TypeScript version
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+
+  // Use Nuxt aliases instead of relative paths for imports
+  "typescript.preferences.importModuleSpecifier": "non-relative",
+  "javascript.preferences.importModuleSpecifier": "non-relative",
+
+  // Use single quotes for imports
+  "typescript.preferences.quoteStyle": "single",
+  "javascript.preferences.quoteStyle": "single",
+
+  // TypeScript inlay hints
+  "typescript.inlayHints.parameterNames.enabled": "literals",
+  "typescript.inlayHints.functionLikeReturnTypes.enabled": true,
+
+  // Format & linting on save
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit",
+    "source.organizeImports": "never"
+  },
+
+  // Enable Tailwind autocomplete in strings
+  "editor.quickSuggestions": {
+    "strings": true
+  },
+
+  // File associations & exclusions
   "files.associations": {
     "*.css": "tailwindcss"
   },
-  "editor.quickSuggestions": {
-    "strings": "on"
+  "files.exclude": {
+    "**/.nuxt": true,
+    "**/node_modules": true,
+    "**/.output": true,
+    "**/dist": true,
+    "**/generated": true,
+    "**/.data": true,
+    "**/coverage": true
   },
-  "tailwindCSS.classAttributes": ["class", "ui"],
-  "tailwindCSS.experimental.classRegex": [
-    ["ui:\\s*{([^)]*)\\s*}", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
-  ]
+
+  // Faster search
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/.nuxt": true,
+    "**/.output": true,
+    "**/dist": true,
+    "**/coverage": true,
+    "**/pnpm-lock.yaml": true
+  },
+
+  // File nesting (group related files)
+  "explorer.fileNesting.enabled": true,
+  "explorer.fileNesting.patterns": {
+    "*.ts": "${capture}.spec.ts, ${capture}.test.ts, ${capture}.d.ts",
+    "*.vue": "${capture}.spec.ts, ${capture}.test.ts",
+    "package.json": "pnpm-lock.yaml, pnpm-workspace.yaml, .npmrc"
+  },
+
+  // i18n
+  "i18n-ally.keystyle": "nested"
 }
