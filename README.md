@@ -10,7 +10,7 @@ Portfolio moderne et responsive développé avec **Nuxt 4** et **Nuxt UI v4**.
 - **Tailwind CSS v4** - Framework CSS utility-first
 - **Vue i18n** - Internationalisation (FR/EN)
 - **Pnpm** - Gestionnaire de paquets
-- **NuxtHub** - Plateforme de déploiement
+- **Cloudflare Pages** - Déploiement edge
 
 ## ✨ Fonctionnalités
 
@@ -95,49 +95,29 @@ nuxt.config.ts          # Configuration Nuxt avec i18n et CSS
 ## 🌐 SEO et Performance
 
 - **Meta tags dynamiques** selon la langue sélectionnée
-- **Images optimisées** avec lazy loading intelligent  
+- **Images optimisées** avec lazy loading intelligent
 - **Animations performantes** avec Intersection Observer
 - **Score Lighthouse optimisé** (Performance, Accessibility, SEO)
 - **Structure sémantique HTML5** avec ARIA
 - **Sitemap et robots.txt** générés automatiquement
 
-## 🎯 Déploiement avec NuxtHub
+## 🎯 Déploiement avec Cloudflare Pages
 
-Ce portfolio est optimisé pour **NuxtHub**, la plateforme officielle de déploiement Nuxt :
+Ce portfolio est déployé sur **Cloudflare Pages** avec déploiement automatique via Git :
 
-### Déploiement automatique
-
-```bash
-# Installation du CLI NuxtHub
-npx nuxthub deploy
-
-# Ou via le dashboard NuxtHub
-# 1. Connecter le repository GitHub
-# 2. Déploiement automatique sur chaque push
-```
-
-### Configuration pour NuxtHub
+### Configuration
 
 Le projet est pré-configuré avec :
-- ✅ **SSG** (Static Site Generation) pour performance maximale
+
+- ✅ **SSR** (Server-Side Rendering) sur Cloudflare Workers
 - ✅ **Edge-side rendering** pour vitesse globale
 - ✅ **Automatic deployments** depuis GitHub
 - ✅ **Preview deployments** pour les pull requests
 - ✅ **Custom domain** support
-- ✅ **Analytics** intégrées
-
-### Alternatives de déploiement
-
-Le projet fonctionne aussi parfaitement sur :
-- **Vercel** - Configuration zero avec détection automatique
-- **Netlify** - Build automatique avec Nuxt detection
-- **Cloudflare Pages** - Edge computing natif
-- **GitHub Pages** - Déploiement gratuit pour projets open source
 
 ### Variables d'environnement
 
 Aucune variable d'environnement requise pour le déploiement de base.
-Le site fonctionne entièrement en mode statique.
 
 ---
 
@@ -161,5 +141,5 @@ Le site fonctionne entièrement en mode statique.
 
 ---
 
-**Développé avec ❤️ par William Fontaine**  
-🚀 *Déployé sur [NuxtHub](https://nuxt.com/deploy/nuxthub)*
+**Développé avec ❤️ par William Fontaine**
+🚀 _Déployé sur [Cloudflare Pages](https://pages.cloudflare.com)_

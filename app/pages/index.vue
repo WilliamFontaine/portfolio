@@ -1,22 +1,3 @@
-<template>
-  <div>
-    <!-- Hero Section -->
-    <Hero />
-
-    <!-- Experience Section -->
-    <Experience />
-    
-    <!-- Projects Showcase -->
-    <ProjectsShowcase />
-
-    <!-- Skills Grid -->
-    <SkillsGrid />
-    
-    <!-- Formation Section -->
-    <Formation />
-  </div>
-</template>
-
 <script setup lang="ts">
 const { t } = useI18n()
 
@@ -29,6 +10,12 @@ useSeoMeta({
   ogUrl: 'https://wfontaine.fr',
   twitterTitle: t('seo.title'),
   twitterDescription: t('seo.description'),
-  twitterCard: 'summary_large_image'
+  twitterCard: 'summary_large_image',
 })
 </script>
+
+<template>
+  <div>
+    <HorizontalScroller />
+  </div>
+</template>
