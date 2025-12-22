@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { useHorizontalScroll } from '~/composables/useHorizontalScroll'
-
 const { t } = useI18n()
 
 const containerRef = ref<HTMLElement>()
@@ -28,6 +26,7 @@ const sectionNames = computed(() => [
 provide('scrollContext', {
   progress,
   currentSection,
+  scrollToSection,
 })
 </script>
 
@@ -73,7 +72,7 @@ provide('scrollContext', {
 
         <!-- Dot -->
         <button
-          class="h-3 w-3 rounded-full transition-all"
+          class="h-3 w-3 cursor-pointer rounded-full transition-all"
           :class="
             currentSection === idx
               ? 'scale-125 bg-teal-400 shadow-lg shadow-teal-400/50'

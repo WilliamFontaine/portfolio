@@ -1,6 +1,18 @@
 <script setup lang="ts">
 const { t } = useI18n()
 const { isDark } = useTheme()
+const { prefersReducedMotion } = useBreakpoints()
+
+// Use ref for image to avoid hydration mismatch (server doesn't know theme)
+// Start with light image, update after hydration
+const comboxImage = ref('/images/projects/combox_light.png')
+
+// Watch for subsequent theme changes
+watch(isDark, (dark) => {
+  comboxImage.value = dark
+    ? '/images/projects/combox_dark.png'
+    : '/images/projects/combox_light.png'
+})
 
 const projects = computed(() => [
   {
@@ -8,9 +20,6 @@ const projects = computed(() => [
     title: t('projects.items.combox.title'),
     description: t('projects.items.combox.description'),
     longDescription: t('projects.items.combox.longDescription'),
-    image: isDark.value
-      ? '/images/projects/combox_dark.png'
-      : '/images/projects/combox_light.png',
     techs: [
       'Nuxt 4',
       'NestJS',
@@ -40,33 +49,83 @@ const projects = computed(() => [
 
 const featuredProject = computed(() => projects.value.find((p) => p.featured))
 const otherProjects = computed(() => projects.value.filter((p) => !p.featured))
+
+// Refs
+const sectionRef = ref<HTMLElement>()
+const titleRef = ref<HTMLElement>()
+const featuredRef = ref<HTMLElement>()
+const otherProjectsRef = ref<HTMLElement>()
+
+// Use section animation composable
+const { animate } = useSectionAnimation({
+  sectionRef,
+  sectionIndex: 3,
+})
+
+onMounted(() => {
+  // Update image after mount to avoid hydration mismatch
+  comboxImage.value = isDark.value
+    ? '/images/projects/combox_dark.png'
+    : '/images/projects/combox_light.png'
+
+  if (prefersReducedMotion.value || !import.meta.client) return
+
+  nextTick(() => {
+    // Title
+    animate(
+      titleRef.value,
+      { opacity: 0, y: 30 },
+      { opacity: 1, y: 0, duration: 0.6, ease: EASING.smooth },
+    )
+
+    // Featured project
+    animate(
+      featuredRef.value,
+      { opacity: 0, scale: 0.95 },
+      { opacity: 1, scale: 1, duration: 0.6, delay: 0.1, ease: EASING.smooth },
+    )
+
+    // Other projects
+    if (otherProjectsRef.value) {
+      const cards = otherProjectsRef.value.querySelectorAll('.project-card')
+      animate(
+        cards,
+        { opacity: 0, y: 30 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          stagger: 0.1,
+          delay: 0.2,
+          ease: EASING.smooth,
+        },
+      )
+    }
+  })
+})
 </script>
 
 <template>
   <section
+    ref="sectionRef"
     class="horizontal-section relative flex w-full flex-shrink-0 items-center px-4 py-8 sm:px-8 sm:py-12 lg:h-screen lg:w-screen lg:overflow-y-auto lg:py-8"
   >
     <div class="mx-auto w-full max-w-7xl lg:my-auto">
       <h2
-        v-motion
-        :initial="{ opacity: 0, y: 30 }"
-        :visible-once="{ opacity: 1, y: 0, transition: { duration: 600 } }"
+        ref="titleRef"
         class="mb-6 text-center text-4xl font-bold lg:mb-8 lg:text-5xl"
       >
         {{ t("projects.title") }}
       </h2>
 
-      <div class="grid gap-6 md:grid-cols-2 md:gap-5 lg:gap-4">
+      <div
+        ref="otherProjectsRef"
+        class="grid gap-6 md:grid-cols-2 md:gap-5 lg:gap-4"
+      >
         <!-- Featured Project -->
         <Card
           v-if="featuredProject"
-          v-motion
-          :initial="{ opacity: 0, scale: 0.95 }"
-          :visible-once="{
-            opacity: 1,
-            scale: 1,
-            transition: { delay: 100, duration: 600 },
-          }"
+          ref="featuredRef"
           class="group col-span-full overflow-hidden border-border/50 bg-card/80 backdrop-blur-sm transition-all hover:border-teal-500/30"
         >
           <CardContent class="p-0">
@@ -122,7 +181,7 @@ const otherProjects = computed(() => projects.value.filter((p) => !p.featured))
                 class="relative flex-1 overflow-hidden bg-muted/30 p-4 md:p-5 lg:p-6"
               >
                 <img
-                  :src="featuredProject.image"
+                  :src="comboxImage"
                   :alt="featuredProject.title"
                   class="h-full w-full rounded-lg object-cover shadow-2xl transition-transform duration-500 group-hover:scale-[1.02]"
                   loading="lazy"
@@ -134,16 +193,9 @@ const otherProjects = computed(() => projects.value.filter((p) => !p.featured))
 
         <!-- Other Projects (Archived) -->
         <Card
-          v-for="(project, idx) in otherProjects"
+          v-for="project in otherProjects"
           :key="project.key"
-          v-motion
-          :initial="{ opacity: 0, y: 30 }"
-          :visible-once="{
-            opacity: 1,
-            y: 0,
-            transition: { delay: 200 + idx * 100, duration: 600 },
-          }"
-          class="group overflow-hidden border-border/50 bg-card/80 backdrop-blur-sm transition-all hover:border-border"
+          class="project-card group overflow-hidden border-border/50 bg-card/80 backdrop-blur-sm transition-all hover:border-border"
         >
           <CardContent class="p-4 lg:p-5">
             <div class="mb-2 flex items-center gap-2">

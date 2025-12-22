@@ -5,13 +5,21 @@ export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
 
-  modules: [
-    'shadcn-nuxt',
-    '@nuxtjs/i18n',
-    '@nuxt/eslint',
-    '@vueuse/motion/nuxt',
-    '@nuxt/icon',
-  ],
+  modules: ['shadcn-nuxt', '@nuxtjs/i18n', '@nuxt/eslint', '@nuxt/icon'],
+
+  imports: {
+    imports: [
+      { name: 'gsap', from: 'gsap' },
+      { name: 'ScrollTrigger', from: 'gsap/ScrollTrigger' },
+      { name: 'ScrollToPlugin', from: 'gsap/ScrollToPlugin' },
+    ],
+    dirs: [
+      'composables',
+      'composables/animations',
+      'utils',
+      'utils/animations',
+    ],
+  },
 
   shadcn: {
     prefix: '',
@@ -69,8 +77,9 @@ export default defineNuxtConfig({
       ],
       script: [
         {
+          // Support for 3 theme modes: light, dark, system
           innerHTML:
-            '(function(){try{var t=localStorage.getItem(\'theme\'),d=t?t===\'dark\':window.matchMedia(\'(prefers-color-scheme:dark)\').matches;document.documentElement.classList.toggle(\'dark\',d)}catch(e){}})()',
+            '(function(){try{var t=localStorage.getItem(\'theme\');var s=window.matchMedia(\'(prefers-color-scheme:dark)\').matches;var d=t===\'system\'||!t?s:t===\'dark\';document.documentElement.classList.toggle(\'dark\',d)}catch(e){}})()',
           type: 'text/javascript',
         },
       ],

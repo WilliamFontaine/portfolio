@@ -1,13 +1,87 @@
-export function useTheme() {
-  // Default to dark, will be synced with DOM on client
-  const isDark = useState('theme-dark', () => true)
+import { usePreferredColorScheme, useStorage } from '@vueuse/core'
 
-  // Sync with DOM state on client (the inline script already set the class)
+export type Theme = 'light' | 'dark' | 'system';
+
+export function useTheme() {
+  // System preference detection
+  const systemPreference = usePreferredColorScheme()
+
+  // User preference (persisted to localStorage)
+  const userTheme = useStorage<Theme>('theme', 'system')
+
+  // Computed dark mode state
+  const isDark = computed(() => {
+    if (userTheme.value === 'system') {
+      return systemPreference.value === 'dark'
+    }
+    return userTheme.value === 'dark'
+  })
+
+  // Apply theme to DOM with optional transition
+  const applyTheme = (dark: boolean, withTransition = true) => {
+    if (!import.meta.client) return
+
+    const html = document.documentElement
+
+    // Use View Transitions API if available and transitions enabled
+    if (
+      withTransition &&
+      'startViewTransition' in document &&
+      typeof (document as any).startViewTransition === 'function'
+    ) {
+      (document as any).startViewTransition(() => {
+        html.classList.toggle('dark', dark)
+      })
+    } else {
+      // Fallback: direct class toggle
+      html.classList.toggle('dark', dark)
+    }
+  }
+
+  // Set theme
+  const setTheme = (theme: Theme) => {
+    userTheme.value = theme
+    const dark =
+      theme === 'system' ? systemPreference.value === 'dark' : theme === 'dark'
+    applyTheme(dark)
+  }
+
+  // Toggle between light and dark (cycles through: light → dark → system)
+  const toggleTheme = () => {
+    if (userTheme.value === 'light') {
+      setTheme('dark')
+    } else if (userTheme.value === 'dark') {
+      setTheme('system')
+    } else {
+      setTheme('light')
+    }
+  }
+
+  // Simple toggle between light and dark only
+  const toggleDark = () => {
+    setTheme(isDark.value ? 'light' : 'dark')
+  }
+
+  // Sync on mount
   onMounted(() => {
-    isDark.value = document.documentElement.classList.contains('dark')
+    applyTheme(isDark.value, false)
+  })
+
+  // Watch system preference changes
+  watch(systemPreference, () => {
+    if (userTheme.value === 'system') {
+      applyTheme(isDark.value)
+    }
   })
 
   return {
     isDark: readonly(isDark),
+    theme: readonly(userTheme),
+    systemPreference: readonly(
+      computed(() => systemPreference.value as 'light' | 'dark'),
+    ),
+    setTheme,
+    toggleTheme,
+    toggleDark,
   }
 }

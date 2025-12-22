@@ -38,6 +38,13 @@
     "social": "Retrouvez-moi aussi sur",
     "title": "Travaillons ensemble"
   },
+  "error": {
+    "backHome": "Retour à l'accueil",
+    "badge": "Erreur",
+    "message": "La page que vous recherchez n'existe pas ou a été déplacée.",
+    "retry": "Réessayer",
+    "title": "Page introuvable"
+  },
   "experience": {
     "items": {
       "freelance": {
@@ -88,6 +95,9 @@
     "name": "William Fontaine",
     "title": "Développeur Full-Stack Nuxt & NestJS"
   },
+  "hints": {
+    "swipe": "Faites défiler vers le bas"
+  },
   "nav": {
     "about": "À propos",
     "contact": "Contact",
@@ -132,5 +142,10 @@
       "title": "Stack secondaire"
     },
     "title": "Compétences"
+  },
+  "theme": {
+    "dark": "Mode sombre",
+    "light": "Mode clair",
+    "system": "Système"
   }
 }

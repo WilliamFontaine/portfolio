@@ -11,5 +11,8 @@ useTheme()
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>
+
+    <!-- Theme Toggle Button -->
+    <ThemeToggle />
   </div>
 </template>

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const { t } = useI18n()
+const { prefersReducedMotion } = useBreakpoints()
 
 // Stack principale (maîtrisée au quotidien)
 const mainStack = [
@@ -27,17 +28,100 @@ const secondaryStack = [
   { name: 'Electron', icon: 'devicon:electron', category: 'Desktop' },
   { name: 'CI/CD', icon: 'simple-icons:gitlab', category: 'DevOps' },
 ]
+
+// Refs
+const sectionRef = ref<HTMLElement>()
+const titleRef = ref<HTMLElement>()
+const mainHeaderRef = ref<HTMLElement>()
+const mainGridRef = ref<HTMLElement>()
+const secondaryHeaderRef = ref<HTMLElement>()
+const secondaryGridRef = ref<HTMLElement>()
+const extraInfoRef = ref<HTMLElement>()
+
+// Use section animation composable
+const { animate } = useSectionAnimation({
+  sectionRef,
+  sectionIndex: 4,
+})
+
+onMounted(() => {
+  if (prefersReducedMotion.value || !import.meta.client) return
+
+  nextTick(() => {
+    // Title
+    animate(
+      titleRef.value,
+      { opacity: 0, y: 30 },
+      { opacity: 1, y: 0, duration: 0.6, ease: EASING.smooth },
+    )
+
+    // Main stack header
+    animate(
+      mainHeaderRef.value,
+      { opacity: 0, x: -30 },
+      { opacity: 1, x: 0, duration: 0.6, delay: 0.1, ease: EASING.smooth },
+    )
+
+    // Main stack items
+    if (mainGridRef.value) {
+      const mainItems = mainGridRef.value.querySelectorAll('.skill-item')
+      animate(
+        mainItems,
+        { opacity: 0, scale: 0.8 },
+        {
+          opacity: 1,
+          scale: 1,
+          duration: 0.4,
+          stagger: 0.05,
+          delay: 0.15,
+          ease: EASING.smooth,
+        },
+      )
+    }
+
+    // Secondary stack header
+    animate(
+      secondaryHeaderRef.value,
+      { opacity: 0, x: 30 },
+      { opacity: 1, x: 0, duration: 0.6, delay: 0.2, ease: EASING.smooth },
+    )
+
+    // Secondary stack items
+    if (secondaryGridRef.value) {
+      const secondaryItems =
+        secondaryGridRef.value.querySelectorAll('.skill-item')
+      animate(
+        secondaryItems,
+        { opacity: 0, scale: 0.8 },
+        {
+          opacity: 1,
+          scale: 1,
+          duration: 0.4,
+          stagger: 0.05,
+          delay: 0.3,
+          ease: EASING.smooth,
+        },
+      )
+    }
+
+    // Extra info
+    animate(
+      extraInfoRef.value,
+      { opacity: 0, y: 20 },
+      { opacity: 1, y: 0, duration: 0.6, delay: 0.5, ease: EASING.smooth },
+    )
+  })
+})
 </script>
 
 <template>
   <section
+    ref="sectionRef"
     class="horizontal-section relative flex w-full flex-shrink-0 items-center px-4 py-8 sm:px-8 sm:py-12 lg:h-screen lg:w-screen lg:overflow-y-auto lg:py-8"
   >
     <div class="mx-auto w-full max-w-6xl lg:my-auto">
       <h2
-        v-motion
-        :initial="{ opacity: 0, y: 30 }"
-        :visible-once="{ opacity: 1, y: 0, transition: { duration: 600 } }"
+        ref="titleRef"
         class="mb-12 text-center text-4xl font-bold lg:text-5xl"
       >
         {{ t("skills.title") }}
@@ -46,16 +130,7 @@ const secondaryStack = [
       <div class="grid gap-12 lg:grid-cols-2">
         <!-- Main Stack -->
         <div>
-          <div
-            v-motion
-            :initial="{ opacity: 0, x: -30 }"
-            :visible-once="{
-              opacity: 1,
-              x: 0,
-              transition: { delay: 100, duration: 600 },
-            }"
-            class="mb-6"
-          >
+          <div ref="mainHeaderRef" class="mb-6">
             <h3
               class="flex items-center gap-2 text-xl font-semibold text-teal-400"
             >
@@ -67,18 +142,11 @@ const secondaryStack = [
             </p>
           </div>
 
-          <div class="grid grid-cols-2 gap-3 sm:grid-cols-3">
+          <div ref="mainGridRef" class="grid grid-cols-2 gap-3 sm:grid-cols-3">
             <div
-              v-for="(skill, idx) in mainStack"
+              v-for="skill in mainStack"
               :key="skill.name"
-              v-motion
-              :initial="{ opacity: 0, scale: 0.8 }"
-              :visible-once="{
-                opacity: 1,
-                scale: 1,
-                transition: { delay: 150 + idx * 50, duration: 400 },
-              }"
-              class="group flex items-center gap-3 rounded-lg border border-border/50 bg-card/50 px-4 py-3 backdrop-blur-sm transition-all hover:border-teal-500/50 hover:bg-teal-500/5"
+              class="skill-item group flex items-center gap-3 rounded-lg border border-border/50 bg-card/50 px-4 py-3 backdrop-blur-sm transition-all hover:border-teal-500/50 hover:bg-teal-500/5"
             >
               <Icon
                 :name="skill.icon"
@@ -91,16 +159,7 @@ const secondaryStack = [
 
         <!-- Secondary Stack -->
         <div>
-          <div
-            v-motion
-            :initial="{ opacity: 0, x: 30 }"
-            :visible-once="{
-              opacity: 1,
-              x: 0,
-              transition: { delay: 200, duration: 600 },
-            }"
-            class="mb-6"
-          >
+          <div ref="secondaryHeaderRef" class="mb-6">
             <h3
               class="flex items-center gap-2 text-xl font-semibold text-orange-400"
             >
@@ -112,18 +171,14 @@ const secondaryStack = [
             </p>
           </div>
 
-          <div class="grid grid-cols-2 gap-3 sm:grid-cols-3">
+          <div
+            ref="secondaryGridRef"
+            class="grid grid-cols-2 gap-3 sm:grid-cols-3"
+          >
             <div
-              v-for="(skill, idx) in secondaryStack"
+              v-for="skill in secondaryStack"
               :key="skill.name"
-              v-motion
-              :initial="{ opacity: 0, scale: 0.8 }"
-              :visible-once="{
-                opacity: 1,
-                scale: 1,
-                transition: { delay: 300 + idx * 50, duration: 400 },
-              }"
-              class="group flex items-center gap-3 rounded-lg border border-border/50 bg-card/50 px-4 py-3 backdrop-blur-sm transition-all hover:border-orange-500/50 hover:bg-orange-500/5"
+              class="skill-item group flex items-center gap-3 rounded-lg border border-border/50 bg-card/50 px-4 py-3 backdrop-blur-sm transition-all hover:border-orange-500/50 hover:bg-orange-500/5"
             >
               <Icon
                 :name="skill.icon"
@@ -137,13 +192,7 @@ const secondaryStack = [
 
       <!-- Extra info -->
       <div
-        v-motion
-        :initial="{ opacity: 0, y: 20 }"
-        :visible-once="{
-          opacity: 1,
-          y: 0,
-          transition: { delay: 500, duration: 600 },
-        }"
+        ref="extraInfoRef"
         class="mt-12 flex flex-wrap justify-center gap-6 text-sm text-muted-foreground"
       >
         <div class="flex items-center gap-2">

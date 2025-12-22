@@ -1,6 +1,4 @@
-import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { ScrollToPlugin } from 'gsap/ScrollToPlugin'
+import { BREAKPOINTS } from '~/constants/breakpoints'
 
 interface UseHorizontalScrollOptions {
   container: Ref<HTMLElement | undefined>;
@@ -8,11 +6,9 @@ interface UseHorizontalScrollOptions {
   sectionsCount: number;
 }
 
-// Breakpoint for enabling horizontal scroll (matches Tailwind's lg)
-const LG_BREAKPOINT = 1024
-
 export function useHorizontalScroll(options: UseHorizontalScrollOptions) {
   const { container, wrapper, sectionsCount } = options
+  const { prefersReducedMotion } = useBreakpoints()
 
   const scrollTriggerInstance = ref<ScrollTrigger | null>(null)
   const progress = ref(0)
@@ -22,17 +18,19 @@ export function useHorizontalScroll(options: UseHorizontalScrollOptions) {
   const init = () => {
     if (!container.value || !wrapper.value || !import.meta.client) return
 
-    // Only enable horizontal scroll on large screens
-    if (window.innerWidth < LG_BREAKPOINT) {
+    // Only enable horizontal scroll on large screens (use centralized breakpoint)
+    if (window.innerWidth < BREAKPOINTS.LG) {
       isHorizontalMode.value = false
       return
     }
 
     isHorizontalMode.value = true
-    gsap.registerPlugin(ScrollTrigger, ScrollToPlugin)
 
     const sections = wrapper.value.querySelectorAll('.horizontal-section')
     const totalWidth = sections.length * window.innerWidth
+
+    // Respect reduced motion preference
+    const shouldReduceMotion = prefersReducedMotion.value
 
     const tween = gsap.to(wrapper.value, {
       x: () => -(totalWidth - window.innerWidth),
@@ -40,16 +38,18 @@ export function useHorizontalScroll(options: UseHorizontalScrollOptions) {
       scrollTrigger: {
         trigger: container.value,
         pin: true,
-        scrub: 0.8,
+        scrub: shouldReduceMotion ? 0 : 0.8, // Instant scroll if reduced motion
         end: () => `+=${totalWidth}`,
-        // Gentle snap - only when scroll velocity is low
-        snap: {
-          snapTo: 1 / (sectionsCount - 1),
-          duration: { min: 0.3, max: 0.6 },
-          delay: 0.1,
-          ease: 'power1.out',
-          inertia: false,
-        },
+        // Gentle snap - only when scroll velocity is low (disabled if reduced motion)
+        snap: shouldReduceMotion
+          ? undefined
+          : {
+              snapTo: 1 / (sectionsCount - 1),
+              duration: { min: 0.3, max: 0.6 },
+              delay: 0.1,
+              ease: 'power1.out',
+              inertia: false,
+            },
         onUpdate: (self) => {
           progress.value = self.progress
           currentSection.value = Math.min(
@@ -79,7 +79,7 @@ export function useHorizontalScroll(options: UseHorizontalScrollOptions) {
 
     gsap.to(window, {
       scrollTo: { y: scrollY, autoKill: false },
-      duration: 0.8,
+      duration: prefersReducedMotion.value ? 0.1 : 0.8,
       ease: 'power2.inOut',
     })
   }
@@ -97,7 +97,7 @@ export function useHorizontalScroll(options: UseHorizontalScrollOptions) {
 
   const handleResize = () => {
     const wasHorizontal = isHorizontalMode.value
-    const shouldBeHorizontal = window.innerWidth >= LG_BREAKPOINT
+    const shouldBeHorizontal = window.innerWidth >= BREAKPOINTS.LG
 
     if (wasHorizontal !== shouldBeHorizontal) {
       kill()

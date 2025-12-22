@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const { t } = useI18n()
+const { prefersReducedMotion } = useBreakpoints()
 
 const services = computed(() => [
   { icon: 'lucide:code-2', text: t('about.services.custom') },
@@ -12,10 +13,74 @@ const education = computed(() => [
   t('about.education.bachelor'),
   t('about.education.dut'),
 ])
+
+// Refs for GSAP animations
+const sectionRef = ref<HTMLElement>()
+const photoRef = ref<HTMLElement>()
+const statsRef = ref<HTMLElement>()
+const titleRef = ref<HTMLElement>()
+const descRef = ref<HTMLElement>()
+const philosophyRef = ref<HTMLElement>()
+const servicesRef = ref<HTMLElement>()
+const educationRef = ref<HTMLElement>()
+
+// Use section animation composable
+const { animate } = useSectionAnimation({
+  sectionRef,
+  sectionIndex: 1,
+})
+
+onMounted(() => {
+  if (prefersReducedMotion.value || !import.meta.client) return
+
+  nextTick(() => {
+    // Photo animation
+    animate(
+      photoRef.value,
+      { opacity: 0, scale: 0.8 },
+      { opacity: 1, scale: 1, duration: 0.8, ease: EASING.smooth },
+    )
+
+    // Stats animation
+    animate(
+      statsRef.value,
+      { opacity: 0, y: 20 },
+      { opacity: 1, y: 0, duration: 0.6, delay: 0.3, ease: EASING.smooth },
+    )
+
+    // Right side elements
+    animate(
+      titleRef.value,
+      { opacity: 0, x: 30 },
+      { opacity: 1, x: 0, duration: 0.6, delay: 0.1, ease: EASING.smooth },
+    )
+    animate(
+      descRef.value,
+      { opacity: 0, x: 30 },
+      { opacity: 1, x: 0, duration: 0.6, delay: 0.2, ease: EASING.smooth },
+    )
+    animate(
+      philosophyRef.value,
+      { opacity: 0, x: 30 },
+      { opacity: 1, x: 0, duration: 0.6, delay: 0.3, ease: EASING.smooth },
+    )
+    animate(
+      servicesRef.value,
+      { opacity: 0, x: 30 },
+      { opacity: 1, x: 0, duration: 0.6, delay: 0.4, ease: EASING.smooth },
+    )
+    animate(
+      educationRef.value,
+      { opacity: 0, x: 30 },
+      { opacity: 1, x: 0, duration: 0.6, delay: 0.5, ease: EASING.smooth },
+    )
+  })
+})
 </script>
 
 <template>
   <section
+    ref="sectionRef"
     class="horizontal-section relative flex w-full flex-shrink-0 items-center px-4 py-8 sm:px-8 sm:py-12 lg:h-screen lg:w-screen lg:overflow-y-auto lg:py-8"
   >
     <div
@@ -26,16 +91,7 @@ const education = computed(() => [
         class="flex flex-col items-center justify-center gap-8 md:items-start"
       >
         <!-- Photo with glow -->
-        <div
-          v-motion
-          :initial="{ opacity: 0, scale: 0.8 }"
-          :visible-once="{
-            opacity: 1,
-            scale: 1,
-            transition: { duration: 800 },
-          }"
-          class="relative"
-        >
+        <div ref="photoRef" class="relative">
           <div
             class="absolute -inset-4 rounded-full bg-gradient-to-r from-teal-400/50 to-orange-400/50 blur-2xl"
           />
@@ -51,16 +107,7 @@ const education = computed(() => [
         </div>
 
         <!-- Stats -->
-        <div
-          v-motion
-          :initial="{ opacity: 0, y: 20 }"
-          :visible-once="{
-            opacity: 1,
-            y: 0,
-            transition: { delay: 300, duration: 600 },
-          }"
-          class="flex gap-8"
-        >
+        <div ref="statsRef" class="flex gap-8">
           <div class="text-center">
             <span class="block text-4xl font-bold text-teal-400 lg:text-5xl"
               >4+</span
@@ -83,41 +130,17 @@ const education = computed(() => [
 
       <!-- Right: Content -->
       <div class="flex flex-col justify-center">
-        <h2
-          v-motion
-          :initial="{ opacity: 0, x: 30 }"
-          :visible-once="{
-            opacity: 1,
-            x: 0,
-            transition: { delay: 100, duration: 600 },
-          }"
-          class="text-4xl font-bold lg:text-5xl"
-        >
+        <h2 ref="titleRef" class="text-4xl font-bold lg:text-5xl">
           {{ t("about.title") }}
         </h2>
 
-        <p
-          v-motion
-          :initial="{ opacity: 0, x: 30 }"
-          :visible-once="{
-            opacity: 1,
-            x: 0,
-            transition: { delay: 200, duration: 600 },
-          }"
-          class="mt-6 text-lg text-muted-foreground"
-        >
+        <p ref="descRef" class="mt-6 text-lg text-muted-foreground">
           {{ t("about.description") }}
         </p>
 
         <!-- Philosophy -->
         <div
-          v-motion
-          :initial="{ opacity: 0, x: 30 }"
-          :visible-once="{
-            opacity: 1,
-            x: 0,
-            transition: { delay: 300, duration: 600 },
-          }"
+          ref="philosophyRef"
           class="mt-8 rounded-lg border border-teal-500/20 bg-teal-500/5 p-6"
         >
           <h3 class="flex items-center gap-2 font-semibold text-teal-400">
@@ -130,16 +153,7 @@ const education = computed(() => [
         </div>
 
         <!-- Services -->
-        <div
-          v-motion
-          :initial="{ opacity: 0, x: 30 }"
-          :visible-once="{
-            opacity: 1,
-            x: 0,
-            transition: { delay: 400, duration: 600 },
-          }"
-          class="mt-8"
-        >
+        <div ref="servicesRef" class="mt-8">
           <h3 class="mb-4 font-semibold">{{ t("about.services.title") }}</h3>
           <ul class="space-y-3">
             <li
@@ -157,16 +171,7 @@ const education = computed(() => [
         </div>
 
         <!-- Education -->
-        <div
-          v-motion
-          :initial="{ opacity: 0, x: 30 }"
-          :visible-once="{
-            opacity: 1,
-            x: 0,
-            transition: { delay: 500, duration: 600 },
-          }"
-          class="mt-6"
-        >
+        <div ref="educationRef" class="mt-6">
           <h3 class="mb-3 flex items-center gap-2 font-semibold">
             <Icon
               name="lucide:graduation-cap"

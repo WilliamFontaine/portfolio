@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const { t } = useI18n()
+const { prefersReducedMotion } = useBreakpoints()
 
 const experiences = computed(() => [
   {
@@ -46,24 +47,65 @@ const experiences = computed(() => [
     current: false,
   },
 ])
+
+// Refs
+const sectionRef = ref<HTMLElement>()
+const titleRef = ref<HTMLElement>()
+const timelineRef = ref<HTMLElement>()
+
+// Use section animation composable
+const { animate } = useSectionAnimation({
+  sectionRef,
+  sectionIndex: 2,
+})
+
+onMounted(() => {
+  if (prefersReducedMotion.value || !import.meta.client) return
+
+  nextTick(() => {
+    // Title
+    animate(
+      titleRef.value,
+      { opacity: 0, y: 30 },
+      { opacity: 1, y: 0, duration: 0.6, ease: EASING.smooth },
+    )
+
+    // Timeline items
+    if (timelineRef.value) {
+      const items = timelineRef.value.querySelectorAll('.timeline-item')
+      items.forEach((item, idx) => {
+        animate(
+          item as HTMLElement,
+          { opacity: 0, x: idx % 2 === 0 ? -50 : 50 },
+          {
+            opacity: 1,
+            x: 0,
+            duration: 0.6,
+            delay: idx * 0.2,
+            ease: EASING.smooth,
+          },
+        )
+      })
+    }
+  })
+})
 </script>
 
 <template>
   <section
+    ref="sectionRef"
     class="horizontal-section relative flex w-full flex-shrink-0 items-center px-4 py-8 sm:px-8 sm:py-12 lg:h-screen lg:w-screen lg:overflow-y-auto lg:py-8"
   >
     <div class="mx-auto w-full max-w-5xl lg:my-auto">
       <h2
-        v-motion
-        :initial="{ opacity: 0, y: 30 }"
-        :visible-once="{ opacity: 1, y: 0, transition: { duration: 600 } }"
+        ref="titleRef"
         class="mb-6 text-center text-4xl font-bold lg:mb-8 lg:text-5xl"
       >
         {{ t("experience.title") }}
       </h2>
 
       <!-- Timeline -->
-      <div class="relative">
+      <div ref="timelineRef" class="relative">
         <!-- Vertical line -->
         <div
           class="absolute left-8 top-0 h-full w-0.5 bg-gradient-to-b from-teal-400 via-teal-400/50 to-orange-400/50 md:left-1/2 md:-translate-x-px"
@@ -74,14 +116,7 @@ const experiences = computed(() => [
           <div
             v-for="(exp, idx) in experiences"
             :key="exp.key"
-            v-motion
-            :initial="{ opacity: 0, x: idx % 2 === 0 ? -50 : 50 }"
-            :visible-once="{
-              opacity: 1,
-              x: 0,
-              transition: { delay: idx * 200, duration: 600 },
-            }"
-            class="relative"
+            class="timeline-item relative"
             :class="idx % 2 === 0 ? 'md:pr-[52%]' : 'md:pl-[52%]'"
           >
             <!-- Timeline dot -->
