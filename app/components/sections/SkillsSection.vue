@@ -37,76 +37,26 @@ const secondaryHeaderRef = ref<HTMLElement>()
 const secondaryGridRef = ref<HTMLElement>()
 const extraInfoRef = ref<HTMLElement>()
 
-// Use section animation composable
-const { animate } = useSectionAnimation({
+useSectionAnimations({
   sectionRef,
   sectionIndex: 4,
-})
-
-// Setup animations on mount
-useAnimateOnMount(() => {
-  // Title
-  animate(
-    titleRef.value,
-    { opacity: 0, y: 30 },
-    { opacity: 1, y: 0, duration: 0.6, ease: EASING.smooth },
-  )
-
-  // Main stack header
-  animate(
-    mainHeaderRef.value,
-    { opacity: 0, x: -30 },
-    { opacity: 1, x: 0, duration: 0.6, delay: 0.1, ease: EASING.smooth },
-  )
-
-  // Main stack items
-  if (mainGridRef.value) {
-    const mainItems = mainGridRef.value.querySelectorAll('.skill-item')
-    animate(
-      mainItems,
-      { opacity: 0, scale: 0.8 },
-      {
-        opacity: 1,
-        scale: 1,
-        duration: 0.4,
-        stagger: 0.05,
-        delay: 0.15,
-        ease: EASING.smooth,
-      },
-    )
-  }
-
-  // Secondary stack header
-  animate(
-    secondaryHeaderRef.value,
-    { opacity: 0, x: 30 },
-    { opacity: 1, x: 0, duration: 0.6, delay: 0.2, ease: EASING.smooth },
-  )
-
-  // Secondary stack items
-  if (secondaryGridRef.value) {
-    const secondaryItems =
-      secondaryGridRef.value.querySelectorAll('.skill-item')
-    animate(
-      secondaryItems,
-      { opacity: 0, scale: 0.8 },
-      {
-        opacity: 1,
-        scale: 1,
-        duration: 0.4,
-        stagger: 0.05,
-        delay: 0.3,
-        ease: EASING.smooth,
-      },
-    )
-  }
-
-  // Extra info
-  animate(
-    extraInfoRef.value,
-    { opacity: 0, y: 20 },
-    { opacity: 1, y: 0, duration: 0.6, delay: 0.5, ease: EASING.smooth },
-  )
+  animations: [
+    { ref: titleRef, preset: 'fadeUp', delay: 0 },
+    { ref: mainHeaderRef, preset: 'slideRight', delay: 0.1 },
+    createGridAnimation('.skill-item', mainGridRef, {
+      preset: 'scaleUp',
+      startDelay: 0.2,
+      stagger: 0.04,
+    }),
+    { ref: secondaryHeaderRef, preset: 'slideLeft', delay: 0.25 },
+    createGridAnimation('.skill-item', secondaryGridRef, {
+      preset: 'scaleUp',
+      startDelay: 0.35,
+      stagger: 0.04,
+    }),
+    { ref: extraInfoRef, preset: 'fadeUp', delay: 0.5 },
+  ],
+  flowStagger: 0.025,
 })
 </script>
 

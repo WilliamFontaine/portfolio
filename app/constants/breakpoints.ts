@@ -12,7 +12,3 @@ export const BREAKPOINTS = {
 
 export type Breakpoint = keyof typeof BREAKPOINTS;
 export type BreakpointValue = (typeof BREAKPOINTS)[Breakpoint];
-
-// Helper to get CSS media query string
-export const getMediaQuery = (bp: Breakpoint): string =>
-  `(min-width: ${BREAKPOINTS[bp]}px)`

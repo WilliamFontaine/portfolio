@@ -17,39 +17,16 @@ const emailButtonRef = ref<HTMLElement>()
 useMagneticEffect(maltButtonRef, MAGNETIC_EFFECTS.BUTTON)
 useMagneticEffect(emailButtonRef, MAGNETIC_EFFECTS.BUTTON)
 
-// Use section animation composable
-const { animate } = useSectionAnimation({
+useSectionAnimations({
   sectionRef,
   sectionIndex: 5,
-})
-
-// Setup animations on mount
-useAnimateOnMount(() => {
-  animate(
-    titleRef.value,
-    { opacity: 0, y: 30 },
-    { opacity: 1, y: 0, duration: 0.6, ease: EASING.smooth },
-  )
-  animate(
-    descRef.value,
-    { opacity: 0, y: 20 },
-    { opacity: 1, y: 0, duration: 0.6, delay: 0.1, ease: EASING.smooth },
-  )
-  animate(
-    ctasRef.value,
-    { opacity: 0, y: 20 },
-    { opacity: 1, y: 0, duration: 0.6, delay: 0.2, ease: EASING.smooth },
-  )
-  animate(
-    socialRef.value,
-    { opacity: 0, y: 20 },
-    { opacity: 1, y: 0, duration: 0.6, delay: 0.4, ease: EASING.smooth },
-  )
-  animate(
-    locationRef.value,
-    { opacity: 0, y: 20 },
-    { opacity: 1, y: 0, duration: 0.6, delay: 0.5, ease: EASING.smooth },
-  )
+  animations: [
+    ...createFadeUpSequence(
+      [titleRef, descRef, ctasRef, socialRef, locationRef],
+      { startDelay: 0, increment: 0.1 },
+    ),
+  ],
+  flowStagger: 0.02,
 })
 </script>
 
@@ -77,7 +54,7 @@ useAnimateOnMount(() => {
         <Button
           ref="maltButtonRef"
           as="a"
-          href="https://www.malt.fr/profile/willidev-it"
+          :href="URLS.SOCIAL.MALT"
           target="_blank"
           size="lg"
           class="gap-2 bg-gradient-to-r from-teal-500 to-teal-600 px-8 text-white shadow-lg shadow-teal-500/25 transition-all hover:from-teal-600 hover:to-teal-700 hover:shadow-xl hover:shadow-teal-500/30"

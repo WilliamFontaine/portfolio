@@ -27,7 +27,7 @@ const projects = computed(() => [
       'Redis',
       'Lemon Squeezy',
     ],
-    url: 'https://com-box.app',
+    url: URLS.PROJECTS.COMBOX,
     featured: true,
   },
   {
@@ -56,7 +56,7 @@ const featuredRef = ref<HTMLElement>()
 const otherProjectsRef = ref<HTMLElement>()
 
 // Use section animation composable
-const { animate } = useSectionAnimation({
+useSectionAnimation({
   sectionRef,
   sectionIndex: 3,
 })
@@ -68,38 +68,19 @@ onMounted(() => {
     : '/images/projects/combox_light.png'
 })
 
-// Setup animations on mount
-useAnimateOnMount(() => {
-  // Title
-  animate(
-    titleRef.value,
-    { opacity: 0, y: 30 },
-    { opacity: 1, y: 0, duration: 0.6, ease: EASING.smooth },
-  )
-
-  // Featured project
-  animate(
-    featuredRef.value,
-    { opacity: 0, scale: 0.95 },
-    { opacity: 1, scale: 1, duration: 0.6, delay: 0.1, ease: EASING.smooth },
-  )
-
-  // Other projects
-  if (otherProjectsRef.value) {
-    const cards = otherProjectsRef.value.querySelectorAll('.project-card')
-    animate(
-      cards,
-      { opacity: 0, y: 30 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 0.6,
-        stagger: 0.1,
-        delay: 0.2,
-        ease: EASING.smooth,
-      },
-    )
-  }
+useSectionAnimations({
+  sectionRef,
+  sectionIndex: 3,
+  animations: [
+    { ref: titleRef, preset: 'fadeUp', delay: 0 },
+    { ref: featuredRef, preset: 'scaleUp', delay: 0.15 },
+    createGridAnimation('.project-card', otherProjectsRef, {
+      preset: 'fadeUp',
+      startDelay: 0.3,
+      stagger: 0.12,
+    }),
+  ],
+  flowStagger: 0.03,
 })
 </script>
 

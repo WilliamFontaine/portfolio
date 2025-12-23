@@ -13,7 +13,6 @@ const education = computed(() => [
   t('about.education.dut'),
 ])
 
-// Refs for GSAP animations
 const sectionRef = ref<HTMLElement>()
 const photoRef = ref<HTMLElement>()
 const statsRef = ref<HTMLElement>()
@@ -23,54 +22,19 @@ const philosophyRef = ref<HTMLElement>()
 const servicesRef = ref<HTMLElement>()
 const educationRef = ref<HTMLElement>()
 
-// Use section animation composable
-const { animate } = useSectionAnimation({
+useSectionAnimations({
   sectionRef,
   sectionIndex: 1,
-})
-
-// Setup animations on mount
-useAnimateOnMount(() => {
-  // Photo animation
-  animate(
-    photoRef.value,
-    { opacity: 0, scale: 0.8 },
-    { opacity: 1, scale: 1, duration: 0.8, ease: EASING.smooth },
-  )
-
-  // Stats animation
-  animate(
-    statsRef.value,
-    { opacity: 0, y: 20 },
-    { opacity: 1, y: 0, duration: 0.6, delay: 0.3, ease: EASING.smooth },
-  )
-
-  // Right side elements
-  animate(
-    titleRef.value,
-    { opacity: 0, x: 30 },
-    { opacity: 1, x: 0, duration: 0.6, delay: 0.1, ease: EASING.smooth },
-  )
-  animate(
-    descRef.value,
-    { opacity: 0, x: 30 },
-    { opacity: 1, x: 0, duration: 0.6, delay: 0.2, ease: EASING.smooth },
-  )
-  animate(
-    philosophyRef.value,
-    { opacity: 0, x: 30 },
-    { opacity: 1, x: 0, duration: 0.6, delay: 0.3, ease: EASING.smooth },
-  )
-  animate(
-    servicesRef.value,
-    { opacity: 0, x: 30 },
-    { opacity: 1, x: 0, duration: 0.6, delay: 0.4, ease: EASING.smooth },
-  )
-  animate(
-    educationRef.value,
-    { opacity: 0, x: 30 },
-    { opacity: 1, x: 0, duration: 0.6, delay: 0.5, ease: EASING.smooth },
-  )
+  animations: [
+    { ref: photoRef, preset: 'scaleUp', delay: 0 },
+    { ref: statsRef, preset: 'fadeUp', delay: 0.2 },
+    ...createSequence(
+      [titleRef, descRef, philosophyRef, servicesRef, educationRef],
+      'slideLeft',
+      { startDelay: 0.1, increment: 0.08 },
+    ),
+  ],
+  flowStagger: 0.03,
 })
 </script>
 

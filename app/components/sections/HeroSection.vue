@@ -1,7 +1,6 @@
 <script setup lang="ts">
 const { t } = useI18n()
 
-// Element refs for GSAP animations
 const sectionRef = ref<HTMLElement>()
 const badgeRef = ref<HTMLElement>()
 const titleRef = ref<HTMLElement>()
@@ -11,39 +10,26 @@ const descriptionRef = ref<HTMLElement>()
 const ctasRef = ref<HTMLElement>()
 const socialRef = ref<HTMLElement>()
 
-// Magnetic effect refs for CTA buttons
 const ctaButtonRef = ref<HTMLElement>()
 const secondaryButtonRef = ref<HTMLElement>()
-
-// Social link refs for magnetic effect
 const githubLinkRef = ref<HTMLElement>()
 const linkedinLinkRef = ref<HTMLElement>()
 const maltLinkRef = ref<HTMLElement>()
 
-// Apply magnetic effects
 useMagneticEffect(ctaButtonRef, MAGNETIC_EFFECTS.BUTTON)
 useMagneticEffect(secondaryButtonRef, MAGNETIC_EFFECTS.BUTTON)
 useMagneticEffect(githubLinkRef, MAGNETIC_EFFECTS.SOCIAL)
 useMagneticEffect(linkedinLinkRef, MAGNETIC_EFFECTS.SOCIAL)
 useMagneticEffect(maltLinkRef, MAGNETIC_EFFECTS.SOCIAL)
 
-// Get scroll context for navigation
 const scrollContext = inject<{
   scrollToSection?: (index: number) => void;
 } | null>('scrollContext', null)
 
-// Use section animation composable
-const { animate } = useSectionAnimation({
-  sectionRef,
-  sectionIndex: 0,
-})
-
-// Scroll to projects section (index 3)
 const scrollToProjects = () => {
   if (scrollContext?.scrollToSection) {
     scrollContext.scrollToSection(3)
   } else {
-    // Fallback: find section by class and scroll to it
     const projectsSection = document.querySelectorAll('.horizontal-section')[3]
     if (projectsSection) {
       projectsSection.scrollIntoView({ behavior: 'smooth' })
@@ -51,69 +37,28 @@ const scrollToProjects = () => {
   }
 }
 
-// Setup entrance animations on mount
-useAnimateOnMount(() => {
-  // Badge animation
-  animate(
-    badgeRef.value,
-    { opacity: 0, y: 30 },
-    { opacity: 1, y: 0, duration: 0.6, delay: 0.1, ease: EASING.smooth },
-  )
-
-  // Title animation
-  animate(
-    titleRef.value,
-    { opacity: 0, y: 30 },
-    { opacity: 1, y: 0, duration: 0.6, delay: 0.2, ease: EASING.smooth },
-  )
-
-  // Name animation with character split
-  if (nameRef.value) {
-    // First, make parent visible so children can be seen
-    gsap.set(nameRef.value, { opacity: 1 })
-
-    const result = splitText(nameRef.value, 'chars')
-    animate(
-      result.elements,
-      { opacity: 0, y: 20 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 0.5,
-        stagger: 0.03,
-        delay: 0.4,
-        ease: 'power2.out',
+useSectionAnimations({
+  sectionRef,
+  sectionIndex: 0,
+  animations: [
+    { ref: badgeRef, preset: 'fadeUp', delay: 0 },
+    { ref: titleRef, preset: 'fadeUp', delay: 0.1 },
+    {
+      ref: nameRef,
+      preset: {
+        from: { opacity: 0, y: 20 },
+        to: { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' },
       },
-    )
-  }
-
-  // Subtitle animation
-  animate(
-    subtitleRef.value,
-    { opacity: 0, y: 30 },
-    { opacity: 1, y: 0, duration: 0.6, delay: 0.7, ease: EASING.smooth },
-  )
-
-  // Description animation
-  animate(
-    descriptionRef.value,
-    { opacity: 0, y: 30 },
-    { opacity: 1, y: 0, duration: 0.6, delay: 0.8, ease: EASING.smooth },
-  )
-
-  // CTAs animation
-  animate(
-    ctasRef.value,
-    { opacity: 0, y: 30 },
-    { opacity: 1, y: 0, duration: 0.6, delay: 1.0, ease: EASING.smooth },
-  )
-
-  // Social links animation
-  animate(
-    socialRef.value,
-    { opacity: 0, y: 30 },
-    { opacity: 1, y: 0, duration: 0.6, delay: 1.2, ease: EASING.smooth },
-  )
+      delay: 0.25,
+      splitMode: 'chars',
+      stagger: 0.025,
+    },
+    { ref: subtitleRef, preset: 'fadeUp', delay: 0.5 },
+    { ref: descriptionRef, preset: 'fadeUp', delay: 0.6 },
+    { ref: ctasRef, preset: 'fadeUp', delay: 0.75 },
+    { ref: socialRef, preset: 'fadeUp', delay: 0.9 },
+  ],
+  flowStagger: 0.02,
 })
 </script>
 
@@ -176,7 +121,7 @@ useAnimateOnMount(() => {
         <Button
           ref="ctaButtonRef"
           as="a"
-          href="https://www.malt.fr/profile/willidev-it"
+          :href="URLS.SOCIAL.MALT"
           target="_blank"
           size="lg"
           class="w-full justify-center gap-3 bg-gradient-to-r from-teal-500 to-teal-600 px-8 text-white shadow-lg shadow-teal-500/25 transition-all hover:from-teal-600 hover:to-teal-700 hover:shadow-xl hover:shadow-teal-500/30 sm:w-auto"
@@ -210,7 +155,7 @@ useAnimateOnMount(() => {
           <Button
             ref="githubLinkRef"
             as="a"
-            href="https://github.com/WilliamFontaine"
+            :href="URLS.SOCIAL.GITHUB"
             target="_blank"
             rel="noopener noreferrer"
             variant="outline"
@@ -223,7 +168,7 @@ useAnimateOnMount(() => {
           <Button
             ref="linkedinLinkRef"
             as="a"
-            href="https://www.linkedin.com/in/willidev-it"
+            :href="URLS.SOCIAL.LINKEDIN"
             target="_blank"
             rel="noopener noreferrer"
             variant="outline"
@@ -236,7 +181,7 @@ useAnimateOnMount(() => {
           <Button
             ref="maltLinkRef"
             as="a"
-            href="https://www.malt.fr/profile/willidev-it"
+            :href="URLS.SOCIAL.MALT"
             target="_blank"
             rel="noopener noreferrer"
             variant="outline"

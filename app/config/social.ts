@@ -2,17 +2,17 @@ export const socialLinks = [
   {
     name: 'GitHub',
     icon: 'lucide:github',
-    href: 'https://github.com/WilliamFontaine',
+    href: URLS.SOCIAL.GITHUB,
   },
   {
     name: 'LinkedIn',
     icon: 'lucide:linkedin',
-    href: 'https://www.linkedin.com/in/willidev-it',
+    href: URLS.SOCIAL.LINKEDIN,
   },
   {
     name: 'Malt',
     icon: 'simple-icons:malt',
-    href: 'https://www.malt.fr/profile/willidev-it',
+    href: URLS.SOCIAL.MALT,
   },
 ] as const
 

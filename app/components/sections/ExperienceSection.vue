@@ -52,38 +52,18 @@ const sectionRef = ref<HTMLElement>()
 const titleRef = ref<HTMLElement>()
 const timelineRef = ref<HTMLElement>()
 
-// Use section animation composable
-const { animate } = useSectionAnimation({
+useSectionAnimations({
   sectionRef,
   sectionIndex: 2,
-})
-
-// Setup animations on mount
-useAnimateOnMount(() => {
-  // Title
-  animate(
-    titleRef.value,
-    { opacity: 0, y: 30 },
-    { opacity: 1, y: 0, duration: 0.6, ease: EASING.smooth },
-  )
-
-  // Timeline items
-  if (timelineRef.value) {
-    const items = timelineRef.value.querySelectorAll('.timeline-item')
-    items.forEach((item, idx) => {
-      animate(
-        item as HTMLElement,
-        { opacity: 0, x: idx % 2 === 0 ? -50 : 50 },
-        {
-          opacity: 1,
-          x: 0,
-          duration: 0.6,
-          delay: idx * 0.2,
-          ease: EASING.smooth,
-        },
-      )
-    })
-  }
+  animations: [
+    { ref: titleRef, preset: 'fadeUp', delay: 0 },
+    createAlternatingSlide('.timeline-item', timelineRef, {
+      startDelay: 0.15,
+      stagger: 0.18,
+      distance: 50,
+    }),
+  ],
+  flowStagger: 0.03,
 })
 </script>
 

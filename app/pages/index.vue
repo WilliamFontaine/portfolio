@@ -7,7 +7,7 @@ useSeoMeta({
   ogTitle: t('seo.title'),
   ogDescription: t('seo.description'),
   ogType: 'website',
-  ogUrl: 'https://wfontaine.fr',
+  ogUrl: URLS.SITE.BASE_URL,
   twitterTitle: t('seo.title'),
   twitterDescription: t('seo.description'),
   twitterCard: 'summary_large_image',
