@@ -81,14 +81,14 @@ useSectionAnimations({
 
       <!-- Title -->
       <h1
-        class="text-5xl font-bold tracking-tight sm:text-6xl md:text-6xl lg:text-7xl xl:text-8xl"
+        class="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl"
       >
         <span ref="titleRef" style="opacity: 0">{{ t("hero.greeting") }}</span>
         <br />
         <span
           ref="nameRef"
           style="opacity: 0"
-          class="bg-gradient-to-r from-teal-400 via-teal-300 to-orange-400 bg-clip-text text-transparent"
+          class="whitespace-nowrap bg-gradient-to-r from-teal-400 via-teal-300 to-orange-400 bg-clip-text text-transparent"
         >
           {{ t("hero.name") }}
         </span>

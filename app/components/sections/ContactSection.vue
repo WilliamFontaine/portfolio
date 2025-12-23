@@ -102,11 +102,13 @@ useSectionAnimations({
       <!-- Location -->
       <div
         ref="locationRef"
-        class="mt-12 flex items-center justify-center gap-2 text-muted-foreground"
+        class="mt-12 flex flex-col items-center justify-center gap-2 text-sm text-muted-foreground sm:flex-row sm:gap-2 sm:text-base"
       >
-        <Icon name="lucide:map-pin" class="h-4 w-4 text-teal-400" />
-        <span>{{ t("contact.location") }}</span>
-        <span class="text-muted-foreground/50">•</span>
+        <div class="flex items-center gap-2">
+          <Icon name="lucide:map-pin" class="h-4 w-4 text-teal-400" />
+          <span>{{ t("contact.location") }}</span>
+        </div>
+        <span class="hidden text-muted-foreground/50 sm:inline">•</span>
         <span class="text-teal-400">{{ t("contact.remote") }}</span>
       </div>
     </div>
