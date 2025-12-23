@@ -3,8 +3,6 @@
  * In horizontal scroll mode, animations trigger based on scroll progress
  * In vertical scroll mode, animations use standard ScrollTrigger
  */
-import { BREAKPOINTS } from '~/constants/breakpoints'
-
 interface SectionAnimationOptions {
   sectionRef: Ref<HTMLElement | undefined>;
   sectionIndex: number;
@@ -13,7 +11,7 @@ interface SectionAnimationOptions {
 
 export function useSectionAnimation(options: SectionAnimationOptions) {
   const { sectionRef, sectionIndex, totalSections = 6 } = options
-  const { prefersReducedMotion } = useBreakpoints()
+  const { prefersReducedMotion, isDesktop } = useBreakpoints()
 
   // Inject scroll context from HorizontalScroller
   const scrollContext = inject<{
@@ -35,7 +33,7 @@ export function useSectionAnimation(options: SectionAnimationOptions) {
   // Check if we're in horizontal mode
   const checkHorizontalMode = () => {
     if (!import.meta.client) return false
-    return window.innerWidth >= BREAKPOINTS.LG
+    return isDesktop.value
   }
 
   /**

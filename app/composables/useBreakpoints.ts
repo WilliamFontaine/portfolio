@@ -1,6 +1,4 @@
 import { useMediaQuery } from '@vueuse/core'
-import { BREAKPOINTS } from '~/constants/breakpoints'
-import type { Breakpoint } from '~/constants/breakpoints'
 
 export function useBreakpoints() {
   // Media queries
@@ -42,17 +40,6 @@ export function useBreakpoints() {
     '(prefers-reduced-motion: reduce)',
   )
 
-  // Helper functions
-  const isSmaller = (bp: Breakpoint): boolean => {
-    if (!import.meta.client) return false
-    return window.innerWidth < BREAKPOINTS[bp]
-  }
-
-  const isLarger = (bp: Breakpoint): boolean => {
-    if (!import.meta.client) return false
-    return window.innerWidth >= BREAKPOINTS[bp]
-  }
-
   return {
     current,
     isMobile,
@@ -61,8 +48,6 @@ export function useBreakpoints() {
     isTouchDevice,
     prefersReducedMotion,
     deviceTier,
-    isSmaller,
-    isLarger,
     // Expose individual breakpoints
     isSm,
     isMd,

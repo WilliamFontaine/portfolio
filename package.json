@@ -33,6 +33,7 @@
     "@iconify-json/simple-icons": "^1.2.63",
     "@nuxt/eslint": "^1.12.1",
     "@nuxt/icon": "^2.1.1",
+    "@nuxtjs/color-mode": "^4.0.0",
     "@resvg/resvg-js": "^2.6.2",
     "@tailwindcss/vite": "^4.1.18",
     "@types/three": "^0.182.0",

@@ -1,6 +1,5 @@
 <script setup lang="ts">
 const { t } = useI18n()
-const { prefersReducedMotion } = useBreakpoints()
 
 const experiences = computed(() => [
   {
@@ -59,35 +58,32 @@ const { animate } = useSectionAnimation({
   sectionIndex: 2,
 })
 
-onMounted(() => {
-  if (prefersReducedMotion.value || !import.meta.client) return
+// Setup animations on mount
+useAnimateOnMount(() => {
+  // Title
+  animate(
+    titleRef.value,
+    { opacity: 0, y: 30 },
+    { opacity: 1, y: 0, duration: 0.6, ease: EASING.smooth },
+  )
 
-  nextTick(() => {
-    // Title
-    animate(
-      titleRef.value,
-      { opacity: 0, y: 30 },
-      { opacity: 1, y: 0, duration: 0.6, ease: EASING.smooth },
-    )
-
-    // Timeline items
-    if (timelineRef.value) {
-      const items = timelineRef.value.querySelectorAll('.timeline-item')
-      items.forEach((item, idx) => {
-        animate(
-          item as HTMLElement,
-          { opacity: 0, x: idx % 2 === 0 ? -50 : 50 },
-          {
-            opacity: 1,
-            x: 0,
-            duration: 0.6,
-            delay: idx * 0.2,
-            ease: EASING.smooth,
-          },
-        )
-      })
-    }
-  })
+  // Timeline items
+  if (timelineRef.value) {
+    const items = timelineRef.value.querySelectorAll('.timeline-item')
+    items.forEach((item, idx) => {
+      animate(
+        item as HTMLElement,
+        { opacity: 0, x: idx % 2 === 0 ? -50 : 50 },
+        {
+          opacity: 1,
+          x: 0,
+          duration: 0.6,
+          delay: idx * 0.2,
+          ease: EASING.smooth,
+        },
+      )
+    })
+  }
 })
 </script>
 

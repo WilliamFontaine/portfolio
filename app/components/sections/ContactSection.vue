@@ -1,8 +1,5 @@
 <script setup lang="ts">
-import { socialLinks } from '~/config/social'
-
 const { t } = useI18n()
-const { prefersReducedMotion } = useBreakpoints()
 
 // Refs
 const sectionRef = ref<HTMLElement>()
@@ -17,8 +14,8 @@ const maltButtonRef = ref<HTMLElement>()
 const emailButtonRef = ref<HTMLElement>()
 
 // Apply magnetic effects
-useMagneticEffect(maltButtonRef, { strength: 0.15, scale: 1.02 })
-useMagneticEffect(emailButtonRef, { strength: 0.15, scale: 1.02 })
+useMagneticEffect(maltButtonRef, MAGNETIC_EFFECTS.BUTTON)
+useMagneticEffect(emailButtonRef, MAGNETIC_EFFECTS.BUTTON)
 
 // Use section animation composable
 const { animate } = useSectionAnimation({
@@ -26,36 +23,33 @@ const { animate } = useSectionAnimation({
   sectionIndex: 5,
 })
 
-onMounted(() => {
-  if (prefersReducedMotion.value || !import.meta.client) return
-
-  nextTick(() => {
-    animate(
-      titleRef.value,
-      { opacity: 0, y: 30 },
-      { opacity: 1, y: 0, duration: 0.6, ease: EASING.smooth },
-    )
-    animate(
-      descRef.value,
-      { opacity: 0, y: 20 },
-      { opacity: 1, y: 0, duration: 0.6, delay: 0.1, ease: EASING.smooth },
-    )
-    animate(
-      ctasRef.value,
-      { opacity: 0, y: 20 },
-      { opacity: 1, y: 0, duration: 0.6, delay: 0.2, ease: EASING.smooth },
-    )
-    animate(
-      socialRef.value,
-      { opacity: 0, y: 20 },
-      { opacity: 1, y: 0, duration: 0.6, delay: 0.4, ease: EASING.smooth },
-    )
-    animate(
-      locationRef.value,
-      { opacity: 0, y: 20 },
-      { opacity: 1, y: 0, duration: 0.6, delay: 0.5, ease: EASING.smooth },
-    )
-  })
+// Setup animations on mount
+useAnimateOnMount(() => {
+  animate(
+    titleRef.value,
+    { opacity: 0, y: 30 },
+    { opacity: 1, y: 0, duration: 0.6, ease: EASING.smooth },
+  )
+  animate(
+    descRef.value,
+    { opacity: 0, y: 20 },
+    { opacity: 1, y: 0, duration: 0.6, delay: 0.1, ease: EASING.smooth },
+  )
+  animate(
+    ctasRef.value,
+    { opacity: 0, y: 20 },
+    { opacity: 1, y: 0, duration: 0.6, delay: 0.2, ease: EASING.smooth },
+  )
+  animate(
+    socialRef.value,
+    { opacity: 0, y: 20 },
+    { opacity: 1, y: 0, duration: 0.6, delay: 0.4, ease: EASING.smooth },
+  )
+  animate(
+    locationRef.value,
+    { opacity: 0, y: 20 },
+    { opacity: 1, y: 0, duration: 0.6, delay: 0.5, ease: EASING.smooth },
+  )
 })
 </script>
 

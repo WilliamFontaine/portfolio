@@ -1,6 +1,5 @@
 <script setup lang="ts">
 const { t } = useI18n()
-const { prefersReducedMotion } = useBreakpoints()
 
 const services = computed(() => [
   { icon: 'lucide:code-2', text: t('about.services.custom') },
@@ -30,51 +29,48 @@ const { animate } = useSectionAnimation({
   sectionIndex: 1,
 })
 
-onMounted(() => {
-  if (prefersReducedMotion.value || !import.meta.client) return
+// Setup animations on mount
+useAnimateOnMount(() => {
+  // Photo animation
+  animate(
+    photoRef.value,
+    { opacity: 0, scale: 0.8 },
+    { opacity: 1, scale: 1, duration: 0.8, ease: EASING.smooth },
+  )
 
-  nextTick(() => {
-    // Photo animation
-    animate(
-      photoRef.value,
-      { opacity: 0, scale: 0.8 },
-      { opacity: 1, scale: 1, duration: 0.8, ease: EASING.smooth },
-    )
+  // Stats animation
+  animate(
+    statsRef.value,
+    { opacity: 0, y: 20 },
+    { opacity: 1, y: 0, duration: 0.6, delay: 0.3, ease: EASING.smooth },
+  )
 
-    // Stats animation
-    animate(
-      statsRef.value,
-      { opacity: 0, y: 20 },
-      { opacity: 1, y: 0, duration: 0.6, delay: 0.3, ease: EASING.smooth },
-    )
-
-    // Right side elements
-    animate(
-      titleRef.value,
-      { opacity: 0, x: 30 },
-      { opacity: 1, x: 0, duration: 0.6, delay: 0.1, ease: EASING.smooth },
-    )
-    animate(
-      descRef.value,
-      { opacity: 0, x: 30 },
-      { opacity: 1, x: 0, duration: 0.6, delay: 0.2, ease: EASING.smooth },
-    )
-    animate(
-      philosophyRef.value,
-      { opacity: 0, x: 30 },
-      { opacity: 1, x: 0, duration: 0.6, delay: 0.3, ease: EASING.smooth },
-    )
-    animate(
-      servicesRef.value,
-      { opacity: 0, x: 30 },
-      { opacity: 1, x: 0, duration: 0.6, delay: 0.4, ease: EASING.smooth },
-    )
-    animate(
-      educationRef.value,
-      { opacity: 0, x: 30 },
-      { opacity: 1, x: 0, duration: 0.6, delay: 0.5, ease: EASING.smooth },
-    )
-  })
+  // Right side elements
+  animate(
+    titleRef.value,
+    { opacity: 0, x: 30 },
+    { opacity: 1, x: 0, duration: 0.6, delay: 0.1, ease: EASING.smooth },
+  )
+  animate(
+    descRef.value,
+    { opacity: 0, x: 30 },
+    { opacity: 1, x: 0, duration: 0.6, delay: 0.2, ease: EASING.smooth },
+  )
+  animate(
+    philosophyRef.value,
+    { opacity: 0, x: 30 },
+    { opacity: 1, x: 0, duration: 0.6, delay: 0.3, ease: EASING.smooth },
+  )
+  animate(
+    servicesRef.value,
+    { opacity: 0, x: 30 },
+    { opacity: 1, x: 0, duration: 0.6, delay: 0.4, ease: EASING.smooth },
+  )
+  animate(
+    educationRef.value,
+    { opacity: 0, x: 30 },
+    { opacity: 1, x: 0, duration: 0.6, delay: 0.5, ease: EASING.smooth },
+  )
 })
 </script>
 

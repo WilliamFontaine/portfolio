@@ -1,5 +1,3 @@
-import { BREAKPOINTS } from '~/constants/breakpoints'
-
 interface UseHorizontalScrollOptions {
   container: Ref<HTMLElement | undefined>;
   wrapper: Ref<HTMLElement | undefined>;
@@ -8,7 +6,7 @@ interface UseHorizontalScrollOptions {
 
 export function useHorizontalScroll(options: UseHorizontalScrollOptions) {
   const { container, wrapper, sectionsCount } = options
-  const { prefersReducedMotion } = useBreakpoints()
+  const { prefersReducedMotion, isDesktop } = useBreakpoints()
 
   const scrollTriggerInstance = ref<ScrollTrigger | null>(null)
   const progress = ref(0)
@@ -19,7 +17,7 @@ export function useHorizontalScroll(options: UseHorizontalScrollOptions) {
     if (!container.value || !wrapper.value || !import.meta.client) return
 
     // Only enable horizontal scroll on large screens (use centralized breakpoint)
-    if (window.innerWidth < BREAKPOINTS.LG) {
+    if (!isDesktop.value) {
       isHorizontalMode.value = false
       return
     }
@@ -38,17 +36,29 @@ export function useHorizontalScroll(options: UseHorizontalScrollOptions) {
       scrollTrigger: {
         trigger: container.value,
         pin: true,
-        scrub: shouldReduceMotion ? 0 : 0.8, // Instant scroll if reduced motion
+        scrub: shouldReduceMotion ? 0 : 1.2, // Smoother scroll with higher scrub value
         end: () => `+=${totalWidth}`,
-        // Gentle snap - only when scroll velocity is low (disabled if reduced motion)
+        // Very gentle snap - only activates when user stops scrolling near a section
         snap: shouldReduceMotion
           ? undefined
           : {
-              snapTo: 1 / (sectionsCount - 1),
-              duration: { min: 0.3, max: 0.6 },
-              delay: 0.1,
-              ease: 'power1.out',
-              inertia: false,
+              snapTo: (value) => {
+                // Calculate which section we're closest to
+                const sectionProgress = value * (sectionsCount - 1)
+                const nearestSection = Math.round(sectionProgress)
+                const distance = Math.abs(sectionProgress - nearestSection)
+
+                // Only snap if VERY close to a section (within 8% threshold)
+                // This allows free scrolling but gently guides to sections when appropriate
+                if (distance > 0.08) return value
+
+                // Snap to nearest section
+                return nearestSection / (sectionsCount - 1)
+              },
+              duration: { min: 0.5, max: 1.0 }, // Smooth, slow snap
+              delay: 0.3, // Longer delay - only snap after user stops scrolling
+              ease: 'power2.inOut',
+              inertia: true, // Preserve scroll momentum
             },
         onUpdate: (self) => {
           progress.value = self.progress
@@ -97,7 +107,7 @@ export function useHorizontalScroll(options: UseHorizontalScrollOptions) {
 
   const handleResize = () => {
     const wasHorizontal = isHorizontalMode.value
-    const shouldBeHorizontal = window.innerWidth >= BREAKPOINTS.LG
+    const shouldBeHorizontal = isDesktop.value
 
     if (wasHorizontal !== shouldBeHorizontal) {
       kill()

@@ -1,6 +1,5 @@
 <script setup lang="ts">
 const { t } = useI18n()
-const { prefersReducedMotion } = useBreakpoints()
 
 // Stack principale (maîtrisée au quotidien)
 const mainStack = [
@@ -44,73 +43,70 @@ const { animate } = useSectionAnimation({
   sectionIndex: 4,
 })
 
-onMounted(() => {
-  if (prefersReducedMotion.value || !import.meta.client) return
+// Setup animations on mount
+useAnimateOnMount(() => {
+  // Title
+  animate(
+    titleRef.value,
+    { opacity: 0, y: 30 },
+    { opacity: 1, y: 0, duration: 0.6, ease: EASING.smooth },
+  )
 
-  nextTick(() => {
-    // Title
+  // Main stack header
+  animate(
+    mainHeaderRef.value,
+    { opacity: 0, x: -30 },
+    { opacity: 1, x: 0, duration: 0.6, delay: 0.1, ease: EASING.smooth },
+  )
+
+  // Main stack items
+  if (mainGridRef.value) {
+    const mainItems = mainGridRef.value.querySelectorAll('.skill-item')
     animate(
-      titleRef.value,
-      { opacity: 0, y: 30 },
-      { opacity: 1, y: 0, duration: 0.6, ease: EASING.smooth },
+      mainItems,
+      { opacity: 0, scale: 0.8 },
+      {
+        opacity: 1,
+        scale: 1,
+        duration: 0.4,
+        stagger: 0.05,
+        delay: 0.15,
+        ease: EASING.smooth,
+      },
     )
+  }
 
-    // Main stack header
+  // Secondary stack header
+  animate(
+    secondaryHeaderRef.value,
+    { opacity: 0, x: 30 },
+    { opacity: 1, x: 0, duration: 0.6, delay: 0.2, ease: EASING.smooth },
+  )
+
+  // Secondary stack items
+  if (secondaryGridRef.value) {
+    const secondaryItems =
+      secondaryGridRef.value.querySelectorAll('.skill-item')
     animate(
-      mainHeaderRef.value,
-      { opacity: 0, x: -30 },
-      { opacity: 1, x: 0, duration: 0.6, delay: 0.1, ease: EASING.smooth },
+      secondaryItems,
+      { opacity: 0, scale: 0.8 },
+      {
+        opacity: 1,
+        scale: 1,
+        duration: 0.4,
+        stagger: 0.05,
+        delay: 0.3,
+        ease: EASING.smooth,
+      },
     )
+  }
 
-    // Main stack items
-    if (mainGridRef.value) {
-      const mainItems = mainGridRef.value.querySelectorAll('.skill-item')
-      animate(
-        mainItems,
-        { opacity: 0, scale: 0.8 },
-        {
-          opacity: 1,
-          scale: 1,
-          duration: 0.4,
-          stagger: 0.05,
-          delay: 0.15,
-          ease: EASING.smooth,
-        },
-      )
-    }
-
-    // Secondary stack header
-    animate(
-      secondaryHeaderRef.value,
-      { opacity: 0, x: 30 },
-      { opacity: 1, x: 0, duration: 0.6, delay: 0.2, ease: EASING.smooth },
-    )
-
-    // Secondary stack items
-    if (secondaryGridRef.value) {
-      const secondaryItems =
-        secondaryGridRef.value.querySelectorAll('.skill-item')
-      animate(
-        secondaryItems,
-        { opacity: 0, scale: 0.8 },
-        {
-          opacity: 1,
-          scale: 1,
-          duration: 0.4,
-          stagger: 0.05,
-          delay: 0.3,
-          ease: EASING.smooth,
-        },
-      )
-    }
-
-    // Extra info
-    animate(
-      extraInfoRef.value,
-      { opacity: 0, y: 20 },
-      { opacity: 1, y: 0, duration: 0.6, delay: 0.5, ease: EASING.smooth },
-    )
-  })
+  // Extra info
+  animate(
+    extraInfoRef.value,
+    { opacity: 0, y: 20 },
+    { opacity: 1, y: 0, duration: 0.6, delay: 0.5, ease: EASING.smooth },
+  )
 })
 </script>
 

@@ -5,7 +5,13 @@ export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
 
-  modules: ['shadcn-nuxt', '@nuxtjs/i18n', '@nuxt/eslint', '@nuxt/icon'],
+  modules: [
+    'shadcn-nuxt',
+    '@nuxtjs/i18n',
+    '@nuxt/eslint',
+    '@nuxt/icon',
+    '@nuxtjs/color-mode',
+  ],
 
   imports: {
     imports: [
@@ -13,17 +19,16 @@ export default defineNuxtConfig({
       { name: 'ScrollTrigger', from: 'gsap/ScrollTrigger' },
       { name: 'ScrollToPlugin', from: 'gsap/ScrollToPlugin' },
     ],
-    dirs: [
-      'composables',
-      'composables/animations',
-      'utils',
-      'utils/animations',
-    ],
+    dirs: ['composables/**', 'config/**', 'constants/**', 'lib/**', 'utils/**'],
   },
 
   shadcn: {
     prefix: '',
     componentDir: './app/components/ui',
+  },
+
+  colorMode: {
+    classSuffix: '',
   },
 
   css: ['~/assets/css/tailwind.css'],
@@ -73,14 +78,6 @@ export default defineNuxtConfig({
           rel: 'apple-touch-icon',
           sizes: '180x180',
           href: '/apple-touch-icon.png',
-        },
-      ],
-      script: [
-        {
-          // Support for 3 theme modes: light, dark, system
-          innerHTML:
-            '(function(){try{var t=localStorage.getItem(\'theme\');var s=window.matchMedia(\'(prefers-color-scheme:dark)\').matches;var d=t===\'system\'||!t?s:t===\'dark\';document.documentElement.classList.toggle(\'dark\',d)}catch(e){}})()',
-          type: 'text/javascript',
         },
       ],
     },

@@ -1,7 +1,6 @@
 <script setup lang="ts">
 const { t } = useI18n()
 const { isDark } = useTheme()
-const { prefersReducedMotion } = useBreakpoints()
 
 // Use ref for image to avoid hydration mismatch (server doesn't know theme)
 // Start with light image, update after hydration
@@ -62,46 +61,45 @@ const { animate } = useSectionAnimation({
   sectionIndex: 3,
 })
 
+// Update image after mount to avoid hydration mismatch
 onMounted(() => {
-  // Update image after mount to avoid hydration mismatch
   comboxImage.value = isDark.value
     ? '/images/projects/combox_dark.png'
     : '/images/projects/combox_light.png'
+})
 
-  if (prefersReducedMotion.value || !import.meta.client) return
+// Setup animations on mount
+useAnimateOnMount(() => {
+  // Title
+  animate(
+    titleRef.value,
+    { opacity: 0, y: 30 },
+    { opacity: 1, y: 0, duration: 0.6, ease: EASING.smooth },
+  )
 
-  nextTick(() => {
-    // Title
+  // Featured project
+  animate(
+    featuredRef.value,
+    { opacity: 0, scale: 0.95 },
+    { opacity: 1, scale: 1, duration: 0.6, delay: 0.1, ease: EASING.smooth },
+  )
+
+  // Other projects
+  if (otherProjectsRef.value) {
+    const cards = otherProjectsRef.value.querySelectorAll('.project-card')
     animate(
-      titleRef.value,
+      cards,
       { opacity: 0, y: 30 },
-      { opacity: 1, y: 0, duration: 0.6, ease: EASING.smooth },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.6,
+        stagger: 0.1,
+        delay: 0.2,
+        ease: EASING.smooth,
+      },
     )
-
-    // Featured project
-    animate(
-      featuredRef.value,
-      { opacity: 0, scale: 0.95 },
-      { opacity: 1, scale: 1, duration: 0.6, delay: 0.1, ease: EASING.smooth },
-    )
-
-    // Other projects
-    if (otherProjectsRef.value) {
-      const cards = otherProjectsRef.value.querySelectorAll('.project-card')
-      animate(
-        cards,
-        { opacity: 0, y: 30 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.6,
-          stagger: 0.1,
-          delay: 0.2,
-          ease: EASING.smooth,
-        },
-      )
-    }
-  })
+  }
 })
 </script>
 

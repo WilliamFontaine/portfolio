@@ -1,10 +1,5 @@
 <script setup lang="ts">
 const { t } = useI18n()
-const { prefersReducedMotion } = useBreakpoints()
-
-// Magnetic effect strength constants
-const BUTTON_MAGNETIC = { strength: 0.15, scale: 1.02 }
-const SOCIAL_MAGNETIC = { strength: 0.25, scale: 1.1 }
 
 // Element refs for GSAP animations
 const sectionRef = ref<HTMLElement>()
@@ -26,11 +21,11 @@ const linkedinLinkRef = ref<HTMLElement>()
 const maltLinkRef = ref<HTMLElement>()
 
 // Apply magnetic effects
-useMagneticEffect(ctaButtonRef, BUTTON_MAGNETIC)
-useMagneticEffect(secondaryButtonRef, BUTTON_MAGNETIC)
-useMagneticEffect(githubLinkRef, SOCIAL_MAGNETIC)
-useMagneticEffect(linkedinLinkRef, SOCIAL_MAGNETIC)
-useMagneticEffect(maltLinkRef, SOCIAL_MAGNETIC)
+useMagneticEffect(ctaButtonRef, MAGNETIC_EFFECTS.BUTTON)
+useMagneticEffect(secondaryButtonRef, MAGNETIC_EFFECTS.BUTTON)
+useMagneticEffect(githubLinkRef, MAGNETIC_EFFECTS.SOCIAL)
+useMagneticEffect(linkedinLinkRef, MAGNETIC_EFFECTS.SOCIAL)
+useMagneticEffect(maltLinkRef, MAGNETIC_EFFECTS.SOCIAL)
 
 // Get scroll context for navigation
 const scrollContext = inject<{
@@ -56,70 +51,69 @@ const scrollToProjects = () => {
   }
 }
 
-// GSAP entrance animations
-onMounted(() => {
-  if (prefersReducedMotion.value || !import.meta.client) return
+// Setup entrance animations on mount
+useAnimateOnMount(() => {
+  // Badge animation
+  animate(
+    badgeRef.value,
+    { opacity: 0, y: 30 },
+    { opacity: 1, y: 0, duration: 0.6, delay: 0.1, ease: EASING.smooth },
+  )
 
-  nextTick(() => {
-    // Badge animation
+  // Title animation
+  animate(
+    titleRef.value,
+    { opacity: 0, y: 30 },
+    { opacity: 1, y: 0, duration: 0.6, delay: 0.2, ease: EASING.smooth },
+  )
+
+  // Name animation with character split
+  if (nameRef.value) {
+    // First, make parent visible so children can be seen
+    gsap.set(nameRef.value, { opacity: 1 })
+
+    const result = splitText(nameRef.value, 'chars')
     animate(
-      badgeRef.value,
-      { opacity: 0, y: 30 },
-      { opacity: 1, y: 0, duration: 0.6, delay: 0.1, ease: EASING.smooth },
+      result.elements,
+      { opacity: 0, y: 20 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.5,
+        stagger: 0.03,
+        delay: 0.4,
+        ease: 'power2.out',
+      },
     )
+  }
 
-    // Title animation
-    animate(
-      titleRef.value,
-      { opacity: 0, y: 30 },
-      { opacity: 1, y: 0, duration: 0.6, delay: 0.2, ease: EASING.smooth },
-    )
+  // Subtitle animation
+  animate(
+    subtitleRef.value,
+    { opacity: 0, y: 30 },
+    { opacity: 1, y: 0, duration: 0.6, delay: 0.7, ease: EASING.smooth },
+  )
 
-    // Name animation with character split
-    if (nameRef.value) {
-      const result = splitText(nameRef.value, 'chars')
-      animate(
-        result.elements,
-        { opacity: 0, y: 20 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.5,
-          stagger: 0.03,
-          delay: 0.4,
-          ease: 'power2.out',
-        },
-      )
-    }
+  // Description animation
+  animate(
+    descriptionRef.value,
+    { opacity: 0, y: 30 },
+    { opacity: 1, y: 0, duration: 0.6, delay: 0.8, ease: EASING.smooth },
+  )
 
-    // Subtitle animation
-    animate(
-      subtitleRef.value,
-      { opacity: 0, y: 30 },
-      { opacity: 1, y: 0, duration: 0.6, delay: 0.7, ease: EASING.smooth },
-    )
+  // CTAs animation
+  animate(
+    ctasRef.value,
+    { opacity: 0, y: 30 },
+    { opacity: 1, y: 0, duration: 0.6, delay: 1.0, ease: EASING.smooth },
+  )
 
-    // Description animation
-    animate(
-      descriptionRef.value,
-      { opacity: 0, y: 30 },
-      { opacity: 1, y: 0, duration: 0.6, delay: 0.8, ease: EASING.smooth },
-    )
-
-    // CTAs animation
-    animate(
-      ctasRef.value,
-      { opacity: 0, y: 30 },
-      { opacity: 1, y: 0, duration: 0.6, delay: 1.0, ease: EASING.smooth },
-    )
-
-    // Social links animation
-    animate(
-      socialRef.value,
-      { opacity: 0, y: 30 },
-      { opacity: 1, y: 0, duration: 0.6, delay: 1.2, ease: EASING.smooth },
-    )
-  })
+  // Social links animation
+  animate(
+    socialRef.value,
+    { opacity: 0, y: 30 },
+    { opacity: 1, y: 0, duration: 0.6, delay: 1.2, ease: EASING.smooth },
+  )
 })
 </script>
 
@@ -130,7 +124,7 @@ onMounted(() => {
   >
     <div class="relative z-10 w-full max-w-5xl">
       <!-- Available Badge -->
-      <div ref="badgeRef">
+      <div ref="badgeRef" style="opacity: 0">
         <Badge
           class="mb-6 gap-2 border-teal-500/30 bg-teal-500/10 px-4 py-2 text-sm text-teal-400"
           variant="outline"
@@ -144,10 +138,11 @@ onMounted(() => {
       <h1
         class="text-5xl font-bold tracking-tight sm:text-6xl md:text-6xl lg:text-7xl xl:text-8xl"
       >
-        <span ref="titleRef">{{ t("hero.greeting") }}</span>
+        <span ref="titleRef" style="opacity: 0">{{ t("hero.greeting") }}</span>
         <br />
         <span
           ref="nameRef"
+          style="opacity: 0"
           class="bg-gradient-to-r from-teal-400 via-teal-300 to-orange-400 bg-clip-text text-transparent"
         >
           {{ t("hero.name") }}
@@ -157,6 +152,7 @@ onMounted(() => {
       <!-- Subtitle -->
       <p
         ref="subtitleRef"
+        style="opacity: 0"
         class="mt-4 text-xl font-medium text-muted-foreground lg:text-2xl"
       >
         {{ t("hero.title") }}
@@ -165,6 +161,7 @@ onMounted(() => {
       <!-- Description -->
       <p
         ref="descriptionRef"
+        style="opacity: 0"
         class="mt-6 max-w-2xl text-lg text-muted-foreground/80"
       >
         {{ t("hero.description") }}
@@ -173,6 +170,7 @@ onMounted(() => {
       <!-- CTAs -->
       <div
         ref="ctasRef"
+        style="opacity: 0"
         class="mt-8 flex flex-col gap-3 sm:mt-10 sm:flex-row sm:items-center sm:gap-4"
       >
         <Button
@@ -200,7 +198,11 @@ onMounted(() => {
       </div>
 
       <!-- Social Links -->
-      <div ref="socialRef" class="mt-8 flex items-center gap-4 sm:mt-12">
+      <div
+        ref="socialRef"
+        style="opacity: 0"
+        class="mt-8 flex items-center gap-4 sm:mt-12"
+      >
         <span class="text-sm text-muted-foreground">{{
           t("contact.social")
         }}</span>

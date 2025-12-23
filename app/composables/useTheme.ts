@@ -1,87 +1,34 @@
-import { usePreferredColorScheme, useStorage } from '@vueuse/core'
-
 export type Theme = 'light' | 'dark' | 'system';
 
 export function useTheme() {
-  // System preference detection
-  const systemPreference = usePreferredColorScheme()
-
-  // User preference (persisted to localStorage)
-  const userTheme = useStorage<Theme>('theme', 'system')
+  const colorMode = useColorMode()
 
   // Computed dark mode state
-  const isDark = computed(() => {
-    if (userTheme.value === 'system') {
-      return systemPreference.value === 'dark'
-    }
-    return userTheme.value === 'dark'
-  })
+  const isDark = computed(() => colorMode.value === 'dark')
 
-  // Apply theme to DOM with optional transition
-  const applyTheme = (dark: boolean, withTransition = true) => {
-    if (!import.meta.client) return
-
-    const html = document.documentElement
-
-    // Use View Transitions API if available and transitions enabled
-    if (
-      withTransition &&
-      'startViewTransition' in document &&
-      typeof (document as any).startViewTransition === 'function'
-    ) {
-      (document as any).startViewTransition(() => {
-        html.classList.toggle('dark', dark)
-      })
-    } else {
-      // Fallback: direct class toggle
-      html.classList.toggle('dark', dark)
-    }
-  }
+  // Current theme (light, dark, or system)
+  const theme = computed(() => colorMode.preference as Theme)
 
   // Set theme
-  const setTheme = (theme: Theme) => {
-    userTheme.value = theme
-    const dark =
-      theme === 'system' ? systemPreference.value === 'dark' : theme === 'dark'
-    applyTheme(dark)
+  const setTheme = (newTheme: Theme) => {
+    colorMode.preference = newTheme
   }
 
-  // Toggle between light and dark (cycles through: light → dark → system)
+  // Toggle between light → dark → system
   const toggleTheme = () => {
-    if (userTheme.value === 'light') {
-      setTheme('dark')
-    } else if (userTheme.value === 'dark') {
-      setTheme('system')
+    if (colorMode.preference === 'light') {
+      colorMode.preference = 'dark'
+    } else if (colorMode.preference === 'dark') {
+      colorMode.preference = 'system'
     } else {
-      setTheme('light')
+      colorMode.preference = 'light'
     }
   }
-
-  // Simple toggle between light and dark only
-  const toggleDark = () => {
-    setTheme(isDark.value ? 'light' : 'dark')
-  }
-
-  // Sync on mount
-  onMounted(() => {
-    applyTheme(isDark.value, false)
-  })
-
-  // Watch system preference changes
-  watch(systemPreference, () => {
-    if (userTheme.value === 'system') {
-      applyTheme(isDark.value)
-    }
-  })
 
   return {
     isDark: readonly(isDark),
-    theme: readonly(userTheme),
-    systemPreference: readonly(
-      computed(() => systemPreference.value as 'light' | 'dark'),
-    ),
+    theme: readonly(theme),
     setTheme,
     toggleTheme,
-    toggleDark,
   }
 }
