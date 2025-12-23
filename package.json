@@ -20,14 +20,14 @@
     "clsx": "^2.1.1",
     "gsap": "^3.14.2",
     "nuxt": "^4.2.2",
-    "reka-ui": "^2.6.1",
+    "reka-ui": "^2.7.0",
     "tailwind-merge": "^3.4.0",
     "three": "^0.182.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^20.2.0",
     "@commitlint/config-conventional": "^20.2.0",
-    "@iconify-json/devicon": "^1.2.54",
+    "@iconify-json/devicon": "^1.2.55",
     "@iconify-json/logos": "^1.2.10",
     "@iconify-json/lucide": "^1.2.82",
     "@iconify-json/simple-icons": "^1.2.63",
