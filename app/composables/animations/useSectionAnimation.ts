@@ -10,7 +10,7 @@ interface SectionAnimationOptions {
 }
 
 export function useSectionAnimation(options: SectionAnimationOptions) {
-  const { sectionRef, sectionIndex, totalSections = 6 } = options
+  const { sectionRef: _sectionRef, sectionIndex, totalSections = 6 } = options
   const { prefersReducedMotion, isDesktop } = useBreakpoints()
 
   // Inject scroll context from HorizontalScroller
@@ -46,22 +46,46 @@ export function useSectionAnimation(options: SectionAnimationOptions) {
   ) => {
     if (!import.meta.client || prefersReducedMotion.value || !targets) return
 
-    // Set initial state immediately
     gsap.set(targets, fromVars)
 
     if (!isHorizontalMode.value) {
-      // Vertical mode: use standard ScrollTrigger
-      const tween = gsap.to(targets, {
-        ...toVars,
-        scrollTrigger: {
-          trigger: sectionRef.value,
-          start: 'top 80%',
-          once: true,
-        },
+      const createScrollTrigger = (trigger: Element) => ({
+        trigger,
+        start: 'top 75%',
+        once: true,
       })
-      animations.push(tween)
+
+      if (targets instanceof NodeList || Array.isArray(targets)) {
+        const baseDelay = typeof toVars.delay === 'number' ? toVars.delay : 0
+        const staggerAmount =
+          typeof toVars.stagger === 'number' ? toVars.stagger : 0
+
+        Array.from(targets).forEach((target, i) => {
+          animations.push(
+            gsap.to(target, {
+              ...toVars,
+              stagger: undefined,
+              delay: baseDelay + i * staggerAmount,
+              scrollTrigger: createScrollTrigger(target as Element),
+            }),
+          )
+        })
+      } else {
+        const trigger =
+          typeof targets === 'string'
+            ? (document.querySelector(targets) ?? _sectionRef.value)
+            : targets instanceof Element
+              ? targets
+              : _sectionRef.value
+
+        animations.push(
+          gsap.to(targets, {
+            ...toVars,
+            scrollTrigger: createScrollTrigger(trigger as Element),
+          }),
+        )
+      }
     } else {
-      // Horizontal mode: store for later playback
       pendingAnimations.push({ targets, fromVars, toVars })
     }
   }
