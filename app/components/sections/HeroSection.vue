@@ -1,26 +1,32 @@
 <script setup lang="ts">
 const { t } = useI18n()
 
-const sectionRef = ref<HTMLElement>()
-const badgeRef = ref<HTMLElement>()
-const titleRef = ref<HTMLElement>()
-const nameRef = ref<HTMLElement>()
-const subtitleRef = ref<HTMLElement>()
-const descriptionRef = ref<HTMLElement>()
-const ctasRef = ref<HTMLElement>()
-const socialRef = ref<HTMLElement>()
-
-const ctaButtonRef = ref<HTMLElement>()
-const secondaryButtonRef = ref<HTMLElement>()
-const githubLinkRef = ref<HTMLElement>()
-const linkedinLinkRef = ref<HTMLElement>()
-const maltLinkRef = ref<HTMLElement>()
+const {
+  sectionRef,
+  badgeRef,
+  titleRef,
+  nameRef,
+  subtitleRef,
+  descriptionRef,
+  ctasRef,
+  socialRef,
+  ctaButtonRef,
+  secondaryButtonRef,
+} = createSectionRefs(
+  'sectionRef',
+  'badgeRef',
+  'titleRef',
+  'nameRef',
+  'subtitleRef',
+  'descriptionRef',
+  'ctasRef',
+  'socialRef',
+  'ctaButtonRef',
+  'secondaryButtonRef',
+)
 
 useMagneticEffect(ctaButtonRef, MAGNETIC_EFFECTS.BUTTON)
 useMagneticEffect(secondaryButtonRef, MAGNETIC_EFFECTS.BUTTON)
-useMagneticEffect(githubLinkRef, MAGNETIC_EFFECTS.SOCIAL)
-useMagneticEffect(linkedinLinkRef, MAGNETIC_EFFECTS.SOCIAL)
-useMagneticEffect(maltLinkRef, MAGNETIC_EFFECTS.SOCIAL)
 
 const scrollContext = inject<{
   scrollToSection?: (index: number) => void;
@@ -42,21 +48,28 @@ useSectionAnimations({
   sectionIndex: 0,
   animations: [
     { ref: badgeRef, preset: 'fadeUp', delay: 0 },
-    { ref: titleRef, preset: 'fadeUp', delay: 0.1 },
+    { ref: titleRef, preset: 'fadeUp', delay: 0.15 },
     {
       ref: nameRef,
       preset: {
-        from: { opacity: 0, y: 20 },
-        to: { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' },
+        from: { opacity: 0, y: 50, scale: 0.7, rotationX: -15 },
+        to: {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          rotationX: 0,
+          duration: 0.8,
+          ease: 'back.out(2)',
+        },
       },
-      delay: 0.25,
+      delay: 0.35,
       splitMode: 'chars',
-      stagger: 0.025,
+      stagger: 0.04,
     },
-    { ref: subtitleRef, preset: 'fadeUp', delay: 0.5 },
-    { ref: descriptionRef, preset: 'fadeUp', delay: 0.6 },
-    { ref: ctasRef, preset: 'fadeUp', delay: 0.75 },
-    { ref: socialRef, preset: 'fadeUp', delay: 0.9 },
+    { ref: subtitleRef, preset: 'fadeUp', delay: 1.0 },
+    { ref: descriptionRef, preset: 'fadeUp', delay: 1.2 },
+    { ref: ctasRef, preset: 'fadeUp', delay: 1.35 },
+    { ref: socialRef, preset: 'fadeUp', delay: 1.55 },
   ],
   flowStagger: 0.02,
 })
@@ -69,7 +82,7 @@ useSectionAnimations({
   >
     <div class="relative z-10 w-full max-w-5xl">
       <!-- Available Badge -->
-      <div ref="badgeRef" style="opacity: 0">
+      <div ref="badgeRef" class="opacity-0">
         <Badge
           class="mb-6 gap-2 border-teal-500/30 bg-teal-500/10 px-4 py-2 text-sm text-teal-400"
           variant="outline"
@@ -83,12 +96,11 @@ useSectionAnimations({
       <h1
         class="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl"
       >
-        <span ref="titleRef" style="opacity: 0">{{ t("hero.greeting") }}</span>
+        <span ref="titleRef" class="opacity-0">{{ t("hero.greeting") }}</span>
         <br />
         <span
           ref="nameRef"
-          style="opacity: 0"
-          class="whitespace-nowrap bg-gradient-to-r from-teal-400 via-teal-300 to-orange-400 bg-clip-text text-transparent"
+          class="opacity-0 whitespace-nowrap bg-gradient-to-r from-teal-400 via-teal-300 to-orange-400 bg-clip-text text-transparent"
         >
           {{ t("hero.name") }}
         </span>
@@ -97,8 +109,7 @@ useSectionAnimations({
       <!-- Subtitle -->
       <p
         ref="subtitleRef"
-        style="opacity: 0"
-        class="mt-4 text-xl font-medium text-muted-foreground lg:text-2xl"
+        class="opacity-0 mt-4 text-xl font-medium text-muted-foreground lg:text-2xl"
       >
         {{ t("hero.title") }}
       </p>
@@ -106,8 +117,7 @@ useSectionAnimations({
       <!-- Description -->
       <p
         ref="descriptionRef"
-        style="opacity: 0"
-        class="mt-6 max-w-2xl text-lg text-muted-foreground/80"
+        class="opacity-0 mt-6 max-w-2xl text-lg text-muted-foreground/80"
       >
         {{ t("hero.description") }}
       </p>
@@ -115,8 +125,7 @@ useSectionAnimations({
       <!-- CTAs -->
       <div
         ref="ctasRef"
-        style="opacity: 0"
-        class="mt-8 flex flex-col gap-3 sm:mt-10 sm:flex-row sm:items-center sm:gap-4"
+        class="opacity-0 mt-8 flex flex-col gap-3 sm:mt-10 sm:flex-row sm:items-center sm:gap-4"
       >
         <Button
           ref="ctaButtonRef"
@@ -143,55 +152,8 @@ useSectionAnimations({
       </div>
 
       <!-- Social Links -->
-      <div
-        ref="socialRef"
-        style="opacity: 0"
-        class="mt-8 flex items-center gap-4 sm:mt-12"
-      >
-        <span class="text-sm text-muted-foreground">{{
-          t("contact.social")
-        }}</span>
-        <div class="flex gap-2">
-          <Button
-            ref="githubLinkRef"
-            as="a"
-            :href="URLS.SOCIAL.GITHUB"
-            target="_blank"
-            rel="noopener noreferrer"
-            variant="outline"
-            size="icon"
-            class="h-10 w-10 rounded-lg border-border/50 bg-card/50 text-muted-foreground backdrop-blur-sm transition-all hover:border-teal-500/50 hover:bg-teal-500/10 hover:text-teal-400"
-            aria-label="GitHub"
-          >
-            <Icon name="lucide:github" class="h-5 w-5" />
-          </Button>
-          <Button
-            ref="linkedinLinkRef"
-            as="a"
-            :href="URLS.SOCIAL.LINKEDIN"
-            target="_blank"
-            rel="noopener noreferrer"
-            variant="outline"
-            size="icon"
-            class="h-10 w-10 rounded-lg border-border/50 bg-card/50 text-muted-foreground backdrop-blur-sm transition-all hover:border-teal-500/50 hover:bg-teal-500/10 hover:text-teal-400"
-            aria-label="LinkedIn"
-          >
-            <Icon name="lucide:linkedin" class="h-5 w-5" />
-          </Button>
-          <Button
-            ref="maltLinkRef"
-            as="a"
-            :href="URLS.SOCIAL.MALT"
-            target="_blank"
-            rel="noopener noreferrer"
-            variant="outline"
-            size="icon"
-            class="h-10 w-10 rounded-lg border-border/50 bg-card/50 text-muted-foreground backdrop-blur-sm transition-all hover:border-teal-500/50 hover:bg-teal-500/10 hover:text-teal-400"
-            aria-label="Malt"
-          >
-            <Icon name="simple-icons:malt" class="h-5 w-5" />
-          </Button>
-        </div>
+      <div ref="socialRef" class="opacity-0 mt-8 sm:mt-12">
+        <SocialLinks layout="horizontal" show-label :magnetic="true" />
       </div>
     </div>
   </section>

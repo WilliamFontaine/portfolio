@@ -47,10 +47,11 @@ const experiences = computed(() => [
   },
 ])
 
-// Refs
-const sectionRef = ref<HTMLElement>()
-const titleRef = ref<HTMLElement>()
-const timelineRef = ref<HTMLElement>()
+const { sectionRef, titleRef, timelineRef } = createSectionRefs(
+  'sectionRef',
+  'titleRef',
+  'timelineRef',
+)
 
 useSectionAnimations({
   sectionRef,
@@ -75,7 +76,7 @@ useSectionAnimations({
     <div class="mx-auto w-full max-w-5xl lg:my-auto">
       <h2
         ref="titleRef"
-        class="mb-6 text-center text-4xl font-bold lg:mb-8 lg:text-5xl"
+        class="opacity-0 mb-6 text-center text-4xl font-bold lg:mb-8 lg:text-5xl"
       >
         {{ t("experience.title") }}
       </h2>
@@ -92,7 +93,7 @@ useSectionAnimations({
           <div
             v-for="(exp, idx) in experiences"
             :key="exp.key"
-            class="timeline-item relative"
+            class="timeline-item opacity-0 relative"
             :class="idx % 2 === 0 ? 'md:pr-[52%]' : 'md:pl-[52%]'"
           >
             <!-- Timeline dot -->

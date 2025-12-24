@@ -28,14 +28,23 @@ const secondaryStack = [
   { name: 'CI/CD', icon: 'simple-icons:gitlab', category: 'DevOps' },
 ]
 
-// Refs
-const sectionRef = ref<HTMLElement>()
-const titleRef = ref<HTMLElement>()
-const mainHeaderRef = ref<HTMLElement>()
-const mainGridRef = ref<HTMLElement>()
-const secondaryHeaderRef = ref<HTMLElement>()
-const secondaryGridRef = ref<HTMLElement>()
-const extraInfoRef = ref<HTMLElement>()
+const {
+  sectionRef,
+  titleRef,
+  mainHeaderRef,
+  mainGridRef,
+  secondaryHeaderRef,
+  secondaryGridRef,
+  extraInfoRef,
+} = createSectionRefs(
+  'sectionRef',
+  'titleRef',
+  'mainHeaderRef',
+  'mainGridRef',
+  'secondaryHeaderRef',
+  'secondaryGridRef',
+  'extraInfoRef',
+)
 
 useSectionAnimations({
   sectionRef,
@@ -68,7 +77,7 @@ useSectionAnimations({
     <div class="mx-auto w-full max-w-6xl lg:my-auto">
       <h2
         ref="titleRef"
-        class="mb-12 text-center text-4xl font-bold lg:text-5xl"
+        class="opacity-0 mb-12 text-center text-4xl font-bold lg:text-5xl"
       >
         {{ t("skills.title") }}
       </h2>
@@ -76,7 +85,7 @@ useSectionAnimations({
       <div class="grid gap-12 lg:grid-cols-2">
         <!-- Main Stack -->
         <div>
-          <div ref="mainHeaderRef" class="mb-6">
+          <div ref="mainHeaderRef" class="opacity-0 mb-6">
             <h3
               class="flex items-center gap-2 text-xl font-semibold text-teal-400"
             >
@@ -92,7 +101,7 @@ useSectionAnimations({
             <div
               v-for="skill in mainStack"
               :key="skill.name"
-              class="skill-item group flex items-center gap-3 rounded-lg border border-border/50 bg-card/50 px-4 py-3 backdrop-blur-sm transition-all hover:border-teal-500/50 hover:bg-teal-500/5"
+              class="skill-item opacity-0 group flex items-center gap-3 rounded-lg border border-border/50 bg-card/50 px-4 py-3 backdrop-blur-sm transition-all hover:border-teal-500/50 hover:bg-teal-500/5"
             >
               <Icon
                 :name="skill.icon"
@@ -105,7 +114,7 @@ useSectionAnimations({
 
         <!-- Secondary Stack -->
         <div>
-          <div ref="secondaryHeaderRef" class="mb-6">
+          <div ref="secondaryHeaderRef" class="opacity-0 mb-6">
             <h3
               class="flex items-center gap-2 text-xl font-semibold text-orange-400"
             >
@@ -124,7 +133,7 @@ useSectionAnimations({
             <div
               v-for="skill in secondaryStack"
               :key="skill.name"
-              class="skill-item group flex items-center gap-3 rounded-lg border border-border/50 bg-card/50 px-4 py-3 backdrop-blur-sm transition-all hover:border-orange-500/50 hover:bg-orange-500/5"
+              class="skill-item opacity-0 group flex items-center gap-3 rounded-lg border border-border/50 bg-card/50 px-4 py-3 backdrop-blur-sm transition-all hover:border-orange-500/50 hover:bg-orange-500/5"
             >
               <Icon
                 :name="skill.icon"
@@ -139,7 +148,7 @@ useSectionAnimations({
       <!-- Extra info -->
       <div
         ref="extraInfoRef"
-        class="mt-12 flex flex-wrap justify-center gap-6 text-sm text-muted-foreground"
+        class="opacity-0 mt-12 flex flex-wrap justify-center gap-6 text-sm text-muted-foreground"
       >
         <div class="flex items-center gap-2">
           <Icon name="lucide:globe" class="h-4 w-4 text-teal-400" />

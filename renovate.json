@@ -1,4 +1,84 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["config:recommended"]
+  "extends": [
+    "config:recommended",
+    ":dependencyDashboard",
+    ":semanticCommits",
+    ":preserveSemverRanges"
+  ],
+  "schedule": ["before 6am on Monday"],
+  "timezone": "UTC",
+  "labels": ["dependencies"],
+  "rangeStrategy": "bump",
+  "prConcurrentLimit": 5,
+  "prHourlyLimit": 2,
+  "packageRules": [
+    {
+      "description": "Group Nuxt ecosystem updates",
+      "matchPackagePatterns": ["^@nuxt/", "^nuxt$", "^@nuxtjs/"],
+      "groupName": "Nuxt ecosystem",
+      "schedule": ["before 6am on Monday"]
+    },
+    {
+      "description": "Group icon packages",
+      "matchPackagePatterns": ["^@iconify-json/"],
+      "groupName": "Iconify icons",
+      "automerge": true
+    },
+    {
+      "description": "Group UI component libraries",
+      "matchPackageNames": ["reka-ui", "shadcn-nuxt"],
+      "groupName": "UI components"
+    },
+    {
+      "description": "Group linting and formatting tools",
+      "matchPackagePatterns": ["^eslint", "^prettier", "^@commitlint/"],
+      "matchPackageNames": ["lint-staged", "husky"],
+      "groupName": "Linting and formatting",
+      "automerge": true,
+      "minimumReleaseAge": "3 days"
+    },
+    {
+      "description": "Group Tailwind packages",
+      "matchPackagePatterns": ["^@tailwindcss/", "^tailwindcss$"],
+      "matchPackageNames": [
+        "tailwind-merge",
+        "class-variance-authority",
+        "clsx"
+      ],
+      "groupName": "Tailwind ecosystem"
+    },
+    {
+      "description": "Group 3D and animation libraries",
+      "matchPackageNames": ["three", "@types/three", "gsap"],
+      "groupName": "3D and animation"
+    },
+    {
+      "description": "Auto-merge patch and minor updates for non-major dependencies",
+      "matchUpdateTypes": ["patch", "minor"],
+      "matchCurrentVersion": "!/^0/",
+      "automerge": true,
+      "minimumReleaseAge": "3 days"
+    },
+    {
+      "description": "Hold back major updates for manual review",
+      "matchUpdateTypes": ["major"],
+      "dependencyDashboardApproval": true
+    },
+    {
+      "description": "Auto-merge dev dependency patches",
+      "matchDepTypes": ["devDependencies"],
+      "matchUpdateTypes": ["patch"],
+      "automerge": true
+    }
+  ],
+  "vulnerabilityAlerts": {
+    "enabled": true,
+    "labels": ["security"],
+    "schedule": ["at any time"]
+  },
+  "lockFileMaintenance": {
+    "enabled": true,
+    "schedule": ["before 6am on the first day of the month"]
+  }
 }

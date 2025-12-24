@@ -21,7 +21,6 @@ export function useSectionAnimation(options: SectionAnimationOptions) {
 
   const animations: gsap.core.Tween[] = []
   const hasAnimated = ref(false)
-  const isHorizontalMode = ref(false)
 
   // Pending animations for horizontal mode
   const pendingAnimations: Array<{
@@ -30,10 +29,48 @@ export function useSectionAnimation(options: SectionAnimationOptions) {
     toVars: gsap.TweenVars;
   }> = []
 
-  // Check if we're in horizontal mode
-  const checkHorizontalMode = () => {
-    if (!import.meta.client) return false
-    return isDesktop.value
+  // Computed: horizontal mode when desktop on client-side
+  const isHorizontalMode = computed(
+    () => import.meta.client && isDesktop.value,
+  )
+
+  // ScrollTrigger config for vertical mode
+  const createScrollTrigger = (trigger: Element) => ({
+    trigger,
+    start: 'top 75%',
+    once: true,
+  })
+
+  // Resolve trigger element from targets
+  const resolveTrigger = (targets: gsap.TweenTarget): Element => {
+    if (typeof targets === 'string') {
+      return document.querySelector(targets) ?? (_sectionRef.value as Element)
+    }
+    if (targets instanceof Element) {
+      return targets
+    }
+    return _sectionRef.value as Element
+  }
+
+  // Animate array of targets in vertical mode
+  const animateArrayVertical = (
+    targets: Element[] | NodeList,
+    toVars: gsap.TweenVars,
+  ) => {
+    const baseDelay = typeof toVars.delay === 'number' ? toVars.delay : 0
+    const staggerAmount =
+      typeof toVars.stagger === 'number' ? toVars.stagger : 0
+
+    Array.from(targets).forEach((target, i) => {
+      animations.push(
+        gsap.to(target, {
+          ...toVars,
+          stagger: undefined,
+          delay: baseDelay + i * staggerAmount,
+          scrollTrigger: createScrollTrigger(target as Element),
+        }),
+      )
+    })
   }
 
   /**
@@ -49,39 +86,14 @@ export function useSectionAnimation(options: SectionAnimationOptions) {
     gsap.set(targets, fromVars)
 
     if (!isHorizontalMode.value) {
-      const createScrollTrigger = (trigger: Element) => ({
-        trigger,
-        start: 'top 75%',
-        once: true,
-      })
-
       if (targets instanceof NodeList || Array.isArray(targets)) {
-        const baseDelay = typeof toVars.delay === 'number' ? toVars.delay : 0
-        const staggerAmount =
-          typeof toVars.stagger === 'number' ? toVars.stagger : 0
-
-        Array.from(targets).forEach((target, i) => {
-          animations.push(
-            gsap.to(target, {
-              ...toVars,
-              stagger: undefined,
-              delay: baseDelay + i * staggerAmount,
-              scrollTrigger: createScrollTrigger(target as Element),
-            }),
-          )
-        })
+        animateArrayVertical(targets, toVars)
       } else {
-        const trigger =
-          typeof targets === 'string'
-            ? (document.querySelector(targets) ?? _sectionRef.value)
-            : targets instanceof Element
-              ? targets
-              : _sectionRef.value
-
+        const trigger = resolveTrigger(targets)
         animations.push(
           gsap.to(targets, {
             ...toVars,
-            scrollTrigger: createScrollTrigger(trigger as Element),
+            scrollTrigger: createScrollTrigger(trigger),
           }),
         )
       }
@@ -105,24 +117,20 @@ export function useSectionAnimation(options: SectionAnimationOptions) {
 
   /**
    * Calculate the progress threshold for this section
+   * Triggers slightly before section is centered
    */
-  const getSectionThreshold = () => {
+  const sectionThreshold = computed(() => {
     if (sectionIndex === 0) return 0
-    // Trigger slightly before section is centered
     return Math.max(0, (sectionIndex - 0.3) / (totalSections - 1))
-  }
+  })
 
   // Watch for section becoming active in horizontal mode
   let stopWatcher: (() => void) | null = null
 
   onMounted(() => {
     nextTick(() => {
-      isHorizontalMode.value = checkHorizontalMode()
-
       // Setup watcher for horizontal mode
       if (isHorizontalMode.value && scrollContext) {
-        const threshold = getSectionThreshold()
-
         // Section 0 (Hero) plays immediately
         if (sectionIndex === 0) {
           setTimeout(() => playAnimations(), 100)
@@ -130,7 +138,10 @@ export function useSectionAnimation(options: SectionAnimationOptions) {
           stopWatcher = watch(
             () => scrollContext.progress.value,
             (currentProgress) => {
-              if (!hasAnimated.value && currentProgress >= threshold) {
+              if (
+                !hasAnimated.value &&
+                currentProgress >= sectionThreshold.value
+              ) {
                 playAnimations()
               }
             },
@@ -155,8 +166,8 @@ export function useSectionAnimation(options: SectionAnimationOptions) {
   })
 
   return {
-    isHorizontalMode: computed(() => isHorizontalMode.value),
-    hasAnimated: computed(() => hasAnimated.value),
+    isHorizontalMode,
+    hasAnimated: readonly(hasAnimated),
     animate,
     playAnimations,
   }

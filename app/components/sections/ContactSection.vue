@@ -1,17 +1,25 @@
 <script setup lang="ts">
 const { t } = useI18n()
 
-// Refs
-const sectionRef = ref<HTMLElement>()
-const titleRef = ref<HTMLElement>()
-const descRef = ref<HTMLElement>()
-const ctasRef = ref<HTMLElement>()
-const socialRef = ref<HTMLElement>()
-const locationRef = ref<HTMLElement>()
-
-// CTA button refs for magnetic effect
-const maltButtonRef = ref<HTMLElement>()
-const emailButtonRef = ref<HTMLElement>()
+const {
+  sectionRef,
+  titleRef,
+  descRef,
+  ctasRef,
+  socialRef,
+  locationRef,
+  maltButtonRef,
+  emailButtonRef,
+} = createSectionRefs(
+  'sectionRef',
+  'titleRef',
+  'descRef',
+  'ctasRef',
+  'socialRef',
+  'locationRef',
+  'maltButtonRef',
+  'emailButtonRef',
+)
 
 // Apply magnetic effects
 useMagneticEffect(maltButtonRef, MAGNETIC_EFFECTS.BUTTON)
@@ -37,19 +45,22 @@ useSectionAnimations({
   >
     <div class="w-full max-w-3xl text-center">
       <!-- Title -->
-      <h2 ref="titleRef" class="text-4xl font-bold lg:text-5xl xl:text-6xl">
+      <h2
+        ref="titleRef"
+        class="opacity-0 text-4xl font-bold lg:text-5xl xl:text-6xl"
+      >
         {{ t("contact.title") }}
       </h2>
 
       <!-- Description -->
-      <p ref="descRef" class="mt-6 text-xl text-muted-foreground">
+      <p ref="descRef" class="opacity-0 mt-6 text-xl text-muted-foreground">
         {{ t("contact.description") }}
       </p>
 
       <!-- CTAs -->
       <div
         ref="ctasRef"
-        class="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row"
+        class="opacity-0 mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row"
       >
         <Button
           ref="maltButtonRef"
@@ -77,32 +88,14 @@ useSectionAnimations({
       </div>
 
       <!-- Social -->
-      <div ref="socialRef" class="mt-12">
-        <p class="mb-4 text-sm text-muted-foreground">
-          {{ t("contact.social") }}
-        </p>
-        <div class="flex justify-center gap-4">
-          <Button
-            v-for="link in socialLinks"
-            :key="link.name"
-            as="a"
-            :href="link.href"
-            target="_blank"
-            rel="noopener noreferrer"
-            variant="outline"
-            size="icon"
-            class="h-14 w-14 rounded-full border-border/50 bg-card/50 backdrop-blur-sm transition-all hover:border-teal-500/50 hover:bg-teal-500/10 hover:text-teal-400"
-            :aria-label="link.name"
-          >
-            <Icon :name="link.icon" class="h-6 w-6" />
-          </Button>
-        </div>
+      <div ref="socialRef" class="opacity-0 mt-12">
+        <SocialLinks layout="grid" show-label />
       </div>
 
       <!-- Location -->
       <div
         ref="locationRef"
-        class="mt-12 flex flex-col items-center justify-center gap-2 text-sm text-muted-foreground sm:flex-row sm:gap-2 sm:text-base"
+        class="opacity-0 mt-12 flex flex-col items-center justify-center gap-2 text-sm text-muted-foreground sm:flex-row sm:gap-2 sm:text-base"
       >
         <div class="flex items-center gap-2">
           <Icon name="lucide:map-pin" class="h-4 w-4 text-teal-400" />

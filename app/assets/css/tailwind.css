@@ -1,10 +1,3 @@
-/* CRITICAL CSS - Prevent FOUC (Flash of Unstyled Content) */
-/* This must be first to hide animated elements before GSAP loads */
-/* Note: No !important so GSAP can override during animation */
-.gsap-hide {
-  opacity: 0;
-}
-
 @import "tailwindcss";
 
 @custom-variant dark (&:is(.dark *));
@@ -191,7 +184,7 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply overflow-x-hidden bg-background text-foreground;
   }
 
   /* Enhanced focus-visible for keyboard navigation */

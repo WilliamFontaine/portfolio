@@ -49,17 +49,11 @@ const projects = computed(() => [
 const featuredProject = computed(() => projects.value.find((p) => p.featured))
 const otherProjects = computed(() => projects.value.filter((p) => !p.featured))
 
-// Refs
-const sectionRef = ref<HTMLElement>()
-const titleRef = ref<HTMLElement>()
-const featuredRef = ref<HTMLElement>()
-const otherProjectsRef = ref<HTMLElement>()
-
-// Use section animation composable
-useSectionAnimation({
-  sectionRef,
-  sectionIndex: 3,
-})
+const { sectionRef, titleRef, projectsGridRef } = createSectionRefs(
+  'sectionRef',
+  'titleRef',
+  'projectsGridRef',
+)
 
 // Update image after mount to avoid hydration mismatch
 onMounted(() => {
@@ -73,14 +67,31 @@ useSectionAnimations({
   sectionIndex: 3,
   animations: [
     { ref: titleRef, preset: 'fadeUp', delay: 0 },
-    { ref: featuredRef, preset: 'scaleUp', delay: 0.15 },
-    createGridAnimation('.project-card', otherProjectsRef, {
+    {
+      selector: '.featured-card',
+      parent: projectsGridRef,
+      preset: 'scaleUp',
+      delay: 0.1,
+    },
+    {
+      selector: '.featured-content',
+      parent: projectsGridRef,
       preset: 'fadeUp',
-      startDelay: 0.3,
+      delay: 0.2,
+    },
+    {
+      selector: '.featured-image',
+      parent: projectsGridRef,
+      preset: 'slideLeft',
+      delay: 0.25,
+    },
+    createGridAnimation('.project-card', projectsGridRef, {
+      preset: 'fadeUp',
+      startDelay: 0.4,
       stagger: 0.12,
     }),
   ],
-  flowStagger: 0.03,
+  flowStagger: 0.02,
 })
 </script>
 
@@ -92,26 +103,25 @@ useSectionAnimations({
     <div class="mx-auto w-full max-w-7xl lg:my-auto">
       <h2
         ref="titleRef"
-        class="mb-6 text-center text-4xl font-bold lg:mb-8 lg:text-5xl"
+        class="opacity-0 mb-6 text-center text-4xl font-bold lg:mb-8 lg:text-5xl"
       >
         {{ t("projects.title") }}
       </h2>
 
       <div
-        ref="otherProjectsRef"
+        ref="projectsGridRef"
         class="grid gap-6 md:grid-cols-2 md:gap-5 lg:gap-4"
       >
         <!-- Featured Project -->
         <Card
           v-if="featuredProject"
-          ref="featuredRef"
-          class="group col-span-full overflow-hidden border-border/50 bg-card/80 backdrop-blur-sm transition-all hover:border-teal-500/30"
+          class="featured-card opacity-0 group col-span-full overflow-hidden border-border/50 bg-card/80 backdrop-blur-sm transition-all hover:border-teal-500/30"
         >
           <CardContent class="p-0">
             <div class="flex flex-col md:flex-row">
               <!-- Info -->
               <div
-                class="flex flex-1 flex-col justify-between p-4 md:p-5 lg:p-6"
+                class="featured-content opacity-0 flex flex-1 flex-col justify-between p-4 md:p-5 lg:p-6"
               >
                 <div>
                   <Badge
@@ -157,7 +167,7 @@ useSectionAnimations({
 
               <!-- Screenshot -->
               <div
-                class="relative flex-1 overflow-hidden bg-muted/30 p-4 md:p-5 lg:p-6"
+                class="featured-image opacity-0 relative flex-1 overflow-hidden bg-muted/30 p-4 md:p-5 lg:p-6"
               >
                 <img
                   :src="comboxImage"
@@ -174,7 +184,7 @@ useSectionAnimations({
         <Card
           v-for="project in otherProjects"
           :key="project.key"
-          class="project-card group overflow-hidden border-border/50 bg-card/80 backdrop-blur-sm transition-all hover:border-border"
+          class="project-card opacity-0 group overflow-hidden border-border/50 bg-card/80 backdrop-blur-sm transition-all hover:border-border"
         >
           <CardContent class="p-4 lg:p-5">
             <div class="mb-2 flex items-center gap-2">

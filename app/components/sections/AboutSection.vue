@@ -13,14 +13,25 @@ const education = computed(() => [
   t('about.education.dut'),
 ])
 
-const sectionRef = ref<HTMLElement>()
-const photoRef = ref<HTMLElement>()
-const statsRef = ref<HTMLElement>()
-const titleRef = ref<HTMLElement>()
-const descRef = ref<HTMLElement>()
-const philosophyRef = ref<HTMLElement>()
-const servicesRef = ref<HTMLElement>()
-const educationRef = ref<HTMLElement>()
+const {
+  sectionRef,
+  photoRef,
+  statsRef,
+  titleRef,
+  descRef,
+  philosophyRef,
+  servicesRef,
+  educationRef,
+} = createSectionRefs(
+  'sectionRef',
+  'photoRef',
+  'statsRef',
+  'titleRef',
+  'descRef',
+  'philosophyRef',
+  'servicesRef',
+  'educationRef',
+)
 
 useSectionAnimations({
   sectionRef,
@@ -51,7 +62,7 @@ useSectionAnimations({
         class="flex flex-col items-center justify-center gap-8 md:items-start"
       >
         <!-- Photo with glow -->
-        <div ref="photoRef" class="relative">
+        <div ref="photoRef" class="opacity-0 relative">
           <div
             class="absolute -inset-4 rounded-full bg-gradient-to-r from-teal-400/50 to-orange-400/50 blur-2xl"
           />
@@ -67,7 +78,7 @@ useSectionAnimations({
         </div>
 
         <!-- Stats -->
-        <div ref="statsRef" class="flex gap-8">
+        <div ref="statsRef" class="opacity-0 flex gap-8">
           <div class="text-center">
             <span class="block text-4xl font-bold text-teal-400 lg:text-5xl"
               >4+</span
@@ -90,18 +101,18 @@ useSectionAnimations({
 
       <!-- Right: Content -->
       <div class="flex flex-col justify-center">
-        <h2 ref="titleRef" class="text-4xl font-bold lg:text-5xl">
+        <h2 ref="titleRef" class="opacity-0 text-4xl font-bold lg:text-5xl">
           {{ t("about.title") }}
         </h2>
 
-        <p ref="descRef" class="mt-6 text-lg text-muted-foreground">
+        <p ref="descRef" class="opacity-0 mt-6 text-lg text-muted-foreground">
           {{ t("about.description") }}
         </p>
 
         <!-- Philosophy -->
         <div
           ref="philosophyRef"
-          class="mt-8 rounded-lg border border-teal-500/20 bg-teal-500/5 p-6"
+          class="opacity-0 mt-8 rounded-lg border border-teal-500/20 bg-teal-500/5 p-6"
         >
           <h3 class="flex items-center gap-2 font-semibold text-teal-400">
             <Icon name="lucide:quote" class="h-5 w-5" />
@@ -113,7 +124,7 @@ useSectionAnimations({
         </div>
 
         <!-- Services -->
-        <div ref="servicesRef" class="mt-8">
+        <div ref="servicesRef" class="opacity-0 mt-8">
           <h3 class="mb-4 font-semibold">{{ t("about.services.title") }}</h3>
           <ul class="space-y-3">
             <li
@@ -131,7 +142,7 @@ useSectionAnimations({
         </div>
 
         <!-- Education -->
-        <div ref="educationRef" class="mt-6">
+        <div ref="educationRef" class="opacity-0 mt-6">
           <h3 class="mb-3 flex items-center gap-2 font-semibold">
             <Icon
               name="lucide:graduation-cap"

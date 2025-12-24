@@ -6,7 +6,7 @@ useTheme()
 
 <template>
   <div
-    class="min-h-screen bg-background text-foreground antialiased transition-colors duration-300"
+    class="min-h-screen overflow-x-hidden bg-background text-foreground antialiased transition-colors duration-300"
   >
     <NuxtLayout>
       <NuxtPage />

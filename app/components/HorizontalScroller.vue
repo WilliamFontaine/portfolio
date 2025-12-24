@@ -43,7 +43,7 @@ provide('scrollContext', {
     <div
       ref="wrapperRef"
       class="will-change-transform"
-      :class="isHorizontalMode ? 'flex h-full' : 'flex flex-col'"
+      :class="isHorizontalMode ? 'flex h-full' : 'flex flex-col pb-[15vh]'"
       :style="isHorizontalMode ? { width: `${sectionsCount * 100}vw` } : {}"
     >
       <SectionsHeroSection />
