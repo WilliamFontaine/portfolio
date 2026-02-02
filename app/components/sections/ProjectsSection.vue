@@ -4,21 +4,21 @@ const { isDark } = useTheme()
 
 // Use ref for image to avoid hydration mismatch (server doesn't know theme)
 // Start with light image, update after hydration
-const comboxImage = ref('/images/projects/combox_light.png')
+const comwaveImage = ref('/images/projects/comwave_light.png')
 
 // Watch for subsequent theme changes
 watch(isDark, (dark) => {
-  comboxImage.value = dark
-    ? '/images/projects/combox_dark.png'
-    : '/images/projects/combox_light.png'
+  comwaveImage.value = dark
+    ? '/images/projects/comwave_dark.png'
+    : '/images/projects/comwave_light.png'
 })
 
 const projects = computed(() => [
   {
-    key: 'combox',
-    title: t('projects.items.combox.title'),
-    description: t('projects.items.combox.description'),
-    longDescription: t('projects.items.combox.longDescription'),
+    key: 'comwave',
+    title: t('projects.items.comwave.title'),
+    description: t('projects.items.comwave.description'),
+    longDescription: t('projects.items.comwave.longDescription'),
     techs: [
       'Nuxt 4',
       'NestJS',
@@ -27,7 +27,7 @@ const projects = computed(() => [
       'Redis',
       'Lemon Squeezy',
     ],
-    url: URLS.PROJECTS.COMBOX,
+    url: URLS.PROJECTS.COMWAVE,
     featured: true,
   },
   {
@@ -57,9 +57,9 @@ const { sectionRef, titleRef, projectsGridRef } = createSectionRefs(
 
 // Update image after mount to avoid hydration mismatch
 onMounted(() => {
-  comboxImage.value = isDark.value
-    ? '/images/projects/combox_dark.png'
-    : '/images/projects/combox_light.png'
+  comwaveImage.value = isDark.value
+    ? '/images/projects/comwave_dark.png'
+    : '/images/projects/comwave_light.png'
 })
 
 useSectionAnimations({
@@ -170,7 +170,7 @@ useSectionAnimations({
                 class="featured-image opacity-0 relative flex-1 overflow-hidden bg-muted/30 p-4 md:p-5 lg:p-6"
               >
                 <img
-                  :src="comboxImage"
+                  :src="comwaveImage"
                   :alt="featuredProject.title"
                   class="h-full w-full rounded-lg object-cover shadow-2xl transition-transform duration-500 group-hover:scale-[1.02]"
                   loading="lazy"
