@@ -49,7 +49,7 @@
     "items": {
       "freelance": {
         "achievements": [
-          "Développement de Combox, SaaS de planification social media",
+          "Développement de ComWave, SaaS de planification social media",
           "Accompagnement clients du cadrage au déploiement",
           "Architecture multi-tenant, OAuth 2.0, queues asynchrones"
         ],
@@ -109,10 +109,10 @@
     "archived": "Projet archivé",
     "featured": "Projet phare",
     "items": {
-      "combox": {
+      "comwave": {
         "description": "SaaS de planification et publication automatique de contenu sur les réseaux sociaux.",
         "longDescription": "Architecture multi-tenant avec gestion d'organisations, rôles et permissions. Système d'authentification OAuth 2.0 pour chaque plateforme sociale. Pipeline de publication programmée avec queues asynchrones (BullMQ).",
-        "title": "Combox"
+        "title": "ComWave"
       },
       "egenr": {
         "description": "Application de bureau multiplateforme pour podologues et professionnels de santé.",

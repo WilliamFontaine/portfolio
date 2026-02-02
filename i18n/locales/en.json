@@ -49,7 +49,7 @@
     "items": {
       "freelance": {
         "achievements": [
-          "Development of Combox, social media scheduling SaaS",
+          "Development of ComWave, social media scheduling SaaS",
           "Client support from scoping to deployment",
           "Multi-tenant architecture, OAuth 2.0, async queues"
         ],
@@ -109,10 +109,10 @@
     "archived": "Archived project",
     "featured": "Featured project",
     "items": {
-      "combox": {
+      "comwave": {
         "description": "SaaS for scheduling & auto-publishing content across social platforms.",
         "longDescription": "Multi-tenant architecture with organization management, roles and permissions. OAuth 2.0 authentication system for each social platform. Scheduled publishing pipeline with async queues (BullMQ).",
-        "title": "Combox"
+        "title": "ComWave"
       },
       "egenr": {
         "description": "Cross-platform desktop application for podiatrists and healthcare professionals.",

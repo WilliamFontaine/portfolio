@@ -12,7 +12,7 @@ export const URLS = {
 
   // Projects
   PROJECTS: {
-    COMBOX: 'https://com-box.app',
+    COMWAVE: 'https://comwave.app',
   },
 
   // Site
