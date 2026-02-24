@@ -3,16 +3,16 @@
     "goToSection": "Go to {section} section"
   },
   "about": {
-    "description": "Specialized in Nuxt and NestJS, I help startups and SMBs build performant, maintainable web applications designed to last.",
+    "description": "I build tech products from A to Z: mockups, code, infra, deployment. Two stacks in production, Spring Boot/Angular and Nuxt/NestJS.",
     "education": {
       "bachelor": "Bachelor Application Developer - HESIAS (2023)",
       "dut": "DUT Computer Science - IUT Clermont Auvergne (2022)",
       "master": "Master's IT Expert - HESIAS (2025)",
       "title": "Education"
     },
-    "intro": "Passionate Full-Stack Developer",
+    "intro": "Freelance Full-Stack Developer",
     "philosophy": {
-      "content": "Projects that run in production, with an obsession: useful code, client-oriented, not just pretty. I'm not just an executor: I'm a driving force.",
+      "content": "Projects that run in production, with an obsession: useful code, client-oriented, not just pretty. I deliver, I propose, I commit.",
       "title": "My philosophy"
     },
     "services": {
@@ -77,7 +77,7 @@
           "Rigor and importance of maintainable code"
         ],
         "company": "NEO-FUGU",
-        "description": "Development of a complex ERP in the luxury sector. 3 years on internal projects in a team of 10.",
+        "description": "Contributing to the development of an ERP in the luxury sector. 3 years in a team of 10.",
         "period": "2022 - 2025",
         "role": "Full-Stack Developer"
       }
@@ -90,10 +90,10 @@
       "contact": "Contact me",
       "projects": "View my projects"
     },
-    "description": "I build custom web applications for startups and SMBs. From functional scoping to deployment, I support you at every step.",
+    "description": "I build tech products from A to Z for startups and SMBs. From scoping to deployment, two stacks in production: Spring Boot/Angular and Nuxt/NestJS.",
     "greeting": "Hi, I'm",
     "name": "William Fontaine",
-    "title": "Full-Stack Developer Nuxt & NestJS"
+    "title": "Freelance Full-Stack Developer"
   },
   "hints": {
     "swipe": "Scroll down"
@@ -129,8 +129,8 @@
     "viewProject": "View project"
   },
   "seo": {
-    "description": "Full-Stack Developer specialized in Nuxt and NestJS. I build custom web applications: SaaS, MVP, business platforms.",
-    "title": "William Fontaine - Full-Stack Developer Nuxt & NestJS"
+    "description": "Freelance Full-Stack Developer. I build tech products from A to Z: SaaS, MVP, business platforms. Spring Boot/Angular and Nuxt/NestJS.",
+    "title": "William Fontaine - Freelance Full-Stack Developer"
   },
   "skills": {
     "main": {
