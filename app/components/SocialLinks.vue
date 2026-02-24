@@ -53,12 +53,12 @@ if (props.magnetic) {
       props.class,
     ]"
   >
-    <span v-if="showLabel" class="text-sm text-muted-foreground">
+    <span v-if="showLabel" class="text-sm font-medium text-muted-foreground/70">
       {{ labelText || t("contact.social") }}
     </span>
     <div
       :class="
-        layout === 'horizontal' ? 'flex gap-2' : 'flex justify-center gap-4'
+        layout === 'horizontal' ? 'flex gap-3' : 'flex justify-center gap-4'
       "
     >
       <Button
@@ -72,14 +72,14 @@ if (props.magnetic) {
         variant="outline"
         :size="size"
         :class="[
-          layout === 'grid' ? 'h-14 w-14 rounded-full' : 'h-10 w-10 rounded-lg',
+          layout === 'grid' ? 'h-14 w-14 rounded-full' : 'h-11 w-11 rounded-xl',
           'border-border/50 bg-card/50 text-muted-foreground backdrop-blur-sm transition-all hover:border-teal-500/50 hover:bg-teal-500/10 hover:text-teal-400',
         ]"
         :aria-label="link.name"
       >
         <Icon
           :name="link.icon"
-          :class="layout === 'grid' ? 'h-6 w-6' : 'h-5 w-5'"
+          :size="layout === 'grid' ? '24' : '20'"
         />
       </Button>
     </div>
