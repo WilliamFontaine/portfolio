@@ -1,0 +1,24 @@
+name: Setup
+description: Install pnpm + Node and install dependencies with a frozen lockfile. Caller must checkout first.
+
+inputs:
+  node-version:
+    description: Node.js version
+    required: false
+    default: '24'
+
+runs:
+  using: composite
+  steps:
+    - name: Install pnpm
+      uses: pnpm/action-setup@v6
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v6
+      with:
+        node-version: ${{ inputs.node-version }}
+        cache: pnpm
+
+    - name: Install dependencies
+      shell: bash
+      run: pnpm install --frozen-lockfile
