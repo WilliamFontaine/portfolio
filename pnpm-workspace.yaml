@@ -1,6 +1,10 @@
-onlyBuiltDependencies:
-  - "@parcel/watcher"
-  - "@tailwindcss/oxide"
-  - esbuild
-  - unrs-resolver
-  - vue-demi
+# pnpm 11 remplace onlyBuiltDependencies/ignoredBuiltDependencies par cette map.
+# true  = autorise l'exécution des scripts postinstall (build natif)
+# false = refuse explicitement
+allowBuilds:
+  '@parcel/watcher': true
+  '@tailwindcss/oxide': true
+  esbuild: true
+  sharp: true
+  unrs-resolver: true
+  vue-demi: true

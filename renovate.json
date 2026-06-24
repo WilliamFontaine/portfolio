@@ -4,78 +4,74 @@
     "config:recommended",
     ":dependencyDashboard",
     ":semanticCommits",
-    ":preserveSemverRanges"
+    ":automergeMinor",
+    ":automergePatch",
+    "schedule:weekly",
+    "group:allNonMajor"
   ],
-  "schedule": ["before 6am on Monday"],
-  "timezone": "UTC",
+  "configMigration": true,
+  "osvVulnerabilityAlerts": true,
+  "minimumReleaseAge": "3 days",
   "labels": ["dependencies"],
   "rangeStrategy": "bump",
   "prConcurrentLimit": 5,
-  "prHourlyLimit": 2,
+  "timezone": "Europe/Paris",
   "packageRules": [
     {
-      "description": "Group Nuxt ecosystem updates",
-      "matchPackagePatterns": ["^@nuxt/", "^nuxt$", "^@nuxtjs/"],
-      "groupName": "Nuxt ecosystem",
-      "schedule": ["before 6am on Monday"]
+      "description": "Nuxt et ses modules officiels",
+      "groupName": "Nuxt",
+      "matchPackageNames": ["/^@nuxt//", "/^@nuxtjs//", "/^nuxt$/"]
     },
     {
-      "description": "Group icon packages",
-      "matchPackagePatterns": ["^@iconify-json/"],
-      "groupName": "Iconify icons",
-      "automerge": true
+      "description": "Librairies de composants UI",
+      "groupName": "UI components",
+      "matchPackageNames": ["reka-ui", "shadcn-nuxt"]
     },
     {
-      "description": "Group UI component libraries",
-      "matchPackageNames": ["reka-ui", "shadcn-nuxt"],
-      "groupName": "UI components"
-    },
-    {
-      "description": "Group linting and formatting tools",
-      "matchPackagePatterns": ["^eslint", "^prettier", "^@commitlint/"],
-      "matchPackageNames": ["lint-staged", "husky"],
-      "groupName": "Linting and formatting",
-      "automerge": true,
-      "minimumReleaseAge": "3 days"
-    },
-    {
-      "description": "Group Tailwind packages",
-      "matchPackagePatterns": ["^@tailwindcss/", "^tailwindcss$"],
+      "description": "Ecosysteme Tailwind CSS",
+      "groupName": "Tailwind CSS",
       "matchPackageNames": [
+        "/^@tailwindcss//",
+        "/^tailwindcss$/",
         "tailwind-merge",
         "class-variance-authority",
         "clsx"
-      ],
-      "groupName": "Tailwind ecosystem"
+      ]
     },
     {
-      "description": "Group 3D and animation libraries",
-      "matchPackageNames": ["three", "@types/three", "gsap"],
-      "groupName": "3D and animation"
+      "description": "3D et animation (three.js, GSAP)",
+      "groupName": "3D et animation",
+      "matchPackageNames": ["three", "@types/three", "gsap"]
     },
     {
-      "description": "Auto-merge patch and minor updates for non-major dependencies",
-      "matchUpdateTypes": ["patch", "minor"],
-      "matchCurrentVersion": "!/^0/",
+      "description": "Outils de lint et de formatage",
+      "groupName": "Lint et formatage",
+      "matchPackageNames": [
+        "/^eslint/",
+        "/^@nuxt/eslint$/",
+        "/^@commitlint//",
+        "/prettier/",
+        "lint-staged",
+        "husky"
+      ]
+    },
+    {
+      "description": "Jeux d'icones Iconify (donnees uniquement : automerge meme en major)",
+      "groupName": "Iconify",
       "automerge": true,
-      "minimumReleaseAge": "3 days"
+      "matchPackageNames": ["/^@iconify-json//"]
     },
     {
-      "description": "Hold back major updates for manual review",
-      "matchUpdateTypes": ["major"],
-      "dependencyDashboardApproval": true
-    },
-    {
-      "description": "Auto-merge dev dependency patches",
-      "matchDepTypes": ["devDependencies"],
-      "matchUpdateTypes": ["patch"],
-      "automerge": true
+      "description": "Ne jamais auto-merger un bump mineur sur un paquet 0.x (un minor peut etre cassant en semver 0.x)",
+      "matchCurrentVersion": "/^0\\./",
+      "matchUpdateTypes": ["minor"],
+      "automerge": false
     }
   ],
   "vulnerabilityAlerts": {
-    "enabled": true,
     "labels": ["security"],
-    "schedule": ["at any time"]
+    "minimumReleaseAge": "0",
+    "automerge": true
   },
   "lockFileMaintenance": {
     "enabled": true,

@@ -7,11 +7,11 @@ import { splitText } from '~/utils/animations/splitText'
  */
 export interface AnimationPreset {
   /** Initial state (from) */
-  from: gsap.TweenVars;
+  from: gsap.TweenVars
   /** Final state (to) */
-  to: Omit<gsap.TweenVars, 'delay'>;
+  to: Omit<gsap.TweenVars, 'delay'>
   /** Delay before animation starts (in seconds) */
-  delay?: number;
+  delay?: number
 }
 
 /**
@@ -19,21 +19,21 @@ export interface AnimationPreset {
  */
 export interface ElementAnimation {
   /** Ref to the element to animate */
-  ref?: Ref<MaybeElement | null | undefined>;
+  ref?: Ref<MaybeElement | null | undefined>
   /** CSS selector for querying elements (alternative to ref) */
-  selector?: string;
+  selector?: string
   /** Parent element to query within (required if using selector) */
-  parent?: Ref<MaybeElement | null | undefined>;
+  parent?: Ref<MaybeElement | null | undefined>
   /** Preset name or custom animation config */
-  preset?: AnimationPresetName | AnimationPreset;
+  preset?: AnimationPresetName | AnimationPreset
   /** Override delay */
-  delay?: number;
+  delay?: number
   /** Text split mode (for text animations) */
-  splitMode?: 'chars' | 'words' | 'lines';
+  splitMode?: 'chars' | 'words' | 'lines'
   /** Stagger amount (for arrays or split text) */
-  stagger?: number;
+  stagger?: number
   /** Custom animation function (for complex cases) */
-  custom?: (elements: NodeListOf<Element>) => void;
+  custom?: (elements: NodeListOf<Element>) => void
 }
 
 /**
@@ -45,15 +45,12 @@ export type AnimationPresetName =
   | 'slideLeft'
   | 'slideRight'
   | 'scaleUp'
-  | 'alternatingSlide';
+  | 'alternatingSlide'
 
 /**
  * Built-in animation presets
  */
-const BUILT_IN_PRESETS: Record<
-  AnimationPresetName,
-  Omit<AnimationPreset, 'delay'>
-> = {
+const BUILT_IN_PRESETS: Record<AnimationPresetName, Omit<AnimationPreset, 'delay'>> = {
   fadeUp: {
     from: { opacity: 0, y: 30 },
     to: { opacity: 1, y: 0, duration: 0.6, ease: EASING.smooth },
@@ -120,21 +117,15 @@ const BUILT_IN_PRESETS: Record<
  * ```
  */
 export function useSectionAnimations(config: {
-  sectionRef: Ref<HTMLElement | undefined>;
-  sectionIndex: number;
-  animations: ElementAnimation[];
+  sectionRef: Ref<HTMLElement | undefined>
+  sectionIndex: number
+  animations: ElementAnimation[]
   /** Base delay to add to all animations (defaults to 0) */
-  baseDelay?: number;
+  baseDelay?: number
   /** Stagger delay between animations (creates smooth flow) */
-  flowStagger?: number;
+  flowStagger?: number
 }) {
-  const {
-    sectionRef,
-    sectionIndex,
-    animations,
-    baseDelay = 0,
-    flowStagger = 0,
-  } = config
+  const { sectionRef, sectionIndex, animations, baseDelay = 0, flowStagger = 0 } = config
   const { animate } = useSectionAnimation({ sectionRef, sectionIndex })
 
   /**
@@ -143,7 +134,7 @@ export function useSectionAnimations(config: {
   function animateElements() {
     animations.forEach((anim, animIndex) => {
       // Get target elements
-      let targets: gsap.TweenTarget | null = null
+      let targets: gsap.TweenTarget | null
       if (anim.ref?.value) {
         targets = anim.ref.value
       } else if (anim.selector && anim.parent?.value) {
@@ -189,8 +180,7 @@ export function useSectionAnimations(config: {
       }
 
       // Calculate final delay with flow stagger
-      const finalDelay =
-        baseDelay + (anim.delay ?? preset.delay ?? 0) + animIndex * flowStagger
+      const finalDelay = baseDelay + (anim.delay ?? preset.delay ?? 0) + animIndex * flowStagger
 
       // Handle text splitting
       if (anim.splitMode && anim.ref?.value) {
@@ -232,9 +222,9 @@ export function createAlternatingSlide(
   selector: string,
   parent: Ref<MaybeElement | null | undefined>,
   options: {
-    startDelay?: number;
-    stagger?: number;
-    distance?: number;
+    startDelay?: number
+    stagger?: number
+    distance?: number
   } = {},
 ): ElementAnimation {
   const { startDelay = 0, stagger = 0.2, distance = 50 } = options
@@ -262,9 +252,9 @@ export function createGridAnimation(
   selector: string,
   parent: Ref<MaybeElement | null | undefined>,
   options: {
-    preset?: AnimationPresetName;
-    startDelay?: number;
-    stagger?: number;
+    preset?: AnimationPresetName
+    startDelay?: number
+    stagger?: number
   } = {},
 ): ElementAnimation {
   const { preset = 'scaleUp', startDelay = 0, stagger = 0.05 } = options
