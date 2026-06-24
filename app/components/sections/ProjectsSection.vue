@@ -19,14 +19,7 @@ const projects = computed(() => [
     title: t('projects.items.comwave.title'),
     description: t('projects.items.comwave.description'),
     longDescription: t('projects.items.comwave.longDescription'),
-    techs: [
-      'Nuxt 4',
-      'NestJS',
-      'PostgreSQL',
-      'BullMQ',
-      'Redis',
-      'Lemon Squeezy',
-    ],
+    techs: ['Nuxt 4', 'NestJS', 'PostgreSQL', 'BullMQ', 'Redis', 'Lemon Squeezy'],
     url: URLS.PROJECTS.COMWAVE,
     featured: true,
   },
@@ -101,17 +94,11 @@ useSectionAnimations({
     class="horizontal-section relative flex w-full flex-shrink-0 items-center px-4 py-8 sm:px-8 sm:py-12 lg:h-screen lg:w-screen lg:overflow-y-auto lg:py-8"
   >
     <div class="mx-auto w-full max-w-7xl lg:my-auto">
-      <h2
-        ref="titleRef"
-        class="opacity-0 mb-6 text-center text-4xl font-bold lg:mb-8 lg:text-5xl"
-      >
-        {{ t("projects.title") }}
+      <h2 ref="titleRef" class="opacity-0 mb-6 text-center text-4xl font-bold lg:mb-8 lg:text-5xl">
+        {{ t('projects.title') }}
       </h2>
 
-      <div
-        ref="projectsGridRef"
-        class="grid gap-6 md:grid-cols-2 md:gap-5 lg:gap-4"
-      >
+      <div ref="projectsGridRef" class="grid gap-6 md:grid-cols-2 md:gap-5 lg:gap-4">
         <!-- Featured Project -->
         <Card
           v-if="featuredProject"
@@ -124,10 +111,8 @@ useSectionAnimations({
                 class="featured-content opacity-0 flex flex-1 flex-col justify-between p-4 md:p-5 lg:p-6"
               >
                 <div>
-                  <Badge
-                    class="mb-2 bg-teal-500/20 text-teal-400 hover:bg-teal-500/30"
-                  >
-                    {{ t("projects.featured") }}
+                  <Badge class="mb-2 bg-teal-500/20 text-teal-400 hover:bg-teal-500/30">
+                    {{ t('projects.featured') }}
                   </Badge>
                   <h3 class="text-xl font-bold lg:text-2xl">
                     {{ featuredProject.title }}
@@ -161,7 +146,7 @@ useSectionAnimations({
                   class="mt-4 w-fit gap-2 transition-all hover:border-teal-500/50 hover:bg-teal-500/5"
                 >
                   <Icon name="lucide:external-link" class="h-4 w-4" />
-                  {{ t("projects.viewProject") }}
+                  {{ t('projects.viewProject') }}
                 </Button>
               </div>
 
@@ -188,13 +173,8 @@ useSectionAnimations({
         >
           <CardContent class="p-4 lg:p-5">
             <div class="mb-2 flex items-center gap-2">
-              <Icon
-                name="lucide:archive"
-                class="h-4 w-4 text-muted-foreground"
-              />
-              <span class="text-xs text-muted-foreground">{{
-                t("projects.archived")
-              }}</span>
+              <Icon name="lucide:archive" class="h-4 w-4 text-muted-foreground" />
+              <span class="text-xs text-muted-foreground">{{ t('projects.archived') }}</span>
             </div>
             <h3 class="text-lg font-semibold lg:text-xl">
               {{ project.title }}
@@ -204,12 +184,7 @@ useSectionAnimations({
             </p>
 
             <div class="mt-3 flex flex-wrap gap-1.5">
-              <Badge
-                v-for="tech in project.techs"
-                :key="tech"
-                variant="outline"
-                class="text-xs"
-              >
+              <Badge v-for="tech in project.techs" :key="tech" variant="outline" class="text-xs">
                 {{ tech }}
               </Badge>
             </div>

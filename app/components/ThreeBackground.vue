@@ -2,7 +2,7 @@
 import type * as THREE from 'three'
 
 interface Props {
-  progress?: number;
+  progress?: number
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -59,9 +59,7 @@ function init() {
 
   function animate() {
     animationId = requestAnimationFrame(animate)
-    time += reducedMotion
-      ? ANIMATION_CONFIG.TIME_DELTA_REDUCED
-      : ANIMATION_CONFIG.TIME_DELTA_NORMAL
+    time += reducedMotion ? ANIMATION_CONFIG.TIME_DELTA_REDUCED : ANIMATION_CONFIG.TIME_DELTA_NORMAL
     frameCount++
 
     // Smooth mouse movement
@@ -75,18 +73,13 @@ function init() {
     updateParticles(particles, time)
 
     // Update connections periodically
-    if (
-      frameCount % ANIMATION_CONFIG.CONNECTION_UPDATE_INTERVAL === 0 &&
-      !reducedMotion
-    ) {
+    if (frameCount % ANIMATION_CONFIG.CONNECTION_UPDATE_INTERVAL === 0 && !reducedMotion) {
       connections = updateConnections(scene, nodes, connections)
     }
 
     // Update camera position
-    const targetX =
-      props.progress * CAMERA_MOVEMENT.RANGE - CAMERA_MOVEMENT.OFFSET
-    camera.position.x +=
-      (targetX - camera.position.x) * CAMERA_MOVEMENT.SMOOTHING
+    const targetX = props.progress * CAMERA_MOVEMENT.RANGE - CAMERA_MOVEMENT.OFFSET
+    camera.position.x += (targetX - camera.position.x) * CAMERA_MOVEMENT.SMOOTHING
     camera.position.y = mousePos.y * CAMERA_MOVEMENT.MOUSE_Y_INFLUENCE
     camera.lookAt(camera.position.x, 0, 0)
 
@@ -120,9 +113,5 @@ onUnmounted(() => cleanup())
 </script>
 
 <template>
-  <div
-    ref="containerRef"
-    class="fixed inset-0 -z-10 overflow-hidden"
-    aria-hidden="true"
-  />
+  <div ref="containerRef" class="fixed inset-0 -z-10 overflow-hidden" aria-hidden="true" />
 </template>

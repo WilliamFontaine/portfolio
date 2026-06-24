@@ -5,13 +5,7 @@ export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
 
-  modules: [
-    'shadcn-nuxt',
-    '@nuxtjs/i18n',
-    '@nuxt/eslint',
-    '@nuxt/icon',
-    '@nuxtjs/color-mode',
-  ],
+  modules: ['shadcn-nuxt', '@nuxtjs/i18n', '@nuxt/eslint', '@nuxt/icon', '@nuxtjs/color-mode'],
 
   imports: {
     imports: [

@@ -3,29 +3,25 @@
  * Alternative to GSAP premium SplitText plugin
  */
 
-export type SplitType = 'chars' | 'words' | 'lines';
+export type SplitType = 'chars' | 'words' | 'lines'
 
 export interface SplitTextResult {
-  elements: HTMLElement[];
-  revert: () => void;
+  elements: HTMLElement[]
+  revert: () => void
 }
 
 /**
  * Split text into individual elements for animation
  * Preserves gradient text by applying it to each character with calculated positions
  */
-export function splitText(
-  element: HTMLElement,
-  type: SplitType = 'chars',
-): SplitTextResult {
+export function splitText(element: HTMLElement, type: SplitType = 'chars'): SplitTextResult {
   const originalHTML = element.innerHTML
   const originalText = element.textContent || ''
   const computedStyle = window.getComputedStyle(element)
 
   // Check if parent has gradient text (bg-clip-text pattern)
   const hasGradient =
-    computedStyle.backgroundClip === 'text' ||
-    computedStyle.webkitBackgroundClip === 'text'
+    computedStyle.backgroundClip === 'text' || computedStyle.webkitBackgroundClip === 'text'
   const gradientBg = hasGradient ? computedStyle.backgroundImage : null
 
   // Clear existing content

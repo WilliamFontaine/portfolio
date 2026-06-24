@@ -74,11 +74,8 @@ useSectionAnimations({
     class="horizontal-section relative flex w-full flex-shrink-0 items-center px-4 py-8 sm:px-8 sm:py-12 lg:h-screen lg:w-screen lg:overflow-y-auto lg:py-8"
   >
     <div class="mx-auto w-full max-w-5xl lg:my-auto">
-      <h2
-        ref="titleRef"
-        class="opacity-0 mb-6 text-center text-4xl font-bold lg:mb-8 lg:text-5xl"
-      >
-        {{ t("experience.title") }}
+      <h2 ref="titleRef" class="opacity-0 mb-6 text-center text-4xl font-bold lg:mb-8 lg:text-5xl">
+        {{ t('experience.title') }}
       </h2>
 
       <!-- Timeline -->
@@ -99,11 +96,7 @@ useSectionAnimations({
             <!-- Timeline dot -->
             <div
               class="absolute left-6 top-6 h-5 w-5 rounded-full border-4 border-background md:left-1/2 md:-translate-x-1/2"
-              :class="
-                exp.current
-                  ? 'bg-teal-400 shadow-lg shadow-teal-400/50'
-                  : 'bg-orange-400'
-              "
+              :class="exp.current ? 'bg-teal-400 shadow-lg shadow-teal-400/50' : 'bg-orange-400'"
             />
 
             <!-- Card -->
@@ -113,29 +106,21 @@ useSectionAnimations({
               <CardHeader class="pb-1 lg:pb-2">
                 <div class="flex flex-wrap items-start justify-between gap-2">
                   <div>
-                    <CardTitle class="text-lg lg:text-xl">{{
-                      exp.role
-                    }}</CardTitle>
+                    <CardTitle class="text-lg lg:text-xl">{{ exp.role }}</CardTitle>
                     <CardDescription class="text-sm lg:text-base">{{
                       exp.company
                     }}</CardDescription>
                   </div>
                   <Badge
                     :variant="exp.current ? 'default' : 'outline'"
-                    :class="
-                      exp.current
-                        ? 'bg-teal-500/20 text-teal-400 hover:bg-teal-500/30'
-                        : ''
-                    "
+                    :class="exp.current ? 'bg-teal-500/20 text-teal-400 hover:bg-teal-500/30' : ''"
                   >
                     {{ exp.period }}
                   </Badge>
                 </div>
               </CardHeader>
               <CardContent class="pt-2 lg:pt-3">
-                <p
-                  class="mb-2 text-sm text-muted-foreground lg:mb-3 lg:text-base"
-                >
+                <p class="mb-2 text-sm text-muted-foreground lg:mb-3 lg:text-base">
                   {{ exp.description }}
                 </p>
 
@@ -156,12 +141,7 @@ useSectionAnimations({
 
                 <!-- Tech badges -->
                 <div class="flex flex-wrap gap-1.5 lg:gap-2">
-                  <Badge
-                    v-for="tech in exp.techs"
-                    :key="tech"
-                    variant="secondary"
-                    class="text-xs"
-                  >
+                  <Badge v-for="tech in exp.techs" :key="tech" variant="secondary" class="text-xs">
                     {{ tech }}
                   </Badge>
                 </div>

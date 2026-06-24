@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.output/
+.nuxt/
+.nitro/
+.data/
+.cache/
+*.d.ts
+*.tsbuildinfo
+pnpm-lock.yaml

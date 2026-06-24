@@ -1,8 +1,8 @@
 export interface UseMagneticEffectOptions {
-  strength?: number;
-  ease?: number;
-  scale?: number;
-  disabled?: boolean;
+  strength?: number
+  ease?: number
+  scale?: number
+  disabled?: boolean
 }
 
 /**
@@ -13,12 +13,7 @@ export function useMagneticEffect(
   element: Ref<HTMLElement | { $el?: HTMLElement } | undefined>,
   options: UseMagneticEffectOptions = {},
 ) {
-  const {
-    strength = 0.3,
-    ease = 0.15,
-    scale = 1.05,
-    disabled = false,
-  } = options
+  const { strength = 0.3, ease = 0.15, scale = 1.05, disabled = false } = options
 
   const { prefersReducedMotion, isTouchDevice } = useBreakpoints()
 
@@ -44,10 +39,7 @@ export function useMagneticEffect(
     })
 
     // Continue animation if still moving
-    if (
-      Math.abs(currentX - targetX) > 0.01 ||
-      Math.abs(currentY - targetY) > 0.01
-    ) {
+    if (Math.abs(currentX - targetX) > 0.01 || Math.abs(currentY - targetY) > 0.01) {
       rafId = requestAnimationFrame(updatePosition)
     }
   }

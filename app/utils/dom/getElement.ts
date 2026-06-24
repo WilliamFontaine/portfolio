@@ -15,11 +15,7 @@ export function getElement(
   }
 
   // If it's a Vue component instance with $el
-  if (
-    typeof ref.value === 'object' &&
-    '$el' in ref.value &&
-    ref.value.$el instanceof HTMLElement
-  ) {
+  if (typeof ref.value === 'object' && '$el' in ref.value && ref.value.$el instanceof HTMLElement) {
     return ref.value.$el
   }
 

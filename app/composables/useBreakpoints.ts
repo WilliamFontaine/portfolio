@@ -36,9 +36,7 @@ export function useBreakpoints() {
   })
 
   // Reduced motion preference
-  const prefersReducedMotion = useMediaQuery(
-    '(prefers-reduced-motion: reduce)',
-  )
+  const prefersReducedMotion = useMediaQuery('(prefers-reduced-motion: reduce)')
 
   return {
     current,

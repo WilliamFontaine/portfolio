@@ -10,5 +10,5 @@ export const BREAKPOINTS = {
   XXL: 1536,
 } as const
 
-export type Breakpoint = keyof typeof BREAKPOINTS;
-export type BreakpointValue = (typeof BREAKPOINTS)[Breakpoint];
+export type Breakpoint = keyof typeof BREAKPOINTS
+export type BreakpointValue = (typeof BREAKPOINTS)[Breakpoint]

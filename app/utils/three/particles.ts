@@ -17,8 +17,7 @@ export function createParticleSystem(): THREE.Points {
     positions.push(
       (Math.random() - 0.5) * PARTICLE_CONFIG.SPREAD.X,
       (Math.random() - 0.5) * PARTICLE_CONFIG.SPREAD.Y,
-      PARTICLE_CONFIG.SPREAD.Z_MIN +
-        Math.random() * PARTICLE_CONFIG.SPREAD.Z_MAX,
+      PARTICLE_CONFIG.SPREAD.Z_MIN + Math.random() * PARTICLE_CONFIG.SPREAD.Z_MAX,
     )
 
     const t = Math.random()
@@ -29,14 +28,8 @@ export function createParticleSystem(): THREE.Points {
     colors.push(color.r, color.g, color.b)
   }
 
-  particleGeometry.setAttribute(
-    'position',
-    new THREE.Float32BufferAttribute(positions, 3),
-  )
-  particleGeometry.setAttribute(
-    'color',
-    new THREE.Float32BufferAttribute(colors, 3),
-  )
+  particleGeometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3))
+  particleGeometry.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3))
 
   const particleMaterial = new THREE.PointsMaterial({
     size: PARTICLE_CONFIG.SIZE,
@@ -64,7 +57,7 @@ export function updateParticles(particles: THREE.Points[], time: number) {
  */
 export function cleanupParticles(particles: THREE.Points[]) {
   particles.forEach((ps) => {
-    ps.geometry.dispose();
-    (ps.material as THREE.Material).dispose()
+    ps.geometry.dispose()
+    ;(ps.material as THREE.Material).dispose()
   })
 }

@@ -6,9 +6,9 @@ import * as THREE from 'three'
  */
 
 export interface SceneContext {
-  scene: THREE.Scene;
-  camera: THREE.PerspectiveCamera;
-  renderer: THREE.WebGLRenderer;
+  scene: THREE.Scene
+  camera: THREE.PerspectiveCamera
+  renderer: THREE.WebGLRenderer
 }
 
 /**
@@ -30,9 +30,7 @@ export function createScene(container: HTMLElement): SceneContext {
 
   const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true })
   renderer.setSize(width, height)
-  renderer.setPixelRatio(
-    Math.min(window.devicePixelRatio, CAMERA_CONFIG.MAX_PIXEL_RATIO),
-  )
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, CAMERA_CONFIG.MAX_PIXEL_RATIO))
   container.appendChild(renderer.domElement)
 
   return { scene, camera, renderer }

@@ -1,17 +1,17 @@
 <script setup lang="ts">
 interface Props {
   /** Display layout */
-  layout?: 'horizontal' | 'grid';
+  layout?: 'horizontal' | 'grid'
   /** Show label */
-  showLabel?: boolean;
+  showLabel?: boolean
   /** Label text (uses i18n key if not provided) */
-  labelText?: string;
+  labelText?: string
   /** Button size variant */
-  size?: 'icon' | 'icon-sm' | 'icon-lg';
+  size?: 'icon' | 'icon-sm' | 'icon-lg'
   /** Apply magnetic effect to buttons */
-  magnetic?: boolean;
+  magnetic?: boolean
   /** Additional CSS class */
-  class?: string;
+  class?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -47,20 +47,14 @@ if (props.magnetic) {
 <template>
   <div
     :class="[
-      layout === 'horizontal'
-        ? 'flex items-center gap-4'
-        : 'flex flex-col items-center gap-4',
+      layout === 'horizontal' ? 'flex items-center gap-4' : 'flex flex-col items-center gap-4',
       props.class,
     ]"
   >
     <span v-if="showLabel" class="text-sm font-medium text-muted-foreground/70">
-      {{ labelText || t("contact.social") }}
+      {{ labelText || t('contact.social') }}
     </span>
-    <div
-      :class="
-        layout === 'horizontal' ? 'flex gap-3' : 'flex justify-center gap-4'
-      "
-    >
+    <div :class="layout === 'horizontal' ? 'flex gap-3' : 'flex justify-center gap-4'">
       <Button
         v-for="link in socialLinks"
         :key="link.name"
@@ -77,10 +71,7 @@ if (props.magnetic) {
         ]"
         :aria-label="link.name"
       >
-        <Icon
-          :name="link.icon"
-          :size="layout === 'grid' ? '24' : '20'"
-        />
+        <Icon :name="link.icon" :size="layout === 'grid' ? '24' : '20'" />
       </Button>
     </div>
   </div>

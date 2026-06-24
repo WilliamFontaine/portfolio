@@ -75,25 +75,20 @@ useSectionAnimations({
     class="horizontal-section relative flex w-full flex-shrink-0 items-center px-4 py-8 sm:px-8 sm:py-12 lg:h-screen lg:w-screen lg:overflow-y-auto lg:py-8"
   >
     <div class="mx-auto w-full max-w-6xl lg:my-auto">
-      <h2
-        ref="titleRef"
-        class="opacity-0 mb-12 text-center text-4xl font-bold lg:text-5xl"
-      >
-        {{ t("skills.title") }}
+      <h2 ref="titleRef" class="opacity-0 mb-12 text-center text-4xl font-bold lg:text-5xl">
+        {{ t('skills.title') }}
       </h2>
 
       <div class="grid gap-12 lg:grid-cols-2">
         <!-- Main Stack -->
         <div>
           <div ref="mainHeaderRef" class="opacity-0 mb-6">
-            <h3
-              class="flex items-center gap-2 text-xl font-semibold text-teal-400"
-            >
+            <h3 class="flex items-center gap-2 text-xl font-semibold text-teal-400">
               <Icon name="lucide:star" class="h-5 w-5" />
-              {{ t("skills.main.title") }}
+              {{ t('skills.main.title') }}
             </h3>
             <p class="mt-1 text-sm text-muted-foreground">
-              {{ t("skills.main.description") }}
+              {{ t('skills.main.description') }}
             </p>
           </div>
 
@@ -103,10 +98,7 @@ useSectionAnimations({
               :key="skill.name"
               class="skill-item opacity-0 group flex items-center gap-3 rounded-lg border border-border/50 bg-card/50 px-4 py-3 backdrop-blur-sm transition-all hover:border-teal-500/50 hover:bg-teal-500/5"
             >
-              <Icon
-                :name="skill.icon"
-                class="h-6 w-6 transition-transform group-hover:scale-110"
-              />
+              <Icon :name="skill.icon" class="h-6 w-6 transition-transform group-hover:scale-110" />
               <span class="font-medium">{{ skill.name }}</span>
             </div>
           </div>
@@ -115,30 +107,22 @@ useSectionAnimations({
         <!-- Secondary Stack -->
         <div>
           <div ref="secondaryHeaderRef" class="opacity-0 mb-6">
-            <h3
-              class="flex items-center gap-2 text-xl font-semibold text-orange-400"
-            >
+            <h3 class="flex items-center gap-2 text-xl font-semibold text-orange-400">
               <Icon name="lucide:plus-circle" class="h-5 w-5" />
-              {{ t("skills.secondary.title") }}
+              {{ t('skills.secondary.title') }}
             </h3>
             <p class="mt-1 text-sm text-muted-foreground">
-              {{ t("skills.secondary.description") }}
+              {{ t('skills.secondary.description') }}
             </p>
           </div>
 
-          <div
-            ref="secondaryGridRef"
-            class="grid grid-cols-2 gap-3 sm:grid-cols-3"
-          >
+          <div ref="secondaryGridRef" class="grid grid-cols-2 gap-3 sm:grid-cols-3">
             <div
               v-for="skill in secondaryStack"
               :key="skill.name"
               class="skill-item opacity-0 group flex items-center gap-3 rounded-lg border border-border/50 bg-card/50 px-4 py-3 backdrop-blur-sm transition-all hover:border-orange-500/50 hover:bg-orange-500/5"
             >
-              <Icon
-                :name="skill.icon"
-                class="h-6 w-6 transition-transform group-hover:scale-110"
-              />
+              <Icon :name="skill.icon" class="h-6 w-6 transition-transform group-hover:scale-110" />
               <span class="font-medium">{{ skill.name }}</span>
             </div>
           </div>

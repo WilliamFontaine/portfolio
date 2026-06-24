@@ -4,9 +4,9 @@
  * In vertical scroll mode, animations use standard ScrollTrigger
  */
 interface SectionAnimationOptions {
-  sectionRef: Ref<HTMLElement | undefined>;
-  sectionIndex: number;
-  totalSections?: number;
+  sectionRef: Ref<HTMLElement | undefined>
+  sectionIndex: number
+  totalSections?: number
 }
 
 export function useSectionAnimation(options: SectionAnimationOptions) {
@@ -15,8 +15,8 @@ export function useSectionAnimation(options: SectionAnimationOptions) {
 
   // Inject scroll context from HorizontalScroller
   const scrollContext = inject<{
-    progress: ComputedRef<number>;
-    currentSection: ComputedRef<number>;
+    progress: ComputedRef<number>
+    currentSection: ComputedRef<number>
   } | null>('scrollContext', null)
 
   const animations: gsap.core.Tween[] = []
@@ -24,15 +24,13 @@ export function useSectionAnimation(options: SectionAnimationOptions) {
 
   // Pending animations for horizontal mode
   const pendingAnimations: Array<{
-    targets: gsap.TweenTarget;
-    fromVars: gsap.TweenVars;
-    toVars: gsap.TweenVars;
+    targets: gsap.TweenTarget
+    fromVars: gsap.TweenVars
+    toVars: gsap.TweenVars
   }> = []
 
   // Computed: horizontal mode when desktop on client-side
-  const isHorizontalMode = computed(
-    () => import.meta.client && isDesktop.value,
-  )
+  const isHorizontalMode = computed(() => import.meta.client && isDesktop.value)
 
   // ScrollTrigger config for vertical mode
   const createScrollTrigger = (trigger: Element) => ({
@@ -53,13 +51,9 @@ export function useSectionAnimation(options: SectionAnimationOptions) {
   }
 
   // Animate array of targets in vertical mode
-  const animateArrayVertical = (
-    targets: Element[] | NodeList,
-    toVars: gsap.TweenVars,
-  ) => {
+  const animateArrayVertical = (targets: Element[] | NodeList, toVars: gsap.TweenVars) => {
     const baseDelay = typeof toVars.delay === 'number' ? toVars.delay : 0
-    const staggerAmount =
-      typeof toVars.stagger === 'number' ? toVars.stagger : 0
+    const staggerAmount = typeof toVars.stagger === 'number' ? toVars.stagger : 0
 
     Array.from(targets).forEach((target, i) => {
       animations.push(
@@ -138,10 +132,7 @@ export function useSectionAnimation(options: SectionAnimationOptions) {
           stopWatcher = watch(
             () => scrollContext.progress.value,
             (currentProgress) => {
-              if (
-                !hasAnimated.value &&
-                currentProgress >= sectionThreshold.value
-              ) {
+              if (!hasAnimated.value && currentProgress >= sectionThreshold.value) {
                 playAnimations()
               }
             },

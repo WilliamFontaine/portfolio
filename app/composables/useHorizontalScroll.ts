@@ -1,7 +1,7 @@
 interface UseHorizontalScrollOptions {
-  container: Ref<HTMLElement | undefined>;
-  wrapper: Ref<HTMLElement | undefined>;
-  sectionsCount: number;
+  container: Ref<HTMLElement | undefined>
+  wrapper: Ref<HTMLElement | undefined>
+  sectionsCount: number
 }
 
 export function useHorizontalScroll(options: UseHorizontalScrollOptions) {
@@ -80,11 +80,7 @@ export function useHorizontalScroll(options: UseHorizontalScrollOptions) {
     // Calculate target progress: for n sections, progress ranges from 0 to 1
     // Section i should be at progress = i / (n - 1) for proper centering
     const targetProgress =
-      index === 0
-        ? 0
-        : index === sectionsCount - 1
-          ? 1
-          : index / (sectionsCount - 1)
+      index === 0 ? 0 : index === sectionsCount - 1 ? 1 : index / (sectionsCount - 1)
     const scrollY = st.start + (st.end - st.start) * targetProgress
 
     gsap.to(window, {

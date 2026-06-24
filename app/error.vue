@@ -10,7 +10,7 @@
           class="mb-6 gap-2 border-teal-500/30 bg-teal-500/10 px-4 py-2 text-sm text-teal-400"
         >
           <Icon name="lucide:alert-triangle" class="size-4" />
-          {{ t("error.badge") }}
+          {{ t('error.badge') }}
         </Badge>
 
         <!-- Code d'erreur avec gradient -->
@@ -22,12 +22,12 @@
 
         <!-- Titre -->
         <h2 class="mt-4 text-2xl sm:text-3xl font-bold tracking-tight">
-          {{ t("error.title") }}
+          {{ t('error.title') }}
         </h2>
 
         <!-- Description -->
         <p class="mt-4 text-lg text-muted-foreground/80">
-          {{ t("error.message") }}
+          {{ t('error.message') }}
         </p>
 
         <!-- Actions -->
@@ -38,7 +38,7 @@
             @click="handleError"
           >
             <Icon name="lucide:home" class="size-5" />
-            {{ t("error.backHome") }}
+            {{ t('error.backHome') }}
           </Button>
 
           <Button
@@ -48,7 +48,7 @@
             @click="refresh"
           >
             <Icon name="lucide:refresh-cw" class="size-5" />
-            {{ t("error.retry") }}
+            {{ t('error.retry') }}
           </Button>
         </div>
       </div>
@@ -59,9 +59,9 @@
 <script setup lang="ts">
 defineProps<{
   error: {
-    statusCode: number;
-    message: string;
-  };
+    statusCode: number
+    message: string
+  }
 }>()
 
 const { t } = useI18n()

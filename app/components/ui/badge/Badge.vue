@@ -9,8 +9,8 @@ import { badgeVariants } from '.'
 
 const props = defineProps<
   PrimitiveProps & {
-    variant?: BadgeVariants['variant'];
-    class?: HTMLAttributes['class'];
+    variant?: BadgeVariants['variant']
+    class?: HTMLAttributes['class']
   }
 >()
 

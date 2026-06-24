@@ -39,11 +39,10 @@ useSectionAnimations({
   animations: [
     { ref: photoRef, preset: 'scaleUp', delay: 0 },
     { ref: statsRef, preset: 'fadeUp', delay: 0.2 },
-    ...createSequence(
-      [titleRef, descRef, philosophyRef, servicesRef, educationRef],
-      'slideLeft',
-      { startDelay: 0.1, increment: 0.08 },
-    ),
+    ...createSequence([titleRef, descRef, philosophyRef, servicesRef, educationRef], 'slideLeft', {
+      startDelay: 0.1,
+      increment: 0.08,
+    }),
   ],
   flowStagger: 0.03,
 })
@@ -54,13 +53,9 @@ useSectionAnimations({
     ref="sectionRef"
     class="horizontal-section relative flex w-full flex-shrink-0 items-center px-4 py-8 sm:px-8 sm:py-12 lg:h-screen lg:w-screen lg:overflow-y-auto lg:py-8"
   >
-    <div
-      class="mx-auto grid w-full max-w-7xl gap-8 md:grid-cols-2 md:gap-12 lg:my-auto lg:gap-16"
-    >
+    <div class="mx-auto grid w-full max-w-7xl gap-8 md:grid-cols-2 md:gap-12 lg:my-auto lg:gap-16">
       <!-- Left: Photo + Stats -->
-      <div
-        class="flex flex-col items-center justify-center gap-8 md:items-start"
-      >
+      <div class="flex flex-col items-center justify-center gap-8 md:items-start">
         <!-- Photo with glow -->
         <div ref="photoRef" class="opacity-0 relative">
           <div
@@ -80,21 +75,13 @@ useSectionAnimations({
         <!-- Stats -->
         <div ref="statsRef" class="opacity-0 flex gap-8">
           <div class="text-center">
-            <span class="block text-4xl font-bold text-teal-400 lg:text-5xl"
-              >4+</span
-            >
-            <span class="text-sm text-muted-foreground">{{
-              t("about.stats.experience")
-            }}</span>
+            <span class="block text-4xl font-bold text-teal-400 lg:text-5xl">4+</span>
+            <span class="text-sm text-muted-foreground">{{ t('about.stats.experience') }}</span>
           </div>
           <div class="h-16 w-px bg-border" />
           <div class="text-center">
-            <span class="block text-4xl font-bold text-orange-400 lg:text-5xl"
-              >100%</span
-            >
-            <span class="text-sm text-muted-foreground">{{
-              t("about.stats.satisfaction")
-            }}</span>
+            <span class="block text-4xl font-bold text-orange-400 lg:text-5xl">100%</span>
+            <span class="text-sm text-muted-foreground">{{ t('about.stats.satisfaction') }}</span>
           </div>
         </div>
       </div>
@@ -102,11 +89,11 @@ useSectionAnimations({
       <!-- Right: Content -->
       <div class="flex flex-col justify-center">
         <h2 ref="titleRef" class="opacity-0 text-4xl font-bold lg:text-5xl">
-          {{ t("about.title") }}
+          {{ t('about.title') }}
         </h2>
 
         <p ref="descRef" class="opacity-0 mt-6 text-lg text-muted-foreground">
-          {{ t("about.description") }}
+          {{ t('about.description') }}
         </p>
 
         <!-- Philosophy -->
@@ -116,26 +103,17 @@ useSectionAnimations({
         >
           <h3 class="flex items-center gap-2 font-semibold text-teal-400">
             <Icon name="lucide:quote" class="h-5 w-5" />
-            {{ t("about.philosophy.title") }}
+            {{ t('about.philosophy.title') }}
           </h3>
-          <p class="mt-2 text-muted-foreground italic">
-            "{{ t("about.philosophy.content") }}"
-          </p>
+          <p class="mt-2 text-muted-foreground italic">"{{ t('about.philosophy.content') }}"</p>
         </div>
 
         <!-- Services -->
         <div ref="servicesRef" class="opacity-0 mt-8">
-          <h3 class="mb-4 font-semibold">{{ t("about.services.title") }}</h3>
+          <h3 class="mb-4 font-semibold">{{ t('about.services.title') }}</h3>
           <ul class="space-y-3">
-            <li
-              v-for="(service, idx) in services"
-              :key="idx"
-              class="flex items-start gap-3"
-            >
-              <Icon
-                :name="service.icon"
-                class="mt-0.5 h-5 w-5 flex-shrink-0 text-teal-400"
-              />
+            <li v-for="(service, idx) in services" :key="idx" class="flex items-start gap-3">
+              <Icon :name="service.icon" class="mt-0.5 h-5 w-5 flex-shrink-0 text-teal-400" />
               <span class="text-muted-foreground">{{ service.text }}</span>
             </li>
           </ul>
@@ -144,11 +122,8 @@ useSectionAnimations({
         <!-- Education -->
         <div ref="educationRef" class="opacity-0 mt-6">
           <h3 class="mb-3 flex items-center gap-2 font-semibold">
-            <Icon
-              name="lucide:graduation-cap"
-              class="h-5 w-5 text-orange-400"
-            />
-            {{ t("about.education.title") }}
+            <Icon name="lucide:graduation-cap" class="h-5 w-5 text-orange-400" />
+            {{ t('about.education.title') }}
           </h3>
           <ul class="space-y-1 text-sm text-muted-foreground">
             <li v-for="(edu, idx) in education" :key="idx">{{ edu }}</li>

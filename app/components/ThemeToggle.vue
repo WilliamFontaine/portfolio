@@ -90,11 +90,7 @@ onMounted(() => {
       @click="handleToggle"
     >
       <div ref="iconRef" class="flex items-center justify-center">
-        <Icon
-          :name="currentIcon"
-          class="h-5 w-5 transition-colors"
-          :class="iconColor"
-        />
+        <Icon :name="currentIcon" class="h-5 w-5 transition-colors" :class="iconColor" />
       </div>
 
       <!-- Tooltip -->

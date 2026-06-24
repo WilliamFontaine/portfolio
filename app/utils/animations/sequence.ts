@@ -21,9 +21,9 @@ export function createFadeUpSequence(
   elements: Ref<MaybeElement | null | undefined>[],
   options: {
     /** Delay before first animation (default: 0.1) */
-    startDelay?: number;
+    startDelay?: number
     /** Delay increment between animations (default: 0.1) */
-    increment?: number;
+    increment?: number
   } = {},
 ) {
   const { startDelay = 0.1, increment = 0.1 } = options
@@ -56,8 +56,8 @@ export function createSequence(
   elements: Ref<MaybeElement | null | undefined>[],
   preset: 'fadeUp' | 'fadeIn' | 'slideLeft' | 'slideRight' | 'scaleUp',
   options: {
-    startDelay?: number;
-    increment?: number;
+    startDelay?: number
+    increment?: number
   } = {},
 ) {
   const { startDelay = 0.1, increment = 0.1 } = options

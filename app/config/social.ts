@@ -16,4 +16,4 @@ export const socialLinks = [
   },
 ] as const
 
-export type SocialLink = (typeof socialLinks)[number];
+export type SocialLink = (typeof socialLinks)[number]

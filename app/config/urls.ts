@@ -21,4 +21,4 @@ export const URLS = {
   },
 } as const
 
-export type UrlsConfig = typeof URLS;
+export type UrlsConfig = typeof URLS

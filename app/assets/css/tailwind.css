@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @custom-variant dark (&:is(.dark *));
 
@@ -203,7 +203,7 @@
   /* Better touch feedback */
   a:active,
   button:active,
-  [role="button"]:active {
+  [role='button']:active {
     opacity: 0.8;
     transform: scale(0.98);
   }
@@ -211,8 +211,8 @@
   /* Larger tap targets on touch devices */
   button,
   a,
-  [role="button"],
-  [role="link"] {
+  [role='button'],
+  [role='link'] {
     min-height: 44px;
   }
 }

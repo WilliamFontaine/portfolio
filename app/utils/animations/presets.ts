@@ -19,4 +19,4 @@ export const EASING = {
   expo: 'expo.out',
 } as const
 
-export type Easing = keyof typeof EASING;
+export type Easing = keyof typeof EASING

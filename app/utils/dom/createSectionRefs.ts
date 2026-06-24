@@ -10,7 +10,8 @@
 export function createSectionRefs<T extends string>(
   ...refNames: T[]
 ): Record<T, Ref<HTMLElement | undefined>> {
-  return Object.fromEntries(
-    refNames.map((name) => [name, ref<HTMLElement>()]),
-  ) as Record<T, Ref<HTMLElement | undefined>>
+  return Object.fromEntries(refNames.map((name) => [name, ref<HTMLElement>()])) as Record<
+    T,
+    Ref<HTMLElement | undefined>
+  >
 }

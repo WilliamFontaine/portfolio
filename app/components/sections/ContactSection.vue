@@ -29,10 +29,10 @@ useSectionAnimations({
   sectionRef,
   sectionIndex: 5,
   animations: [
-    ...createFadeUpSequence(
-      [titleRef, descRef, ctasRef, socialRef, locationRef],
-      { startDelay: 0, increment: 0.1 },
-    ),
+    ...createFadeUpSequence([titleRef, descRef, ctasRef, socialRef, locationRef], {
+      startDelay: 0,
+      increment: 0.1,
+    }),
   ],
   flowStagger: 0.02,
 })
@@ -45,16 +45,13 @@ useSectionAnimations({
   >
     <div class="w-full max-w-3xl text-center">
       <!-- Title -->
-      <h2
-        ref="titleRef"
-        class="opacity-0 text-4xl font-bold lg:text-5xl xl:text-6xl"
-      >
-        {{ t("contact.title") }}
+      <h2 ref="titleRef" class="opacity-0 text-4xl font-bold lg:text-5xl xl:text-6xl">
+        {{ t('contact.title') }}
       </h2>
 
       <!-- Description -->
       <p ref="descRef" class="opacity-0 mt-6 text-xl text-muted-foreground">
-        {{ t("contact.description") }}
+        {{ t('contact.description') }}
       </p>
 
       <!-- CTAs -->
@@ -71,7 +68,7 @@ useSectionAnimations({
           class="gap-2 bg-gradient-to-r from-teal-500 to-teal-600 px-8 text-white shadow-lg shadow-teal-500/25 transition-all hover:from-teal-600 hover:to-teal-700 hover:shadow-xl hover:shadow-teal-500/30"
         >
           <Icon name="simple-icons:malt" class="h-5 w-5" />
-          {{ t("contact.cta.malt") }}
+          {{ t('contact.cta.malt') }}
         </Button>
 
         <Button
@@ -83,7 +80,7 @@ useSectionAnimations({
           class="gap-2 border-border/50 px-8 backdrop-blur-sm transition-all hover:border-teal-500/50 hover:bg-teal-500/5"
         >
           <Icon name="lucide:mail" class="h-5 w-5" />
-          {{ t("contact.cta.email") }}
+          {{ t('contact.cta.email') }}
         </Button>
       </div>
 
@@ -99,10 +96,10 @@ useSectionAnimations({
       >
         <div class="flex items-center gap-2">
           <Icon name="lucide:map-pin" class="h-4 w-4 text-teal-400" />
-          <span>{{ t("contact.location") }}</span>
+          <span>{{ t('contact.location') }}</span>
         </div>
         <span class="hidden text-muted-foreground/50 sm:inline">•</span>
-        <span class="text-teal-400">{{ t("contact.remote") }}</span>
+        <span class="text-teal-400">{{ t('contact.remote') }}</span>
       </div>
     </div>
   </section>

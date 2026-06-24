@@ -6,12 +6,11 @@ const wrapperRef = ref<HTMLElement>()
 
 const sectionsCount = 6
 
-const { progress, currentSection, scrollToSection, isHorizontalMode } =
-  useHorizontalScroll({
-    container: containerRef,
-    wrapper: wrapperRef,
-    sectionsCount,
-  })
+const { progress, currentSection, scrollToSection, isHorizontalMode } = useHorizontalScroll({
+  container: containerRef,
+  wrapper: wrapperRef,
+  sectionsCount,
+})
 
 const sectionNames = computed(() => [
   'Hero',
@@ -55,9 +54,7 @@ provide('scrollContext', {
     </div>
 
     <!-- Section indicator -->
-    <nav
-      class="fixed right-6 top-1/2 z-50 hidden -translate-y-1/2 flex-col gap-3 lg:flex"
-    >
+    <nav class="fixed right-6 top-1/2 z-50 hidden -translate-y-1/2 flex-col gap-3 lg:flex">
       <div
         v-for="(name, idx) in sectionNames"
         :key="idx"
