@@ -1,4 +1,4 @@
-FROM node:24-alpine AS base
+FROM node:24.0.2-alpine AS base
 
 RUN corepack enable && corepack prepare pnpm@11.9.0 --activate
 
@@ -21,7 +21,7 @@ ENV NODE_OPTIONS="--max-old-space-size=4096"
 RUN pnpm build
 
 # Production image
-FROM node:24-alpine AS production
+FROM node:24.0.2-alpine AS production
 
 WORKDIR /app
 
