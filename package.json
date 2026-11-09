@@ -27,9 +27,9 @@
   "devDependencies": {
     "@commitlint/cli": "^21.1.0",
     "@commitlint/config-conventional": "^21.1.0",
-    "@iconify-json/devicon": "^1.2.74",
-    "@iconify-json/logos": "^1.2.18",
-    "@iconify-json/lucide": "^1.2.149",
+    "@iconify-json/devicon": "^1.2.77",
+    "@iconify-json/logos": "^1.2.19",
+    "@iconify-json/lucide": "^1.2.151",
     "@iconify-json/simple-icons": "^1.2.101",
     "@nuxt/eslint": "^1.16.0",
     "@nuxt/icon": "^2.2.5",
