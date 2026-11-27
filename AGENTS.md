@@ -26,7 +26,7 @@ Pour toute question Astro, interroger le serveur MCP de la doc (`.mcp.json`, `as
 
 ## Règles
 
-- **Jetons seulement** : couleurs et tailles viennent des jetons déclarés dans `@theme` de `src/styles/global.css`. Aucune valeur de couleur arbitraire ailleurs.
+- **Jetons seulement** : couleurs et tailles viennent des jetons déclarés dans `@theme` de `src/styles/global.css`. Aucune valeur de couleur arbitraire ailleurs. ESLint (`eslint-plugin-better-tailwindcss`) refuse les valeurs de couleur arbitraires (`bg-[#f00]`, `text-(--x)`).
 - **Textes validés** : aucun texte inventé ou réécrit. Un texte qui manque se fait valider d'abord.
 - **Confidentialité** : le dépôt est public. La règle sur ce qui peut y figurer est dans `profil/confidentialite.md` du dépôt privé `freelance` ; la lire avant d'ajouter un contenu qui touche un client.
 - **Aucune information datée** dans le contenu (âge, années d'expérience calculées, « depuis X ans »).
