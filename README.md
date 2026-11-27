@@ -1,49 +1,24 @@
-# William Fontaine Portfolio
+# wfontaine.fr
 
-Personal portfolio with horizontal scroll navigation, 3D background, and i18n support.
+Site personnel de William Fontaine, développeur web full-stack freelance. Astro 7, Tailwind 4, servi en fichiers statiques par Cloudflare Workers.
 
-## Stack
+## Démarrer
 
-Nuxt 4 · TypeScript · Tailwind CSS v4 · Three.js · GSAP · Shadcn UI · Cloudflare Pages
-
-## Getting Started
+Node 26.13.1 (`.nvmrc`) et pnpm 12 (champ `packageManager`, sans Corepack).
 
 ```bash
 pnpm install
-pnpm dev         # http://localhost:3000
+pnpm dev      # http://localhost:4321
 ```
 
-## Scripts
+## Commandes
 
-| Command         | Description              |
-| --------------- | ------------------------ |
-| `pnpm dev`      | Start dev server         |
-| `pnpm build`    | Build for production     |
-| `pnpm preview`  | Preview production build |
-| `pnpm lint`     | Run ESLint               |
-| `pnpm lint:fix` | Fix ESLint errors        |
-| `pnpm format`   | Format with Prettier     |
+| Commande      | Rôle                                                       |
+| ------------- | ---------------------------------------------------------- |
+| `pnpm dev`    | Serveur de développement                                   |
+| `pnpm build`  | Construit `dist/`                                          |
+| `pnpm serve`  | Sert `dist/` avec `wrangler dev` sur 127.0.0.1:8787        |
+| `pnpm test`   | Playwright (chromium) contre `pnpm serve`                  |
+| `pnpm verify` | Recette complète : format, lint, knip, types, build, tests |
 
-## Project Structure
-
-```
-app/
-├── components/
-│   ├── sections/                # HeroSection, AboutSection, ProjectsSection, etc.
-│   ├── ui/                      # Reusable UI components (shadcn-nuxt generated)
-│   ├── HorizontalScroller.vue
-│   └── ThreeBackground.vue      # 3D animated background
-├── pages/
-├── composables/
-└── assets/
-i18n/                            # fr.json, en.json
-```
-
-## Code Quality
-
-- ESLint + Prettier (auto-fix on commit via Husky + lint-staged)
-- Conventional commits enforced via Commitlint
-
-## Deployment
-
-SSR on Cloudflare Pages via Cloudflare Workers. Auto-deploy on push to `main`.
+Les conventions du projet et les pièges sont dans [AGENTS.md](AGENTS.md).

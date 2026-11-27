@@ -1,10 +1,7 @@
-node_modules/
 dist/
-.output/
-.nuxt/
-.nitro/
-.data/
-.cache/
-*.d.ts
-*.tsbuildinfo
+.astro/
+.wrangler/
+test-results/
+screenshots/
+.lighthouseci/
 pnpm-lock.yaml

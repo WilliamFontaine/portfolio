@@ -15,53 +15,19 @@
   "osvVulnerabilityAlerts": true,
   "minimumReleaseAge": "3 days",
   "labels": ["dependencies"],
-  "rangeStrategy": "bump",
+  "rangeStrategy": "pin",
   "prConcurrentLimit": 5,
   "timezone": "Europe/Paris",
   "packageRules": [
     {
-      "description": "Nuxt et ses modules officiels",
-      "groupName": "Nuxt",
-      "matchPackageNames": ["/^@nuxt//", "/^@nuxtjs//", "/^nuxt$/"]
-    },
-    {
-      "description": "Librairies de composants UI",
-      "groupName": "UI components",
-      "matchPackageNames": ["reka-ui", "shadcn-nuxt"]
-    },
-    {
       "description": "Ecosysteme Tailwind CSS",
       "groupName": "Tailwind CSS",
-      "matchPackageNames": [
-        "/^@tailwindcss//",
-        "/^tailwindcss$/",
-        "tailwind-merge",
-        "class-variance-authority",
-        "clsx"
-      ]
-    },
-    {
-      "description": "3D et animation (three.js, GSAP)",
-      "groupName": "3D et animation",
-      "matchPackageNames": ["three", "@types/three", "gsap"]
+      "matchPackageNames": ["/^@tailwindcss//", "/^tailwindcss$/"]
     },
     {
       "description": "Outils de lint et de formatage",
       "groupName": "Lint et formatage",
-      "matchPackageNames": [
-        "/^eslint/",
-        "/^@nuxt/eslint$/",
-        "/^@commitlint//",
-        "/prettier/",
-        "lint-staged",
-        "husky"
-      ]
-    },
-    {
-      "description": "Jeux d'icones Iconify (donnees uniquement : automerge meme en major)",
-      "groupName": "Iconify",
-      "automerge": true,
-      "matchPackageNames": ["/^@iconify-json//"]
+      "matchPackageNames": ["/^eslint/", "/^@commitlint//", "/prettier/", "lint-staged", "husky"]
     },
     {
       "description": "Ne jamais auto-merger un bump mineur sur un paquet 0.x (un minor peut etre cassant en semver 0.x)",
