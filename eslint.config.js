@@ -26,7 +26,7 @@ export default defineConfig(
         {
           restrict: [
             {
-              pattern: '(^|[-:])[\\[(]',
+              pattern: '(^|[-:/@])[\\[(]',
               message: 'Arbitrary value: declare a token in @theme or a @utility in global.css.',
             },
           ],
