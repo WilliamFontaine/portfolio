@@ -22,11 +22,11 @@ Pour toute question Astro, interroger le serveur MCP de la doc (`.mcp.json`, `as
 
 ## Recette
 
-`pnpm verify` = `format:check`, `lint`, `knip`, `check`, `build`, `test`. Elle se juge à son code de sortie, sur l'état final. `pnpm test` construit puis sert `dist/` avec `wrangler dev` sur le port 8787 (réutilisé s'il tourne déjà) et lance Playwright en chromium ; firefox et webkit ne lancent que `motion.spec.ts`, en CI.
+`pnpm verify` = `format:check`, `lint`, `knip`, `check`, `test`. Elle se juge à son code de sortie, sur l'état final. `pnpm test` construit `dist/`, le sert avec `wrangler dev` sur le port 8787 et lance Playwright en chromium ; firefox et webkit ne lancent que `motion.spec.ts`.
 
 ## Règles
 
-- **Jetons seulement** : couleurs et tailles viennent des jetons déclarés dans `@theme` de `src/styles/global.css`. Aucune valeur de couleur arbitraire ailleurs. ESLint (`eslint-plugin-better-tailwindcss`) refuse les valeurs de couleur arbitraires (`bg-[#f00]`, `text-(--x)`).
+- **Jetons seulement** : couleurs et tailles viennent des jetons déclarés dans `@theme` de `src/styles/global.css`. ESLint (`eslint-plugin-better-tailwindcss`) refuse toute valeur ou propriété arbitraire (`bg-[#f00]`, `w-(--x)`, `[color:red]`) : déclarer un jeton dans `@theme` ou un `@utility` dans `global.css`.
 - **Textes validés** : aucun texte inventé ou réécrit. Un texte qui manque se fait valider d'abord.
 - **Confidentialité** : le dépôt est public. La règle sur ce qui peut y figurer est dans `profil/confidentialite.md` du dépôt privé `freelance` ; la lire avant d'ajouter un contenu qui touche un client.
 - **Aucune information datée** dans le contenu (âge, années d'expérience calculées, « depuis X ans »).
@@ -40,5 +40,4 @@ Pour toute question Astro, interroger le serveur MCP de la doc (`.mcp.json`, `as
 - Sans `404.html`, Workers répond 404 avec un corps vide : la page 404 est `src/pages/404.astro` (`not_found_handling: "404-page"`).
 - `trailingSlash: 'always'` : les URL de test portent leur `/` final (`/inexistant/`).
 - Les polices sont des chaînes dans `astro.config.ts` : knip ne voit pas les paquets `@fontsource-variable/*`, ils sont dans `ignoreDependencies`.
-- `pnpm test` ne fait tourner que chromium ; firefox et webkit ne sont pas installés en local.
-- Ne lance pas `pnpm serve` si le port 8787 est pris : Playwright réutilise le serveur existant, qui peut servir un ancien `dist/`.
+- Un serveur déjà sur le port 8787 est réutilisé par `pnpm test` sans reconstruction : l'arrêter avant, sinon les tests passent sur un ancien `dist/`.

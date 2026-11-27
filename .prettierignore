@@ -1,7 +1,1 @@
-dist/
-.astro/
-.wrangler/
-test-results/
-screenshots/
-.lighthouseci/
 pnpm-lock.yaml

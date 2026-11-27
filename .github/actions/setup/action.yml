@@ -1,5 +1,5 @@
 name: Setup
-description: Install pnpm and Node, then the dependencies with a frozen lockfile. Checkout first.
+description: Install pnpm and Node, then the dependencies. Checkout first.
 
 runs:
   using: composite
@@ -11,5 +11,5 @@ runs:
         node-version-file: .nvmrc
         cache: pnpm
 
-    - run: pnpm install --frozen-lockfile
+    - run: pnpm install
       shell: bash

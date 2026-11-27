@@ -9,7 +9,6 @@ export default defineConfig(
     'dist/',
     '.astro/',
     '.wrangler/',
-    '.nuxt/',
     'test-results/',
     'screenshots/',
     '.lighthouseci/',
@@ -27,9 +26,8 @@ export default defineConfig(
         {
           restrict: [
             {
-              pattern: '-(\\[(#|rgb|hsl|oklch)|\\(--)',
-              message:
-                'Arbitrary color value: use a design token declared in @theme of src/styles/global.css.',
+              pattern: '(^|[-:])[\\[(]',
+              message: 'Arbitrary value: declare a token in @theme or a @utility in global.css.',
             },
           ],
         },
