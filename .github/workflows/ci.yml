@@ -5,6 +5,7 @@ on:
     branches: [main]
   pull_request:
     types: [opened, synchronize]
+  workflow_dispatch:
 
 # Annule les runs de PR obsolètes ; ne jamais abandonner un run sur main.
 concurrency:
