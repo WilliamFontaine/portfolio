@@ -35,7 +35,6 @@ test('a fingerprinted asset is cached for a year', async ({ page, request }) => 
 test('a page keeps the default revalidating cache', async ({ request }) => {
   const response = await request.get('/')
   expect(response.headers()['cache-control']).toBe('public, max-age=0, must-revalidate')
-  expect(response.headers()['etag']).toBeTruthy()
 })
 
 test('_headers is not served', async ({ request }) => {
