@@ -6,7 +6,7 @@ interface Props {
 const { label } = Astro.props
 ---
 
-<div class="grid gap-0.5 text-body-sm md:gap-4 lg:grid-cols-field">
+<div class="grid gap-0.5 text-body-sm lg:grid-cols-field lg:gap-4">
   <dt class="text-text-muted">{label}</dt>
   <dd>
     <slot />

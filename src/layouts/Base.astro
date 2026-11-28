@@ -43,7 +43,7 @@ const shareImage = new URL('/og.png', Astro.site)
     <Font cssVariable="--font-space-grotesk" preload />
     <Font cssVariable="--font-manrope" preload />
   </head>
-  <body class="bg-surface text-body-compact text-text md:text-body supports-animation-timeline:motion-safe:has-data-reading:pb-reading-clearance">
+  <body class="flex min-h-dvh flex-col bg-surface text-body-compact text-text md:text-body supports-animation-timeline:motion-safe:has-data-reading:pb-reading-clearance">
     <slot />
   </body>
 </html>

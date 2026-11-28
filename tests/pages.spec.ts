@@ -128,6 +128,22 @@ test('colophon credits the relief, photos, fonts and icons', async ({ page }) =>
   })
 })
 
+for (const [width, gap, beside] of [
+  [768, 2, false],
+  [1024, 0, true],
+] as const) {
+  test(`a legal field's value sits ${beside ? 'beside' : 'under'} its label at ${width}px`, async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width, height: 900 })
+    await page.goto('/mentions-legales/')
+    const label = await box(page.getByRole('term').filter({ hasText: 'SIREN' }))
+    const value = await box(page.getByRole('definition').nth(2))
+    expect(value.y === label.y).toBe(beside)
+    expect(Math.max(0, value.y - (label.y + label.height))).toBe(gap)
+  })
+}
+
 test('legal notice names the publisher, the host and the data processing', async ({ page }) => {
   await page.goto('/mentions-legales/')
   expect(await fields(page)).toEqual({
@@ -155,7 +171,7 @@ test.describe('colophon line', () => {
 
   for (const width of widths) {
     const [text, side] =
-      width >= 768
+      width >= 1024
         ? [`Puy de Dôme (1${nbsp}465${nbsp}m) et sa tour`, 1]
         : [`Puy de Dôme, 1${nbsp}465${nbsp}m`, -1]
 
@@ -296,6 +312,18 @@ test.describe('not found', () => {
     `)
     await expect(page.getByRole('contentinfo')).toMatchAriaSnapshot(footer)
   })
+
+  for (const [width, height] of [
+    [390, 900],
+    [2560, 1440],
+  ] as const) {
+    test(`the footer reaches the bottom of a ${width}x${height} window`, async ({ page }) => {
+      await page.setViewportSize({ width, height })
+      await page.goto('/inexistant/')
+      const { y, height: footerHeight } = await box(page.getByRole('contentinfo'))
+      expect(y + footerHeight).toBe(height)
+    })
+  }
 })
 
 test('/404 is noindex too', async ({ page }) => {
