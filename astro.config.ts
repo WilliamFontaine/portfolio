@@ -16,6 +16,7 @@ export default defineConfig({
   },
   experimental: { svgOptimizer: svgoOptimizer({ plugins: ['preset-default', 'removeTitle'] }) },
   image: { layout: 'constrained', responsiveStyles: true },
+  markdown: { syntaxHighlight: false },
   fonts: [
     {
       provider: fontProviders.local(),
