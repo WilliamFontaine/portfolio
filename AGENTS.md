@@ -30,7 +30,7 @@ Astro ne réserve que `src/pages/` ; le reste est rangé par rôle, importé par
 
 ## Recette
 
-`pnpm verify` = `format:check`, `lint`, `knip`, `check`, `test`. Elle se juge à son code de sortie, sur l'état final. `pnpm test` construit `dist/`, le sert avec `wrangler dev` sur le port 8787 et lance Playwright en chromium (rapport HTML dans `playwright-report/`) ; firefox et webkit ne lancent que `motion.spec.ts` et `wrap.spec.ts`. `pnpm lhci` sert `dist/` et mesure Lighthouse ; sur une adresse réelle : `pnpm lhci --collect.url=<URL> --collect.startServerCommand=`. Les projets `finition-1440` et `finition-390` (`--project='finition-*'`, hors recette) enregistrent les vidéos à 60 i/s de la relecture image par image dans `screenshots/finition/`.
+`pnpm verify` = `format:check`, `lint`, `knip`, `check`, `test`. Elle se juge à son code de sortie, sur l'état final. `pnpm test` construit `dist/`, le sert avec `wrangler dev` sur le port 8787 et lance Playwright en chromium (rapport HTML dans `playwright-report/`) ; firefox et webkit ne lancent que `motion.spec.ts` et `wrap.spec.ts`. `pnpm lhci` sert `dist/` et mesure Lighthouse ; sur une adresse réelle : `pnpm exec lhci autorun --collect.url=<URL>`. Les projets `finition-1440` et `finition-390` (`--project='finition-*'`, hors recette) enregistrent les vidéos à 60 i/s de la relecture image par image dans `screenshots/finition/`.
 
 ## Tests visuels
 

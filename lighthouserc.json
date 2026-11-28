@@ -1,10 +1,5 @@
 {
   "ci": {
-    "collect": {
-      "url": ["http://127.0.0.1:8787/"],
-      "startServerCommand": "pnpm serve",
-      "startServerReadyTimeout": 30000
-    },
     "assert": {
       "assertions": {
         "categories:performance": [

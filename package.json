@@ -17,7 +17,7 @@
     "verify": "pnpm format:check && pnpm lint && pnpm knip && pnpm check && pnpm test",
     "prepare": "husky",
     "validate:html": "html-validate \"dist/**/*.html\"",
-    "lhci": "lhci autorun"
+    "lhci": "lhci autorun --collect.startServerCommand=\"pnpm serve\" --collect.startServerReadyTimeout=30000 --collect.url=http://127.0.0.1:8787/"
   },
   "dependencies": {
     "@fontsource-variable/manrope": "5.3.0",
