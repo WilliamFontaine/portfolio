@@ -1,16 +1,9 @@
 ---
-import '../styles/global.css'
+import Base from '../layouts/Base.astro'
 ---
 
-<html lang="fr">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Page introuvable</title>
-  </head>
-  <body data-page="404">
-    <main>
-      <h1>Page introuvable</h1>
-    </main>
-  </body>
-</html>
+<Base title="Page introuvable" description="Cette page n'existe pas." noindex>
+  <main data-page="404">
+    <h1>Page introuvable</h1>
+  </main>
+</Base>

@@ -1,16 +1,13 @@
 ---
-import '../styles/global.css'
+import Base from '../layouts/Base.astro'
 ---
 
-<html lang="fr">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>William Fontaine</title>
-  </head>
-  <body>
-    <main>
-      <h1>William Fontaine</h1>
-    </main>
-  </body>
-</html>
+<Base title="William Fontaine" description="Développeur full-stack freelance.">
+  <main>
+    <h1 class="font-display text-display text-ink">William Fontaine</h1>
+    <p class="text-accent">Du besoin à la mise en production.</p>
+  </main>
+  <footer class="island bg-surface-raised">
+    <p class="text-text">Pied de page</p>
+  </footer>
+</Base>
