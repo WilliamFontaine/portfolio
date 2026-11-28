@@ -1,0 +1,24 @@
+{
+  "ci": {
+    "collect": {
+      "url": ["http://127.0.0.1:8787/"],
+      "startServerCommand": "pnpm serve",
+      "startServerReadyTimeout": 30000
+    },
+    "assert": {
+      "assertions": {
+        "categories:performance": [
+          "error",
+          { "minScore": 0.95, "aggregationMethod": "median-run" }
+        ],
+        "cumulative-layout-shift": [
+          "error",
+          { "maxNumericValue": 0, "aggregationMethod": "pessimistic" }
+        ],
+        "resource-summary:third-party:count": ["error", { "maxNumericValue": 0 }],
+        "image-delivery-insight": "error"
+      }
+    },
+    "upload": { "target": "filesystem", "outputDir": ".lighthouseci" }
+  }
+}

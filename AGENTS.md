@@ -61,4 +61,5 @@ Le diff des PNG se relit dans la PR avant de fusionner.
 - `trailingSlash: 'always'` : les URL de test portent leur `/` final (`/inexistant/`).
 - Les polices sont des chaînes dans `astro.config.ts` : knip ne voit pas les paquets `@fontsource-variable/*`, ils sont dans `ignoreDependencies`.
 - Un port 8787 occupé arrête `pnpm test` avec une erreur explicite : arrêter ce serveur par son PID.
+- `public/_headers` : un seul bloc par motif (cloudflare/workers-sdk#17139), `_astro/*` en cache d'un an y compris sa 404 (un fichier disparu pendant la propagation d'un déploiement), accepté. La CI y ajoute `pnpm validate:html`, lychee hors ligne sur `dist/` et `pnpm lhci` (Lighthouse CI sur le site servi) ; `lighthouserc.remote.json` mesure une adresse réelle : `pnpm exec lhci autorun --config=lighthouserc.remote.json --collect.url=<URL>`.
 - Sous un agent, `astro dev` d'Astro 7 se détache (`ASTRO_DEV_BACKGROUND`) et s'arrête par `pnpm exec astro dev stop`.
