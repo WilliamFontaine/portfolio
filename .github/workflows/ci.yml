@@ -116,6 +116,8 @@ jobs:
     needs: ci-ok
     runs-on: ubuntu-24.04
     timeout-minutes: 10
+    env:
+      BASE_URL: https://pr-${{ github.event.pull_request.number }}-wfontaine.${{ vars.WORKERS_DEV_SUBDOMAIN }}.workers.dev/
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -125,35 +127,18 @@ jobs:
         with:
           name: dist
           path: dist
-      - run: pnpm exec wrangler versions list --json > "$RUNNER_TEMP/versions-before.json"
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
-      - id: preview
-        run: |
-          output="$(pnpm exec wrangler preview --name "pr-$PR_NUMBER" --tag "$HEAD_SHA" --message "$PR_TITLE" --json)"
-          printf '%s\n' "$output"
-          echo "url=$(jq -er '.preview.urls[0]' <<< "$output")" >> "$GITHUB_OUTPUT"
+      - run: pnpm exec wrangler versions upload --preview-alias "pr-$PR_NUMBER" --tag "$HEAD_SHA" --message "$PR_TITLE"
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
           PR_NUMBER: ${{ github.event.pull_request.number }}
           HEAD_SHA: ${{ github.event.pull_request.head.sha }}
           PR_TITLE: ${{ github.event.pull_request.title }}
-      - run: pnpm exec wrangler versions list --json > "$RUNNER_TEMP/versions-after.json"
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
-      - run: diff "$RUNNER_TEMP/versions-before.json" "$RUNNER_TEMP/versions-after.json" && echo "no new production version"
       - run: >-
           curl -sfI --retry 5 --retry-all-errors --retry-delay 3 "$BASE_URL"
           | grep -i '^x-robots-tag: noindex'
-        env:
-          BASE_URL: ${{ steps.preview.outputs.url }}
       - run: pnpm exec playwright install --with-deps chromium
       - run: pnpm test:edge
-        env:
-          BASE_URL: ${{ steps.preview.outputs.url }}
 
   deploy:
     name: Deploy
