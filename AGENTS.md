@@ -30,7 +30,7 @@ Astro ne réserve que `src/pages/` ; le reste est rangé par rôle, importé par
 
 ## Recette
 
-`pnpm verify` = `format:check`, `lint`, `knip`, `check`, `test`. Elle se juge à son code de sortie, sur l'état final. `pnpm test` construit `dist/`, le sert avec `wrangler dev` sur le port 8787 et lance Playwright en chromium (rapport HTML dans `playwright-report/`) ; firefox et webkit ne lancent que `motion.spec.ts` et `wrap.spec.ts`. Les projets `finition-1440` et `finition-390` (`--project='finition-*'`, hors recette) enregistrent les vidéos à 60 i/s de la relecture image par image dans `screenshots/finition/`.
+`pnpm verify` = `format:check`, `lint`, `knip`, `check`, `test`. Elle se juge à son code de sortie, sur l'état final. `pnpm test` construit `dist/`, le sert avec `wrangler dev` sur le port 8787 et lance Playwright en chromium (rapport HTML dans `playwright-report/`) ; firefox et webkit ne lancent que `motion.spec.ts` et `wrap.spec.ts`. `pnpm lhci` sert `dist/` et mesure Lighthouse ; sur une adresse réelle : `pnpm lhci --collect.url=<URL> --collect.startServerCommand=`. Les projets `finition-1440` et `finition-390` (`--project='finition-*'`, hors recette) enregistrent les vidéos à 60 i/s de la relecture image par image dans `screenshots/finition/`.
 
 ## Tests visuels
 
@@ -61,5 +61,5 @@ Le diff des PNG se relit dans la PR avant de fusionner.
 - `trailingSlash: 'always'` : les URL de test portent leur `/` final (`/inexistant/`).
 - Les polices sont des chaînes dans `astro.config.ts` : knip ne voit pas les paquets `@fontsource-variable/*`, ils sont dans `ignoreDependencies`.
 - Un port 8787 occupé arrête `pnpm test` avec une erreur explicite : arrêter ce serveur par son PID.
-- `public/_headers` : un seul bloc par motif (cloudflare/workers-sdk#17139), `_astro/*` en cache d'un an y compris sa 404 (un fichier disparu pendant la propagation d'un déploiement), accepté. La CI y ajoute `pnpm validate:html`, lychee hors ligne sur `dist/` et `pnpm lhci` (Lighthouse CI sur le site servi) ; `lighthouserc.remote.json` mesure une adresse réelle : `pnpm exec lhci autorun --config=lighthouserc.remote.json --collect.url=<URL>`.
+- `public/_headers` : un seul bloc par motif (cloudflare/workers-sdk#17139), `_astro/*` en cache d'un an y compris sa 404 (un fichier disparu pendant la propagation d'un déploiement), accepté.
 - Sous un agent, `astro dev` d'Astro 7 se détache (`ASTRO_DEV_BACKGROUND`) et s'arrête par `pnpm exec astro dev stop`.

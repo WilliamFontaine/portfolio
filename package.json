@@ -17,7 +17,6 @@
     "verify": "pnpm format:check && pnpm lint && pnpm knip && pnpm check && pnpm test",
     "prepare": "husky",
     "validate:html": "html-validate \"dist/**/*.html\"",
-    "links": "lychee --offline --include-fragments --root-dir \"$PWD/dist\" --index-files index.html dist",
     "lhci": "lhci autorun"
   },
   "dependencies": {

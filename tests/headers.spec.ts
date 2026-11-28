@@ -27,7 +27,8 @@ for (const [label, path, status] of [
 test('a fingerprinted asset is cached for a year', async ({ page, request }) => {
   await page.goto('/')
   const href = await page.locator('link[rel="stylesheet"]').getAttribute('href')
-  const response = await request.get(href!)
+  expect(href).toMatch(/^\/_astro\//)
+  const response = await request.get(href as string)
   expect(response.headers()['cache-control']).toBe('public, max-age=31536000, immutable')
 })
 

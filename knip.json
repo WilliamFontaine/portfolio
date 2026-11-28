@@ -1,5 +1,4 @@
 {
   "$schema": "https://unpkg.com/knip@6/schema.json",
-  "ignoreDependencies": ["@fontsource-variable/space-grotesk", "@fontsource-variable/manrope"],
-  "ignoreBinaries": ["lychee"]
+  "ignoreDependencies": ["@fontsource-variable/space-grotesk", "@fontsource-variable/manrope"]
 }
