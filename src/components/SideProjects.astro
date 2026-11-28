@@ -27,7 +27,7 @@ const projects = await Promise.all(
         class="group flex flex-col gap-3.5 hover:border-line-strong md:max-lg:last:col-span-2"
       >
         <div class="flex items-baseline justify-between gap-3">
-          <h4 class="text-h4">{project.name}</h4>
+          <h4 class="text-h4-compact md:text-h4">{project.name}</h4>
           <span class="text-note whitespace-nowrap text-text-muted">{project.period}</span>
         </div>
         <p class="text-body-sm">{project.description}</p>

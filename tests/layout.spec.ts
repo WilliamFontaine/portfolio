@@ -117,7 +117,7 @@ for (const deviceScaleFactor of [2, 3]) {
   test.describe(`at density ${deviceScaleFactor}`, () => {
     test.use({ deviceScaleFactor })
 
-    for (const width of [390, 1440]) {
+    for (const width of [390, 768, 1440]) {
       test(`photos and portrait pick a sharp, not oversized source at ${width}px`, async ({
         page,
       }) => {
@@ -127,21 +127,24 @@ for (const deviceScaleFactor of [2, 3]) {
         const images = page.locator('picture img')
         await expect(images).toHaveCount(3)
         for (const image of await images.all()) {
-          const { chosen, candidates } = await image.evaluate(async (img: HTMLImageElement) => {
-            const source = new Image()
-            source.src = img.currentSrc
-            await source.decode()
-            const srcset = img.parentElement!.querySelector('source')!.srcset
-            return {
-              chosen: source.naturalWidth,
-              candidates: srcset.split(',').map((entry) => parseInt(entry.trim().split(' ')[1]!)),
-            }
-          })
-          // Astro never upscales: the widest candidate is the widest the original allows.
-          const needed = Math.min(
-            (await box(image)).width * deviceScaleFactor,
-            Math.max(...candidates),
+          const { chosen, aspect, candidates } = await image.evaluate(
+            async (img: HTMLImageElement) => {
+              const source = new Image()
+              source.src = img.currentSrc
+              await source.decode()
+              const srcset = img.parentElement!.querySelector('source')!.srcset
+              return {
+                chosen: source.naturalWidth,
+                aspect: source.naturalWidth / source.naturalHeight,
+                candidates: srcset.split(',').map((entry) => parseInt(entry.trim().split(' ')[1]!)),
+              }
+            },
           )
+          // object-fit: cover draws the photo at least as wide as its box, wider when it is wider.
+          const { width: boxWidth, height: boxHeight } = await box(image)
+          const drawn = Math.max(boxWidth, boxHeight * aspect)
+          // Astro never upscales: the widest candidate is the widest the original allows.
+          const needed = Math.min(drawn * deviceScaleFactor, Math.max(...candidates))
           expect(chosen).toBeGreaterThanOrEqual(Math.floor(needed))
           expect(chosen).toBeLessThanOrEqual(Math.min(...candidates.filter((w) => w >= needed)))
         }

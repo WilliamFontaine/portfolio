@@ -44,6 +44,7 @@ test('images carry their exact text alternatives, decorations are hidden', async
   ]) {
     await expect(page.getByRole('img', { name, exact: true })).toHaveCount(1)
   }
+  await expect(page.locator('svg[aria-hidden="true"]')).not.toHaveCount(0)
   await expect(page.locator('svg:not([aria-hidden="true"])')).toHaveCount(0)
 })
 

@@ -1,6 +1,10 @@
+import type { Page } from '@playwright/test'
 import { expect, test } from './fixtures'
 
 const email = 'william.fontaine0308@gmail.com'
+// innerText applies the label's uppercase transform, hence the case-insensitive patterns.
+const label = (page: Page) =>
+  page.locator('#top').getByText('Développeur full-stack, web et mobile')
 
 test('page title and description', async ({ page }) => {
   await page.goto('/')
@@ -14,6 +18,10 @@ test('page title and description', async ({ page }) => {
 test('every menu link leads to its section', async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 })
   await page.goto('/')
+  await expect(label(page)).toHaveText(
+    /^développeur full-stack, web et mobile · clermont-ferrand$/i,
+    { useInnerText: true },
+  )
   const header = page.getByRole('banner')
   const nav = page.getByRole('navigation', { name: 'Navigation principale' })
   for (const [name, id] of [
@@ -76,7 +84,9 @@ for (const width of [360, 390]) {
     const header = page.getByRole('banner')
     await expect(header.getByRole('navigation')).toHaveCount(0)
     await expect(header.getByRole('link')).toHaveText(['William Fontaine', "M'écrire"])
-    await expect(page.locator('#top').getByText('· Clermont-Ferrand')).toBeHidden()
+    await expect(label(page)).toHaveText(/^développeur full-stack, web et mobile$/i, {
+      useInnerText: true,
+    })
   })
 }
 

@@ -17,6 +17,11 @@ const steps = [
   ['code-block', 'text-structure', "Ce que j'ai fait", data.done],
   ['check-circle', 'text-accent', "Aujourd'hui", data.today],
 ] as const
+// object-fit: cover draws a photo wider than its box when the photo is wider than the box's ratio.
+const drawn = (box: number) => Math.max(1, data.photo.width / data.photo.height / box)
+const wide = drawn(4 / 5)
+const compact = drawn(4 / 3)
+const sizes = `(min-width: 1440px) ${Math.ceil(490 * wide)}px, (min-width: 1024px) calc((100vw - 264px) * ${((5 / 12) * wide).toFixed(4)}), calc((100vw - 48px) * ${compact.toFixed(4)})`
 ---
 
 <article
@@ -31,7 +36,7 @@ const steps = [
       src={data.photo}
       alt={data.alt}
       formats={['avif', 'webp']}
-      sizes="(min-width: 1440px) 490px, (min-width: 1024px) calc((100vw - 264px) * 5 / 12), calc(100vw - 48px)"
+      {sizes}
       class="aspect-4/3 w-full rounded-lg lg:aspect-4/5"
     />
     <figcaption class="text-note text-text-muted">{data.credit}</figcaption>
