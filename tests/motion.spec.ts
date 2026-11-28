@@ -109,37 +109,6 @@ test.describe('with motion', () => {
     })
   }
 
-  test('on a phone the arrival waits until half the line shows above the reading line', async ({
-    page,
-  }) => {
-    await page.setViewportSize({ width: 390, height: 900 })
-    await page.goto('/')
-    await expect.poll(() => states(page)).toEqual(['paused', 'paused', 'paused', 'paused'])
-    const { height } = await box(sky(page))
-    expect(await showSkyAbove(page, 0.3)).toBeLessThan(0.5)
-    expect(900 - (await box(sky(page))).y).toBeGreaterThan(height / 2)
-    await frames(page)
-    expect(await states(page)).toEqual(['paused', 'paused', 'paused', 'paused'])
-    expect(await showSkyAbove(page, 0.7)).toBeGreaterThanOrEqual(0.5)
-    await expect.poll(() => running(page)).toBe(0)
-  })
-
-  test('turning motion off while the arrival waits never plays it and shows every block', async ({
-    page,
-  }) => {
-    await page.setViewportSize({ width: 390, height: 900 })
-    await page.goto('/')
-    await expect.poll(() => states(page)).toEqual(['paused', 'paused', 'paused', 'paused'])
-    await expect(page.locator('[data-pending]')).not.toHaveCount(0)
-    await page.emulateMedia({ reducedMotion: 'reduce' })
-    await expect(page.locator('[data-pending]')).toHaveCount(0)
-    await expect.poll(() => page.evaluate(() => document.getAnimations().length)).toBe(0)
-    await sky(page).scrollIntoViewIfNeeded()
-    await scrollSettled(page)
-    expect(await running(page)).toBe(0)
-    await expect(page.locator('#top svg[data-sky]').first()).toHaveCSS('clip-path', 'none')
-  })
-
   test('a link to a section lands on it, then scrolling turns smooth', async ({ page }) => {
     await page.goto('/#contact')
     const contact = page.locator('#contact')
@@ -283,6 +252,51 @@ test.describe('with motion', () => {
       await expect(mark).not.toHaveAttribute('data-say')
       await expect(name).toHaveCSS('opacity', '0')
     })
+  })
+})
+
+test.describe('on a phone', () => {
+  // The script's first-frame pause needs real frames, which Playwright's fake clock turns into timers.
+  test.use({ reducedMotion: 'no-preference', viewport: { width: 390, height: 900 } })
+
+  test('the arrival waits until half the line shows above the reading line', async ({ page }) => {
+    await page.goto('/')
+    await expect.poll(() => states(page)).toEqual(['paused', 'paused', 'paused', 'paused'])
+    const { height } = await box(sky(page))
+    expect(await showSkyAbove(page, 0.3)).toBeLessThan(0.5)
+    expect(900 - (await box(sky(page))).y).toBeGreaterThan(height / 2)
+    await frames(page)
+    expect(await states(page)).toEqual(['paused', 'paused', 'paused', 'paused'])
+    expect(await showSkyAbove(page, 0.7)).toBeGreaterThanOrEqual(0.5)
+    await expect.poll(() => running(page)).toBe(0)
+  })
+
+  test('turning motion off while the arrival waits never plays it and shows every block', async ({
+    page,
+  }) => {
+    await page.goto('/')
+    await expect.poll(() => states(page)).toEqual(['paused', 'paused', 'paused', 'paused'])
+    await expect(page.locator('[data-pending]')).not.toHaveCount(0)
+    await page.emulateMedia({ reducedMotion: 'reduce' })
+    await expect(page.locator('[data-pending]')).toHaveCount(0)
+    await expect.poll(() => page.evaluate(() => document.getAnimations().length)).toBe(0)
+    await sky(page).scrollIntoViewIfNeeded()
+    await scrollSettled(page)
+    expect(await running(page)).toBe(0)
+    await expect(page.locator('#top svg[data-sky]').first()).toHaveCSS('clip-path', 'none')
+  })
+
+  test('turning motion off and on while the arrival waits never replays the old one', async ({
+    page,
+  }) => {
+    await page.goto('/')
+    await expect.poll(() => states(page)).toEqual(['paused', 'paused', 'paused', 'paused'])
+    await page.emulateMedia({ reducedMotion: 'reduce' })
+    await page.emulateMedia({ reducedMotion: 'no-preference' })
+    await expect.poll(() => running(page)).toBe(0)
+    await sky(page).scrollIntoViewIfNeeded()
+    await scrollSettled(page)
+    expect(await running(page)).toBe(0)
   })
 })
 

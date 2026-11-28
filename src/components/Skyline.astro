@@ -87,26 +87,24 @@ const front = Array.from({ length: steps }, (_, i) => ({
 
 <script>
   const motion = matchMedia('(prefers-reduced-motion: no-preference)')
-  for (const sky of document.querySelectorAll('[data-arrival]')) {
-    // Its own start is the first moment the arrival's animations surely exist, in WebKit too.
-    sky.addEventListener(
-      'animationstart',
-      () => {
-        const arrival = sky.getAnimations({ subtree: true })
-        for (const animation of arrival) animation.pause()
-        // On a phone the arrival waits until half the line shows above the reading line (ReadingLine.astro).
-        const band = document.querySelector<HTMLElement>('[data-reading]')?.offsetHeight ?? 0
-        const wait = new IntersectionObserver(
-          ([entry]) => {
-            if (entry!.intersectionRatio < 0.5) return
-            wait.disconnect()
-            if (motion.matches) for (const animation of arrival) animation.play()
-          },
-          { threshold: 0.5, rootMargin: `0px 0px -${band}px 0px` },
-        )
-        wait.observe(sky)
-      },
-      { once: true },
-    )
-  }
+  // WebKit may not have created the arrival's animations when this runs: pause them on the first frame.
+  requestAnimationFrame(() => {
+    if (!motion.matches) return
+    // On a phone the arrival waits until half the line shows above the reading line (ReadingLine.astro).
+    const band = document.querySelector<HTMLElement>('[data-reading]')?.offsetHeight ?? 0
+    for (const sky of document.querySelectorAll('[data-arrival]')) {
+      for (const animation of sky.getAnimations({ subtree: true })) animation.pause()
+      const wait = new IntersectionObserver(
+        ([entry]) => {
+          if (entry!.intersectionRatio < 0.5) return
+          wait.disconnect()
+          // Live animations only: a switch of the motion preference meanwhile replaces them.
+          if (motion.matches)
+            for (const animation of sky.getAnimations({ subtree: true })) animation.play()
+        },
+        { threshold: 0.5, rootMargin: `0px 0px -${band}px 0px` },
+      )
+      wait.observe(sky)
+    }
+  })
 </script>

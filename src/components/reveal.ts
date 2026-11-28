@@ -6,7 +6,7 @@ export const stagger = 'motion-safe:data-in:nth-2:delay-90 motion-safe:data-in:n
 export function observeReveals() {
   const motion = matchMedia('(prefers-reduced-motion: no-preference)')
   if (!motion.matches) return
-  const reveal = (block: Element) => {
+  const show = (block: Element) => {
     if (!block.hasAttribute('data-pending') || block.hasAttribute('data-in')) return
     block.toggleAttribute('data-in', true)
     blocks.unobserve(block)
@@ -21,7 +21,7 @@ export function observeReveals() {
   const blocks = new IntersectionObserver(
     (entries) => {
       for (const entry of entries) {
-        if (entry.isIntersecting) reveal(entry.target)
+        if (entry.isIntersecting) show(entry.target)
       }
     },
     { rootMargin: '0px 0px -10% 0px' },
@@ -33,7 +33,7 @@ export function observeReveals() {
   }
   document.addEventListener('focusin', ({ target }) => {
     const block = (target as Element).closest('[data-pending]')
-    if (block) reveal(block)
+    if (block) show(block)
   })
   // Starting from no-preference, the first change is to reduce: stop and show every block.
   motion.addEventListener(
