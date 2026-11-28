@@ -5,8 +5,8 @@ const sky = (page: Page) => page.locator('#top [data-arrival]')
 const reading = (page: Page) => page.locator('[data-reading]')
 const box = async (locator: Locator) => (await locator.boundingBox())!
 
-const timing = (page: Page, name: string) =>
-  sky(page).evaluate((element, name) => {
+const timing = (page: Page, name: string, arrival = sky(page)) =>
+  arrival.evaluate((element, name) => {
     const animation = element
       .getAnimations({ subtree: true })
       .find((animation) => (animation as CSSAnimation).animationName === name)
@@ -106,6 +106,19 @@ test.describe('with motion', () => {
       expect((await timing(page, 'rise')).delay).toBe(150 + duration / 2)
       await settleArrival(page)
       await expect(page.locator('#top svg[data-sky]').first()).toHaveCSS('clip-path', 'none')
+    })
+  }
+
+  for (const width of [1440, 390]) {
+    test(`the colophon tower note shows once the tower has risen at ${width}px`, async ({
+      page,
+    }) => {
+      await page.setViewportSize({ width, height: 900 })
+      await page.goto('/colophon/')
+      // Inside the arrival, the note waits with the line on a phone.
+      const arrival = page.getByRole('figure').locator('[data-arrival]')
+      const rise = await timing(page, 'rise', arrival)
+      expect((await timing(page, 'fade', arrival)).delay).toBeCloseTo(rise.delay + rise.duration)
     })
   }
 

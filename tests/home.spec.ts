@@ -60,6 +60,14 @@ for (const width of [360, 390, 1440]) {
   }
 }
 
+test('menu links offer a 44px target, as every other standalone link', async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 })
+  await page.goto('/')
+  for (const link of await page.getByRole('navigation').getByRole('link').all()) {
+    expect((await link.boundingBox())!.height).toBeGreaterThanOrEqual(44)
+  }
+})
+
 test('mail, LinkedIn and Malt links reach their targets', async ({ page }) => {
   await page.goto('/')
   const mail = page.getByRole('link', { name: email })

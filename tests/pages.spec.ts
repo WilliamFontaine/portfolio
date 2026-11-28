@@ -144,6 +144,19 @@ for (const [width, gap, beside] of [
   })
 }
 
+for (const width of [390, 768]) {
+  test(`an annex section's body sits 12px under its heading at ${width}px`, async ({ page }) => {
+    await page.setViewportSize({ width, height: 900 })
+    await page.goto('/mentions-legales/')
+    const section = page
+      .locator('section')
+      .filter({ has: page.getByRole('heading', { name: 'Éditeur' }) })
+    const heading = await box(section.getByRole('heading'))
+    const body = await box(section.locator('dl'))
+    expect(body.y - (heading.y + heading.height)).toBe(12)
+  })
+}
+
 test('legal notice names the publisher, the host and the data processing', async ({ page }) => {
   await page.goto('/mentions-legales/')
   expect(await fields(page)).toEqual({
@@ -317,11 +330,15 @@ test.describe('not found', () => {
     [390, 900],
     [2560, 1440],
   ] as const) {
-    test(`the footer reaches the bottom of a ${width}x${height} window`, async ({ page }) => {
+    test(`the line rests on the footer at the bottom of a ${width}x${height} window`, async ({
+      page,
+    }) => {
       await page.setViewportSize({ width, height })
       await page.goto('/inexistant/')
       const { y, height: footerHeight } = await box(page.getByRole('contentinfo'))
       expect(y + footerHeight).toBe(height)
+      const line = await box(page.locator('[data-arrival]'))
+      expect(line.y + line.height).toBe(y)
     })
   }
 })

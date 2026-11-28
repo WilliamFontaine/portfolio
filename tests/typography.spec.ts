@@ -77,7 +77,7 @@ for (const [name, path, notFound] of [
         for (const heading of await page.locator('h1, h2, h3, h4').all()) {
           await expect(heading).toHaveCSS('text-wrap-style', 'balance')
         }
-        for (const paragraph of await page.locator('p').all()) {
+        for (const paragraph of await page.locator('p, li, dd').all()) {
           await expect(paragraph).toHaveCSS('text-wrap-style', 'pretty')
         }
       })

@@ -23,7 +23,7 @@ const links = sections.filter(([id]) => id !== 'top' && id !== 'contact')
       {links.map(([id, name]) => (
         <a
           href={section(id)}
-          class="text-ui font-medium underline decoration-transparent decoration-2 underline-offset-6 hover:text-ink hover:decoration-accent motion-safe:transition-colors"
+          class="inline-flex min-h-11 items-center text-ui font-medium underline decoration-transparent decoration-2 underline-offset-6 hover:text-ink hover:decoration-accent motion-safe:transition-colors"
         >
           {name}
         </a>

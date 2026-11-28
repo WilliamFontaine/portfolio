@@ -23,9 +23,10 @@ const front = Array.from({ length: steps }, (_, i) => ({
 
 {props.variant === 'fill' ? (
   <div data-arrival class:list={['relative', className]}>
+    {/* Chromium's composited clip-path animation (the draw) freezes the flow's mask unless this svg has its own layer. */}
     <svg
       data-sky
-      class="absolute inset-0 size-full overflow-visible motion-safe:animate-draw-compact md:motion-safe:animate-draw"
+      class="absolute inset-0 size-full overflow-visible motion-safe:animate-draw-compact motion-safe:will-change-transform md:motion-safe:animate-draw"
       viewBox={viewBox}
       preserveAspectRatio="xMidYMin slice"
       aria-hidden="true"
@@ -72,6 +73,7 @@ const front = Array.from({ length: steps }, (_, i) => ({
         set:html={towerMarkup}
       />
     </svg>
+    <slot />
   </div>
 ) : (
   <svg

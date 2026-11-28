@@ -157,6 +157,8 @@
   --animate-rise-compact: rise 420ms var(--ease-flow) 640ms backwards;
   --animate-flow: flow 1000ms var(--ease-flow) 1480ms backwards;
   --animate-flow-compact: flow 1000ms var(--ease-flow) 1081ms backwards;
+  --animate-note: fade 520ms var(--ease-out) 1270ms backwards;
+  --animate-note-compact: fade 520ms var(--ease-out) 1060ms backwards;
   --animate-beacon: beacon 800ms var(--ease-flow);
   --animate-draw-contact: draw 700ms var(--ease-flow);
   --animate-route: route linear both;
@@ -185,6 +187,12 @@
     }
     to {
       transform: scaleY(1);
+    }
+  }
+
+  @keyframes fade {
+    from {
+      opacity: 0;
     }
   }
 
@@ -288,7 +296,8 @@
     @apply max-w-text text-pretty;
   }
 
-  li {
+  li,
+  dd {
     @apply text-pretty;
   }
 }
