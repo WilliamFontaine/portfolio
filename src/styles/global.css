@@ -155,6 +155,8 @@
   --text-shadow-*: initial;
   --blur-*: initial;
   --perspective-*: initial;
+  --leading-*: initial;
+  --tracking-*: initial;
   --aspect-*: initial;
 }
 

@@ -1,7 +1,6 @@
 import { expect, test } from './fixtures'
 
 const widths = [360, 390, 768, 1280, 1440, 1920, 2560, 3440]
-const alphaOf = (color: string) => Number(/(?:\/|rgba\(.*,)\s*([\d.]+)\)$/.exec(color)?.[1] ?? 1)
 
 test.use({ reducedMotion: 'reduce' })
 
@@ -27,35 +26,28 @@ for (const width of widths) {
       expect(a).toBe(d)
     }
 
-    const tower = await page.locator('[data-sky-tower]').evaluate((g) => {
-      const box = g.getBoundingClientRect()
-      const sky = g.closest('svg')!.getBoundingClientRect()
-      return { box, sky }
-    })
-    expect(tower.box.top).toBeGreaterThanOrEqual(tower.sky.top)
-    expect(tower.box.bottom).toBeLessThanOrEqual(tower.sky.bottom)
-    expect(
-      Math.abs(tower.box.x + tower.box.width / 2 - (tower.sky.x + tower.sky.width / 2)),
-    ).toBeLessThanOrEqual(1)
+    const tower = await page.locator('[data-sky-tower]').first().boundingBox()
+    const sky = await skies.first().boundingBox()
+    expect(tower!.y).toBeGreaterThanOrEqual(sky!.y)
+    expect(tower!.y + tower!.height).toBeLessThanOrEqual(sky!.y + sky!.height)
+    expect(Math.abs(tower!.x + tower!.width / 2 - (sky!.x + sky!.width / 2))).toBeLessThanOrEqual(1)
   })
 }
 
 for (const [scheme, top, end] of [
-  ['light', 1, 0.06],
-  ['dark', 0.5, 0.03],
+  ['light', 'rgb(46, 97, 72)', 'color(srgb 0.180392 0.380392 0.282353 / 0.06)'],
+  [
+    'dark',
+    'color(srgb 0.513726 0.756863 0.627451 / 0.5)',
+    'color(srgb 0.513726 0.756863 0.627451 / 0.03)',
+  ],
 ] as const) {
   test(`${scheme} gradient and tower start at the design system opacity`, async ({ page }) => {
     await page.emulateMedia({ colorScheme: scheme })
     await page.goto('/')
-    const color = (selector: string) =>
-      page
-        .locator(selector)
-        .first()
-        .evaluate((el) => getComputedStyle(el).color)
-
-    expect(alphaOf(await color('linearGradient > stop:nth-child(1)'))).toBeCloseTo(top, 2)
-    expect(alphaOf(await color('linearGradient > stop:nth-child(2)'))).toBeCloseTo(end, 2)
-    expect(alphaOf(await color('[data-sky-tower]'))).toBeCloseTo(top, 2)
+    await expect(page.locator('linearGradient > stop:nth-child(1)').first()).toHaveCSS('color', top)
+    await expect(page.locator('linearGradient > stop:nth-child(2)').first()).toHaveCSS('color', end)
+    await expect(page.locator('[data-sky-tower]').first()).toHaveCSS('color', top)
   })
 }
 

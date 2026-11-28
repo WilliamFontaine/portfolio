@@ -32,7 +32,7 @@ export default defineConfig(
               message: 'Arbitrary value: declare a token in @theme or a @utility in global.css.',
             },
             {
-              pattern: '(^|:)dark:',
+              pattern: '(^|:)(not-)?dark:',
               message:
                 'dark: follows the OS theme and ignores color-scheme: use a light-dark() token.',
             },
