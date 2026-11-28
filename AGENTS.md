@@ -44,6 +44,10 @@ docker run --rm --ipc=host --init -v "$PWD":/work -v portfolio-visual-nm:/work/n
 
 Le diff des PNG se relit dans la PR avant de fusionner.
 
+## Retour arrière
+
+Tableau de bord Cloudflare (Workers & Pages, le Worker, Deployments, menu de la version, Rollback) ou `pnpm exec wrangler rollback <version-id> --message "<raison>"`. La version se retrouve par son tag, le SHA du commit déployé. Ensuite, une PR de revert : sinon le déploiement suivant remet la version fautive. Seules les 100 dernières versions comptent, et celles de plus de 30 jours peuvent être supprimées. Le job `deploy` s'en charge seul quand les contrôles après déploiement échouent (le run reste rouge).
+
 ## Règles
 
 - **Jetons seulement** : couleurs et tailles viennent des jetons déclarés dans `@theme` de `src/styles/global.css`. ESLint (`eslint-plugin-better-tailwindcss`) refuse toute valeur ou propriété arbitraire (`bg-[#f00]`, `w-(--x)`, `[color:red]`) et toute variante `dark:` (elle suit le thème du système et ignore le `color-scheme` de l'îlot : utiliser un jeton `light-dark()`) : déclarer un jeton dans `@theme` ou un `@utility` dans `global.css`.
