@@ -46,7 +46,19 @@ Le diff des PNG se relit dans la PR avant de fusionner.
 
 ## Déploiement et retour arrière
 
-Le job `deploy` (push sur `main`, ou `workflow_dispatch`) vit dans l'environnement GitHub `production`, limité à la branche `main` : un déploiement lancé depuis une autre branche échoue à cette porte. Après un push sur `main`, il attend que le site en ligne serve exactement `dist/index.html` puis lance `pnpm test:edge` ; s'il échoue, il exécute `wrangler rollback` vers le déploiement précédent et le run reste rouge. Le test `@revalidation` (ETag du HTML) n'en fait pas partie, il ne tourne qu'en local.
+Le job `deploy` (push sur `main`, ou `workflow_dispatch`) vit dans l'environnement GitHub `production`, limité à la branche `main` : un déploiement lancé depuis une autre branche échoue à cette porte. Après un push sur `main`, il attend que le site en ligne serve exactement `dist/index.html` puis lance `pnpm test:edge` ; s'il échoue, il exécute `wrangler rollback` vers le déploiement précédent et le run reste rouge.
+Le HTML servi par Cloudflare n'a pas d'ETag (seuls les fichiers statiques en portent) : il se revalide par `max-age=0, must-revalidate` et se retélécharge en entier, ce qui est accepté vu sa taille.
+
+## Zone Cloudflare
+
+Réglages dont le site dépend, faits dans le tableau de bord (pas dans le dépôt) :
+
+- Bot Fight Mode et JS Detections restent coupés (cookie `cf_clearance` et script hors CSP) ; la synchronisation des préférences de bots est coupée : le `robots.txt` du dépôt fait foi.
+- Une Configuration Rule sur les noms du site coupe Email Obfuscation, Rocket Loader, Automatic HTTPS Rewrites et Web Analytics (« Disable RUM ») : ils réécrivent le `mailto:` ou injectent des scripts que la CSP refuse.
+- Speed Brain est coupé pour toute la zone (en-tête `speculation-rules`).
+- Le HSTS de la zone reste à Off : l'en-tête vient de `public/_headers`.
+
+La fixture automatique de Playwright relève toute requête `/cdn-cgi/`, tout cookie et toute erreur de console : `pnpm test:edge` contre le site en ligne détecte une injection réactivée.
 
 À la main : tableau de bord Cloudflare (Workers & Pages, le Worker, Deployments, menu de la version, Rollback) ou `pnpm exec wrangler rollback <version-id> --message "<raison>"`. Les versions déployées se listent par `pnpm exec wrangler deployments list` (`versions list` mêle aussi les préversions des PR) ; la version se retrouve par son tag, le SHA du commit déployé. Ensuite, une PR de revert : sinon le déploiement suivant remet la version fautive. Seules les 100 dernières versions comptent, préversions comprises, et celles de plus de 30 jours peuvent être supprimées.
 
