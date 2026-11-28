@@ -1,6 +1,7 @@
 ---
 import panorama from '../data/panorama-180.json'
 import { sections } from '../data/site'
+import Container from './Container.astro'
 import Ridge from './Ridge.astro'
 
 const layers = [
@@ -50,4 +51,151 @@ const layers = [
     </div>
   </div>
   <div class="h-safe-bottom bg-surface"></div>
+  <Container>
+    <div data-gutter></div>
+  </Container>
 </div>
+
+<script>
+  const root = document.documentElement
+  const reading = document.querySelector<HTMLElement>('[data-reading]')!
+  const box = reading.querySelector<HTMLElement>('[data-marks]')!
+  const pen = reading.querySelector<HTMLElement>('[data-pen]')!
+  const gutter = reading.querySelector<HTMLElement>('[data-gutter]')!
+  const ridge = reading.querySelector('svg')!
+  const clamp = (value: number, low: number, high: number) => Math.min(high, Math.max(low, value))
+
+  const { width: viewWidth, height: viewHeight } = ridge.viewBox.baseVal
+  const numbers = ridge
+    .querySelector('path')!
+    .getAttribute('d')!
+    .match(/-?[\d.]+/g)!
+    .map(Number)
+  const points = [numbers.slice(0, 2)]
+  for (let i = 2; i + 5 < numbers.length; i += 6) points.push(numbers.slice(i + 4, i + 6))
+  const lineY = (x: number) => {
+    const i = Math.max(
+      1,
+      points.findIndex(([px]) => px! >= clamp(x, 0, viewWidth)),
+    )
+    const [ax, ay] = points[i - 1] as [number, number]
+    const [bx, by] = points[i] as [number, number]
+    return ay + ((by - ay) * (x - ax)) / (bx - ax)
+  }
+  const stages = [...reading.querySelectorAll('a')].map((mark) => ({
+    mark,
+    name: mark.lastElementChild as HTMLElement,
+    section: document.getElementById(mark.hash.slice(1))!,
+    x: 0,
+    passed: false,
+  }))
+  type Stage = (typeof stages)[number]
+  const gap = 28
+  const say = 1600
+  let inset = 0
+  let span = 0
+  let scale = 1
+  let offset = 0
+  let ready = false
+  let saying: Stage | undefined
+  let next: Stage | undefined
+  let sayTimer: ReturnType<typeof setTimeout> | undefined
+  let settleTimer: ReturnType<typeof setTimeout> | undefined
+  let walker: Animation | undefined
+
+  const progress = () => {
+    const range = root.scrollHeight - root.clientHeight
+    return range > 0 ? clamp(root.scrollTop / range, 0, 1) : 1
+  }
+  const crest = (x: number) => lineY((x - offset) / scale) * scale
+
+  const reach = (stage: Stage) => {
+    clearTimeout(sayTimer)
+    saying?.mark.removeAttribute('data-say')
+    saying = stage
+    stage.mark.removeAttribute('data-ping')
+    // Without a style flush between removing and setting it, the beacon would not restart.
+    void stage.mark.offsetWidth
+    stage.mark.toggleAttribute('data-ping', true)
+    stage.mark.toggleAttribute('data-say', true)
+    sayTimer = setTimeout(() => stage.mark.removeAttribute('data-say'), say)
+  }
+  // A smooth jump crosses stages frame after frame: only the furthest one reached when the scroll settles speaks.
+  const commit = () => {
+    clearTimeout(settleTimer)
+    if (next?.passed) reach(next)
+    next = undefined
+  }
+  const update = () => {
+    if (!span) return
+    const p = progress()
+    // Same mapping as the route keyframes in global.css.
+    const at = inset + p * span
+    for (const stage of stages) {
+      const passed = at >= stage.x - 0.5
+      if (passed && !stage.passed && ready && (!next || stage.x > next.x)) next = stage
+      stage.passed = passed
+      stage.mark.toggleAttribute('data-passed', passed)
+    }
+    reading.toggleAttribute('data-done', p >= 0.999)
+    ready = true
+    if (next) {
+      clearTimeout(settleTimer)
+      settleTimer = setTimeout(commit, 150)
+    }
+  }
+  const place = () => {
+    const width = box.clientWidth
+    const height = box.clientHeight
+    if (!width || !height) {
+      span = 0
+      walker?.cancel()
+      return
+    }
+    const anchor = parseFloat(getComputedStyle(root).scrollPaddingTop)
+    const range = root.scrollHeight - root.clientHeight
+    const tops = stages.map(({ section }) => section.getBoundingClientRect().top + root.scrollTop)
+    const halves = stages.map(({ name }) => name.offsetWidth / 2)
+    inset = Math.min(width / 4, gutter.getBoundingClientRect().left)
+    span = width - 2 * inset
+    scale = Math.max(width / viewWidth, height / viewHeight)
+    offset = (width - viewWidth * scale) / 2
+    const xs = tops.map(
+      (top) => inset + (range > 0 ? clamp((top - anchor) / range, 0, 1) : 1) * span,
+    )
+    // Short final sections land within a few pixels of each other: push stages apart from the end, then forward.
+    for (let i = xs.length - 2; i >= 0; i--) xs[i] = Math.min(xs[i]!, xs[i + 1]! - gap)
+    for (let i = 1; i < xs.length; i++) xs[i] = Math.max(xs[i]!, xs[i - 1]! + gap)
+
+    reading.style.setProperty('--reading-inset', `${inset}px`)
+    for (const [i, stage] of stages.entries()) {
+      const x = (stage.x = xs[i]!)
+      const half = halves[i]!
+      stage.mark.style.left = `${x}px`
+      stage.mark.style.top = `${crest(x)}px`
+      stage.name.style.left = `calc(50% + ${clamp(0, 8 - (x - half), width - 8 - (x + half))}px)`
+    }
+    // Moved from scroll events, the walker would lag a frame and Firefox would warn of a scroll-linked effect.
+    const bends = points
+      .map(([px]) => px! * scale + offset)
+      .filter((x) => x > inset && x < width - inset)
+    walker?.cancel()
+    walker = pen.animate(
+      [inset, ...bends, width - inset].map((x) => ({
+        transform: `translate(${x}px, ${crest(x)}px)`,
+        offset: (x - inset) / span,
+      })),
+      { timeline: new ScrollTimeline({ source: root }), fill: 'both' },
+    )
+    reading.toggleAttribute('data-ready', true)
+    update()
+  }
+
+  addEventListener('scroll', update, { passive: true })
+  document.addEventListener('scrollend', commit)
+  addEventListener('resize', place)
+  // The band shows or hides with the motion preference; the body's height moves the sections.
+  const resized = new ResizeObserver(place)
+  resized.observe(box)
+  resized.observe(document.body)
+</script>

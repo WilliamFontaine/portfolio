@@ -14,6 +14,19 @@ const timing = (page: Page, name: string) =>
     return { duration: duration as number, delay: delay! }
   }, name)
 
+const states = (page: Page) =>
+  sky(page).evaluate((element) =>
+    element.getAnimations({ subtree: true }).map((animation) => animation.playState),
+  )
+
+const running = (page: Page) =>
+  sky(page).evaluate((element) => element.getAnimations({ subtree: true }).length)
+
+const frames = (page: Page) =>
+  page.evaluate(
+    () => new Promise((done) => requestAnimationFrame(() => requestAnimationFrame(done))),
+  )
+
 // Like Safari, WebKit only tabs to links with Option held.
 const tab = (browserName: string) => (browserName === 'webkit' ? 'Alt+Tab' : 'Tab')
 
@@ -24,12 +37,19 @@ async function scrollSettled(page: Page) {
     .toBe(true)
 }
 
-const running = (page: Page) =>
-  sky(page).evaluate((element) => element.getAnimations({ subtree: true }).length)
-
 async function settleArrival(page: Page) {
   await sky(page).scrollIntoViewIfNeeded()
   await expect.poll(() => running(page)).toBe(0)
+}
+
+// Scrolls until the given share of the hero line shows above the reading line, and returns that share.
+async function showSkyAbove(page: Page, share: number) {
+  const top = (await box(reading(page))).y
+  const { y, height } = await box(sky(page))
+  await page.mouse.wheel(0, y - (top - share * height))
+  await scrollSettled(page)
+  const after = await box(sky(page))
+  return (top - after.y) / after.height
 }
 
 test.describe('with reduced motion', () => {
@@ -49,12 +69,22 @@ test.describe('with reduced motion', () => {
     await expect(page.locator('[data-reveal]')).not.toHaveCount(0)
     await expect(page.locator('[data-pending]')).toHaveCount(0)
     await expect(reading(page)).toBeHidden()
+    await expect(page.locator('html')).toHaveAttribute('data-settled')
     await expect(page.locator('html')).toHaveCSS('scroll-behavior', 'auto')
 
     const button = page.getByRole('main').getByRole('link', { name: "M'écrire" })
     await button.hover()
     expect(await button.evaluate((link) => link.getAnimations().length)).toBe(0)
     expect((await makeAxeBuilder().analyze()).violations).toEqual([])
+  })
+
+  test('allowing motion after load places the reading line', async ({ page }) => {
+    await page.goto('/')
+    await expect(reading(page)).toBeHidden()
+    await page.emulateMedia({ reducedMotion: 'no-preference' })
+    await expect(reading(page)).toBeVisible()
+    await expect(reading(page)).toHaveAttribute('data-ready')
+    await expect(reading(page).locator('a[href="#top"]')).toHaveAttribute('data-passed')
   })
 })
 
@@ -79,30 +109,47 @@ test.describe('with motion', () => {
     })
   }
 
-  test('on a phone the arrival waits until the line shows above the reading line', async ({
+  test('on a phone the arrival waits until half the line shows above the reading line', async ({
     page,
   }) => {
     await page.setViewportSize({ width: 390, height: 900 })
     await page.goto('/')
-    const states = () =>
-      sky(page).evaluate((element) =>
-        element.getAnimations({ subtree: true }).map((animation) => animation.playState),
-      )
-    await expect.poll(states).toEqual(['paused', 'paused', 'paused', 'paused'])
-    await page.mouse.wheel(0, 400)
+    await expect.poll(() => states(page)).toEqual(['paused', 'paused', 'paused', 'paused'])
+    const { height } = await box(sky(page))
+    expect(await showSkyAbove(page, 0.3)).toBeLessThan(0.5)
+    expect(900 - (await box(sky(page))).y).toBeGreaterThan(height / 2)
+    await frames(page)
+    expect(await states(page)).toEqual(['paused', 'paused', 'paused', 'paused'])
+    expect(await showSkyAbove(page, 0.7)).toBeGreaterThanOrEqual(0.5)
     await expect.poll(() => running(page)).toBe(0)
   })
 
-  for (const scheme of ['light', 'dark'] as const) {
-    test(`final ${scheme} state passes axe`, async ({ page, browserName, makeAxeBuilder }) => {
-      await page.emulateMedia({ colorScheme: scheme })
-      await page.setViewportSize({ width: 1440, height: 900 })
-      await page.goto('/')
-      await settleArrival(page)
-      expect((await makeAxeBuilder().analyze()).violations).toEqual([])
-      await page.screenshot({ path: `screenshots/motion-final-${scheme}-${browserName}.png` })
-    })
-  }
+  test('turning motion off while the arrival waits never plays it and shows every block', async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: 390, height: 900 })
+    await page.goto('/')
+    await expect.poll(() => states(page)).toEqual(['paused', 'paused', 'paused', 'paused'])
+    await expect(page.locator('[data-pending]')).not.toHaveCount(0)
+    await page.emulateMedia({ reducedMotion: 'reduce' })
+    await expect(page.locator('[data-pending]')).toHaveCount(0)
+    await expect.poll(() => page.evaluate(() => document.getAnimations().length)).toBe(0)
+    await sky(page).scrollIntoViewIfNeeded()
+    await scrollSettled(page)
+    expect(await running(page)).toBe(0)
+    await expect(page.locator('#top svg[data-sky]').first()).toHaveCSS('clip-path', 'none')
+  })
+
+  test('a link to a section lands on it, then scrolling turns smooth', async ({ page }) => {
+    await page.goto('/#contact')
+    const contact = page.locator('#contact')
+    const landed = (await box(contact)).y
+    expect(await page.evaluate(() => scrollY)).toBeGreaterThan(0)
+    await expect(page.locator('html')).toHaveAttribute('data-settled')
+    await expect(page.locator('html')).toHaveCSS('scroll-behavior', 'smooth')
+    await scrollSettled(page)
+    expect((await box(contact)).y).toBe(landed)
+  })
 
   test('the reading line is decorative and its stages stay out of the tab order', async ({
     page,
@@ -118,31 +165,24 @@ test.describe('with motion', () => {
     }
   })
 
-  test('a stage leads to its section and names it once there', async ({ page, browserName }) => {
+  test('a smooth jump across stages names only the furthest one', async ({ page }) => {
     await page.setViewportSize({ width: 1440, height: 900 })
-    // Frozen timers: the name cannot clear before it is checked.
-    await page.clock.pauseAt(Date.now() + 1000)
     await page.goto('/')
     const line = reading(page)
     await expect(line).toHaveAttribute('data-ready')
-    const mark = line.locator('a[href="#competences"]')
-    const name = mark.locator('span').last()
-    await mark.click()
-    await expect(page).toHaveURL('/#competences')
-    await expect(page.locator('#competences')).toBeInViewport()
-    await expect(mark).toHaveAttribute('data-passed')
+    await expect(page.locator('html')).toHaveCSS('scroll-behavior', 'smooth')
+    // Frozen timers from here: only the scroll's own end can name a stage until runFor.
+    await page.clock.pauseAt(Date.now() + 1000)
+    await line.locator('a[href="#a-propos"]').click()
+    await expect(page.locator('#a-propos')).toBeInViewport()
+    await scrollSettled(page)
     await page.clock.runFor(150)
-    await expect(mark).toHaveAttribute('data-say')
-    await page.mouse.move(0, 0)
     await expect(line.locator('[data-say]')).toHaveCount(1)
-    await expect(name).toHaveCSS('opacity', '1')
-    for (const other of await line.locator('a:not([data-say]) > span:last-child').all()) {
-      await expect(other).toHaveCSS('opacity', '0')
+    await expect(line.locator('[data-ping]')).toHaveCount(1)
+    await expect(line.locator('a[href="#a-propos"]')).toHaveAttribute('data-say')
+    for (const id of ['realisations', 'competences', 'a-propos']) {
+      await expect(line.locator(`a[href="#${id}"]`)).toHaveAttribute('data-passed')
     }
-    await page.screenshot({ path: `screenshots/motion-stage-${browserName}.png` })
-    await page.clock.runFor(1600)
-    await expect(mark).not.toHaveAttribute('data-say')
-    await expect(name).toHaveCSS('opacity', '0')
   })
 
   for (const width of [360, 390, 1440]) {
@@ -202,48 +242,87 @@ test.describe('with motion', () => {
         .toBeLessThanOrEqual(top)
     }
   })
+
+  test.describe('captured', () => {
+    test.use({ screenshots: true })
+
+    for (const scheme of ['light', 'dark'] as const) {
+      test(`final ${scheme} state passes axe`, async ({ page, browserName, makeAxeBuilder }) => {
+        await page.emulateMedia({ colorScheme: scheme })
+        await page.setViewportSize({ width: 1440, height: 900 })
+        await page.goto('/')
+        await settleArrival(page)
+        expect((await makeAxeBuilder().analyze()).violations).toEqual([])
+        await page.screenshot({ path: `screenshots/motion-final-${scheme}-${browserName}.png` })
+      })
+    }
+
+    test('a stage leads to its section and names it once there', async ({ page, browserName }) => {
+      await page.setViewportSize({ width: 1440, height: 900 })
+      // Frozen timers: the name cannot clear before it is checked.
+      await page.clock.pauseAt(Date.now() + 1000)
+      await page.goto('/')
+      const line = reading(page)
+      await expect(line).toHaveAttribute('data-ready')
+      const mark = line.locator('a[href="#competences"]')
+      const name = mark.locator('span').last()
+      await mark.click()
+      await expect(page).toHaveURL('/#competences')
+      await expect(page.locator('#competences')).toBeInViewport()
+      await expect(mark).toHaveAttribute('data-passed')
+      await page.clock.runFor(150)
+      await expect(mark).toHaveAttribute('data-say')
+      await page.mouse.move(0, 0)
+      await expect(line.locator('[data-say]')).toHaveCount(1)
+      await expect(name).toHaveCSS('opacity', '1')
+      for (const other of await line.locator('a:not([data-say]) > span:last-child').all()) {
+        await expect(other).toHaveCSS('opacity', '0')
+      }
+      await page.screenshot({ path: `screenshots/motion-stage-${browserName}.png` })
+      await page.clock.runFor(1600)
+      await expect(mark).not.toHaveAttribute('data-say')
+      await expect(name).toHaveCSS('opacity', '0')
+    })
+  })
 })
 
 test.describe('flow mask', () => {
-  test.use({ reducedMotion: 'no-preference' })
+  test.use({ reducedMotion: 'no-preference', screenshots: true })
 
-  for (const share of [0.1, 0.5]) {
-    test(`the gradient flows down from the crest, captured at ${share * 100}% of the flow`, async ({
-      page,
-      browserName,
-    }) => {
-      await page.setViewportSize({ width: 1440, height: 900 })
-      await page.goto('/')
-      // Seek only once the script has let the arrival run, or its play() would undo the pause.
-      await expect
-        .poll(() =>
-          sky(page).evaluate((element) =>
-            element
-              .getAnimations({ subtree: true })
-              .every(
-                ({ playState, currentTime }) =>
-                  playState === 'running' && (currentTime as number) > 300,
-              ),
-          ),
-        )
-        .toBe(true)
-      const { delay, duration } = await timing(page, 'flow')
-      const time = delay + duration * share
-      const times = await sky(page).evaluate(async (element, time) => {
-        const animations = element.getAnimations({ subtree: true })
-        for (const animation of animations) {
-          animation.pause()
-          animation.currentTime = time
-        }
-        // WebKit paints a seeked frame late: wait for two frames before the capture.
-        await new Promise((done) => requestAnimationFrame(() => requestAnimationFrame(done)))
-        return animations.map((animation) => animation.currentTime)
-      }, time)
-      expect(times).toEqual([time, time, time, time])
-      await sky(page).screenshot({
-        path: `screenshots/motion-flow-${share * 100}-${browserName}.png`,
+  for (const [width, height] of [
+    [1440, 900],
+    [2560, 1440],
+  ] as const) {
+    for (const share of [0.1, 0.5]) {
+      test(`the gradient flows down from the crest at ${width}px, ${share * 100}% into the flow`, async ({
+        page,
+        browserName,
+      }) => {
+        await page.setViewportSize({ width, height })
+        await page.goto('/')
+        await settleArrival(page)
+        // A fresh arrival, free of the script's pause and release, which run once per page.
+        await page.emulateMedia({ reducedMotion: 'reduce' })
+        await page.emulateMedia({ reducedMotion: 'no-preference' })
+        await expect.poll(() => running(page)).toBe(4)
+        const { delay, duration } = await timing(page, 'flow')
+        const time = delay + duration * share
+        const times = await sky(page).evaluate(async (element, time) => {
+          const animations = element.getAnimations({ subtree: true })
+          for (const animation of animations) {
+            animation.pause()
+            animation.currentTime = time
+          }
+          // WebKit paints a seeked frame late: wait for two frames before the capture.
+          await new Promise((done) => requestAnimationFrame(() => requestAnimationFrame(done)))
+          return animations.map((animation) => animation.currentTime)
+        }, time)
+        expect(times).toEqual([time, time, time, time])
+        await sky(page).screenshot({
+          path: `screenshots/motion-flow-${width}-${share * 100}-${browserName}.png`,
+        })
       })
-    })
+    }
   }
 })
 

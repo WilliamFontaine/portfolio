@@ -6,14 +6,16 @@ export { expect }
 export const test = base.extend<{
   cleanSession: void
   notFound: boolean
+  screenshots: boolean
   makeAxeBuilder: () => AxeBuilder
 }>({
   notFound: [false, { option: true }],
+  screenshots: [false, { option: true }],
   makeAxeBuilder: async ({ page }, use) => {
     await use(() => new AxeBuilder({ page }))
   },
   cleanSession: [
-    async ({ page, context, baseURL, browserName, notFound }, use) => {
+    async ({ page, context, baseURL, browserName, notFound, screenshots }, use) => {
       const origin = new URL(baseURL!).origin
       const blocked: string[] = []
       // The zone injects /cdn-cgi/ scripts, which the 'self' CSP lets through.
@@ -32,6 +34,7 @@ export const test = base.extend<{
         notFound && m.location().url === page.url() && m.text().includes('status of 404')
       // Playwright's WebKit screenshots append a <style> to sync animations, which the CSP refuses.
       const isScreenshotStyle = (m: ConsoleMessage) =>
+        screenshots &&
         browserName === 'webkit' &&
         m.text().startsWith('Refused to apply a stylesheet because its hash')
       const consoleMessages = await page.consoleMessages({ filter: 'all' })

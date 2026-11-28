@@ -8,6 +8,17 @@ const props = Astro.props
 const className = props.class
 const { W, H, d, tower: towerMarkup } = panorama
 const viewBox = `0 0 ${W} ${H}`
+
+// The flow's soft front: fainter copies stacked above the shape, since WebKit drops a blur filter past 4096 device px.
+const steps = 32
+const span = 80
+const ease = (t: number) => t * t * (3 - 2 * t)
+const through = (k: number) => ease(Math.min(1, (k - 0.5) / steps))
+// Copy k darkens the bands it covers so that the light let through follows the eased ramp.
+const front = Array.from({ length: steps }, (_, i) => ({
+  y: -90 - ((i + 1) * span) / steps,
+  opacity: (1 - through(i + 1) / through(i + 2)).toFixed(3),
+}))
 ---
 
 {props.variant === 'fill' ? (
@@ -32,15 +43,13 @@ const viewBox = `0 0 ${W} ${H}`
             transform="translate(0 520)"
             class="motion-safe:animate-flow-compact md:motion-safe:animate-flow"
           >
-            <g filter={`url(#soft-${props.id})`}>
-              <use href={`#area-${props.id}`} y="-90" />
-              <rect y="200" width={W} height="450" />
-            </g>
+            {front.map(({ y, opacity }) => (
+              <use href={`#area-${props.id}`} {y} fill-opacity={opacity} />
+            ))}
+            <use href={`#area-${props.id}`} y="-90" />
+            <rect y="200" width={W} height="450" />
           </g>
         </mask>
-        <filter id={`soft-${props.id}`} x="0" y="-40%" width="100%" height="180%">
-          <feGaussianBlur stdDeviation="0 30" />
-        </filter>
       </defs>
       <use
         href={`#area-${props.id}`}
@@ -75,3 +84,29 @@ const viewBox = `0 0 ${W} ${H}`
     <Ridge />
   </svg>
 )}
+
+<script>
+  const motion = matchMedia('(prefers-reduced-motion: no-preference)')
+  for (const sky of document.querySelectorAll('[data-arrival]')) {
+    // Its own start is the first moment the arrival's animations surely exist, in WebKit too.
+    sky.addEventListener(
+      'animationstart',
+      () => {
+        const arrival = sky.getAnimations({ subtree: true })
+        for (const animation of arrival) animation.pause()
+        // On a phone the arrival waits until half the line shows above the reading line (ReadingLine.astro).
+        const band = document.querySelector<HTMLElement>('[data-reading]')?.offsetHeight ?? 0
+        const wait = new IntersectionObserver(
+          ([entry]) => {
+            if (entry!.intersectionRatio < 0.5) return
+            wait.disconnect()
+            if (motion.matches) for (const animation of arrival) animation.play()
+          },
+          { threshold: 0.5, rootMargin: `0px 0px -${band}px 0px` },
+        )
+        wait.observe(sky)
+      },
+      { once: true },
+    )
+  }
+</script>

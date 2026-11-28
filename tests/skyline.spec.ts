@@ -53,7 +53,7 @@ for (const [scheme, top, end] of [
 
 test('fill skyline ids derive from its id prop', async ({ page }) => {
   await page.goto('/')
-  for (const prefix of ['area', 'gradient', 'flow', 'soft']) {
+  for (const prefix of ['area', 'gradient', 'flow']) {
     await expect(page.locator(`#${prefix}-hero`)).toHaveCount(1)
   }
 })

@@ -13,12 +13,19 @@ const profiles = [
 ---
 
 <section id="contact" class="bg-surface-raised pb-12 text-ink scheme-dark md:pb-22">
-  <div data-reveal class="data-pending:not-data-in:opacity-0 data-in:animate-draw-contact">
+  <div
+    data-reveal
+    class="motion-safe:data-pending:not-data-in:opacity-0 motion-safe:data-in:animate-draw-contact"
+  >
     <Skyline variant="stroke" class="h-sky-contact-compact md:h-sky-contact" />
   </div>
   <Container
-    data-reveal
-    class:list={['flex flex-col gap-4.5 pt-6 md:gap-6 md:pt-10', reveal, 'data-in:delay-150']}
+    data-reveal=""
+    class:list={[
+      'flex flex-col gap-4.5 pt-6 md:gap-6 md:pt-10',
+      reveal,
+      'motion-safe:data-in:delay-150',
+    ]}
   >
     <Label>Contact</Label>
     <h2 class="max-w-205 text-display-sm-compact md:text-display-sm">

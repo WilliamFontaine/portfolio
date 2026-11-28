@@ -39,3 +39,13 @@ const canonical = new URL(Astro.url.pathname, Astro.site)
     <slot />
   </body>
 </html>
+
+<script>
+  import { observeReveals } from '../components/reveal'
+
+  // A link to a section lands on it: smooth scrolling only starts once the page has loaded.
+  addEventListener('load', () =>
+    requestAnimationFrame(() => document.documentElement.toggleAttribute('data-settled', true)),
+  )
+  observeReveals()
+</script>

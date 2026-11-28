@@ -21,7 +21,12 @@ export default defineConfig(
   {
     files: ['**/*.astro', '**/*.ts'],
     extends: [betterTailwindcss.configs.correctness],
-    settings: { 'better-tailwindcss': { entryPoint: 'src/styles/global.css' } },
+    settings: {
+      'better-tailwindcss': {
+        entryPoint: 'src/styles/global.css',
+        selectors: { extends: [{ kind: 'variable', name: '^(reveal|stagger)$' }] },
+      },
+    },
     rules: {
       'better-tailwindcss/no-restricted-classes': [
         'error',
