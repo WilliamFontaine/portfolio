@@ -10,8 +10,8 @@ test('home serves the French document with a CSP meta tag', async ({ page }) => 
   )
 })
 
-test('unknown path answers 404 with the 404 page body', async ({ page }) => {
+test('unknown path answers 404 with the 404 page', async ({ page }) => {
   const response = await page.goto('/inexistant/')
   expect(response?.status()).toBe(404)
-  await expect(page.locator('[data-page="404"]')).toHaveCount(1)
+  await expect(page).toHaveTitle('Page introuvable · William Fontaine')
 })

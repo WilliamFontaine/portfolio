@@ -2,19 +2,19 @@
 
 @theme {
   --color-*: initial;
-  --color-surface: #faf6f3;
-  --color-surface-raised: #ffffff;
-  --color-ink: #1f1916;
-  --color-text: #453e3a;
-  --color-text-muted: #6c6460;
-  --color-line: #e2ddd9;
-  --color-line-strong: #c9c2bc;
-  --color-track: #6c646073;
-  --color-brand: #272321;
-  --color-on-brand: #faf6f3;
-  --color-structure: #2e6148;
-  --color-structure-soft: #e8f2ea;
-  --color-accent: #a33e25;
+  --color-surface: light-dark(#faf6f3, #120e0c);
+  --color-surface-raised: light-dark(#ffffff, #1d1816);
+  --color-ink: light-dark(#1f1916, #f6f3f0);
+  --color-text: light-dark(#453e3a, #d5d0cc);
+  --color-text-muted: light-dark(#6c6460, #a6a09b);
+  --color-line: light-dark(#e2ddd9, #302a27);
+  --color-line-strong: light-dark(#c9c2bc, #4a433f);
+  --color-track: light-dark(#6c646073, #a6a09b73);
+  --color-brand: light-dark(#272321, #ebe7e4);
+  --color-on-brand: light-dark(#faf6f3, #120e0c);
+  --color-structure: light-dark(#2e6148, #83c1a0);
+  --color-structure-soft: light-dark(#e8f2ea, #101812);
+  --color-accent: light-dark(#a33e25, #e98667);
 
   --text-*: initial;
   --text-display: 64px;
@@ -83,36 +83,6 @@
   --font-sans: var(--font-manrope);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-surface: #120e0c;
-    --color-surface-raised: #1d1816;
-    --color-ink: #f6f3f0;
-    --color-text: #d5d0cc;
-    --color-text-muted: #a6a09b;
-    --color-line: #302a27;
-    --color-line-strong: #4a433f;
-    --color-track: #a6a09b73;
-    --color-brand: #ebe7e4;
-    --color-on-brand: #120e0c;
-    --color-structure: #83c1a0;
-    --color-structure-soft: #101812;
-    --color-accent: #e98667;
-  }
-}
-
-@utility island {
-  --color-surface: #120e0c;
-  --color-surface-raised: #1d1816;
-  --color-ink: #f6f3f0;
-  --color-text: #d5d0cc;
-  --color-text-muted: #a6a09b;
-  --color-line: #302a27;
-  --color-line-strong: #4a433f;
-  --color-track: #a6a09b73;
-  --color-brand: #ebe7e4;
-  --color-on-brand: #120e0c;
-  --color-structure: #83c1a0;
-  --color-structure-soft: #101812;
-  --color-accent: #e98667;
+:root {
+  color-scheme: light dark;
 }
