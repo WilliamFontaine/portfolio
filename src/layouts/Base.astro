@@ -1,6 +1,6 @@
 ---
 import { Font } from 'astro:assets'
-import '../styles/global.css'
+import '@/styles/global.css'
 
 interface Props {
   title: string
@@ -49,7 +49,7 @@ const shareImage = new URL('/og.png', Astro.site)
 </html>
 
 <script>
-  import { observeReveals } from '../components/reveal'
+  import { observeReveals } from '@/scripts/reveal'
 
   // A link to a section lands on it: smooth scrolling only starts once the page has loaded.
   addEventListener('load', () =>

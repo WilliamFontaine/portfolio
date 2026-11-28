@@ -1,9 +1,9 @@
 ---
 import { Picture } from 'astro:assets'
 import { getEntries, type CollectionEntry } from 'astro:content'
-import Icon from './Icon.astro'
-import Label from './Label.astro'
-import { reveal, stagger } from './reveal'
+import Icon from '@/components/ui/Icon.astro'
+import Label from '@/components/ui/Label.astro'
+import { reveal, stagger } from '@/scripts/reveal'
 
 interface Props {
   entry: CollectionEntry<'cases'>

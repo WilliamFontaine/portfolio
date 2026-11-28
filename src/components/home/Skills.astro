@@ -1,10 +1,10 @@
 ---
 import { getEntries } from 'astro:content'
-import Card from './Card.astro'
-import Container from './Container.astro'
-import Icon from './Icon.astro'
-import SectionHeading from './SectionHeading.astro'
-import { reveal } from './reveal'
+import Card from '@/components/ui/Card.astro'
+import Container from '@/components/ui/Container.astro'
+import Icon from '@/components/ui/Icon.astro'
+import SectionHeading from '@/components/ui/SectionHeading.astro'
+import { reveal } from '@/scripts/reveal'
 
 const technologies = (ids: string[]) => getEntries(ids.map((id) => ({ collection: 'stack', id })))
 const ecosystems = await Promise.all(

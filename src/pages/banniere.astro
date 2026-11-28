@@ -1,9 +1,9 @@
 ---
 import { getEntries } from 'astro:content'
-import Icon from '../components/Icon.astro'
-import Monogram from '../components/Monogram.astro'
-import Skyline from '../components/Skyline.astro'
-import Base from '../layouts/Base.astro'
+import Icon from '@/components/ui/Icon.astro'
+import Monogram from '@/components/brand/Monogram.astro'
+import Skyline from '@/components/brand/Skyline.astro'
+import Base from '@/layouts/Base.astro'
 
 const logos = await getEntries(
   [

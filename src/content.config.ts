@@ -1,7 +1,7 @@
 import { defineCollection, reference } from 'astro:content'
 import { file } from 'astro/loaders'
 import { z } from 'astro/zod'
-import { simple } from './data/icons'
+import { simple } from '@/components/ui/icons'
 
 const stack = defineCollection({
   loader: file('src/data/stack.yaml'),

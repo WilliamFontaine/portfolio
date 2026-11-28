@@ -20,6 +20,14 @@ La pile est récente : ses versions diffèrent de ce que la mémoire ou les anci
 
 Pour toute question Astro, interroger le serveur MCP de la doc (`.mcp.json`, `astro-docs`) plutôt que la mémoire ; Claude Code demande l'approbation au premier usage.
 
+## Carte de `src/`
+
+Astro ne réserve que `src/pages/` ; le reste est rangé par rôle, importé par l'alias `@/` (`tsconfig.json`, `paths`).
+
+- `components/site/` : en-tête, pied de page, ligne de lecture ; `home/` : sections de l'accueil ; `annex/` : pages annexes ; `brand/` : ligne des Puys et monogramme (`panorama-180.json` à côté de `Skyline`) ; `ui/` : briques génériques (`icons.ts` à côté d'`Icon`).
+- `data/` : les YAML des collections de contenu (`content.config.ts`). `scripts/reveal.ts` : apparition au défilement. `site.ts` : e-mail, liens et sections.
+- `layouts/`, `styles/global.css`, `assets/` (images traitées par Astro).
+
 ## Recette
 
 `pnpm verify` = `format:check`, `lint`, `knip`, `check`, `test`. Elle se juge à son code de sortie, sur l'état final. `pnpm test` construit `dist/`, le sert avec `wrangler dev` sur le port 8787 et lance Playwright en chromium (rapport HTML dans `playwright-report/`) ; firefox et webkit ne lancent que `motion.spec.ts`.
