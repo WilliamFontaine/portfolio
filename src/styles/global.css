@@ -250,6 +250,14 @@
   grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
 }
 
+@utility grid-cols-annex {
+  grid-template-columns: --spacing(60) minmax(0, 1fr);
+}
+
+@utility grid-cols-field {
+  grid-template-columns: --spacing(30) minmax(0, 1fr);
+}
+
 /* The animation shorthand resets animation-timeline: the timeline must come after it. */
 @utility reading-progress {
   animation: var(--animate-route);

@@ -1,12 +1,26 @@
 ---
-import { Picture } from 'astro:assets'
+import { getImage, Picture } from 'astro:assets'
 import portrait from '../assets/portrait.png'
+import { linkedin, malt } from '../data/site'
 import ActionLink from './ActionLink.astro'
 import ButtonLink from './ButtonLink.astro'
 import Container from './Container.astro'
 import Icon from './Icon.astro'
 import Label from './Label.astro'
 import Skyline from './Skyline.astro'
+
+const name = 'William Fontaine'
+const job = 'Développeur full-stack freelance'
+const photo = await getImage({ src: portrait, format: 'webp', width: 240 })
+const person = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name,
+  jobTitle: job,
+  url: Astro.site,
+  image: new URL(photo.src, Astro.site),
+  sameAs: [linkedin, malt],
+}
 
 const facts = [
   ['map-pin', 'Clermont-Ferrand, mobile partout en France'],
@@ -50,8 +64,8 @@ const facts = [
           class="size-16 rounded-avatar md:size-20"
         />
         <div class="flex flex-col gap-0.5">
-          <p class="font-display text-h4 text-ink">William Fontaine</p>
-          <p class="text-small font-normal text-text-muted">Développeur full-stack freelance</p>
+          <p class="font-display text-h4 text-ink">{name}</p>
+          <p class="text-small font-normal text-text-muted">{job}</p>
         </div>
       </div>
       <ul class="flex flex-col gap-3 border-t border-line pt-5 text-ui font-normal">
@@ -66,3 +80,4 @@ const facts = [
   </Container>
   <Skyline variant="fill" id="hero" class="mt-10 h-sky-hero-compact md:mt-16 lg:h-sky-hero" />
 </section>
+<script type="application/ld+json" set:html={JSON.stringify(person)} />

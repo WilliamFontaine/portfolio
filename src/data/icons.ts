@@ -7,9 +7,13 @@ import PhCheckCircle from '@phosphor-icons/core/assets/regular/check-circle.svg'
 import PhCodeBlock from '@phosphor-icons/core/assets/regular/code-block.svg'
 import PhEnvelopeSimple from '@phosphor-icons/core/assets/regular/envelope-simple.svg'
 import PhGraduationCap from '@phosphor-icons/core/assets/regular/graduation-cap.svg'
+import PhHardDrives from '@phosphor-icons/core/assets/regular/hard-drives.svg'
+import PhIdentificationCard from '@phosphor-icons/core/assets/regular/identification-card.svg'
 import PhLinkedinLogo from '@phosphor-icons/core/assets/regular/linkedin-logo.svg'
 import PhMapPin from '@phosphor-icons/core/assets/regular/map-pin.svg'
+import PhMapTrifold from '@phosphor-icons/core/assets/regular/map-trifold.svg'
 import PhRocketLaunch from '@phosphor-icons/core/assets/regular/rocket-launch.svg'
+import PhShieldCheck from '@phosphor-icons/core/assets/regular/shield-check.svg'
 import PhTarget from '@phosphor-icons/core/assets/regular/target.svg'
 import SiAngular from 'simple-icons/icons/angular.svg'
 import SiCapacitor from 'simple-icons/icons/capacitor.svg'
@@ -36,9 +40,13 @@ export const phosphor = {
   'code-block': PhCodeBlock,
   'envelope-simple': PhEnvelopeSimple,
   'graduation-cap': PhGraduationCap,
+  'hard-drives': PhHardDrives,
+  'identification-card': PhIdentificationCard,
   'linkedin-logo': PhLinkedinLogo,
   'map-pin': PhMapPin,
+  'map-trifold': PhMapTrifold,
   'rocket-launch': PhRocketLaunch,
+  'shield-check': PhShieldCheck,
   target: PhTarget,
 } satisfies Record<string, SvgComponent>
 

@@ -1,4 +1,10 @@
 ---
+import ButtonLink from '../components/ButtonLink.astro'
+import Container from '../components/Container.astro'
+import Footer from '../components/Footer.astro'
+import Header from '../components/Header.astro'
+import Label from '../components/Label.astro'
+import Skyline from '../components/Skyline.astro'
 import Base from '../layouts/Base.astro'
 ---
 
@@ -7,7 +13,24 @@ import Base from '../layouts/Base.astro'
   description="Cette adresse ne mène à aucune page de wfontaine.fr."
   noindex
 >
-  <main>
-    <h1>Page introuvable</h1>
+  <Header />
+  <main class="pt-16 md:pt-32">
+    <Container class="flex flex-col gap-4.5 md:gap-6">
+      <Label>Erreur 404</Label>
+      <h1 class="max-w-text text-display-compact md:text-display">Cette page n'existe pas</h1>
+      <p class="text-lead-compact md:text-lead">
+        Le lien est peut-être ancien, ou l'adresse a été mal recopiée. Mes réalisations et mon
+        contact sont sur l'accueil.
+      </p>
+      <ButtonLink href="/" class="mt-1 self-start md:mt-2">
+        Retour à l'accueil
+      </ButtonLink>
+    </Container>
+    <Skyline
+      variant="fill"
+      id="not-found"
+      class="mt-14 h-sky-hero-compact md:mt-24 lg:h-sky-hero"
+    />
   </main>
+  <Footer />
 </Base>

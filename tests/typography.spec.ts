@@ -61,6 +61,9 @@ const visibleTexts = (page: Page) =>
 
 for (const [name, path, notFound] of [
   ['home', '/', false],
+  ['colophon', '/colophon/', false],
+  ['legal notice', '/mentions-legales/', false],
+  ['banner', '/banniere/', false],
   ['404', '/inexistant/', true],
 ] as const) {
   test.describe(`${name} page`, () => {

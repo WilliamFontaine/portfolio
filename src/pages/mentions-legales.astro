@@ -1,0 +1,64 @@
+---
+import AnnexIntro from '../components/AnnexIntro.astro'
+import AnnexSection from '../components/AnnexSection.astro'
+import Container from '../components/Container.astro'
+import Field from '../components/Field.astro'
+import Footer from '../components/Footer.astro'
+import Header from '../components/Header.astro'
+import TextLink from '../components/TextLink.astro'
+import { email } from '../data/site'
+import Base from '../layouts/Base.astro'
+---
+
+<Base
+  title="Mentions légales · William Fontaine"
+  description="Éditeur, hébergeur et données personnelles du site wfontaine.fr."
+>
+  <Header />
+  <main>
+    <AnnexIntro label="Informations légales" title="Mentions légales" />
+    <Container class="pb-14 md:pb-28">
+      <AnnexSection icon="identification-card" title="Éditeur" fields>
+        <Field label="Nom">William Fontaine, entrepreneur individuel</Field>
+        <Field label="Siège">Appartement 2, 45 rue Alfred de Musset, 63000 Clermont-Ferrand</Field>
+        <Field label="SIREN">992&nbsp;983&nbsp;148</Field>
+        <Field label="SIRET">992&nbsp;983&nbsp;148&nbsp;00022</Field>
+        <Field label="Contact">
+          <TextLink href={`mailto:${email}`} class="inline-flex min-h-11 items-center">
+            {email}
+          </TextLink>
+        </Field>
+        <Field label="Publication">William Fontaine, directeur de la publication</Field>
+      </AnnexSection>
+      <AnnexSection icon="hard-drives" title="Hébergement" fields>
+        <Field label="Hébergeur">
+          Cloudflare, Inc., 101 Townsend Street, San Francisco, CA 94107, États-Unis
+        </Field>
+        <Field label="Téléphone">+1&nbsp;650&nbsp;319&nbsp;8930</Field>
+      </AnnexSection>
+      <AnnexSection icon="shield-check" title="Vos données">
+        <p>
+          Ce site ne dépose aucun cookie, ne mesure pas l'audience et n'a pas de formulaire. Je ne
+          tiens aucun journal des visites.
+        </p>
+        <p>
+          Cloudflare, qui sert le site, traite votre adresse IP pour acheminer et protéger le
+          trafic, en tant que sous-traitant et dans mon intérêt légitime à sécuriser le
+          site&#x202F;; il conserve jusqu'à 31&nbsp;jours les requêtes qu'il bloque ou vérifie. Ces
+          données peuvent être traitées aux États-Unis, dans le cadre du Data Privacy Framework
+          UE-États-Unis, auquel Cloudflare est certifié.
+        </p>
+        <p>
+          Vous pouvez demander à accéder à vos données, à les faire effacer ou vous opposer à leur
+          traitement en m'écrivant à <TextLink href={`mailto:${email}`}>{email}</TextLink>, et
+          saisir la CNIL.
+        </p>
+        <p>
+          Les crédits des photos, des polices et des icônes sont sur la page{' '}
+          <TextLink href="/colophon/">Comment ce site est fait</TextLink>.
+        </p>
+      </AnnexSection>
+    </Container>
+  </main>
+  <Footer />
+</Base>

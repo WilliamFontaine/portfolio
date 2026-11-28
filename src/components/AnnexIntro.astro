@@ -1,0 +1,35 @@
+---
+import Container from './Container.astro'
+import Icon from './Icon.astro'
+import Label from './Label.astro'
+
+interface Props {
+  label: string
+  title: string
+  lead?: string
+}
+
+const { label, title, lead } = Astro.props
+---
+
+<section class="pt-12 pb-8 md:pt-24 md:pb-12">
+  <Container>
+    <div class="flex max-w-190 flex-col gap-4 md:gap-5">
+      <a
+        href="/"
+        class="group inline-flex min-h-11 items-center gap-2 self-start text-ui-compact text-accent underline decoration-transparent decoration-2 underline-offset-6 hover:decoration-accent motion-safe:transition-colors"
+      >
+        <Icon
+          set="phosphor"
+          name="arrow-right"
+          size={16}
+          class="rotate-180 group-hover:-translate-x-1 motion-safe:transition-transform"
+        />
+        Retour à l'accueil
+      </a>
+      <Label>{label}</Label>
+      <h1 class="text-h1-compact md:text-h1">{title}</h1>
+      {lead && <p class="text-lead-compact md:text-lead">{lead}</p>}
+    </div>
+  </Container>
+</section>
