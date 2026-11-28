@@ -133,7 +133,7 @@ jobs:
         run: |
           output="$(pnpm exec wrangler preview --name "pr-$PR_NUMBER" --tag "$HEAD_SHA" --message "$PR_TITLE" --json)"
           printf '%s\n' "$output"
-          echo "url=$(sed -n '/^{$/,$p' <<< "$output" | jq -er '.preview.urls[0]')" >> "$GITHUB_OUTPUT"
+          echo "url=$(jq -er '.preview.urls[0]' <<< "$output")" >> "$GITHUB_OUTPUT"
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
