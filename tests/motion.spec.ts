@@ -5,13 +5,15 @@ const sky = (page: Page) => page.locator('#top [data-arrival]')
 const reading = (page: Page) => page.locator('[data-reading]')
 const box = async (locator: Locator) => (await locator.boundingBox())!
 
+// Read from the computed style, so the values hold before, during and after the arrival.
 const timing = (page: Page, name: string, arrival = sky(page)) =>
   arrival.evaluate((element, name) => {
-    const animation = element
-      .getAnimations({ subtree: true })
-      .find((animation) => (animation as CSSAnimation).animationName === name)
-    const { duration, delay } = animation!.effect!.getComputedTiming()
-    return { duration: duration as number, delay: delay! }
+    const host = [element, ...element.querySelectorAll('*')].find(
+      (node) => node.checkVisibility() && getComputedStyle(node).animationName === name,
+    )!
+    const { animationDuration, animationDelay } = getComputedStyle(host)
+    const ms = (value: string) => Math.round(parseFloat(value) * 1000)
+    return { duration: ms(animationDuration), delay: ms(animationDelay) }
   }, name)
 
 const states = (page: Page) =>
@@ -350,13 +352,16 @@ test.describe('flow mask', () => {
         await page.setViewportSize({ width, height })
         await page.goto('/')
         await settleArrival(page)
-        // A fresh arrival, free of the script's pause and release, which run once per page.
-        await page.emulateMedia({ reducedMotion: 'reduce' })
-        await page.emulateMedia({ reducedMotion: 'no-preference' })
-        await expect.poll(() => running(page)).toBe(4)
         const { delay, duration } = await timing(page, 'flow')
         const time = delay + duration * share
         const times = await sky(page).evaluate(async (element, time) => {
+          // A fresh arrival, free of the script's pause and release, paused in the task that starts it.
+          for (const node of element.querySelectorAll('[class*="animate-"]')) {
+            const classes = node.getAttribute('class')!
+            node.setAttribute('class', '')
+            void getComputedStyle(node).animationName
+            node.setAttribute('class', classes)
+          }
           const animations = element.getAnimations({ subtree: true })
           for (const animation of animations) {
             animation.pause()
