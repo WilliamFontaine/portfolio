@@ -44,9 +44,11 @@ docker run --rm --ipc=host --init -v "$PWD":/work -v portfolio-visual-nm:/work/n
 
 Le diff des PNG se relit dans la PR avant de fusionner.
 
-## Retour arrière
+## Déploiement et retour arrière
 
-Tableau de bord Cloudflare (Workers & Pages, le Worker, Deployments, menu de la version, Rollback) ou `pnpm exec wrangler rollback <version-id> --message "<raison>"`. La version se retrouve par son tag, le SHA du commit déployé. Ensuite, une PR de revert : sinon le déploiement suivant remet la version fautive. Seules les 100 dernières versions comptent, et celles de plus de 30 jours peuvent être supprimées. Le job `deploy` s'en charge seul quand les contrôles après déploiement échouent (le run reste rouge).
+Le job `deploy` (push sur `main`, ou `workflow_dispatch`) vit dans l'environnement GitHub `production`, limité à la branche `main` : un déploiement lancé depuis une autre branche échoue à cette porte. Après un push sur `main`, il attend que le site en ligne serve exactement `dist/index.html` puis lance `pnpm test:edge` ; s'il échoue, il exécute `wrangler rollback` vers le déploiement précédent et le run reste rouge. Le test `@revalidation` (ETag du HTML) n'en fait pas partie, il ne tourne qu'en local.
+
+À la main : tableau de bord Cloudflare (Workers & Pages, le Worker, Deployments, menu de la version, Rollback) ou `pnpm exec wrangler rollback <version-id> --message "<raison>"`. Les versions déployées se listent par `pnpm exec wrangler deployments list` (`versions list` mêle aussi les préversions des PR) ; la version se retrouve par son tag, le SHA du commit déployé. Ensuite, une PR de revert : sinon le déploiement suivant remet la version fautive. Seules les 100 dernières versions comptent, préversions comprises, et celles de plus de 30 jours peuvent être supprimées.
 
 ## Règles
 

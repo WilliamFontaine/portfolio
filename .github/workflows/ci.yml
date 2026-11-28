@@ -23,6 +23,7 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 0
+          persist-credentials: false
       - uses: ./.github/actions/setup
       - run: pnpm format:check
       - run: pnpm lint
@@ -39,6 +40,8 @@ jobs:
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
       - uses: ./.github/actions/setup
       - run: pnpm check
 
@@ -48,6 +51,8 @@ jobs:
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
       - uses: ./.github/actions/setup
       - run: pnpm exec playwright install --with-deps chromium firefox webkit
       - run: pnpm exec playwright test --project=chromium --project=firefox --project=webkit
@@ -83,6 +88,8 @@ jobs:
       options: --user 1001
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
       - uses: ./.github/actions/setup
       - run: pnpm exec playwright test --project=visual
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
@@ -110,11 +117,11 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     env:
-      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-      CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
       BASE_URL: https://pr-${{ github.event.pull_request.number }}-wfontaine.${{ vars.WORKERS_DEV_SUBDOMAIN }}.workers.dev/
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
       - uses: ./.github/actions/setup
       - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
         with:
@@ -122,6 +129,8 @@ jobs:
           path: dist
       - run: pnpm exec wrangler versions upload --preview-alias "pr-$PR_NUMBER" --tag "$HEAD_SHA" --message "$PR_TITLE"
         env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
           PR_NUMBER: ${{ github.event.pull_request.number }}
           HEAD_SHA: ${{ github.event.pull_request.head.sha }}
           PR_TITLE: ${{ github.event.pull_request.title }}
@@ -129,7 +138,7 @@ jobs:
           curl -sfI --retry 5 --retry-all-errors --retry-delay 3 "$BASE_URL"
           | grep -i '^x-robots-tag: noindex'
       - run: pnpm exec playwright install --with-deps chromium
-      - run: pnpm exec playwright test --project=chromium smoke.spec.ts headers.spec.ts --grep-invert @revalidation
+      - run: pnpm test:edge
 
   deploy:
     name: Deploy
@@ -142,21 +151,32 @@ jobs:
       group: deploy-production
       cancel-in-progress: false
     env:
-      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-      CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
       BASE_URL: https://wfontaine.fr/
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
       - uses: ./.github/actions/setup
       - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
         with:
           name: dist
           path: dist
-      - if: github.ref == 'refs/heads/main'
-        run: pnpm exec playwright install --with-deps chromium
+      - run: pnpm exec playwright install --with-deps chromium
       - run: pnpm exec wrangler deploy --tag "$GITHUB_SHA" --message "$(git log -1 --format=%s)"
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
       - id: verify
-        if: github.ref == 'refs/heads/main'
-        run: pnpm exec playwright test --project=chromium smoke.spec.ts headers.spec.ts
+        timeout-minutes: 5
+        run: |
+          for _ in $(seq 40); do
+            curl -sf --compressed "$BASE_URL" | cmp -s - dist/index.html && exec pnpm test:edge
+            sleep 3
+          done
+          echo "$BASE_URL does not serve the deployed dist/index.html" >&2
+          exit 1
       - if: failure() && steps.verify.outcome == 'failure'
         run: pnpm exec wrangler rollback --message "Post-deploy checks failed for $GITHUB_SHA"
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
