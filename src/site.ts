@@ -5,6 +5,6 @@ export const sections = [
   ['top', 'Accueil'],
   ['realisations', 'Réalisations'],
   ['competences', 'Compétences'],
-  ['a-propos', 'À propos'],
+  ['a-propos', 'À\u00a0propos'],
   ['contact', 'Contact'],
 ] as const

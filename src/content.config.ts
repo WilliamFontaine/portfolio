@@ -17,6 +17,7 @@ const cases = defineCollection({
     z.object({
       order: z.number(),
       label: z.string(),
+      since: z.string(),
       title: z.string(),
       need: z.string(),
       done: z.string(),

@@ -180,6 +180,28 @@ test.describe('with motion', () => {
     })
   }
 
+  test('a stage name replaces the one showing at once, without a crossfade', async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 })
+    await page.goto('/')
+    const line = reading(page)
+    await expect(line).toHaveAttribute('data-ready')
+    const name = (id: string) => line.locator(`a[href="#${id}"] > span`).last()
+    await line.locator('a[href="#competences"]').hover()
+    await expect(name('competences')).toHaveCSS('opacity', '1')
+    await line.locator('a[href="#a-propos"]').hover()
+    expect(await name('competences').evaluate((span) => getComputedStyle(span).opacity)).toBe('0')
+    await expect(line.locator('[data-say]')).toHaveCount(1)
+    await expect(name('a-propos')).toHaveCSS('opacity', '1')
+  })
+
+  test('the banner page draws its lines at rest', async ({ page }) => {
+    await page.goto('/banniere/')
+    for (const svg of await page.locator('svg[data-sky]').all()) {
+      await expect(svg).toHaveCSS('clip-path', 'none')
+    }
+    expect(await page.evaluate(() => document.getAnimations().length)).toBe(0)
+  })
+
   test('a revealed card hovers at the fast duration without delay', async ({ page }) => {
     await page.setViewportSize({ width: 1440, height: 900 })
     await page.goto('/')

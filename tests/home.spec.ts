@@ -4,7 +4,7 @@ import { expect, test } from './fixtures'
 const email = 'william.fontaine0308@gmail.com'
 // innerText applies the label's uppercase transform, hence the case-insensitive patterns.
 const label = (page: Page) =>
-  page.locator('#top').getByText('Développeur full-stack, web et mobile')
+  page.locator('#top').getByText('Développeur full\u2011stack, web et mobile')
 
 test('page title and description', async ({ page }) => {
   await page.goto('/')
@@ -19,7 +19,7 @@ test('every menu link leads to its section', async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 })
   await page.goto('/')
   await expect(label(page)).toHaveText(
-    /^développeur full-stack, web et mobile · clermont-ferrand$/i,
+    /^développeur full\u2011stack, web et mobile · clermont-ferrand$/i,
     { useInnerText: true },
   )
   const header = page.getByRole('banner')
@@ -50,7 +50,7 @@ for (const width of [360, 390, 1440]) {
     }) => {
       await page.setViewportSize({ width, height: 900 })
       await page.goto(`/#${id}`)
-      const label = page.locator(`#${id}`).getByText(/· depuis/)
+      const label = page.locator(`#${id} p`).first()
       await expect(label).toBeInViewport()
       const header = (await page.getByRole('banner').boundingBox())!
       await expect
@@ -67,6 +67,23 @@ test('menu links offer a 44px target, as every other standalone link', async ({ 
     expect((await link.boundingBox())!.height).toBeGreaterThanOrEqual(44)
   }
 })
+
+for (const [width, lines] of [
+  [360, ['terragree · gestion forestière', 'depuis janvier\u00a02026']],
+  [390, ['terragree · gestion forestière', 'depuis janvier\u00a02026']],
+  [768, ['terragree · gestion forestière · depuis janvier\u00a02026']],
+] as const) {
+  test(`a case label takes ${lines.length} line${lines.length > 1 ? 's' : ''} at ${width}px`, async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width, height: 900 })
+    await page.goto('/')
+    const label = page.locator('#terragree').getByText('TerrAgree · gestion forestière')
+    expect((await label.innerText()).toLowerCase().split('\n')).toEqual(lines)
+    const lineHeight = parseFloat(await label.evaluate((p) => getComputedStyle(p).lineHeight))
+    expect((await label.boundingBox())!.height).toBe(lines.length * lineHeight)
+  })
+}
 
 test('mail, LinkedIn and Malt links reach their targets', async ({ page }) => {
   await page.goto('/')
@@ -92,7 +109,7 @@ for (const width of [360, 390]) {
     const header = page.getByRole('banner')
     await expect(header.getByRole('navigation')).toHaveCount(0)
     await expect(header.getByRole('link')).toHaveText(['William Fontaine', "M'écrire"])
-    await expect(label(page)).toHaveText(/^développeur full-stack, web et mobile$/i, {
+    await expect(label(page)).toHaveText(/^développeur full\u2011stack, web et mobile$/i, {
       useInnerText: true,
     })
   })

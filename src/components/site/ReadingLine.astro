@@ -38,7 +38,7 @@ const layers = [
           >
             <span class="absolute top-1/2 left-1/2 -mt-1.75 -ml-1.75 size-3.5 rounded-full border-2 border-text-muted bg-surface ring-3 ring-surface group-hover/mark:scale-120 group-hover/mark:border-accent group-data-passed/mark:border-3 group-data-passed/mark:border-accent motion-safe:transition" />
             <span class="absolute top-1/2 left-1/2 -mt-1.75 -ml-1.75 size-3.5 rounded-full border-2 border-accent opacity-0 motion-safe:group-data-ping/mark:animate-beacon" />
-            <span class="absolute bottom-9 left-1/2 translate-y-1 -translate-x-1/2 rounded-pill bg-brand px-2 py-0.75 text-tip-compact whitespace-nowrap text-on-brand opacity-0 group-hover/mark:translate-y-0 group-hover/mark:opacity-100 group-data-say/mark:translate-y-0 group-data-say/mark:opacity-100 md:px-2.5 md:py-1 md:text-tip motion-safe:transition motion-safe:duration-200">
+            <span class="absolute bottom-9 left-1/2 translate-y-1 -translate-x-1/2 rounded-pill bg-brand px-2 py-0.75 text-tip-compact whitespace-nowrap text-on-brand opacity-0 group-data-say/mark:translate-y-0 group-data-say/mark:opacity-100 md:px-2.5 md:py-1 md:text-tip motion-safe:transition motion-safe:duration-200 group-data-cut/mark:transition-none">
               {name}
             </span>
           </a>
@@ -98,6 +98,7 @@ const layers = [
   let offset = 0
   let ready = false
   let saying: Stage | undefined
+  let shown: Stage | undefined
   let next: Stage | undefined
   let sayTimer: ReturnType<typeof setTimeout> | undefined
   let settleTimer: ReturnType<typeof setTimeout> | undefined
@@ -109,16 +110,32 @@ const layers = [
   }
   const crest = (x: number) => lineY((x - offset) / scale) * scale
 
+  // One name at a time: any other, even one still fading out, goes at once.
+  const show = (stage: Stage) => {
+    for (const { mark } of stages) {
+      mark.toggleAttribute('data-cut', mark !== stage.mark)
+      if (mark !== stage.mark) mark.removeAttribute('data-say')
+    }
+    stage.mark.toggleAttribute('data-say', true)
+    shown = stage
+  }
+  const hide = (stage: Stage) => {
+    if (shown !== stage || saying === stage || stage.mark.matches(':hover')) return
+    stage.mark.removeAttribute('data-say')
+    shown = undefined
+  }
   const reach = (stage: Stage) => {
     clearTimeout(sayTimer)
-    saying?.mark.removeAttribute('data-say')
     saying = stage
     stage.mark.removeAttribute('data-ping')
     // Without a style flush between removing and setting it, the beacon would not restart.
     void stage.mark.offsetWidth
     stage.mark.toggleAttribute('data-ping', true)
-    stage.mark.toggleAttribute('data-say', true)
-    sayTimer = setTimeout(() => stage.mark.removeAttribute('data-say'), say)
+    show(stage)
+    sayTimer = setTimeout(() => {
+      saying = undefined
+      hide(stage)
+    }, say)
   }
   // A smooth jump crosses stages frame after frame: only the furthest one reached when the scroll settles speaks.
   const commit = () => {
@@ -191,6 +208,10 @@ const layers = [
     update()
   }
 
+  for (const stage of stages) {
+    stage.mark.addEventListener('pointerenter', () => show(stage))
+    stage.mark.addEventListener('pointerleave', () => hide(stage))
+  }
   addEventListener('scroll', update, { passive: true })
   document.addEventListener('scrollend', commit)
   addEventListener('resize', place)

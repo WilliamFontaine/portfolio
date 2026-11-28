@@ -12,19 +12,22 @@ const mustBeNbsp: [string, RegExp][] = [
   ['number and unit', new RegExp(`\\d[ ${narrow}]${unit}`, 'gu')],
   ['digit groups', new RegExp(`\\d[ ${narrow}]\\d`, 'g')],
   ['Et après.', new RegExp(`(?<!\\p{L})Et[ ${narrow}]après`, 'gu')],
+  ['à and its next word', new RegExp(`(?<!\\p{L})[àÀ][ ${narrow}\\n]`, 'gu')],
 ]
 
 const nbspAllowed = (before: string, after: string) =>
   after.startsWith(':') ||
   (/\d$/.test(before) && new RegExp(`^(?:\\d|${unit})`, 'u').test(after)) ||
   (new RegExp(`${month}$`, 'iu').test(before) && /^\d{4}/.test(after)) ||
-  (/(?<!\p{L})Et$/u.test(before) && after.startsWith('après'))
+  (/(?<!\p{L})Et$/u.test(before) && after.startsWith('après')) ||
+  /(?<!\p{L})[àÀ]$/u.test(before)
 
 function errorsIn(text: string) {
   const errors: string[] = []
   const report = (rule: string, index: number) =>
     errors.push(`${rule}: «${text.slice(Math.max(0, index - 20), index + 20)}»`)
   for (const m of text.matchAll(/[\u2013\u2014]/g)) report('em or en dash', m.index)
+  for (const m of text.matchAll(/full-stack/gi)) report('U+002D in full-stack', m.index)
   for (const m of text.matchAll(/[?;]/g)) {
     if (text[m.index - 1] !== narrow) report(`no U+202F before ${m[0]}`, m.index)
   }

@@ -2,9 +2,12 @@
 import panorama from './panorama-180.json'
 import Ridge from './Ridge.astro'
 
-type Props = { class?: string } & ({ variant: 'fill'; id: string } | { variant: 'stroke' })
+type Props = { class?: string } & (
+  { variant: 'fill'; id: string; still?: boolean } | { variant: 'stroke' }
+)
 
 const props = Astro.props
+const arrives = props.variant === 'fill' && !props.still
 const className = props.class
 const { W, H, d, tower: towerMarkup } = panorama
 const viewBox = `0 0 ${W} ${H}`
@@ -26,7 +29,11 @@ const front = Array.from({ length: steps }, (_, i) => ({
     {/* Chromium's composited clip-path animation (the draw) freezes the flow's mask unless this svg has its own layer. */}
     <svg
       data-sky
-      class="absolute inset-0 size-full overflow-visible motion-safe:animate-draw-compact motion-safe:will-change-transform md:motion-safe:animate-draw"
+      class:list={[
+        'absolute inset-0 size-full overflow-visible',
+        arrives &&
+          'motion-safe:animate-draw-compact motion-safe:will-change-transform md:motion-safe:animate-draw',
+      ]}
       viewBox={viewBox}
       preserveAspectRatio="xMidYMin slice"
       aria-hidden="true"
@@ -42,7 +49,7 @@ const front = Array.from({ length: steps }, (_, i) => ({
           <rect width={W} height={H} fill="#fff" />
           <g
             transform="translate(0 520)"
-            class="motion-safe:animate-flow-compact md:motion-safe:animate-flow"
+            class:list={[arrives && 'motion-safe:animate-flow-compact md:motion-safe:animate-flow']}
           >
             {front.map(({ y, opacity }) => (
               <use href={`#area-${props.id}`} {y} fill-opacity={opacity} />
@@ -60,7 +67,10 @@ const front = Array.from({ length: steps }, (_, i) => ({
     </svg>
     <svg
       data-sky
-      class="absolute inset-0 size-full overflow-visible text-sky-top motion-safe:animate-draw-compact md:motion-safe:animate-draw"
+      class:list={[
+        'absolute inset-0 size-full overflow-visible text-sky-top',
+        arrives && 'motion-safe:animate-draw-compact md:motion-safe:animate-draw',
+      ]}
       viewBox={viewBox}
       preserveAspectRatio="xMidYMin slice"
       aria-hidden="true"
@@ -69,7 +79,10 @@ const front = Array.from({ length: steps }, (_, i) => ({
       <g
         data-sky-tower
         fill="currentColor"
-        class="origin-bottom transform-fill motion-safe:animate-rise-compact md:motion-safe:animate-rise"
+        class:list={[
+          'origin-bottom transform-fill',
+          arrives && 'motion-safe:animate-rise-compact md:motion-safe:animate-rise',
+        ]}
         set:html={towerMarkup}
       />
     </svg>
