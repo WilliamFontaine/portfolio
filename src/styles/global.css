@@ -15,20 +15,15 @@
   --color-structure: light-dark(#2e6148, #83c1a0);
   --color-structure-soft: light-dark(#e8f2ea, #101812);
   --color-accent: light-dark(#a33e25, #e98667);
+  --spacing-header: 77px;
+  --spacing-header-compact: 65px;
+  --spacing-fade: 12px;
   --spacing-sky-hero-compact: 120px;
   --spacing-sky-hero: clamp(200px, 10vw, 280px);
   --spacing-sky-contact-compact: 44px;
   --spacing-sky-contact: max(72px, 2.98vw);
   --spacing-sky-colophon-compact: 140px;
   --spacing-sky-colophon: 260px;
-  --color-sky-top: light-dark(
-    var(--color-structure),
-    color-mix(in srgb, var(--color-structure) 50%, transparent)
-  );
-  --color-sky-end: light-dark(
-    color-mix(in srgb, var(--color-structure) 6%, transparent),
-    color-mix(in srgb, var(--color-structure) 3%, transparent)
-  );
 
   --text-*: initial;
   --text-display: 64px;
@@ -88,15 +83,98 @@
   --radius-lg: 24px;
   --radius-pill: 999px;
   --radius-focus: 6px;
+
+  --breakpoint-*: initial;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+
+  --container-*: initial;
+  --container-page: 1440px;
+  --container-text: 640px;
+
+  --ease-*: initial;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-draw: cubic-bezier(0.37, 0, 0.63, 1);
+  --ease-flow: cubic-bezier(0.33, 1, 0.68, 1);
+  --default-transition-timing-function: var(--ease-out);
+
+  --animate-*: initial;
+  --animate-draw: draw 1400ms var(--ease-draw) 150ms backwards;
+  --animate-draw-compact: draw 980ms var(--ease-draw) 150ms backwards;
+  --animate-rise: rise 420ms var(--ease-flow) 850ms backwards;
+  --animate-rise-compact: rise 420ms var(--ease-flow) 640ms backwards;
+  --animate-flow: flow 1000ms var(--ease-flow) 1480ms backwards;
+  --animate-flow-compact: flow 1000ms var(--ease-flow) 1081ms backwards;
+  --animate-beacon: beacon 800ms var(--ease-flow);
+
+  @keyframes draw {
+    from {
+      clip-path: inset(0 100% 0 0);
+    }
+    to {
+      clip-path: inset(0 0 0 0);
+    }
+  }
+
+  @keyframes rise {
+    from {
+      transform: scaleY(0);
+    }
+    to {
+      transform: scaleY(1);
+    }
+  }
+
+  @keyframes flow {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(520px);
+    }
+  }
+
+  @keyframes beacon {
+    from {
+      width: 14px;
+      height: 14px;
+      margin: -7px 0 0 -7px;
+      opacity: 0.9;
+    }
+    to {
+      width: 44px;
+      height: 44px;
+      margin: -22px 0 0 -22px;
+      opacity: 0;
+    }
+  }
+
+  --shadow-*: initial;
+  --inset-shadow-*: initial;
+  --drop-shadow-*: initial;
+  --text-shadow-*: initial;
+  --blur-*: initial;
+  --perspective-*: initial;
+  --aspect-*: initial;
 }
 
 @theme inline {
   --color-focus: var(--color-accent);
+  --color-sky-top: light-dark(
+    var(--color-structure),
+    color-mix(in srgb, var(--color-structure) 50%, transparent)
+  );
+  --color-sky-end: light-dark(
+    color-mix(in srgb, var(--color-structure) 6%, transparent),
+    color-mix(in srgb, var(--color-structure) 3%, transparent)
+  );
   --font-*: initial;
   --font-display: var(--font-space-grotesk);
   --font-sans: var(--font-manrope);
 }
 
-:root {
-  color-scheme: light dark;
+@layer base {
+  :focus-visible {
+    @apply rounded-focus outline-2 outline-offset-2 outline-focus;
+  }
 }

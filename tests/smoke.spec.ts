@@ -1,4 +1,4 @@
-import { expect, test } from '@playwright/test'
+import { expect, test } from './fixtures'
 
 test('home serves the French document with a CSP meta tag', async ({ page }) => {
   const response = await page.goto('/')
@@ -10,8 +10,8 @@ test('home serves the French document with a CSP meta tag', async ({ page }) => 
   )
 })
 
-test('unknown path answers 404 with the 404 page', async ({ page }) => {
-  const response = await page.goto('/inexistant/')
-  expect(response?.status()).toBe(404)
-  await expect(page).toHaveTitle('Page introuvable · William Fontaine')
+test('unknown path answers 404 with the 404 page', async ({ request }) => {
+  const response = await request.get('/inexistant/')
+  expect(response.status()).toBe(404)
+  expect(await response.text()).toContain('<title>Page introuvable · William Fontaine</title>')
 })

@@ -12,7 +12,10 @@ const { title, description, noindex } = Astro.props
 const canonical = new URL(Astro.url.pathname, Astro.site)
 ---
 
-<html lang="fr">
+<html
+  lang="fr"
+  class="scheme-light-dark motion-safe:scroll-smooth scroll-pt-header-compact lg:scroll-pt-header"
+>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />

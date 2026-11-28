@@ -1,6 +1,6 @@
-import { expect, test } from '@playwright/test'
+import { expect, test } from './fixtures'
 
-const widths = [390, 768, 1280, 1440, 1920, 2560, 3440]
+const widths = [360, 390, 768, 1280, 1440, 1920, 2560, 3440]
 const alphaOf = (color: string) => Number(/(?:\/|rgba\(.*,)\s*([\d.]+)\)$/.exec(color)?.[1] ?? 1)
 
 test.use({ reducedMotion: 'reduce' })

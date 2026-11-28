@@ -22,16 +22,16 @@ Pour toute question Astro, interroger le serveur MCP de la doc (`.mcp.json`, `as
 
 ## Recette
 
-`pnpm verify` = `format:check`, `lint`, `knip`, `check`, `test`. Elle se juge à son code de sortie, sur l'état final. `pnpm test` construit `dist/`, le sert avec `wrangler dev` sur le port 8787 et lance Playwright en chromium ; firefox et webkit ne lancent que `motion.spec.ts`.
+`pnpm verify` = `format:check`, `lint`, `knip`, `check`, `test`. Elle se juge à son code de sortie, sur l'état final. `pnpm test` construit `dist/`, le sert avec `wrangler dev` sur le port 8787 et lance Playwright en chromium (rapport HTML dans `playwright-report/`) ; firefox et webkit ne lancent que `motion.spec.ts`.
 
 ## Règles
 
-- **Jetons seulement** : couleurs et tailles viennent des jetons déclarés dans `@theme` de `src/styles/global.css`. ESLint (`eslint-plugin-better-tailwindcss`) refuse toute valeur ou propriété arbitraire (`bg-[#f00]`, `w-(--x)`, `[color:red]`) : déclarer un jeton dans `@theme` ou un `@utility` dans `global.css`.
+- **Jetons seulement** : couleurs et tailles viennent des jetons déclarés dans `@theme` de `src/styles/global.css`. ESLint (`eslint-plugin-better-tailwindcss`) refuse toute valeur ou propriété arbitraire (`bg-[#f00]`, `w-(--x)`, `[color:red]`) et toute variante `dark:` (elle suit le thème du système et ignore le `color-scheme` de l'îlot : utiliser un jeton `light-dark()`) : déclarer un jeton dans `@theme` ou un `@utility` dans `global.css`.
 - **Textes validés** : aucun texte inventé ou réécrit. Un texte qui manque se fait valider d'abord.
 - **Confidentialité** : le dépôt est public. La règle sur ce qui peut y figurer est dans `profil/confidentialite.md` du dépôt privé `freelance` ; la lire avant d'ajouter un contenu qui touche un client.
 - **Aucune information datée** dans le contenu (âge, années d'expérience calculées, « depuis X ans »).
 - **CSP** : Astro pose la balise meta CSP (empreintes des scripts et styles). Aucun attribut `style="..."`, aucun `define:vars`.
-- **Largeurs et mouvement réduit** : tout écran se vérifie aux largeurs 390, 768, 1280, 1440, 1920, 2560 et 3440, et avec `prefers-reduced-motion`.
+- **Largeurs et mouvement réduit** : tout écran se vérifie aux largeurs 360, 390, 768, 1280, 1440, 1920, 2560 et 3440, et avec `prefers-reduced-motion`.
 - **Jamais terminé sans l'avoir vu** : captures des surfaces touchées dans les deux thèmes, et vue sur un appareil réel avant de clore un chantier visuel.
 - **Typographie** : tiret simple, virgule ou parenthèses ; ni tiret cadratin ni demi-cadratin.
 
@@ -40,4 +40,5 @@ Pour toute question Astro, interroger le serveur MCP de la doc (`.mcp.json`, `as
 - Sans `404.html`, Workers répond 404 avec un corps vide : la page 404 est `src/pages/404.astro` (`not_found_handling: "404-page"`).
 - `trailingSlash: 'always'` : les URL de test portent leur `/` final (`/inexistant/`).
 - Les polices sont des chaînes dans `astro.config.ts` : knip ne voit pas les paquets `@fontsource-variable/*`, ils sont dans `ignoreDependencies`.
-- Un serveur déjà sur le port 8787 est réutilisé par `pnpm test` sans reconstruction : l'arrêter avant, sinon les tests passent sur un ancien `dist/`.
+- Un port 8787 occupé arrête `pnpm test` avec une erreur explicite : arrêter ce serveur par son PID.
+- Sous un agent, `astro dev` d'Astro 7 se détache (`ASTRO_DEV_BACKGROUND`) et s'arrête par `pnpm exec astro dev stop`.

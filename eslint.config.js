@@ -2,6 +2,7 @@ import js from '@eslint/js'
 import { defineConfig, globalIgnores } from 'eslint/config'
 import astro from 'eslint-plugin-astro'
 import betterTailwindcss from 'eslint-plugin-better-tailwindcss'
+import playwright from 'eslint-plugin-playwright'
 import tseslint from 'typescript-eslint'
 
 export default defineConfig(
@@ -10,6 +11,7 @@ export default defineConfig(
     '.astro/',
     '.wrangler/',
     'test-results/',
+    'playwright-report/',
     'screenshots/',
     '.lighthouseci/',
   ]),
@@ -29,9 +31,17 @@ export default defineConfig(
               pattern: '(^|[-:/@])[\\[(]',
               message: 'Arbitrary value: declare a token in @theme or a @utility in global.css.',
             },
+            {
+              pattern: '(^|:)dark:',
+              message:
+                'dark: follows the OS theme and ignores color-scheme: use a light-dark() token.',
+            },
           ],
         },
       ],
+      'better-tailwindcss/enforce-canonical-classes': 'error',
+      'better-tailwindcss/no-deprecated-classes': 'error',
     },
   },
+  { files: ['tests/**'], extends: [playwright.configs['flat/recommended']] },
 )
