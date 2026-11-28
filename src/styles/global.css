@@ -15,6 +15,20 @@
   --color-structure: light-dark(#2e6148, #83c1a0);
   --color-structure-soft: light-dark(#e8f2ea, #101812);
   --color-accent: light-dark(#a33e25, #e98667);
+  --spacing-sky-hero-compact: 120px;
+  --spacing-sky-hero: clamp(200px, 10vw, 280px);
+  --spacing-sky-contact-compact: 44px;
+  --spacing-sky-contact: max(72px, 2.98vw);
+  --spacing-sky-colophon-compact: 140px;
+  --spacing-sky-colophon: 260px;
+  --color-sky-top: light-dark(
+    var(--color-structure),
+    color-mix(in srgb, var(--color-structure) 50%, transparent)
+  );
+  --color-sky-end: light-dark(
+    color-mix(in srgb, var(--color-structure) 6%, transparent),
+    color-mix(in srgb, var(--color-structure) 3%, transparent)
+  );
 
   --text-*: initial;
   --text-display: 64px;

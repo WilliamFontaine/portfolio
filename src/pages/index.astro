@@ -1,5 +1,10 @@
 ---
 import Base from '../layouts/Base.astro'
+import { Image } from 'astro:assets'
+import forest from '../assets/photos/foret-terragree.jpg'
+import Icon from '../components/Icon.astro'
+import Monogram from '../components/Monogram.astro'
+import Skyline from '../components/Skyline.astro'
 ---
 
 <Base
@@ -9,6 +14,12 @@ import Base from '../layouts/Base.astro'
   <main>
     <h1 class="font-display text-display text-ink">William Fontaine</h1>
     <p class="text-accent">Du besoin à la mise en production.</p>
+    <Monogram size={32} />
+    <Icon set="phosphor" name="arrow-right" size={24} />
+    <Icon set="simple" name="react" size={24} label="React" />
+    <Image src={forest} alt="" width={800} />
+    <Skyline variant="fill" tower class="h-sky-hero-compact lg:h-sky-hero" />
+    <Skyline variant="stroke" tower={false} class="h-sky-contact-compact lg:h-sky-contact" />
   </main>
   <footer class="scheme-dark bg-surface-raised">
     <p class="text-text">Pied de page</p>
