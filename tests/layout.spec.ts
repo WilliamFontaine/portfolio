@@ -1,5 +1,5 @@
 import type { Locator, Page } from '@playwright/test'
-import { expect, test } from './fixtures'
+import { expect, scrollToEnd, test } from './fixtures'
 
 const widths = [360, 390, 768, 1280, 1440, 1920, 2560, 3440]
 const content = 1248
@@ -152,3 +152,26 @@ for (const deviceScaleFactor of [2, 3]) {
     }
   })
 }
+
+test.describe('with motion', () => {
+  test.use({ reducedMotion: 'no-preference' })
+
+  for (const width of [390, 1440]) {
+    test(`the home page loads and scrolls to its end without layout shift at ${width}px`, async ({
+      page,
+    }) => {
+      await page.setViewportSize({ width, height: 900 })
+      await page.addInitScript(() => {
+        const record = window as unknown as { shift: number }
+        record.shift = 0
+        new PerformanceObserver((list) => {
+          for (const entry of list.getEntries())
+            record.shift += (entry as unknown as { value: number }).value
+        }).observe({ type: 'layout-shift', buffered: true })
+      })
+      await page.goto('/')
+      await scrollToEnd(page)
+      expect(await page.evaluate(() => (window as unknown as { shift: number }).shift)).toBe(0)
+    })
+  }
+})

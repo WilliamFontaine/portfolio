@@ -1,7 +1,20 @@
 import AxeBuilder from '@axe-core/playwright'
-import { expect, test as base, type ConsoleMessage } from '@playwright/test'
+import { expect, test as base, type ConsoleMessage, type Page } from '@playwright/test'
 
 export { expect }
+
+// By wheel steps, not one jump, so that every block on the way reveals.
+export async function scrollToEnd(page: Page, settle = async () => {}) {
+  const top = () => page.evaluate(() => window.scrollY)
+  const atEnd = () =>
+    page.evaluate(() => window.scrollY + innerHeight >= document.documentElement.scrollHeight - 1)
+  while (!(await atEnd())) {
+    const before = await top()
+    await page.mouse.wheel(0, Math.round((page.viewportSize()!.height * 2) / 3))
+    await expect.poll(top, { intervals: [50] }).not.toBe(before)
+    await settle()
+  }
+}
 
 export const test = base.extend<{
   cleanSession: void
