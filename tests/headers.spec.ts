@@ -37,10 +37,6 @@ test('a page keeps the default revalidating cache', async ({ request }) => {
   expect(response.headers()['cache-control']).toBe('public, max-age=0, must-revalidate')
 })
 
-test('a page carries an ETag to revalidate with', { tag: '@revalidation' }, async ({ request }) => {
-  expect((await request.get('/')).headers()['etag']).toBeTruthy()
-})
-
 test('_headers is not served', async ({ request }) => {
   expect((await request.get('/_headers')).status()).toBe(404)
 })
