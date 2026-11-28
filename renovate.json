@@ -30,6 +30,11 @@
       "matchPackageNames": ["/^eslint/", "/^@commitlint//", "/prettier/", "lint-staged", "husky"]
     },
     {
+      "description": "Playwright et l'image Docker des tests visuels (même version, références à régénérer)",
+      "groupName": "Playwright",
+      "matchPackageNames": ["@playwright/test", "mcr.microsoft.com/playwright"]
+    },
+    {
       "description": "Ne jamais auto-merger un bump mineur sur un paquet 0.x (un minor peut être cassant en semver 0.x)",
       "matchCurrentVersion": "/^0\\./",
       "matchUpdateTypes": ["minor"],

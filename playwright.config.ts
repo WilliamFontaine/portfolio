@@ -6,12 +6,18 @@ export default defineConfig({
   testDir: 'tests',
   forbidOnly: !!process.env['CI'],
   reporter: [[process.env['CI'] ? 'github' : 'list'], ['html', { open: 'never' }]],
+  expect: { toHaveScreenshot: { maxDiffPixels: 0 } },
   use: { baseURL, trace: 'retain-on-failure' },
   projects: [
     {
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
-      testIgnore: /finition\.spec\.ts/,
+      testIgnore: /(finition|visual)\.spec\.ts/,
+    },
+    {
+      name: 'visual',
+      testMatch: /visual\.spec\.ts/,
+      use: { ...devices['Desktop Chrome'] },
     },
     {
       name: 'firefox',

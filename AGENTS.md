@@ -32,6 +32,18 @@ Astro ne réserve que `src/pages/` ; le reste est rangé par rôle, importé par
 
 `pnpm verify` = `format:check`, `lint`, `knip`, `check`, `test`. Elle se juge à son code de sortie, sur l'état final. `pnpm test` construit `dist/`, le sert avec `wrangler dev` sur le port 8787 et lance Playwright en chromium (rapport HTML dans `playwright-report/`) ; firefox et webkit ne lancent que `motion.spec.ts` et `wrap.spec.ts`. Les projets `finition-1440` et `finition-390` (`--project='finition-*'`, hors recette) enregistrent les vidéos à 60 i/s de la relecture image par image dans `screenshots/finition/`.
 
+## Tests visuels
+
+`tests/visual.spec.ts` (projet `visual`, hors `pnpm verify`) compare 10 captures du site construit aux images de `tests/visual.spec.ts-snapshots/` : accueil à 390 et 1440 px dans les deux thèmes, colophon, mentions légales, 404 et boîte de partage de la bannière. Elles ne se rendent à l'identique que dans l'image `mcr.microsoft.com/playwright:v1.65.1-noble` (la CI y tourne) : en local, passer par Docker (colima), le dépôt sous `$HOME`, `node_modules` Linux dans un volume nommé.
+
+Les références se régénèrent à un changement de design voulu et à chaque montée de Playwright (l'étiquette de l'image, dans `ci.yml`, suit la version du paquet). Une seule commande, avec `--update-snapshots` pour régénérer et sans pour comparer :
+
+```sh
+docker run --rm --ipc=host --init -v "$PWD":/work -v portfolio-visual-nm:/work/node_modules -w /work mcr.microsoft.com/playwright:v1.65.1-noble sh -c 'npm i -g pnpm@12.23.0 && pnpm install --frozen-lockfile && CI=1 pnpm exec playwright test --project=visual --update-snapshots'
+```
+
+Le diff des PNG se relit dans la PR avant de fusionner.
+
 ## Règles
 
 - **Jetons seulement** : couleurs et tailles viennent des jetons déclarés dans `@theme` de `src/styles/global.css`. ESLint (`eslint-plugin-better-tailwindcss`) refuse toute valeur ou propriété arbitraire (`bg-[#f00]`, `w-(--x)`, `[color:red]`) et toute variante `dark:` (elle suit le thème du système et ignore le `color-scheme` de l'îlot : utiliser un jeton `light-dark()`) : déclarer un jeton dans `@theme` ou un `@utility` dans `global.css`.
