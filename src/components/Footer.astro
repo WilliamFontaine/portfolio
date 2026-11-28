@@ -13,7 +13,10 @@ const links = [
     <ul class="flex flex-wrap gap-5">
       {links.map(([href, name]) => (
         <li>
-          <a {href} class="inline-flex min-h-11 items-center underline hover:text-ink">
+          <a
+            {href}
+            class="inline-flex min-h-11 items-center underline hover:text-ink motion-safe:transition-colors"
+          >
             {name}
           </a>
         </li>

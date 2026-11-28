@@ -3,6 +3,7 @@ import { email, linkedin, malt } from '../data/site'
 import Container from './Container.astro'
 import Icon from './Icon.astro'
 import Label from './Label.astro'
+import { reveal } from './reveal'
 import Skyline from './Skyline.astro'
 
 const profiles = [
@@ -12,15 +13,20 @@ const profiles = [
 ---
 
 <section id="contact" class="bg-surface-raised pb-12 text-ink scheme-dark md:pb-22">
-  <Skyline variant="stroke" class="h-sky-contact-compact md:h-sky-contact" />
-  <Container class="flex flex-col gap-4.5 pt-6 md:gap-6 md:pt-10">
+  <div data-reveal class="data-pending:not-data-in:opacity-0 data-in:animate-draw-contact">
+    <Skyline variant="stroke" class="h-sky-contact-compact md:h-sky-contact" />
+  </div>
+  <Container
+    data-reveal
+    class:list={['flex flex-col gap-4.5 pt-6 md:gap-6 md:pt-10', reveal, 'data-in:delay-150']}
+  >
     <Label>Contact</Label>
     <h2 class="max-w-205 text-display-sm-compact md:text-display-sm">
       Un produit à construire ou à faire grandir&#x202F;? Écrivez-moi.
     </h2>
     <a
       href={`mailto:${email}`}
-      class="inline-flex min-h-11 items-center gap-3 self-start font-display text-link-lg-compact wrap-anywhere underline decoration-accent decoration-2 underline-offset-7 hover:underline-offset-3 md:text-link-lg"
+      class="inline-flex min-h-11 items-center gap-3 self-start font-display text-link-lg-compact wrap-anywhere underline decoration-accent decoration-2 underline-offset-7 hover:underline-offset-3 motion-safe:transition-all md:text-link-lg"
     >
       <Icon
         set="phosphor"
@@ -35,9 +41,14 @@ const profiles = [
         <li>
           <a
             {href}
-            class="group inline-flex min-h-11 items-center gap-2 underline decoration-transparent decoration-2 underline-offset-6 hover:decoration-accent"
+            class="group inline-flex min-h-11 items-center gap-2 underline decoration-transparent decoration-2 underline-offset-6 hover:decoration-accent motion-safe:transition-colors"
           >
-            <Icon set="phosphor" name={icon} size={20} class="group-hover:text-accent" />
+            <Icon
+              set="phosphor"
+              name={icon}
+              size={20}
+              class="group-hover:text-accent motion-safe:transition-colors"
+            />
             {name}
           </a>
         </li>

@@ -10,8 +10,13 @@ const { href } = Astro.props
 
 <a
   {href}
-  class="group inline-flex min-h-11 items-center gap-2 text-ui text-accent underline decoration-transparent decoration-2 underline-offset-6 hover:decoration-accent"
+  class="group inline-flex min-h-11 items-center gap-2 text-ui text-accent underline decoration-transparent decoration-2 underline-offset-6 hover:decoration-accent motion-safe:transition-colors"
 >
   <slot />
-  <Icon set="phosphor" name="arrow-right" size={18} class="group-hover:translate-x-1" />
+  <Icon
+    set="phosphor"
+    name="arrow-right"
+    size={18}
+    class="group-hover:translate-x-1 motion-safe:transition-transform"
+  />
 </a>

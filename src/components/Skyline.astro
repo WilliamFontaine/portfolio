@@ -1,5 +1,6 @@
 ---
 import panorama from '../data/panorama-180.json'
+import Ridge from './Ridge.astro'
 
 type Props = { class?: string } & ({ variant: 'fill'; id: string } | { variant: 'stroke' })
 
@@ -10,10 +11,10 @@ const viewBox = `0 0 ${W} ${H}`
 ---
 
 {props.variant === 'fill' ? (
-  <div class:list={['relative', className]}>
+  <div data-arrival class:list={['relative', className]}>
     <svg
       data-sky
-      class="absolute inset-0 size-full overflow-visible"
+      class="absolute inset-0 size-full overflow-visible motion-safe:animate-draw-compact md:motion-safe:animate-draw"
       viewBox={viewBox}
       preserveAspectRatio="xMidYMin slice"
       aria-hidden="true"
@@ -27,7 +28,10 @@ const viewBox = `0 0 ${W} ${H}`
         </linearGradient>
         <mask id={`flow-${props.id}`} maskUnits="userSpaceOnUse" x="0" y="0" width={W} height={H}>
           <rect width={W} height={H} fill="#fff" />
-          <g transform="translate(0 520)">
+          <g
+            transform="translate(0 520)"
+            class="motion-safe:animate-flow-compact md:motion-safe:animate-flow"
+          >
             <g filter={`url(#soft-${props.id})`}>
               <use href={`#area-${props.id}`} y="-90" />
               <rect y="200" width={W} height="450" />
@@ -46,19 +50,18 @@ const viewBox = `0 0 ${W} ${H}`
     </svg>
     <svg
       data-sky
-      class="absolute inset-0 size-full overflow-visible text-sky-top"
+      class="absolute inset-0 size-full overflow-visible text-sky-top motion-safe:animate-draw-compact md:motion-safe:animate-draw"
       viewBox={viewBox}
       preserveAspectRatio="xMidYMin slice"
       aria-hidden="true"
     >
-      <path
-        {d}
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        vector-effect="non-scaling-stroke"
+      <Ridge />
+      <g
+        data-sky-tower
+        fill="currentColor"
+        class="origin-bottom transform-fill motion-safe:animate-rise-compact md:motion-safe:animate-rise"
+        set:html={towerMarkup}
       />
-      <g data-sky-tower fill="currentColor" set:html={towerMarkup} />
     </svg>
   </div>
 ) : (
@@ -69,12 +72,6 @@ const viewBox = `0 0 ${W} ${H}`
     preserveAspectRatio="xMidYMin slice"
     aria-hidden="true"
   >
-    <path
-      {d}
-      fill="none"
-      stroke="currentColor"
-      stroke-width="2"
-      vector-effect="non-scaling-stroke"
-    />
+    <Ridge />
   </svg>
 )}

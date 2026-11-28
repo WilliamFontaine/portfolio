@@ -1,11 +1,11 @@
 ---
-interface Props {
-  class?: string
-}
+import type { HTMLAttributes } from 'astro/types'
 
-const { class: className } = Astro.props
+type Props = HTMLAttributes<'div'>
+
+const { class: className, ...attributes } = Astro.props
 ---
 
-<div class:list={['mx-auto max-w-page px-6 lg:px-24', className]}>
+<div {...attributes} class:list={['mx-auto max-w-page px-6 lg:px-24', className]}>
   <slot />
 </div>

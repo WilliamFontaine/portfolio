@@ -1,0 +1,53 @@
+---
+import panorama from '../data/panorama-180.json'
+import { sections } from '../data/site'
+import Ridge from './Ridge.astro'
+
+const layers = [
+  'text-track',
+  'invisible text-accent reading-tail group-data-ready/reading:visible group-data-done/reading:reading-tail-full motion-safe:group-data-done/reading:transition-all motion-safe:group-data-done/reading:duration-450 motion-safe:group-data-done/reading:ease-flow',
+  'text-accent supports-animation-timeline:motion-safe:reading-progress',
+]
+---
+
+<div
+  data-reading
+  aria-hidden="true"
+  class="group/reading pointer-events-none fixed inset-x-0 bottom-0 z-10 hidden supports-animation-timeline:motion-safe:block"
+>
+  <div class="h-reading-fade bg-linear-to-t from-surface"></div>
+  <div class="relative h-reading bg-surface">
+    <div data-marks class="absolute inset-x-0 top-0 bottom-1.5">
+      {layers.map((layer) => (
+        <svg
+          viewBox={`0 0 ${panorama.W} ${panorama.H}`}
+          preserveAspectRatio="xMidYMin slice"
+          aria-hidden="true"
+          class:list={['absolute inset-0 size-full', layer]}
+        >
+          <Ridge />
+        </svg>
+      ))}
+      <div class="invisible group-data-ready/reading:visible">
+        {sections.map(([id, name]) => (
+          <a
+            href={`#${id}`}
+            tabindex="-1"
+            class="group/mark absolute -mt-5.5 -ml-3.5 h-11 w-7 md:pointer-events-auto"
+          >
+            <span class="absolute top-1/2 left-1/2 -mt-1.75 -ml-1.75 size-3.5 rounded-full border-2 border-text-muted bg-surface ring-3 ring-surface group-hover/mark:scale-120 group-hover/mark:border-accent group-data-passed/mark:border-3 group-data-passed/mark:border-accent motion-safe:transition" />
+            <span class="absolute top-1/2 left-1/2 -mt-1.75 -ml-1.75 size-3.5 rounded-full border-2 border-accent opacity-0 motion-safe:group-data-ping/mark:animate-beacon" />
+            <span class="absolute bottom-9 left-1/2 translate-y-1 -translate-x-1/2 rounded-pill bg-brand px-2 py-0.75 text-tip-compact whitespace-nowrap text-on-brand opacity-0 group-hover/mark:translate-y-0 group-hover/mark:opacity-100 group-data-say/mark:translate-y-0 group-data-say/mark:opacity-100 md:px-2.5 md:py-1 md:text-tip motion-safe:transition motion-safe:duration-200">
+              {name}
+            </span>
+          </a>
+        ))}
+        <span
+          data-pen
+          class="absolute top-0 left-0 -m-1 size-2 rounded-full bg-accent ring-3 ring-surface"
+        />
+      </div>
+    </div>
+  </div>
+  <div class="h-safe-bottom bg-surface"></div>
+</div>

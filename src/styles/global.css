@@ -24,6 +24,12 @@
   --spacing-sky-contact: max(72px, 2.98vw);
   --spacing-sky-colophon-compact: 140px;
   --spacing-sky-colophon: 260px;
+  --spacing-reading: max(34px, calc(2.42vw + 10px));
+  --spacing-reading-fade: 16px;
+  --spacing-safe-bottom: env(safe-area-inset-bottom, 0px);
+  --spacing-reading-clearance: calc(
+    var(--spacing-reading) + var(--spacing-reading-fade) + var(--spacing-safe-bottom)
+  );
 
   --text-*: initial;
   --text-display: 64px;
@@ -115,6 +121,12 @@
   --text-note: 13px;
   --text-note--line-height: 20px;
   --text-note--font-weight: 400;
+  --text-tip: 13px;
+  --text-tip--line-height: 18px;
+  --text-tip--font-weight: 600;
+  --text-tip-compact: 12px;
+  --text-tip-compact--line-height: 16px;
+  --text-tip-compact--font-weight: 600;
 
   --radius-*: initial;
   --radius-sm: 8px;
@@ -146,6 +158,8 @@
   --animate-flow: flow 1000ms var(--ease-flow) 1480ms backwards;
   --animate-flow-compact: flow 1000ms var(--ease-flow) 1081ms backwards;
   --animate-beacon: beacon 800ms var(--ease-flow);
+  --animate-draw-contact: draw 700ms var(--ease-flow);
+  --animate-route: route linear both;
 
   @keyframes draw {
     from {
@@ -153,6 +167,15 @@
     }
     to {
       clip-path: inset(0 0 0 0);
+    }
+  }
+
+  @keyframes route {
+    from {
+      clip-path: inset(0 calc(100% - var(--reading-inset, 0px)) 0 0);
+    }
+    to {
+      clip-path: inset(0 var(--reading-inset, 0px) 0 0);
     }
   }
 
@@ -225,6 +248,20 @@
 
 @utility grid-cols-wide-narrow {
   grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+}
+
+/* The animation shorthand resets animation-timeline: the timeline must come after it. */
+@utility reading-progress {
+  animation: var(--animate-route);
+  animation-timeline: scroll(root block);
+}
+
+@utility reading-tail {
+  clip-path: inset(0 var(--reading-inset, 0px) 0 calc(100% - var(--reading-inset, 0px) - 1px));
+}
+
+@utility reading-tail-full {
+  clip-path: inset(0 0 0 calc(100% - var(--reading-inset, 0px) - 1px));
 }
 
 @layer base {

@@ -3,6 +3,7 @@ import Card from './Card.astro'
 import Container from './Container.astro'
 import Icon from './Icon.astro'
 import SectionHeading from './SectionHeading.astro'
+import { reveal } from './reveal'
 
 const training = [
   ['graduation-cap', '2025', 'Mastère Expert IT, Hesias'],
@@ -13,7 +14,7 @@ const training = [
 
 <section id="a-propos" class="py-14 md:py-28">
   <Container class="grid items-start gap-7 lg:grid-cols-wide-narrow lg:gap-18">
-    <div class="flex flex-col gap-4.5">
+    <div data-reveal class:list={['flex flex-col gap-4.5', reveal]}>
       <SectionHeading label="À propos" title="Un seul interlocuteur" />
       <p>
         Ce qui me plaît, c'est d'être à la table avec ceux qui portent le projet, et de comprendre

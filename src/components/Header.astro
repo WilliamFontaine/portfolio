@@ -1,4 +1,5 @@
 ---
+import { sections } from '../data/site'
 import ButtonLink from './ButtonLink.astro'
 import Container from './Container.astro'
 import Monogram from './Monogram.astro'
@@ -9,11 +10,7 @@ interface Props {
 
 const { home } = Astro.props
 const section = (id: string) => `${home ? '' : '/'}#${id}`
-const links = [
-  ['realisations', 'Réalisations'],
-  ['competences', 'Compétences'],
-  ['a-propos', 'À propos'],
-] as const
+const links = sections.filter(([id]) => id !== 'top' && id !== 'contact')
 ---
 
 <header class="sticky top-0 z-10 h-header-compact border-b border-line bg-surface lg:h-header">
@@ -26,7 +23,7 @@ const links = [
       {links.map(([id, name]) => (
         <a
           href={section(id)}
-          class="text-ui font-medium underline decoration-transparent decoration-2 underline-offset-6 hover:text-ink hover:decoration-accent"
+          class="text-ui font-medium underline decoration-transparent decoration-2 underline-offset-6 hover:text-ink hover:decoration-accent motion-safe:transition-colors"
         >
           {name}
         </a>

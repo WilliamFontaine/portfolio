@@ -3,6 +3,7 @@ import { Picture } from 'astro:assets'
 import { getEntries, type CollectionEntry } from 'astro:content'
 import Icon from './Icon.astro'
 import Label from './Label.astro'
+import { revealInRow } from './reveal'
 
 interface Props {
   entry: CollectionEntry<'cases'>
@@ -31,7 +32,7 @@ const sizes = `(min-width: 1440px) ${Math.ceil(490 * wide)}px, (min-width: 1024p
     reverse ? 'lg:grid-cols-wide-narrow' : 'lg:grid-cols-narrow-wide',
   ]}
 >
-  <figure class:list={['flex flex-col gap-2', reverse && 'lg:order-last']}>
+  <figure data-reveal class:list={['flex flex-col gap-2', reverse && 'lg:order-last', revealInRow]}>
     <Picture
       src={data.photo}
       alt={data.alt}
@@ -41,7 +42,7 @@ const sizes = `(min-width: 1440px) ${Math.ceil(490 * wide)}px, (min-width: 1024p
     />
     <figcaption class="text-note text-text-muted">{data.credit}</figcaption>
   </figure>
-  <div class="flex flex-col gap-5 md:gap-6">
+  <div data-reveal class:list={['flex flex-col gap-5 md:gap-6', revealInRow]}>
     <Label>{data.label}</Label>
     <h3 class="text-h2-compact md:text-h2">{data.title}</h3>
     <div class="flex flex-col gap-4.5">

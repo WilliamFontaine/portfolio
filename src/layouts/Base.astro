@@ -14,7 +14,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site)
 
 <html
   lang="fr"
-  class="scheme-light-dark motion-safe:scroll-smooth scroll-pt-header-compact lg:scroll-pt-header"
+  class="scheme-light-dark scroll-pt-header-compact lg:scroll-pt-header motion-safe:data-settled:scroll-smooth supports-animation-timeline:motion-safe:has-data-reading:scroll-pb-reading-clearance"
 >
   <head>
     <meta charset="utf-8" />
@@ -35,7 +35,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site)
     <Font cssVariable="--font-space-grotesk" preload />
     <Font cssVariable="--font-manrope" preload />
   </head>
-  <body class="bg-surface text-body-compact text-text md:text-body">
+  <body class="bg-surface text-body-compact text-text md:text-body supports-animation-timeline:motion-safe:has-data-reading:pb-reading-clearance">
     <slot />
   </body>
 </html>

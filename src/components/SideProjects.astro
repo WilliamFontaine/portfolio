@@ -3,6 +3,7 @@ import { getCollection, getEntries } from 'astro:content'
 import Card from './Card.astro'
 import Icon from './Icon.astro'
 import Label from './Label.astro'
+import { reveal } from './reveal'
 
 const projects = await Promise.all(
   (await getCollection('projects'))
@@ -12,7 +13,7 @@ const projects = await Promise.all(
 ---
 
 <div class="flex flex-col gap-5 md:gap-7">
-  <div class="flex flex-col gap-3">
+  <div data-reveal class:list={['flex flex-col gap-3', reveal]}>
     <Label>Sur mon temps libre</Label>
     <h3 class="text-h2-compact md:text-h2">Trois produits menés de bout en bout</h3>
     <p>
@@ -24,7 +25,7 @@ const projects = await Promise.all(
     {projects.map((project) => (
       <Card
         as="article"
-        class="group flex flex-col gap-3.5 hover:border-line-strong md:max-lg:last:col-span-2"
+        class="group flex flex-col gap-3.5 hover:border-line-strong motion-safe:transition-colors md:max-lg:last:col-span-2"
       >
         <div class="flex items-baseline justify-between gap-3">
           <h4 class="text-h4-compact md:text-h4">{project.name}</h4>
@@ -39,7 +40,7 @@ const projects = await Promise.all(
           <div
             role="img"
             aria-label={project.stack.map(({ data }) => data.label).join(', ')}
-            class="flex gap-3 text-text-muted group-hover:text-structure"
+            class="flex gap-3 text-text-muted group-hover:text-structure motion-safe:transition-colors"
           >
             {project.stack.map(({ data }) => (
               <Icon set="simple" name={data.icon} size={18} />

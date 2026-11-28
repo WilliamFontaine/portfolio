@@ -8,6 +8,8 @@ import Container from '../components/Container.astro'
 import Footer from '../components/Footer.astro'
 import Header from '../components/Header.astro'
 import Hero from '../components/Hero.astro'
+import ReadingLine from '../components/ReadingLine.astro'
+import { reveal } from '../components/reveal'
 import SectionHeading from '../components/SectionHeading.astro'
 import SideProjects from '../components/SideProjects.astro'
 import Skills from '../components/Skills.astro'
@@ -25,13 +27,19 @@ const cases = (await getCollection('cases')).sort((a, b) => a.data.order - b.dat
     <Hero />
     <section id="realisations" class="pt-14 pb-6 md:pt-28 md:pb-10">
       <Container class="flex flex-col gap-10 md:gap-24">
-        <div class="flex flex-col gap-3">
+        <div data-reveal class:list={['flex flex-col gap-3', reveal]}>
           <SectionHeading label="Réalisations" title="Des logiciels en production" />
         </div>
         {cases.map((entry, index) => (
           <CaseStudy {entry} reverse={index % 2 === 1} />
         ))}
-        <div class="flex flex-wrap items-center justify-between gap-2 border-y border-line py-5 md:gap-6 md:py-6">
+        <div
+          data-reveal
+          class:list={[
+            'flex flex-wrap items-center justify-between gap-2 border-y border-line py-5 md:gap-6 md:py-6',
+            reveal,
+          ]}
+        >
           <p class="font-display text-h3-compact text-ink md:text-h3">
             Un logiciel métier à construire&#x202F;?
           </p>
@@ -45,4 +53,193 @@ const cases = (await getCollection('cases')).sort((a, b) => a.data.order - b.dat
     <Contact />
   </main>
   <Footer />
+  <ReadingLine />
 </Base>
+
+<script>
+  const root = document.documentElement
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches
+  const reading = document.querySelector<HTMLElement>('[data-reading]')!
+  const clamp = (value: number, low: number, high: number) => Math.min(high, Math.max(low, value))
+
+  // A link to a section lands on it: smooth scrolling only starts once the page has loaded.
+  addEventListener('load', () =>
+    requestAnimationFrame(() => root.toggleAttribute('data-settled', true)),
+  )
+
+  if (!reduced) {
+    const sky = document.querySelector<HTMLElement>('[data-arrival]')!
+    const band = reading.offsetHeight
+    // On a phone the line starts below the fold: its arrival waits until half of it shows above the reading line.
+    // WebKit may not have created the animations yet when this runs: pause them on the first frame.
+    requestAnimationFrame(() => {
+      const arrival = sky.getAnimations({ subtree: true })
+      for (const animation of arrival) animation.pause()
+      const wait = new IntersectionObserver(
+        ([entry]) => {
+          if (entry!.intersectionRatio < 0.5) return
+          for (const animation of arrival) animation.play()
+          wait.disconnect()
+        },
+        { threshold: 0.5, rootMargin: `0px 0px -${band}px 0px` },
+      )
+      wait.observe(sky)
+    })
+
+    const reveal = (block: HTMLElement) => {
+      if (!block.hasAttribute('data-pending') || block.hasAttribute('data-in')) return
+      block.toggleAttribute('data-in', true)
+      blocks.unobserve(block)
+      // The reveal's duration and delays would otherwise slow the block's hover transitions.
+      void Promise.allSettled(block.getAnimations({ subtree: true }).map((a) => a.finished)).then(
+        () => {
+          block.removeAttribute('data-pending')
+          block.removeAttribute('data-in')
+        },
+      )
+    }
+    const blocks = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) reveal(entry.target as HTMLElement)
+        }
+      },
+      { rootMargin: '0px 0px -10% 0px' },
+    )
+    for (const block of document.querySelectorAll<HTMLElement>('[data-reveal]')) {
+      if (block.getBoundingClientRect().top <= innerHeight) continue
+      block.toggleAttribute('data-pending', true)
+      blocks.observe(block)
+    }
+    document.addEventListener('focusin', ({ target }) => {
+      const block = (target as Element).closest<HTMLElement>('[data-pending]')
+      if (block) reveal(block)
+    })
+  }
+
+  // Same mapping as the route keyframes in global.css: x = inset + scroll progress * span.
+  const box = reading.querySelector<HTMLElement>('[data-marks]')!
+  const pen = reading.querySelector<HTMLElement>('[data-pen]')!
+  const ridge = reading.querySelector('svg')!
+  const { width: viewWidth, height: viewHeight } = ridge.viewBox.baseVal
+  const numbers = ridge
+    .querySelector('path')!
+    .getAttribute('d')!
+    .match(/-?[\d.]+/g)!
+    .map(Number)
+  const points = [numbers.slice(0, 2)]
+  for (let i = 2; i + 5 < numbers.length; i += 6) points.push(numbers.slice(i + 4, i + 6))
+  const lineY = (x: number) => {
+    const i = Math.max(
+      1,
+      points.findIndex(([px]) => px! >= clamp(x, 0, viewWidth)),
+    )
+    const [ax, ay] = points[i - 1] as [number, number]
+    const [bx, by] = points[i] as [number, number]
+    return ay + ((by - ay) * (x - ax)) / (bx - ax)
+  }
+  const stages = [...reading.querySelectorAll('a')].map((mark) => ({
+    mark,
+    name: mark.lastElementChild as HTMLElement,
+    section: document.getElementById(mark.hash.slice(1))!,
+    x: 0,
+    passed: false,
+  }))
+  type Stage = (typeof stages)[number]
+  const gap = 28
+  const say = 1600
+  let width = 0
+  let inset = 0
+  let span = 0
+  let scale = 1
+  let offset = 0
+  let ready = false
+  let saying: Stage | undefined
+  let next: Stage | undefined
+  let sayTimer: ReturnType<typeof setTimeout> | undefined
+  let settleTimer: ReturnType<typeof setTimeout> | undefined
+  let walker: Animation | undefined
+
+  const range = () => root.scrollHeight - root.clientHeight
+  const progress = () => (range() > 0 ? clamp(root.scrollTop / range(), 0, 1) : 1)
+  const crest = (x: number) => lineY((x - offset) / scale) * scale
+
+  const reach = (stage: Stage) => {
+    clearTimeout(sayTimer)
+    saying?.mark.removeAttribute('data-say')
+    saying = stage
+    stage.mark.removeAttribute('data-ping')
+    // Without a style flush between removing and setting it, the beacon would not restart.
+    void stage.mark.offsetWidth
+    stage.mark.toggleAttribute('data-ping', true)
+    stage.mark.toggleAttribute('data-say', true)
+    sayTimer = setTimeout(() => stage.mark.removeAttribute('data-say'), say)
+  }
+  // A smooth jump crosses stages frame after frame: only the furthest one reached when the scroll settles speaks.
+  const commit = () => {
+    clearTimeout(settleTimer)
+    if (next?.passed) reach(next)
+    next = undefined
+  }
+  const update = () => {
+    if (!width) return
+    const at = inset + progress() * span
+    for (const stage of stages) {
+      const passed = at >= stage.x - 0.5
+      if (passed && !stage.passed && ready && (!next || stage.x > next.x)) next = stage
+      stage.passed = passed
+      stage.mark.toggleAttribute('data-passed', passed)
+    }
+    reading.toggleAttribute('data-done', progress() >= 0.999)
+    ready = true
+    if (next) {
+      clearTimeout(settleTimer)
+      settleTimer = setTimeout(commit, 150)
+    }
+  }
+  const place = () => {
+    width = box.clientWidth
+    const height = box.clientHeight
+    if (!width || !height) return
+    scale = Math.max(width / viewWidth, height / viewHeight)
+    offset = (width - viewWidth * scale) / 2
+    // The headline starts at the content margin, the stages' left bound.
+    inset = Math.min(width / 4, document.querySelector('h1')!.getBoundingClientRect().left)
+    span = width - 2 * inset
+    reading.style.setProperty('--reading-inset', `${inset}px`)
+    const anchor = parseFloat(getComputedStyle(root).scrollPaddingTop)
+    const xs = stages.map(({ section }) => {
+      const top = section.getBoundingClientRect().top + root.scrollTop - anchor
+      return inset + (range() > 0 ? clamp(top / range(), 0, 1) : 1) * span
+    })
+    // Short final sections land within a few pixels of each other: push stages apart from the end, then forward.
+    for (let i = xs.length - 2; i >= 0; i--) xs[i] = Math.min(xs[i]!, xs[i + 1]! - gap)
+    for (let i = 1; i < xs.length; i++) xs[i] = Math.max(xs[i]!, xs[i - 1]! + gap)
+    for (const [i, stage] of stages.entries()) {
+      const x = (stage.x = xs[i]!)
+      stage.mark.style.left = `${x}px`
+      stage.mark.style.top = `${crest(x)}px`
+      const half = stage.name.offsetWidth / 2
+      stage.name.style.left = `calc(50% + ${clamp(0, 8 - (x - half), width - 8 - (x + half))}px)`
+    }
+    // Moved from scroll events, the walker would lag a frame and Firefox would warn of a scroll-linked effect.
+    const bends = points
+      .map(([px]) => px! * scale + offset)
+      .filter((x) => x > inset && x < width - inset)
+    walker?.cancel()
+    walker = pen.animate(
+      [inset, ...bends, width - inset].map((x) => ({
+        transform: `translate(${x}px, ${crest(x)}px)`,
+        offset: (x - inset) / span,
+      })),
+      { timeline: new ScrollTimeline({ source: root }), fill: 'both' },
+    )
+    reading.toggleAttribute('data-ready', true)
+    update()
+  }
+
+  addEventListener('scroll', update, { passive: true })
+  document.addEventListener('scrollend', commit)
+  addEventListener('resize', place)
+  new ResizeObserver(place).observe(document.body)
+</script>
