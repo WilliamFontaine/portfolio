@@ -26,7 +26,7 @@ const front = Array.from({ length: steps }, (_, i) => ({
 
 {props.variant === 'fill' ? (
   <div data-arrival class:list={['relative', className]}>
-    {/* Chromium's composited clip-path animation (the draw) freezes the flow's mask unless this svg has its own layer. */}
+    {/* Chromium's composited clip-path animation (crbug.com/40503852) freezes the flow's mask unless this svg has its own layer. */}
     <svg
       data-sky
       class:list={[

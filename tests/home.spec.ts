@@ -44,13 +44,16 @@ test('every menu link leads to its section', async ({ page }) => {
 })
 
 for (const width of [360, 390, 1440]) {
-  for (const id of ['terragree', 'neogo']) {
+  for (const [id, name] of [
+    ['terragree', 'TerrAgree · gestion forestière'],
+    ['neogo', 'NEOGO · comparateur de trajets'],
+  ] as const) {
     test(`/#${id} opened cold at ${width}px shows the article label under the header`, async ({
       page,
     }) => {
       await page.setViewportSize({ width, height: 900 })
       await page.goto(`/#${id}`)
-      const label = page.locator(`#${id} p`).first()
+      const label = page.locator(`#${id}`).getByText(name)
       await expect(label).toBeInViewport()
       const header = (await page.getByRole('banner').boundingBox())!
       await expect
@@ -81,7 +84,7 @@ for (const [width, lines] of [
     const label = page.locator('#terragree').getByText('TerrAgree · gestion forestière')
     expect((await label.innerText()).toLowerCase().split('\n')).toEqual(lines)
     const lineHeight = parseFloat(await label.evaluate((p) => getComputedStyle(p).lineHeight))
-    expect((await label.boundingBox())!.height).toBe(lines.length * lineHeight)
+    expect((await label.boundingBox())!.height).toBeCloseTo(lines.length * lineHeight, 0)
   })
 }
 

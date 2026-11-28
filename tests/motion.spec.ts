@@ -117,7 +117,6 @@ test.describe('with motion', () => {
     }) => {
       await page.setViewportSize({ width, height: 900 })
       await page.goto('/colophon/')
-      // Inside the arrival, the note waits with the line on a phone.
       const arrival = page.getByRole('figure').locator('[data-arrival]')
       const rise = await timing(page, 'rise', arrival)
       expect((await timing(page, 'fade', arrival)).delay).toBeCloseTo(rise.delay + rise.duration)
@@ -306,6 +305,27 @@ test.describe('on a phone', () => {
     expect(await states(page)).toEqual(['paused', 'paused', 'paused', 'paused'])
     expect(await showSkyAbove(page, 0.7)).toBeGreaterThanOrEqual(0.5)
     await expect.poll(() => running(page)).toBe(0)
+  })
+
+  test('the colophon tower note waits with the line, then plays and ends with it', async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: 390, height: 400 })
+    await page.goto('/colophon/')
+    const arrival = page.getByRole('figure').locator('[data-arrival]')
+    const live = () =>
+      arrival.evaluate((element) =>
+        element
+          .getAnimations({ subtree: true })
+          .map((animation) => `${(animation as CSSAnimation).animationName} ${animation.playState}`)
+          .sort(),
+      )
+    const waiting = ['draw paused', 'draw paused', 'fade paused', 'flow paused', 'rise paused']
+    await expect.poll(live).toEqual(waiting)
+    await frames(page)
+    expect(await live()).toEqual(waiting)
+    await arrival.scrollIntoViewIfNeeded()
+    await expect.poll(live).toEqual([])
   })
 
   test('turning motion off while the arrival waits never plays it and shows every block', async ({
