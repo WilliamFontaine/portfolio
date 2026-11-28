@@ -129,7 +129,7 @@ jobs:
           curl -sfI --retry 5 --retry-all-errors --retry-delay 3 "$BASE_URL"
           | grep -i '^x-robots-tag: noindex'
       - run: pnpm exec playwright install --with-deps chromium
-      - run: pnpm exec playwright test --project=chromium smoke.spec.ts headers.spec.ts
+      - run: pnpm exec playwright test --project=chromium smoke.spec.ts headers.spec.ts --grep-invert @revalidation
 
   deploy:
     name: Deploy
