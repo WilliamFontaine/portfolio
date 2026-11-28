@@ -1,0 +1,37 @@
+---
+import { sections } from '@/site'
+import ButtonLink from '@/components/ui/ButtonLink.astro'
+import Container from '@/components/ui/Container.astro'
+import Monogram from '@/components/brand/Monogram.astro'
+
+interface Props {
+  home?: boolean
+}
+
+const { home } = Astro.props
+const section = (id: string) => `${home ? '' : '/'}#${id}`
+const links = sections.filter(([id]) => id !== 'top' && id !== 'contact')
+---
+
+<header class="sticky top-0 z-10 h-header-compact border-b border-line bg-surface lg:h-header">
+  <Container class="flex h-full items-center justify-between">
+    <a href={home ? '#top' : '/'} class="flex min-h-11 items-center gap-3">
+      <Monogram size={36} />
+      <span class="font-display text-h4-compact text-ink">William Fontaine</span>
+    </a>
+    <nav aria-label="Navigation principale" class="hidden items-center gap-7 md:flex">
+      {links.map(([id, name]) => (
+        <a
+          href={section(id)}
+          class="inline-flex min-h-11 items-center text-ui font-medium underline decoration-transparent decoration-2 underline-offset-6 hover:text-ink hover:decoration-accent motion-safe:transition-colors"
+        >
+          {name}
+        </a>
+      ))}
+      <ButtonLink href={section('contact')}>M'écrire</ButtonLink>
+    </nav>
+    <ButtonLink href={section('contact')} compact class="md:hidden">
+      M'écrire
+    </ButtonLink>
+  </Container>
+</header>

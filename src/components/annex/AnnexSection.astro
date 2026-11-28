@@ -1,0 +1,23 @@
+---
+import type { phosphor } from '@/components/ui/icons'
+import Icon from '@/components/ui/Icon.astro'
+
+interface Props {
+  title: string
+  icon?: keyof typeof phosphor
+  fields?: boolean
+}
+
+const { title, icon, fields } = Astro.props
+const Body = fields ? 'dl' : 'div'
+---
+
+<section class="grid gap-3 border-t border-line py-7 md:py-10 lg:grid-cols-annex lg:gap-12">
+  <div class="flex items-center gap-2.5 self-start">
+    {icon && <Icon set="phosphor" name={icon} size={22} class="text-structure" />}
+    <h2 class="text-h3-compact md:text-h3">{title}</h2>
+  </div>
+  <Body class:list={['flex max-w-text flex-col', fields ? 'gap-3' : 'gap-4']}>
+    <slot />
+  </Body>
+</section>

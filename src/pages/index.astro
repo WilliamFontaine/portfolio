@@ -1,0 +1,57 @@
+---
+import { getCollection } from 'astro:content'
+import About from '@/components/home/About.astro'
+import ActionLink from '@/components/ui/ActionLink.astro'
+import CaseStudy from '@/components/home/CaseStudy.astro'
+import Contact from '@/components/home/Contact.astro'
+import Container from '@/components/ui/Container.astro'
+import Footer from '@/components/site/Footer.astro'
+import Header from '@/components/site/Header.astro'
+import Hero from '@/components/home/Hero.astro'
+import ReadingLine from '@/components/site/ReadingLine.astro'
+import { reveal } from '@/scripts/reveal'
+import SectionHeading from '@/components/ui/SectionHeading.astro'
+import SideProjects from '@/components/home/SideProjects.astro'
+import Skills from '@/components/home/Skills.astro'
+import Base from '@/layouts/Base.astro'
+
+const cases = (await getCollection('cases')).sort((a, b) => a.data.order - b.data.order)
+---
+
+<Base
+  title="William Fontaine, développeur full-stack à Clermont-Ferrand"
+  description="Je conçois et développe des logiciels métier, web et mobile, du besoin à la mise en production, puis j'en assure le suivi. Basé à Clermont-Ferrand."
+>
+  <Header home />
+  <main>
+    <Hero />
+    <section id="realisations" class="pt-14 pb-6 md:pt-28 md:pb-10">
+      <Container class="flex flex-col gap-10 md:gap-24">
+        <div data-reveal class:list={['flex flex-col gap-3', reveal]}>
+          <SectionHeading label="Réalisations" title="Des logiciels en production" />
+        </div>
+        {cases.map((entry, index) => (
+          <CaseStudy {entry} reverse={index % 2 === 1} />
+        ))}
+        <div
+          data-reveal
+          class:list={[
+            'flex flex-wrap items-center justify-between gap-2 border-y border-line py-5 md:gap-6 md:py-6',
+            reveal,
+          ]}
+        >
+          <p class="font-display text-h3-compact text-ink md:text-h3">
+            Un logiciel métier à&nbsp;construire&#x202F;?
+          </p>
+          <ActionLink href="#contact">Parlons de votre projet</ActionLink>
+        </div>
+        <SideProjects />
+      </Container>
+    </section>
+    <Skills />
+    <About />
+    <Contact />
+  </main>
+  <Footer />
+  <ReadingLine />
+</Base>

@@ -1,0 +1,89 @@
+---
+import AnnexIntro from '@/components/annex/AnnexIntro.astro'
+import AnnexSection from '@/components/annex/AnnexSection.astro'
+import Container from '@/components/ui/Container.astro'
+import Field from '@/components/annex/Field.astro'
+import Footer from '@/components/site/Footer.astro'
+import Header from '@/components/site/Header.astro'
+import Skyline from '@/components/brand/Skyline.astro'
+import TextLink from '@/components/ui/TextLink.astro'
+import Base from '@/layouts/Base.astro'
+
+const credits = [
+  ['Relief', 'IGN, RGE ALTI, sous Licence Ouverte (Etalab 2.0)'],
+  ['Photos', 'Kristaps Ungurs et Lau Clrd, sur Unsplash'],
+  ['Polices', 'Space Grotesk et Manrope, sous licence SIL Open Font'],
+  ['Icônes', 'Phosphor (MIT), et Simple Icons (CC0) pour les logos'],
+] as const
+---
+
+<Base
+  title="Comment ce site est fait · William Fontaine"
+  description="La ligne des Puys calculée depuis le relief de l'IGN, la technique du site et ses contrôles de qualité."
+>
+  <Header />
+  <main>
+    <AnnexIntro
+      label="Colophon"
+      title="Comment ce site est fait"
+      lead="Une page pour les curieux, et pour ceux qui veulent voir comment je travaille."
+    />
+    <figure>
+      <Skyline variant="fill" id="colophon" class="h-sky-colophon-compact lg:h-sky-colophon">
+        <p class="absolute top-1 right-1/2 flex -translate-x-3 items-center gap-2 text-tip whitespace-nowrap text-ink motion-safe:animate-note-compact md:motion-safe:animate-note lg:hidden">
+          Puy de Dôme, 1&nbsp;465&nbsp;m<span class="h-px w-4.5 bg-ink"></span>
+        </p>
+        <p class="absolute top-2.5 left-1/2 hidden translate-x-3 items-center gap-2 text-tip whitespace-nowrap text-ink motion-safe:animate-note lg:flex">
+          <span class="h-px w-7 bg-ink"></span>Puy de Dôme (1&nbsp;465&nbsp;m) et sa tour
+        </p>
+      </Skyline>
+      <Container as="figcaption" class="mt-2.5 text-note text-text-muted">
+        Relief IGN RGE ALTI, vue depuis 1&nbsp;100&nbsp;m au-dessus de Clermont, 180&nbsp;degrés
+        à&nbsp;échelle constante.
+      </Container>
+    </figure>
+    <Container class="pt-8 pb-14 md:pt-14 md:pb-28">
+      <AnnexSection icon="map-trifold" title="La ligne des Puys">
+        <p>
+          La silhouette en haut de la page n'est pas dessinée à&nbsp;la main. Je l'ai calculée
+          à&nbsp;partir du relief officiel de l'IGN (RGE ALTI), vue depuis 1&nbsp;100&nbsp;m
+          d'altitude au-dessus de Clermont, en tenant compte de la courbure de la Terre. La tour du
+          Puy de Dôme y est à&nbsp;sa position et à&nbsp;sa hauteur réelles.
+        </p>
+        <p>
+          Pour vérifier le calcul, je l'ai superposé à&nbsp;une photo prise depuis le parc Bargoin.
+          La ligne couvre 180&nbsp;degrés à&nbsp;échelle constante&nbsp;: un écran plus large en
+          montre davantage, sans jamais l'étirer.
+        </p>
+      </AnnexSection>
+      <AnnexSection icon="code-block" title="La technique">
+        <p>
+          Le site est fait de pages statiques, générées avec Astro et Tailwind CSS, en TypeScript
+          strict. Il est servi par Cloudflare, sans cookie, sans mesure d'audience et sans requête
+          vers un autre site. Les polices sont servies d'ici.
+        </p>
+      </AnnexSection>
+      <AnnexSection icon="check-circle" title="La qualité">
+        <p>
+          Chaque modification passe des contrôles automatiques avant d'être publiée. Les types sont
+          vérifiés, les parcours testés avec Playwright, l'accessibilité auditée avec axe, et
+          Lighthouse mesure les performances.
+        </p>
+        <p>
+          Les textes gardent un contraste d'au moins 4,5:1 dans les deux thèmes. Si votre appareil
+          demande moins d'animations, rien ne bouge.
+        </p>
+        <p>
+          Le code du site est public sur{' '}
+          <TextLink href="https://github.com/WilliamFontaine/portfolio">GitHub</TextLink>.
+        </p>
+      </AnnexSection>
+      <AnnexSection title="Crédits" fields>
+        {credits.map(([label, value]) => (
+          <Field {label}>{value}</Field>
+        ))}
+      </AnnexSection>
+    </Container>
+  </main>
+  <Footer />
+</Base>

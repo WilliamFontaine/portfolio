@@ -1,0 +1,24 @@
+- id: quoi-regarder
+  order: 1
+  name: Quoi Regarder
+  period: "2024 à\_2025"
+  description: Une application web cofondée avec un associé, que j'ai développée. Elle suggérait films et séries selon vos goûts, avec des filtres par plateforme et le suivi de vos séries.
+  result: "2\_771 utilisateurs, sans publicité"
+  stack: [spring-boot, nuxt, postgresql]
+  status: Hors ligne
+- id: egenr
+  order: 2
+  name: Egenr
+  period: "2024 à\_2025"
+  description: Une application de bureau pour podologue, cofondée avec un associé, que j'ai développée. Elle gère les fiches patients et génère les comptes rendus en PDF.
+  result: Utilisée chaque jour en cabinet
+  stack: [tauri, nuxt, spring-boot]
+  status: En service
+- id: comwave
+  order: 3
+  name: ComWave
+  period: "2025 à\_2026"
+  description: Une application en ligne pour programmer ses publications sur plusieurs réseaux sociaux, avec des espaces d'équipe. Je l'ai conçue et développée seul.
+  result: Abonnement payant intégré
+  stack: [nuxt, nestjs, postgresql, redis]
+  status: "Arrêté en avril\_2026"

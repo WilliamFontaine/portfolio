@@ -1,0 +1,77 @@
+---
+import { Picture } from 'astro:assets'
+import { getEntries, type CollectionEntry } from 'astro:content'
+import Icon from '@/components/ui/Icon.astro'
+import Label from '@/components/ui/Label.astro'
+import { reveal, stagger } from '@/scripts/reveal'
+
+interface Props {
+  entry: CollectionEntry<'cases'>
+  reverse: boolean
+}
+
+const { entry, reverse } = Astro.props
+const { data } = entry
+const stack = await getEntries(data.stack)
+const steps = [
+  ['target', 'text-structure', 'Le besoin', data.need],
+  ['code-block', 'text-structure', "Ce que j'ai fait", data.done],
+  ['check-circle', 'text-accent', "Aujourd'hui", data.today],
+] as const
+// object-fit: cover draws a photo wider than its box when the photo is wider than the box's ratio.
+const drawn = (box: number) => Math.max(1, data.photo.width / data.photo.height / box)
+const wide = drawn(4 / 5)
+const compact = drawn(4 / 3)
+const sizes = `(min-width: 1440px) ${Math.ceil(490 * wide)}px, (min-width: 1024px) calc((100vw - 264px) * ${((5 / 12) * wide).toFixed(4)}), calc((100vw - 48px) * ${compact.toFixed(4)})`
+---
+
+<article
+  id={entry.id}
+  class:list={[
+    'grid items-start gap-6 md:gap-8 lg:gap-18',
+    reverse ? 'lg:grid-cols-wide-narrow' : 'lg:grid-cols-narrow-wide',
+  ]}
+>
+  <figure
+    data-reveal
+    class:list={['flex flex-col gap-2', reverse && 'lg:order-last', reveal, stagger]}
+  >
+    <Picture
+      src={data.photo}
+      alt={data.alt}
+      formats={['avif', 'webp']}
+      {sizes}
+      class="aspect-4/3 w-full rounded-lg lg:aspect-4/5"
+    />
+    <figcaption class="text-note text-text-muted">{data.credit}</figcaption>
+  </figure>
+  <div data-reveal class:list={['flex flex-col gap-5 md:gap-6', reveal, stagger]}>
+    <Label>
+      {data.label}
+      <span class="max-md:hidden"> ·</span> <span class="max-md:block">{data.since}</span>
+    </Label>
+    <h3 class="text-h2-compact md:text-h2">{data.title}</h3>
+    <div class="flex flex-col gap-4.5">
+      {steps.map(([icon, tone, title, body]) => (
+        <div class="flex flex-col gap-2 border-t border-line pt-4">
+          <h4 class="flex items-center gap-2.5 text-h4-compact md:text-h4">
+            <Icon set="phosphor" name={icon} size={22} class={tone} />
+            {title}
+          </h4>
+          <p class="text-body-sm md:text-body-compact">{body}</p>
+        </div>
+      ))}
+    </div>
+    <div class="flex flex-col gap-2.5">
+      <p class="text-small text-text-muted">Sous le capot</p>
+      <ul class="flex flex-wrap gap-2">
+        {stack.map(({ data: technology }) => (
+          <li class="inline-flex items-center gap-1.75 rounded-pill border border-line bg-surface-raised px-3 py-1.5 text-note leading-4.5">
+            <Icon set="simple" name={technology.icon} size={14} class="text-text-muted" />
+            {technology.label}
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</article>

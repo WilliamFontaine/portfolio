@@ -1,0 +1,59 @@
+---
+import { Font } from 'astro:assets'
+import '@/styles/global.css'
+
+interface Props {
+  title: string
+  description: string
+  noindex?: boolean
+}
+
+const { title, description, noindex } = Astro.props
+const canonical = new URL(Astro.url.pathname, Astro.site)
+const shareImage = new URL('/og.png', Astro.site)
+---
+
+<html
+  lang="fr"
+  class="scheme-light-dark scroll-pt-header-compact lg:scroll-pt-header motion-safe:data-settled:scroll-smooth supports-animation-timeline:motion-safe:has-data-reading:scroll-pb-reading-clearance"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {noindex ? <meta name="robots" content="noindex" /> : <link rel="canonical" href={canonical} />}
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:site_name" content="William Fontaine" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    {!noindex && <meta property="og:url" content={canonical} />}
+    <meta property="og:image" content={shareImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="Du besoin à la mise en production. Et après. wfontaine.fr, au-dessus de la chaîne des Puys et de la tour du Puy de Dôme."
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <Font cssVariable="--font-space-grotesk" preload />
+    <Font cssVariable="--font-manrope" preload />
+  </head>
+  <body class="flex min-h-dvh flex-col bg-surface text-body-compact text-text md:text-body supports-animation-timeline:motion-safe:has-data-reading:pb-reading-clearance">
+    <slot />
+  </body>
+</html>
+
+<script>
+  import { observeReveals } from '@/scripts/reveal'
+
+  // A link to a section lands on it: smooth scrolling only starts once the page has loaded.
+  addEventListener('load', () =>
+    requestAnimationFrame(() => document.documentElement.toggleAttribute('data-settled', true)),
+  )
+  observeReveals()
+</script>

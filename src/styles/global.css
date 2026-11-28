@@ -1,0 +1,303 @@
+@import 'tailwindcss' source('..');
+
+@theme {
+  --color-*: initial;
+  --color-surface: light-dark(#faf6f3, #120e0c);
+  --color-surface-raised: light-dark(#ffffff, #1d1816);
+  --color-ink: light-dark(#1f1916, #f6f3f0);
+  --color-text: light-dark(#453e3a, #d5d0cc);
+  --color-text-muted: light-dark(#6c6460, #a6a09b);
+  --color-line: light-dark(#e2ddd9, #302a27);
+  --color-line-strong: light-dark(#c9c2bc, #4a433f);
+  --color-track: light-dark(#6c646073, #a6a09b73);
+  --color-brand: light-dark(#272321, #ebe7e4);
+  --color-on-brand: light-dark(#faf6f3, #120e0c);
+  --color-structure: light-dark(#2e6148, #83c1a0);
+  --color-structure-soft: light-dark(#e8f2ea, #101812);
+  --color-accent: light-dark(#a33e25, #e98667);
+  --spacing-header: 77px;
+  --spacing-header-compact: 65px;
+  --spacing-fade: 12px;
+  --spacing-sky-hero-compact: 120px;
+  --spacing-sky-hero: clamp(200px, 10vw, 280px);
+  --spacing-sky-contact-compact: 44px;
+  --spacing-sky-contact: max(72px, 2.98vw);
+  --spacing-sky-colophon-compact: 140px;
+  --spacing-sky-colophon: 260px;
+  --spacing-reading: max(34px, calc(2.42vw + 10px));
+  --spacing-reading-fade: 16px;
+  --spacing-safe-bottom: env(safe-area-inset-bottom, 0px);
+  --spacing-reading-clearance: calc(
+    var(--spacing-reading) + var(--spacing-reading-fade) + var(--spacing-safe-bottom)
+  );
+
+  --text-*: initial;
+  --text-display: 64px;
+  --text-display--line-height: 66px;
+  --text-display--letter-spacing: -0.03em;
+  --text-display--font-weight: 600;
+  --text-display-compact: 38px;
+  --text-display-compact--line-height: 40px;
+  --text-display-compact--letter-spacing: -0.03em;
+  --text-display-compact--font-weight: 600;
+  --text-display-sm: 52px;
+  --text-display-sm--line-height: 56px;
+  --text-display-sm--letter-spacing: -0.025em;
+  --text-display-sm--font-weight: 600;
+  --text-display-sm-compact: 32px;
+  --text-display-sm-compact--line-height: 36px;
+  --text-display-sm-compact--letter-spacing: -0.025em;
+  --text-display-sm-compact--font-weight: 600;
+  --text-h1: 44px;
+  --text-h1--line-height: 48px;
+  --text-h1--letter-spacing: -0.025em;
+  --text-h1--font-weight: 600;
+  --text-h1-compact: 32px;
+  --text-h1-compact--line-height: 36px;
+  --text-h1-compact--letter-spacing: -0.025em;
+  --text-h1-compact--font-weight: 600;
+  --text-h2: 32px;
+  --text-h2--line-height: 38px;
+  --text-h2--letter-spacing: -0.02em;
+  --text-h2--font-weight: 600;
+  --text-h2-compact: 26px;
+  --text-h2-compact--line-height: 31px;
+  --text-h2-compact--letter-spacing: -0.02em;
+  --text-h2-compact--font-weight: 600;
+  --text-h3: 22px;
+  --text-h3--line-height: 28px;
+  --text-h3--letter-spacing: -0.01em;
+  --text-h3--font-weight: 600;
+  --text-h3-compact: 20px;
+  --text-h3-compact--line-height: 26px;
+  --text-h3-compact--letter-spacing: -0.01em;
+  --text-h3-compact--font-weight: 600;
+  --text-h4: 20px;
+  --text-h4--line-height: 26px;
+  --text-h4--letter-spacing: -0.01em;
+  --text-h4--font-weight: 600;
+  --text-h4-compact: 18px;
+  --text-h4-compact--line-height: 24px;
+  --text-h4-compact--letter-spacing: -0.01em;
+  --text-h4-compact--font-weight: 600;
+  --text-link-lg: 24px;
+  --text-link-lg--line-height: 32px;
+  --text-link-lg--font-weight: 600;
+  --text-link-lg-compact: 17px;
+  --text-link-lg-compact--line-height: 24px;
+  --text-link-lg-compact--font-weight: 600;
+  --text-lead: 20px;
+  --text-lead--line-height: 32px;
+  --text-lead--font-weight: 400;
+  --text-lead-compact: 18px;
+  --text-lead-compact--line-height: 28px;
+  --text-lead-compact--font-weight: 400;
+  --text-body: 17px;
+  --text-body--line-height: 28px;
+  --text-body--font-weight: 400;
+  --text-body-compact: 16px;
+  --text-body-compact--line-height: 26px;
+  --text-body-compact--font-weight: 400;
+  --text-body-sm: 15px;
+  --text-body-sm--line-height: 24px;
+  --text-body-sm--font-weight: 400;
+  --text-ui: 15px;
+  --text-ui--line-height: 22px;
+  --text-ui--font-weight: 600;
+  --text-ui-compact: 14px;
+  --text-ui-compact--line-height: 22px;
+  --text-ui-compact--font-weight: 600;
+  --text-small: 14px;
+  --text-small--line-height: 22px;
+  --text-small--font-weight: 500;
+  --text-label: 12px;
+  --text-label--line-height: 16px;
+  --text-label--letter-spacing: 0.12em;
+  --text-label--font-weight: 700;
+  --text-label-compact: 11px;
+  --text-label-compact--line-height: 16px;
+  --text-label-compact--letter-spacing: 0.12em;
+  --text-label-compact--font-weight: 700;
+  --text-note: 13px;
+  --text-note--line-height: 20px;
+  --text-note--font-weight: 400;
+  --text-tip: 13px;
+  --text-tip--line-height: 18px;
+  --text-tip--font-weight: 600;
+  --text-tip-compact: 12px;
+  --text-tip-compact--line-height: 16px;
+  --text-tip-compact--font-weight: 600;
+
+  --radius-*: initial;
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-avatar: 16px;
+  --radius-lg: 24px;
+  --radius-pill: 999px;
+  --radius-focus: 6px;
+
+  --breakpoint-*: initial;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+
+  --container-*: initial;
+  --container-page: 1440px;
+  --container-text: 640px;
+
+  --ease-*: initial;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-draw: cubic-bezier(0.37, 0, 0.63, 1);
+  --ease-flow: cubic-bezier(0.33, 1, 0.68, 1);
+  --default-transition-timing-function: var(--ease-out);
+
+  --animate-*: initial;
+  --animate-draw: draw 1400ms var(--ease-draw) 150ms backwards;
+  --animate-draw-compact: draw 980ms var(--ease-draw) 150ms backwards;
+  --animate-rise: rise 420ms var(--ease-flow) 850ms backwards;
+  --animate-rise-compact: rise 420ms var(--ease-flow) 640ms backwards;
+  --animate-flow: flow 1000ms var(--ease-flow) 1480ms backwards;
+  --animate-flow-compact: flow 1000ms var(--ease-flow) 1081ms backwards;
+  --animate-note: fade 520ms var(--ease-out) 1270ms backwards;
+  --animate-note-compact: fade 520ms var(--ease-out) 1060ms backwards;
+  --animate-beacon: beacon 800ms var(--ease-flow);
+  --animate-draw-contact: draw 700ms var(--ease-flow);
+  --animate-route: route linear both;
+
+  @keyframes draw {
+    from {
+      clip-path: inset(0 100% 0 0);
+    }
+    to {
+      clip-path: inset(0 0 0 0);
+    }
+  }
+
+  @keyframes route {
+    from {
+      clip-path: inset(0 calc(100% - var(--reading-inset, 0px)) 0 0);
+    }
+    to {
+      clip-path: inset(0 var(--reading-inset, 0px) 0 0);
+    }
+  }
+
+  @keyframes rise {
+    from {
+      transform: scaleY(0);
+    }
+    to {
+      transform: scaleY(1);
+    }
+  }
+
+  @keyframes fade {
+    from {
+      opacity: 0;
+    }
+  }
+
+  @keyframes flow {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(520px);
+    }
+  }
+
+  @keyframes beacon {
+    from {
+      width: 14px;
+      height: 14px;
+      margin: -7px 0 0 -7px;
+      opacity: 0.9;
+    }
+    to {
+      width: 44px;
+      height: 44px;
+      margin: -22px 0 0 -22px;
+      opacity: 0;
+    }
+  }
+
+  --shadow-*: initial;
+  --inset-shadow-*: initial;
+  --drop-shadow-*: initial;
+  --text-shadow-*: initial;
+  --blur-*: initial;
+  --perspective-*: initial;
+  --leading-*: initial;
+  --tracking-*: initial;
+  --aspect-*: initial;
+}
+
+@theme inline {
+  --color-focus: var(--color-accent);
+  --color-sky-top: light-dark(
+    var(--color-structure),
+    color-mix(in srgb, var(--color-structure) 50%, transparent)
+  );
+  --color-sky-end: light-dark(
+    color-mix(in srgb, var(--color-structure) 6%, transparent),
+    color-mix(in srgb, var(--color-structure) 3%, transparent)
+  );
+  --font-*: initial;
+  --font-display: var(--font-space-grotesk);
+  --font-sans: var(--font-manrope);
+}
+
+@utility grid-cols-hero {
+  grid-template-columns: minmax(0, 1fr) --spacing(104);
+}
+
+@utility grid-cols-narrow-wide {
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+}
+
+@utility grid-cols-wide-narrow {
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+}
+
+@utility grid-cols-annex {
+  grid-template-columns: --spacing(60) minmax(0, 1fr);
+}
+
+@utility grid-cols-field {
+  grid-template-columns: --spacing(30) minmax(0, 1fr);
+}
+
+/* The animation shorthand resets animation-timeline: the timeline must come after it. */
+@utility reading-progress {
+  animation: var(--animate-route);
+  animation-timeline: scroll(root block);
+}
+
+@utility reading-tail {
+  clip-path: inset(0 var(--reading-inset, 0px) 0 calc(100% - var(--reading-inset, 0px) - 1px));
+}
+
+@utility reading-tail-full {
+  clip-path: inset(0 0 0 calc(100% - var(--reading-inset, 0px) - 1px));
+}
+
+@layer base {
+  :focus-visible {
+    @apply rounded-focus outline-2 outline-offset-2 outline-focus;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display text-balance text-ink;
+  }
+
+  p {
+    @apply max-w-text text-pretty;
+  }
+
+  li,
+  dd {
+    @apply text-pretty;
+  }
+}

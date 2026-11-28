@@ -1,0 +1,222 @@
+---
+import panorama from '@/components/brand/panorama-180.json'
+import { sections } from '@/site'
+import Container from '@/components/ui/Container.astro'
+import Ridge from '@/components/brand/Ridge.astro'
+
+const layers = [
+  'text-track',
+  'invisible text-accent reading-tail group-data-ready/reading:visible group-data-done/reading:reading-tail-full motion-safe:group-data-done/reading:transition-all motion-safe:group-data-done/reading:duration-450 motion-safe:group-data-done/reading:ease-flow',
+  'text-accent supports-animation-timeline:motion-safe:reading-progress',
+]
+---
+
+<div
+  data-reading
+  aria-hidden="true"
+  class="group/reading pointer-events-none fixed inset-x-0 bottom-0 z-10 hidden supports-animation-timeline:motion-safe:block"
+>
+  <div class="h-reading-fade bg-linear-to-t from-surface"></div>
+  <div class="relative h-reading bg-surface">
+    <div data-marks class="absolute inset-x-0 top-0 bottom-1.5">
+      {layers.map((layer) => (
+        <svg
+          viewBox={`0 0 ${panorama.W} ${panorama.H}`}
+          preserveAspectRatio="xMidYMin slice"
+          aria-hidden="true"
+          class:list={['absolute inset-0 size-full', layer]}
+        >
+          <Ridge />
+        </svg>
+      ))}
+      <div class="invisible group-data-ready/reading:visible">
+        {sections.map(([id, name]) => (
+          <a
+            href={`#${id}`}
+            tabindex="-1"
+            class="group/mark absolute -mt-5.5 -ml-3.5 h-11 w-7 md:pointer-events-auto"
+          >
+            <span class="absolute top-1/2 left-1/2 -mt-1.75 -ml-1.75 size-3.5 rounded-full border-2 border-text-muted bg-surface ring-3 ring-surface group-hover/mark:scale-120 group-hover/mark:border-accent group-data-passed/mark:border-3 group-data-passed/mark:border-accent motion-safe:transition" />
+            <span class="absolute top-1/2 left-1/2 -mt-1.75 -ml-1.75 size-3.5 rounded-full border-2 border-accent opacity-0 motion-safe:group-data-ping/mark:animate-beacon" />
+            <span class="absolute bottom-9 left-1/2 translate-y-1 -translate-x-1/2 rounded-pill bg-brand px-2 py-0.75 text-tip-compact whitespace-nowrap text-on-brand opacity-0 group-data-say/mark:translate-y-0 group-data-say/mark:opacity-100 md:px-2.5 md:py-1 md:text-tip motion-safe:transition motion-safe:duration-200 group-data-cut/mark:transition-none">
+              {name}
+            </span>
+          </a>
+        ))}
+        <span
+          data-pen
+          class="absolute top-0 left-0 -m-1 size-2 rounded-full bg-accent ring-3 ring-surface"
+        />
+      </div>
+    </div>
+  </div>
+  <div class="h-safe-bottom bg-surface"></div>
+  <Container>
+    <div data-gutter></div>
+  </Container>
+</div>
+
+<script>
+  const root = document.documentElement
+  const reading = document.querySelector<HTMLElement>('[data-reading]')!
+  const box = reading.querySelector<HTMLElement>('[data-marks]')!
+  const pen = reading.querySelector<HTMLElement>('[data-pen]')!
+  const gutter = reading.querySelector<HTMLElement>('[data-gutter]')!
+  const ridge = reading.querySelector('svg')!
+  const clamp = (value: number, low: number, high: number) => Math.min(high, Math.max(low, value))
+
+  const { width: viewWidth, height: viewHeight } = ridge.viewBox.baseVal
+  const numbers = ridge
+    .querySelector('path')!
+    .getAttribute('d')!
+    .match(/-?[\d.]+/g)!
+    .map(Number)
+  const points = [numbers.slice(0, 2)]
+  for (let i = 2; i + 5 < numbers.length; i += 6) points.push(numbers.slice(i + 4, i + 6))
+  const lineY = (x: number) => {
+    const i = Math.max(
+      1,
+      points.findIndex(([px]) => px! >= clamp(x, 0, viewWidth)),
+    )
+    const [ax, ay] = points[i - 1] as [number, number]
+    const [bx, by] = points[i] as [number, number]
+    return ay + ((by - ay) * (x - ax)) / (bx - ax)
+  }
+  const stages = [...reading.querySelectorAll('a')].map((mark) => ({
+    mark,
+    name: mark.lastElementChild as HTMLElement,
+    section: document.getElementById(mark.hash.slice(1))!,
+    x: 0,
+    passed: false,
+  }))
+  type Stage = (typeof stages)[number]
+  const gap = 28
+  const say = 1600
+  let inset = 0
+  let span = 0
+  let scale = 1
+  let offset = 0
+  let ready = false
+  let saying: Stage | undefined
+  let shown: Stage | undefined
+  let next: Stage | undefined
+  let sayTimer: ReturnType<typeof setTimeout> | undefined
+  let settleTimer: ReturnType<typeof setTimeout> | undefined
+  let walker: Animation | undefined
+
+  const progress = () => {
+    const range = root.scrollHeight - root.clientHeight
+    return range > 0 ? clamp(root.scrollTop / range, 0, 1) : 1
+  }
+  const crest = (x: number) => lineY((x - offset) / scale) * scale
+
+  // One name at a time: any other, even one still fading out, goes at once.
+  const show = (stage: Stage) => {
+    for (const { mark } of stages) {
+      mark.toggleAttribute('data-cut', mark !== stage.mark)
+      if (mark !== stage.mark) mark.removeAttribute('data-say')
+    }
+    stage.mark.toggleAttribute('data-say', true)
+    shown = stage
+  }
+  const hide = (stage: Stage) => {
+    if (shown !== stage || saying === stage || stage.mark.matches(':hover')) return
+    stage.mark.removeAttribute('data-say')
+    shown = undefined
+  }
+  const reach = (stage: Stage) => {
+    clearTimeout(sayTimer)
+    saying = stage
+    stage.mark.removeAttribute('data-ping')
+    // Without a style flush between removing and setting it, the beacon would not restart.
+    void stage.mark.offsetWidth
+    stage.mark.toggleAttribute('data-ping', true)
+    show(stage)
+    sayTimer = setTimeout(() => {
+      saying = undefined
+      hide(stage)
+    }, say)
+  }
+  // A smooth jump crosses stages frame after frame: only the furthest one reached when the scroll settles speaks.
+  const commit = () => {
+    clearTimeout(settleTimer)
+    if (next?.passed) reach(next)
+    next = undefined
+  }
+  const update = () => {
+    if (!span) return
+    const p = progress()
+    // Same mapping as the route keyframes in global.css.
+    const at = inset + p * span
+    for (const stage of stages) {
+      const passed = at >= stage.x - 0.5
+      if (passed && !stage.passed && ready && (!next || stage.x > next.x)) next = stage
+      stage.passed = passed
+      stage.mark.toggleAttribute('data-passed', passed)
+    }
+    reading.toggleAttribute('data-done', p >= 0.999)
+    ready = true
+    if (next) {
+      clearTimeout(settleTimer)
+      settleTimer = setTimeout(commit, 150)
+    }
+  }
+  const place = () => {
+    const width = box.clientWidth
+    const height = box.clientHeight
+    if (!width || !height) {
+      span = 0
+      walker?.cancel()
+      return
+    }
+    const anchor = parseFloat(getComputedStyle(root).scrollPaddingTop)
+    const range = root.scrollHeight - root.clientHeight
+    const tops = stages.map(({ section }) => section.getBoundingClientRect().top + root.scrollTop)
+    const halves = stages.map(({ name }) => name.offsetWidth / 2)
+    inset = Math.min(width / 4, gutter.getBoundingClientRect().left)
+    span = width - 2 * inset
+    scale = Math.max(width / viewWidth, height / viewHeight)
+    offset = (width - viewWidth * scale) / 2
+    const xs = tops.map(
+      (top) => inset + (range > 0 ? clamp((top - anchor) / range, 0, 1) : 1) * span,
+    )
+    // Short final sections land within a few pixels of each other: push stages apart from the end, then forward.
+    for (let i = xs.length - 2; i >= 0; i--) xs[i] = Math.min(xs[i]!, xs[i + 1]! - gap)
+    for (let i = 1; i < xs.length; i++) xs[i] = Math.max(xs[i]!, xs[i - 1]! + gap)
+
+    reading.style.setProperty('--reading-inset', `${inset}px`)
+    for (const [i, stage] of stages.entries()) {
+      const x = (stage.x = xs[i]!)
+      const half = halves[i]!
+      stage.mark.style.left = `${x}px`
+      stage.mark.style.top = `${crest(x)}px`
+      stage.name.style.left = `calc(50% + ${clamp(0, 8 - (x - half), width - 8 - (x + half))}px)`
+    }
+    // Moved from scroll events, the walker would lag a frame and Firefox would warn of a scroll-linked effect.
+    const bends = points
+      .map(([px]) => px! * scale + offset)
+      .filter((x) => x > inset && x < width - inset)
+    walker?.cancel()
+    walker = pen.animate(
+      [inset, ...bends, width - inset].map((x) => ({
+        transform: `translate(${x}px, ${crest(x)}px)`,
+        offset: (x - inset) / span,
+      })),
+      { timeline: new ScrollTimeline({ source: root }), fill: 'both' },
+    )
+    reading.toggleAttribute('data-ready', true)
+    update()
+  }
+
+  for (const stage of stages) {
+    stage.mark.addEventListener('pointerenter', () => show(stage))
+    stage.mark.addEventListener('pointerleave', () => hide(stage))
+  }
+  addEventListener('scroll', update, { passive: true })
+  document.addEventListener('scrollend', commit)
+  addEventListener('resize', place)
+  // The band shows or hides with the motion preference; the body's height moves the sections.
+  const resized = new ResizeObserver(place)
+  resized.observe(box)
+  resized.observe(document.body)
+</script>

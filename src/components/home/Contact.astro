@@ -1,0 +1,69 @@
+---
+import { email, linkedin, malt } from '@/site'
+import Container from '@/components/ui/Container.astro'
+import Icon from '@/components/ui/Icon.astro'
+import Label from '@/components/ui/Label.astro'
+import { reveal } from '@/scripts/reveal'
+import Skyline from '@/components/brand/Skyline.astro'
+
+const profiles = [
+  [linkedin, 'linkedin-logo', 'LinkedIn'],
+  [malt, 'arrow-up-right', 'Malt'],
+] as const
+---
+
+<section id="contact" class="bg-surface-raised pb-12 text-ink scheme-dark md:pb-22">
+  <div
+    data-reveal
+    class="motion-safe:data-pending:not-data-in:opacity-0 motion-safe:data-in:animate-draw-contact"
+  >
+    <Skyline variant="stroke" class="h-sky-contact-compact md:h-sky-contact" />
+  </div>
+  <Container
+    data-reveal=""
+    class:list={[
+      'flex flex-col gap-4.5 pt-6 md:gap-6 md:pt-10',
+      reveal,
+      'motion-safe:data-in:delay-150',
+    ]}
+  >
+    <Label>Contact</Label>
+    <h2 class="max-w-205 text-display-sm-compact md:text-display-sm">
+      Un produit à&nbsp;construire ou à&nbsp;faire grandir&#x202F;? Écrivez-moi.
+    </h2>
+    <a
+      href={`mailto:${email}`}
+      class="inline-flex min-h-11 items-center gap-3 self-start font-display text-link-lg-compact wrap-anywhere underline decoration-accent decoration-2 underline-offset-7 hover:underline-offset-3 motion-safe:transition-all md:text-link-lg"
+    >
+      <Icon
+        set="phosphor"
+        name="envelope-simple"
+        size={28}
+        class="size-5.5 text-accent md:size-7"
+      />
+      {email}
+    </a>
+    <ul class="flex flex-wrap gap-4 text-ui md:gap-7">
+      {profiles.map(([href, icon, name]) => (
+        <li>
+          <a
+            {href}
+            class="group inline-flex min-h-11 items-center gap-2 underline decoration-transparent decoration-2 underline-offset-6 hover:decoration-accent motion-safe:transition-colors"
+          >
+            <Icon
+              set="phosphor"
+              name={icon}
+              size={20}
+              class="group-hover:text-accent motion-safe:transition-colors"
+            />
+            {name}
+          </a>
+        </li>
+      ))}
+      <li class="inline-flex min-h-11 items-center gap-2 font-medium">
+        <Icon set="phosphor" name="map-pin" size={20} />
+        Clermont-Ferrand, mobile partout en France
+      </li>
+    </ul>
+  </Container>
+</section>

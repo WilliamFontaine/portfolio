@@ -1,0 +1,36 @@
+---
+import ButtonLink from '@/components/ui/ButtonLink.astro'
+import Container from '@/components/ui/Container.astro'
+import Footer from '@/components/site/Footer.astro'
+import Header from '@/components/site/Header.astro'
+import Label from '@/components/ui/Label.astro'
+import Skyline from '@/components/brand/Skyline.astro'
+import Base from '@/layouts/Base.astro'
+---
+
+<Base
+  title="Page introuvable · William Fontaine"
+  description="Cette adresse ne mène à aucune page de wfontaine.fr."
+  noindex
+>
+  <Header />
+  <main class="flex grow flex-col justify-between pt-16 md:pt-32">
+    <Container class="flex w-full flex-col gap-4.5 md:gap-6">
+      <Label>Erreur 404</Label>
+      <h1 class="max-w-text text-display-compact md:text-display">Cette page n'existe pas</h1>
+      <p class="text-lead-compact md:text-lead">
+        Le lien est peut-être ancien, ou l'adresse a été mal recopiée. Mes réalisations et mon
+        contact sont sur l'accueil.
+      </p>
+      <ButtonLink href="/" class="mt-1 self-start md:mt-2">
+        Retour à&nbsp;l'accueil
+      </ButtonLink>
+    </Container>
+    <Skyline
+      variant="fill"
+      id="not-found"
+      class="mt-14 h-sky-hero-compact md:mt-24 lg:h-sky-hero"
+    />
+  </main>
+  <Footer />
+</Base>

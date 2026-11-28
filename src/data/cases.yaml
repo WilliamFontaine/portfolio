@@ -1,0 +1,24 @@
+- id: terragree
+  order: 1
+  label: TerrAgree · gestion forestière
+  since: "depuis janvier\_2026"
+  title: Un logiciel métier de gestion forestière, parti de zéro
+  need: "TerrAgree gère et vend des forêts pour le compte de leurs propriétaires. Il lui fallait un logiciel à\_sa mesure pour remplacer son ancien outil."
+  done: "Je l'ai construit de zéro, du suivi des forêts et des ventes jusqu'à\_la signature des actes, avec un espace pour les propriétaires. Chaque semaine, je fais le point avec TerrAgree pour fixer le cap et organiser les sprints. Une démo conclut chaque sprint, et je forme les utilisateurs."
+  today: "En production depuis juillet\_2026, utilisé chaque jour par les équipes. Je m'en occupe toujours, au quotidien comme pour les nouvelles fonctionnalités."
+  stack: [java, spring-boot, angular, typescript, postgresql]
+  photo: ../assets/photos/foret-terragree.jpg
+  alt: Vue aérienne d'une forêt mêlant conifères et feuillus
+  credit: "Photo\_: Kristaps Ungurs, Unsplash"
+- id: neogo
+  order: 2
+  label: NEOGO · comparateur de trajets
+  since: "depuis septembre\_2026"
+  title: Un comparateur de trajets, au moment du lancement
+  need: "NEOGO, startup clermontoise, compare les trajets de porte à\_porte en train, car, covoiturage, avion ou voiture, avec le coût réel et l'empreinte carbone. Je l'ai rejointe quelques semaines avant son lancement public."
+  done: Des fonctionnalités de son application mobile, puis des évolutions du comparateur web en production, aux côtés du lead dev.
+  today: "Je fais partie de la petite équipe, et chaque livraison arrive à\_la date annoncée."
+  stack: [react, nextjs, typescript, capacitor]
+  photo: ../assets/photos/train-neogo.jpg
+  alt: Vue depuis la fenêtre d'un train qui traverse un champ
+  credit: "Photo\_: Lau Clrd, Unsplash"

@@ -1,0 +1,26 @@
+---
+import Container from '@/components/ui/Container.astro'
+
+const links = [
+  ['/colophon/', 'Comment ce site est fait'],
+  ['/mentions-legales/', 'Mentions légales'],
+] as const
+---
+
+<footer class="mt-auto border-t border-line bg-surface-raised text-note text-text-muted scheme-dark">
+  <Container class="flex flex-wrap items-center justify-between gap-3 py-2 md:gap-7 md:py-3">
+    <p>© 2026 William Fontaine</p>
+    <ul class="flex flex-wrap gap-5">
+      {links.map(([href, name]) => (
+        <li>
+          <a
+            {href}
+            class="inline-flex min-h-11 items-center underline hover:text-ink motion-safe:transition-colors"
+          >
+            {name}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </Container>
+</footer>

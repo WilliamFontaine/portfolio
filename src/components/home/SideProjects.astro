@@ -1,0 +1,54 @@
+---
+import { getCollection, getEntries } from 'astro:content'
+import Card from '@/components/ui/Card.astro'
+import Icon from '@/components/ui/Icon.astro'
+import Label from '@/components/ui/Label.astro'
+import { reveal } from '@/scripts/reveal'
+
+const projects = await Promise.all(
+  (await getCollection('projects'))
+    .sort((a, b) => a.data.order - b.data.order)
+    .map(async ({ data }) => ({ ...data, stack: await getEntries(data.stack) })),
+)
+---
+
+<div class="flex flex-col gap-5 md:gap-7">
+  <div data-reveal class:list={['flex flex-col gap-3', reveal]}>
+    <Label>Sur mon temps libre</Label>
+    <h3 class="text-h2-compact md:text-h2">Trois produits menés de bout en bout</h3>
+    <p>
+      Des produits complets, menés de l'idée jusqu'à&nbsp;de vrais utilisateurs, en parallèle de ma
+      formation puis de mes débuts en freelance.
+    </p>
+  </div>
+  <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+    {projects.map((project) => (
+      <Card
+        as="article"
+        class="group flex flex-col gap-3.5 hover:border-line-strong motion-safe:transition-colors md:max-lg:last:col-span-2"
+      >
+        <div class="flex items-baseline justify-between gap-3">
+          <h4 class="text-h4-compact md:text-h4">{project.name}</h4>
+          <span class="text-note whitespace-nowrap text-text-muted">{project.period}</span>
+        </div>
+        <p class="text-body-sm">{project.description}</p>
+        <p class="flex items-start gap-2.5 text-ui text-ink">
+          <Icon set="phosphor" name="check-circle" size={18} class="mt-0.5 text-structure" />
+          {project.result}
+        </p>
+        <div class="mt-auto flex items-center justify-between gap-3 border-t border-line pt-3.5">
+          <div
+            role="img"
+            aria-label={project.stack.map(({ data }) => data.label).join(', ')}
+            class="flex gap-3 text-text-muted group-hover:text-structure motion-safe:transition-colors"
+          >
+            {project.stack.map(({ data }) => (
+              <Icon set="simple" name={data.icon} size={18} />
+            ))}
+          </div>
+          <p class="text-note text-text-muted">{project.status}</p>
+        </div>
+      </Card>
+    ))}
+  </div>
+</div>
