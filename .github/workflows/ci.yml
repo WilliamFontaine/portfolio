@@ -127,11 +127,6 @@ jobs:
         with:
           name: dist
           path: dist
-      - run: pnpm exec wrangler preview delete --name "pr-$PR_NUMBER" --skip-confirmation
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
-          PR_NUMBER: ${{ github.event.pull_request.number }}
       - run: pnpm exec wrangler versions upload --preview-alias "pr-$PR_NUMBER" --tag "$HEAD_SHA" --message "$PR_TITLE"
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
