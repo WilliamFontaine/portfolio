@@ -10,7 +10,7 @@ import Label from '@/components/ui/Label.astro'
 import Skyline from '@/components/brand/Skyline.astro'
 
 const name = 'William Fontaine'
-const job = 'Développeur full\u2011stack freelance'
+const job = 'Développeur full-stack freelance'
 const photo = await getImage({ src: portrait, format: 'webp', width: 240 })
 const person = {
   '@context': 'https://schema.org',
@@ -67,7 +67,9 @@ const facts = [
         />
         <div class="flex flex-col gap-0.5">
           <p class="font-display text-h4 text-ink">{name}</p>
-          <p class="text-small font-normal text-text-muted">{job}</p>
+          <p class="text-small font-normal text-text-muted">
+            {job.replace('full-stack', 'full\u2011stack')}
+          </p>
         </div>
       </div>
       <ul class="flex flex-col gap-3 border-t border-line pt-5 text-ui font-normal">

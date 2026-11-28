@@ -280,16 +280,11 @@ test('home carries absolute share metadata and a Person JSON-LD', async ({ page 
   const scripts = page.locator('script[type="application/ld+json"]')
   await expect(scripts).toHaveCount(1)
   const person = JSON.parse((await scripts.textContent())!)
-  const job = await page
-    .getByRole('complementary', { name: 'En bref' })
-    .getByRole('paragraph')
-    .nth(1)
-    .textContent()
   expect(person).toEqual({
     '@context': 'https://schema.org',
     '@type': 'Person',
     name: 'William Fontaine',
-    jobTitle: job,
+    jobTitle: 'Développeur full-stack freelance',
     url: 'https://wfontaine.fr/',
     image: expect.stringMatching(/^https:\/\/wfontaine\.fr\/_astro\/.+/),
     sameAs: [
@@ -297,6 +292,10 @@ test('home carries absolute share metadata and a Person JSON-LD', async ({ page 
       'https://www.malt.fr/profile/williamfontaine',
     ],
   })
+  // Search engines match the plain hyphen: only the visible line binds « full-stack ».
+  await expect(
+    page.getByRole('complementary', { name: 'En bref' }).getByRole('paragraph').nth(1),
+  ).toHaveText(person.jobTitle.replace('full-stack', 'full\u2011stack'))
   const image = await page.request.get(person.image.replace('https://wfontaine.fr', ''))
   expect(image.status()).toBe(200)
   expect(image.headers()['content-type']).toMatch(/^image\//)
