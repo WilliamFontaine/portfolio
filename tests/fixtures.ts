@@ -1,9 +1,17 @@
+import AxeBuilder from '@axe-core/playwright'
 import { expect, test as base, type ConsoleMessage } from '@playwright/test'
 
 export { expect }
 
-export const test = base.extend<{ cleanSession: void; notFound: boolean }>({
+export const test = base.extend<{
+  cleanSession: void
+  notFound: boolean
+  makeAxeBuilder: () => AxeBuilder
+}>({
   notFound: [false, { option: true }],
+  makeAxeBuilder: async ({ page }, use) => {
+    await use(() => new AxeBuilder({ page }))
+  },
   cleanSession: [
     async ({ page, context, baseURL, notFound }, use) => {
       const origin = new URL(baseURL!).origin

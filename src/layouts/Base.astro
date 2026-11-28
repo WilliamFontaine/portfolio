@@ -35,7 +35,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site)
     <Font cssVariable="--font-space-grotesk" preload />
     <Font cssVariable="--font-manrope" preload />
   </head>
-  <body class="bg-surface text-text">
+  <body class="bg-surface text-body-compact text-text md:text-body">
     <slot />
   </body>
 </html>

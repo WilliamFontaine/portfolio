@@ -8,29 +8,19 @@ for (const [scheme, body, accent] of [
     await page.emulateMedia({ colorScheme: scheme })
     await page.goto('/')
     await expect(page.locator('body')).toHaveCSS('background-color', body)
-    await expect(page.locator('.scheme-dark')).toHaveCSS('background-color', 'rgb(29, 24, 22)')
-    await expect(page.locator('.text-accent')).toHaveCSS('color', accent)
-  })
-
-  test(`${scheme} theme draws the keyboard focus on the island in the dark accent`, async ({
-    page,
-  }) => {
-    await page.emulateMedia({ colorScheme: scheme })
-    await page.goto('/')
-    await page.keyboard.press('Tab')
-    const link = page.getByRole('link', { name: 'Lien de test' })
-    await expect(link).toBeFocused()
-    await expect(link).toHaveCSS('outline-style', 'solid')
-    await expect(link).toHaveCSS('outline-width', '2px')
-    await expect(link).toHaveCSS('outline-color', 'rgb(233, 134, 103)')
-    await expect(link).toHaveCSS('border-radius', '6px')
+    for (const island of [page.locator('#contact'), page.getByRole('contentinfo')]) {
+      await expect(island).toHaveCSS('background-color', 'rgb(29, 24, 22)')
+    }
+    await expect(page.getByText('Et après.')).toHaveCSS('color', accent)
   })
 }
 
 test('colour-scheme is light dark on the page and dark on the island', async ({ page }) => {
   await page.goto('/')
   await expect(page.locator('html')).toHaveCSS('color-scheme', 'light dark')
-  await expect(page.locator('.scheme-dark')).toHaveCSS('color-scheme', 'dark')
+  for (const island of [page.locator('#contact'), page.getByRole('contentinfo')]) {
+    await expect(island).toHaveCSS('color-scheme', 'dark')
+  }
 })
 
 for (const [width, padding] of [

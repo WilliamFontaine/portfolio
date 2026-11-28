@@ -1,30 +1,48 @@
 ---
+import { getCollection } from 'astro:content'
+import About from '../components/About.astro'
+import ActionLink from '../components/ActionLink.astro'
+import CaseStudy from '../components/CaseStudy.astro'
+import Contact from '../components/Contact.astro'
+import Container from '../components/Container.astro'
+import Footer from '../components/Footer.astro'
+import Header from '../components/Header.astro'
+import Hero from '../components/Hero.astro'
+import SectionHeading from '../components/SectionHeading.astro'
+import SideProjects from '../components/SideProjects.astro'
+import Skills from '../components/Skills.astro'
 import Base from '../layouts/Base.astro'
-import { Image } from 'astro:assets'
-import forest from '../assets/photos/foret-terragree.jpg'
-import Icon from '../components/Icon.astro'
-import Monogram from '../components/Monogram.astro'
-import Skyline from '../components/Skyline.astro'
+
+const cases = (await getCollection('cases')).sort((a, b) => a.data.order - b.data.order)
 ---
 
 <Base
   title="William Fontaine, développeur full-stack à Clermont-Ferrand"
   description="Je conçois et développe des logiciels métier, web et mobile, du besoin à la mise en production, puis j'en assure le suivi. Basé à Clermont-Ferrand."
 >
+  <Header home />
   <main>
-    <h1 class="font-display text-display text-ink">William Fontaine</h1>
-    <p class="text-accent">Du besoin à la mise en production.</p>
-    <Monogram size={32} />
-    <Icon set="phosphor" name="arrow-right" size={24} />
-    <Icon set="simple" name="react" size={24} label="React" />
-    <Image src={forest} alt="" width={800} />
-    <Skyline variant="fill" id="hero" class="h-sky-hero-compact lg:h-sky-hero" />
-    <Skyline variant="stroke" class="h-sky-contact-compact lg:h-sky-contact" />
+    <Hero />
+    <section id="realisations" class="pt-14 pb-6 md:pt-28 md:pb-10">
+      <Container class="flex flex-col gap-10 md:gap-24">
+        <div class="flex flex-col gap-3">
+          <SectionHeading label="Réalisations" title="Des logiciels en production" />
+        </div>
+        {cases.map((entry, index) => (
+          <CaseStudy {entry} reverse={index % 2 === 1} />
+        ))}
+        <div class="flex flex-wrap items-center justify-between gap-2 border-y border-line py-5 md:gap-6 md:py-6">
+          <p class="font-display text-h3-compact text-ink md:text-h3">
+            Un logiciel métier à construire&#x202F;?
+          </p>
+          <ActionLink href="#contact">Parlons de votre projet</ActionLink>
+        </div>
+        <SideProjects />
+      </Container>
+    </section>
+    <Skills />
+    <About />
+    <Contact />
   </main>
-  <footer class="scheme-dark bg-surface-raised">
-    <p class="text-text">Pied de page</p>
-    <a href="/" class="text-text">
-      Lien de test
-    </a>
-  </footer>
+  <Footer />
 </Base>

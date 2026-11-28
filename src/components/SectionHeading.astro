@@ -1,0 +1,13 @@
+---
+import Label from './Label.astro'
+
+interface Props {
+  label: string
+  title: string
+}
+
+const { label, title } = Astro.props
+---
+
+<Label>{label}</Label>
+<h2 class="text-h1-compact md:text-h1">{title}</h2>

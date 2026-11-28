@@ -1,0 +1,38 @@
+---
+import Card from './Card.astro'
+import Container from './Container.astro'
+import Icon from './Icon.astro'
+import SectionHeading from './SectionHeading.astro'
+
+const training = [
+  ['graduation-cap', '2025', 'Mastère Expert IT, Hesias'],
+  ['graduation-cap', '2023', 'Bachelor, major de promotion, Hesias'],
+  ['chalkboard-teacher', 'Déc.\u00a02025', 'Cours Node.js de M1, Hesias'],
+] as const
+---
+
+<section id="a-propos" class="py-14 md:py-28">
+  <Container class="grid items-start gap-7 lg:grid-cols-wide-narrow lg:gap-18">
+    <div class="flex flex-col gap-4.5">
+      <SectionHeading label="À propos" title="Un seul interlocuteur" />
+      <p>
+        Ce qui me plaît, c'est d'être à la table avec ceux qui portent le projet, et de comprendre
+        leur métier en le construisant. Avant le freelance, j'ai passé trois ans chez NEO-FUGU sur
+        un ERP utilisé par des maisons du luxe comme Dior, dans une équipe d'une dizaine de
+        développeurs.
+      </p>
+    </div>
+    <Card class="flex flex-col gap-4 md:max-w-text lg:mt-8.5">
+      <h3 class="text-h4-compact">Formation et enseignement</h3>
+      <ul class="flex flex-col gap-3 text-ui font-normal">
+        {training.map(([icon, date, entry]) => (
+          <li class="flex items-start gap-3">
+            <Icon set="phosphor" name={icon} size={18} class="mt-0.75 text-structure" />
+            <span class="w-18 shrink-0 text-text-muted md:w-20">{date}</span>
+            {entry}
+          </li>
+        ))}
+      </ul>
+    </Card>
+  </Container>
+</section>

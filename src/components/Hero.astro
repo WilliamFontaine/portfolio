@@ -1,0 +1,68 @@
+---
+import { Picture } from 'astro:assets'
+import portrait from '../assets/portrait.png'
+import ActionLink from './ActionLink.astro'
+import ButtonLink from './ButtonLink.astro'
+import Container from './Container.astro'
+import Icon from './Icon.astro'
+import Label from './Label.astro'
+import Skyline from './Skyline.astro'
+
+const facts = [
+  ['map-pin', 'Clermont-Ferrand, mobile partout en France'],
+  ['rocket-launch', 'En production chez TerrAgree et NEOGO'],
+  ['briefcase', 'Trois ans chez NEO-FUGU avant le freelance'],
+] as const
+---
+
+<section id="top" class="pt-12 md:pt-24">
+  <Container class="grid items-center gap-8 md:gap-12 lg:grid-cols-hero lg:gap-18">
+    <div class="flex flex-col gap-4.5 md:gap-6">
+      <Label>
+        Développeur full-stack, web et mobile<span class="max-md:hidden"> · Clermont-Ferrand</span>
+      </Label>
+      <h1 class="text-display-compact md:text-display">
+        Du besoin à la mise en production. <span class="text-accent">Et&nbsp;après.</span>
+      </h1>
+      <p class="text-lead-compact md:text-lead">
+        J'accompagne les entreprises qui ont un produit à construire et peu ou pas d'équipe tech
+        pour le porter. Un seul interlocuteur, de la première discussion au suivi en production.
+      </p>
+      <div class="mt-1 flex flex-wrap items-center gap-3 md:mt-2 md:gap-6">
+        <ButtonLink href="#contact">M'écrire</ButtonLink>
+        <ActionLink href="#realisations">Voir les réalisations</ActionLink>
+      </div>
+    </div>
+    <aside
+      aria-label="En bref"
+      class="flex flex-col gap-5 rounded-lg border border-line bg-surface-raised p-6 md:max-w-104 md:p-8"
+    >
+      <div class="flex items-center gap-4">
+        <Picture
+          src={portrait}
+          alt="Portrait de William Fontaine"
+          formats={['avif', 'webp']}
+          layout="fixed"
+          width={80}
+          height={80}
+          widths={[64, 80, 128, 160, 192, 240]}
+          sizes="(min-width: 768px) 80px, 64px"
+          class="size-16 rounded-avatar md:size-20"
+        />
+        <div class="flex flex-col gap-0.5">
+          <p class="font-display text-h4 text-ink">William Fontaine</p>
+          <p class="text-small font-normal text-text-muted">Développeur full-stack freelance</p>
+        </div>
+      </div>
+      <ul class="flex flex-col gap-3 border-t border-line pt-5 text-ui font-normal">
+        {facts.map(([icon, fact]) => (
+          <li class="flex items-start gap-3">
+            <Icon set="phosphor" name={icon} size={18} class="mt-0.5 text-structure" />
+            {fact}
+          </li>
+        ))}
+      </ul>
+    </aside>
+  </Container>
+  <Skyline variant="fill" id="hero" class="mt-10 h-sky-hero-compact md:mt-16 lg:h-sky-hero" />
+</section>

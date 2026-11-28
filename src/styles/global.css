@@ -30,41 +30,77 @@
   --text-display--line-height: 66px;
   --text-display--letter-spacing: -0.03em;
   --text-display--font-weight: 600;
+  --text-display-compact: 38px;
+  --text-display-compact--line-height: 40px;
+  --text-display-compact--letter-spacing: -0.03em;
+  --text-display-compact--font-weight: 600;
   --text-display-sm: 52px;
   --text-display-sm--line-height: 56px;
   --text-display-sm--letter-spacing: -0.025em;
   --text-display-sm--font-weight: 600;
+  --text-display-sm-compact: 32px;
+  --text-display-sm-compact--line-height: 36px;
+  --text-display-sm-compact--letter-spacing: -0.025em;
+  --text-display-sm-compact--font-weight: 600;
   --text-h1: 44px;
   --text-h1--line-height: 48px;
   --text-h1--letter-spacing: -0.025em;
   --text-h1--font-weight: 600;
+  --text-h1-compact: 32px;
+  --text-h1-compact--line-height: 36px;
+  --text-h1-compact--letter-spacing: -0.025em;
+  --text-h1-compact--font-weight: 600;
   --text-h2: 32px;
   --text-h2--line-height: 38px;
   --text-h2--letter-spacing: -0.02em;
   --text-h2--font-weight: 600;
+  --text-h2-compact: 26px;
+  --text-h2-compact--line-height: 31px;
+  --text-h2-compact--letter-spacing: -0.02em;
+  --text-h2-compact--font-weight: 600;
   --text-h3: 22px;
   --text-h3--line-height: 28px;
   --text-h3--letter-spacing: -0.01em;
   --text-h3--font-weight: 600;
+  --text-h3-compact: 20px;
+  --text-h3-compact--line-height: 26px;
+  --text-h3-compact--letter-spacing: -0.01em;
+  --text-h3-compact--font-weight: 600;
   --text-h4: 20px;
   --text-h4--line-height: 26px;
   --text-h4--letter-spacing: -0.01em;
   --text-h4--font-weight: 600;
+  --text-h4-compact: 18px;
+  --text-h4-compact--line-height: 24px;
+  --text-h4-compact--letter-spacing: -0.01em;
+  --text-h4-compact--font-weight: 600;
   --text-link-lg: 24px;
   --text-link-lg--line-height: 32px;
   --text-link-lg--font-weight: 600;
+  --text-link-lg-compact: 17px;
+  --text-link-lg-compact--line-height: 24px;
+  --text-link-lg-compact--font-weight: 600;
   --text-lead: 20px;
   --text-lead--line-height: 32px;
   --text-lead--font-weight: 400;
+  --text-lead-compact: 18px;
+  --text-lead-compact--line-height: 28px;
+  --text-lead-compact--font-weight: 400;
   --text-body: 17px;
   --text-body--line-height: 28px;
   --text-body--font-weight: 400;
+  --text-body-compact: 16px;
+  --text-body-compact--line-height: 26px;
+  --text-body-compact--font-weight: 400;
   --text-body-sm: 15px;
   --text-body-sm--line-height: 24px;
   --text-body-sm--font-weight: 400;
   --text-ui: 15px;
   --text-ui--line-height: 22px;
   --text-ui--font-weight: 600;
+  --text-ui-compact: 14px;
+  --text-ui-compact--line-height: 22px;
+  --text-ui-compact--font-weight: 600;
   --text-small: 14px;
   --text-small--line-height: 22px;
   --text-small--font-weight: 500;
@@ -72,6 +108,10 @@
   --text-label--line-height: 16px;
   --text-label--letter-spacing: 0.12em;
   --text-label--font-weight: 700;
+  --text-label-compact: 11px;
+  --text-label-compact--line-height: 16px;
+  --text-label-compact--letter-spacing: 0.12em;
+  --text-label-compact--font-weight: 700;
   --text-note: 13px;
   --text-note--line-height: 20px;
   --text-note--font-weight: 400;
@@ -175,8 +215,35 @@
   --font-sans: var(--font-manrope);
 }
 
+@utility grid-cols-hero {
+  grid-template-columns: minmax(0, 1fr) --spacing(104);
+}
+
+@utility grid-cols-narrow-wide {
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+}
+
+@utility grid-cols-wide-narrow {
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+}
+
 @layer base {
   :focus-visible {
     @apply rounded-focus outline-2 outline-offset-2 outline-focus;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display text-balance text-ink;
+  }
+
+  p {
+    @apply max-w-text text-pretty;
+  }
+
+  li {
+    @apply text-pretty;
   }
 }
