@@ -1,52 +1,52 @@
 ---
 import panorama from '../data/panorama-180.json'
 
-interface Props {
-  variant: 'fill' | 'stroke'
-  tower: boolean
-  class?: string
-}
+type Props = { class?: string } & ({ variant: 'fill'; id: string } | { variant: 'stroke' })
 
-const { variant, tower, class: className } = Astro.props
+const props = Astro.props
+const className = props.class
 const { W, H, d, tower: towerMarkup } = panorama
 const viewBox = `0 0 ${W} ${H}`
-const id = crypto.randomUUID().slice(0, 8)
 ---
 
-{variant === 'fill' ? (
+{props.variant === 'fill' ? (
   <div class:list={['relative', className]}>
     <svg
       data-sky
-      class="absolute inset-0 block size-full overflow-visible"
+      class="absolute inset-0 size-full overflow-visible"
       viewBox={viewBox}
       preserveAspectRatio="xMidYMin slice"
       aria-hidden="true"
     >
       <defs>
-        <path id={`area-${id}`} d={`${d} L${W},${H} L0,${H} Z`} />
-        <linearGradient id={`gradient-${id}`} x1="0" x2="0" y1="0" y2="1">
+        <path id={`area-${props.id}`} d={`${d} L${W},${H} L0,${H} Z`} />
+        <linearGradient id={`gradient-${props.id}`} x1="0" x2="0" y1="0" y2="1">
           <stop offset=".12" class="text-sky-top" stop-color="currentColor" />
           <stop offset=".8" class="text-sky-end" stop-color="currentColor" />
           <stop offset="1" class="text-sky-end" stop-color="currentColor" stop-opacity="0" />
         </linearGradient>
-        <mask id={`flow-${id}`} maskUnits="userSpaceOnUse" x="0" y="0" width={W} height={H}>
+        <mask id={`flow-${props.id}`} maskUnits="userSpaceOnUse" x="0" y="0" width={W} height={H}>
           <rect width={W} height={H} fill="#fff" />
           <g transform="translate(0 520)">
-            <g filter={`url(#soft-${id})`}>
-              <use href={`#area-${id}`} y="-90" />
+            <g filter={`url(#soft-${props.id})`}>
+              <use href={`#area-${props.id}`} y="-90" />
               <rect y="200" width={W} height="450" />
             </g>
           </g>
         </mask>
-        <filter id={`soft-${id}`} x="0" y="-40%" width="100%" height="180%">
+        <filter id={`soft-${props.id}`} x="0" y="-40%" width="100%" height="180%">
           <feGaussianBlur stdDeviation="0 30" />
         </filter>
       </defs>
-      <use href={`#area-${id}`} fill={`url(#gradient-${id})`} mask={`url(#flow-${id})`} />
+      <use
+        href={`#area-${props.id}`}
+        fill={`url(#gradient-${props.id})`}
+        mask={`url(#flow-${props.id})`}
+      />
     </svg>
     <svg
       data-sky
-      class="absolute inset-0 block size-full overflow-visible text-sky-top"
+      class="absolute inset-0 size-full overflow-visible text-sky-top"
       viewBox={viewBox}
       preserveAspectRatio="xMidYMin slice"
       aria-hidden="true"
@@ -58,7 +58,7 @@ const id = crypto.randomUUID().slice(0, 8)
         stroke-width="2"
         vector-effect="non-scaling-stroke"
       />
-      {tower && <g data-sky-tower fill="currentColor" set:html={towerMarkup} />}
+      <g data-sky-tower fill="currentColor" set:html={towerMarkup} />
     </svg>
   </div>
 ) : (

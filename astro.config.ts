@@ -1,5 +1,5 @@
 import tailwindcss from '@tailwindcss/vite'
-import { defineConfig, fontProviders } from 'astro/config'
+import { defineConfig, fontProviders, svgoOptimizer } from 'astro/config'
 
 export default defineConfig({
   site: 'https://wfontaine.fr',
@@ -14,6 +14,7 @@ export default defineConfig({
       ],
     },
   },
+  experimental: { svgOptimizer: svgoOptimizer({ plugins: ['preset-default', 'removeTitle'] }) },
   image: { layout: 'constrained', responsiveStyles: true },
   fonts: [
     {

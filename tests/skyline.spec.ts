@@ -23,6 +23,7 @@ for (const width of widths) {
     )
     for (const { width: w, height: h, a, d } of boxes) {
       expect(261.08 * Math.max(w / 10800, h / 322) + 1).toBeLessThanOrEqual(h)
+      expect(a).toBeGreaterThan(0)
       expect(a).toBe(d)
     }
 
@@ -57,3 +58,10 @@ for (const [scheme, top, end] of [
     expect(alphaOf(await color('[data-sky-tower]'))).toBeCloseTo(top, 2)
   })
 }
+
+test('fill skyline ids derive from its id prop', async ({ page }) => {
+  await page.goto('/')
+  for (const prefix of ['area', 'gradient', 'flow', 'soft']) {
+    await expect(page.locator(`#${prefix}-hero`)).toHaveCount(1)
+  }
+})
