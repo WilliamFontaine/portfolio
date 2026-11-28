@@ -6,7 +6,6 @@ export default defineConfig({
   testDir: 'tests',
   forbidOnly: !!process.env['CI'],
   reporter: [[process.env['CI'] ? 'github' : 'list'], ['html', { open: 'never' }]],
-  expect: { toHaveScreenshot: { maxDiffPixels: 0 } },
   use: { baseURL, trace: 'retain-on-failure' },
   projects: [
     {

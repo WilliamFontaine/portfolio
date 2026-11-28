@@ -28,7 +28,7 @@ test.describe('not found', () => {
   test('404-390-dark', async ({ page }) => {
     await page.emulateMedia({ colorScheme: 'dark' })
     await page.setViewportSize({ width: 390, height: 844 })
-    await page.goto('/404')
+    await page.goto('/inexistant/')
     await expect(page).toHaveScreenshot('404-390-dark.png', { fullPage: true })
   })
 })
